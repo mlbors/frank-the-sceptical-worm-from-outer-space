@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - ISoundingObject - Interface
+ * FTSWFOS - AbstractFactory - Abstract Class
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -19,10 +19,21 @@ using UnityEngine;
 /**************************************************/
 
 /****************************/
-/***** ISOUNDING OBJECT *****/
+/***** ABSTRACT FACTORY *****/
 /****************************/
 
-public interface ISoundingObject
+abstract class AbstractFactory<T> : IGenericFactory<T> where T : class, new()
 {
-    void PlaySound();
+    /******************/
+    /***** CREATE *****/
+    /******************/
+
+    /*
+     * @return T 
+     */
+
+    public T Create()
+    {
+        return new T();
+    }
 }
