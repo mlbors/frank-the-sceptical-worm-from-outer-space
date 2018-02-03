@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IState - Interface
+ * FTSWFOS - IWithState - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,10 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/******************/
-/***** ISTATE *****/
-/******************/
+/***********************/
+/***** IWITH STATE *****/
+/***********************/
 
-public interface IState
+public interface IWithState
 {
+    void UpdateState();
 }

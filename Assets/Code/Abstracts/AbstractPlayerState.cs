@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IState - Interface
+ * FTSWFOS - AbstractPlayerState - Abstract Class
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,10 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/******************/
-/***** ISTATE *****/
-/******************/
+/*********************************/
+/***** ABSTRACT PLAYER STATE *****/
+/*********************************/
 
-public interface IState
-{
+public class AbstractPlayerState : IState {
+
 }

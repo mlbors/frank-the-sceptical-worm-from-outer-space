@@ -24,7 +24,7 @@ using UnityEngine;
 
 public interface IObservable
 {
-    void Attach();
-    void Detach();
+    void Attach(IObserver observer);
+    void Detach(IObserver observer);
     void Notify();
 }

@@ -28,7 +28,7 @@ abstract class AbstractGenerator : IGenerator
     /***** ATTRIBUTS *****/
     /*********************/
 
-    private IPool pool;
+    private IPool _pool;
 
     /**************************************************/
     /**************************************************/
@@ -39,15 +39,8 @@ abstract class AbstractGenerator : IGenerator
 
     public IPool Pool
     {
-        get
-        {
-            return pool;
-        }
-
-        set
-        {
-            pool = value;
-        }
+        get { return _pool; }
+        set { _pool = value; }
     }
 
     /**************************************************/
