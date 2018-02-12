@@ -22,11 +22,15 @@ using UnityEngine;
 /***** ABSTRACT GENERATOR *****/
 /******************************/
 
-abstract class AbstractGenerator : IGenerator
+abstract public class AbstractGenerator : IGenerator
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
+
+    /**
+     * @var IPool _pool objects pool
+     */
 
     private IPool _pool;
 

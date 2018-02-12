@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - AbstractPlayerState - Abstract Class
+ * FTSWFOS - JumpAction - Concrete Classe
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,11 +18,18 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*********************************/
-/***** ABSTRACT PLAYER STATE *****/
-/*********************************/
+/***********************/
+/***** JUMP ACTION *****/
+/***********************/
 
-abstract public class AbstractPlayerState : IPlayerState 
+public class JumpAction : IAction
 {
-    abstract public void Jump();
+    /***************************/
+    /***** IACTION EXECUTE *****/
+    /***************************/
+
+    public void Execute()
+    {
+        
+    }
 }

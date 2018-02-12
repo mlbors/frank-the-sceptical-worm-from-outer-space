@@ -22,13 +22,13 @@ using UnityEngine;
 /***** ABSTRACT FACTORY *****/
 /****************************/
 
-abstract class AbstractFactory<T> : IGenericFactory<T> where T : class, new()
+abstract public class AbstractFactory<T> : IGenericFactory<T> where T : class, new()
 {
     /******************/
     /***** CREATE *****/
     /******************/
 
-    /*
+    /**
      * @return T 
      */
 

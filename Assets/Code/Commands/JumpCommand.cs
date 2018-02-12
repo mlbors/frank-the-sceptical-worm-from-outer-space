@@ -28,16 +28,20 @@ public class JumpCommand : ICommand
     /***** ATTRIBUTS *****/
     /*********************/
 
-    /*
-     * @var Istate _state player's state
+    /**
+     * @var IPlayerState _state player's state
      */
 
-    private IState _state;
+    private IPlayerState _state;
 
     /**************************************************/
     /**************************************************/
 
-    public JumpCommand(IState state)
+    /**
+     * @param IState state player's state
+     */
+
+    public JumpCommand(IPlayerState state)
     {
         _state = state;
     }
@@ -48,6 +52,6 @@ public class JumpCommand : ICommand
 
     public void Execute()
     {
-        _state.jump();
+        _state.Jump();
     }
 }

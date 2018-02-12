@@ -24,6 +24,6 @@ using UnityEngine;
 
 public interface IInvoker
 {
-    void SetCommand(ICommand);
-    void ExecuteCommand(ICommand);
+    void SetCommand(ICommand Command);
+    void ExecuteCommand();
 }

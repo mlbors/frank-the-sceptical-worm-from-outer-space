@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - AbstractPlayerState - Abstract Class
+ * FTSWFOS - IPlayer - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,11 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*********************************/
-/***** ABSTRACT PLAYER STATE *****/
-/*********************************/
+/*******************/
+/***** IPLAYER *****/
+/*******************/
 
-abstract public class AbstractPlayerState : IPlayerState 
+public interface IPlayer
 {
-    abstract public void Jump();
 }

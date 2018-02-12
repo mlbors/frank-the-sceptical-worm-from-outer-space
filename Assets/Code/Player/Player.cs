@@ -22,19 +22,19 @@ using UnityEngine;
 /***** PLAYER *****/
 /******************/
 
-public class Player : MonoBehaviour, ICameraTarget, IObservable, IWithState
+public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithState
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
-    /*
-     * @var IState _state player's state
+    /**
+     * @var IPlayerState _state player's state
      * @var List<IObserver> _observers list of observers
      * @var IInvoker _inputHandler manage input commands
      */
 
-    private IState _state;
+    private IPlayerState _state;
     private List<IObserver> _observers = new List<IObserver>();
     private IInvoker _inputHandler;
 
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour, ICameraTarget, IObservable, IWithState
     /***** STATE GETTER/SETTER *****/
     /*******************************/
 
-    public IState State
+    public IPlayerState State
     {
         get { return _state; }
         set { _state = value; }
@@ -82,7 +82,7 @@ public class Player : MonoBehaviour, ICameraTarget, IObservable, IWithState
     /***** IOBSERVABLE - ATTACH *****/
     /********************************/
 
-    /*
+    /**
      * @param IObserver observer observer to attach
      */
 
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour, ICameraTarget, IObservable, IWithState
     /***** IOBSERVABLE - DETACH *****/
     /********************************/
 
-    /*
+    /**
      * @param IObserver observer observer to detach
      */
 
@@ -156,7 +156,6 @@ public class Player : MonoBehaviour, ICameraTarget, IObservable, IWithState
 
     void HandleInput()
     {
-        //create Command
         ICommand command = new JumpCommand(_state);
         _inputHandler.SetCommand(command);
         _inputHandler.ExecuteCommand();

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IState - Interface
+ * FTSWFOS - Normal Player State - Concrete Classe
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,10 +18,18 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/******************/
-/***** ISTATE *****/
-/******************/
+/*******************************/
+/***** NORMAL PLAYER STATE *****/
+/*******************************/
 
-public interface IState
-{
+public class NormalPlayerState : AbstractPlayerState {
+
+    /****************/
+    /***** JUMP *****/
+    /****************/
+
+    public override void Jump()
+    {
+        
+    }
 }
