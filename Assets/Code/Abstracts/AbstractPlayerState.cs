@@ -24,5 +24,13 @@ using UnityEngine;
 
 abstract public class AbstractPlayerState : IPlayerState 
 {
+    /****************/
+    /***** JUMP *****/
+    /****************/
+
+    /**
+     * @access public
+     */
+
     abstract public void Jump();
 }

@@ -32,11 +32,13 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
      * @var IPlayerState _state player's state
      * @var List<IObserver> _observers list of observers
      * @var IInvoker _inputHandler manage input commands
+     * @var IFactory _commandfactory object that creates commands
      */
 
     private IPlayerState _state;
     private List<IObserver> _observers = new List<IObserver>();
     private IInvoker _inputHandler;
+    private IFactory<ICommand, IProduct> _commandFactory;
 
     /**************************************************/
     /**************************************************/
@@ -44,6 +46,10 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /*******************************/
     /***** STATE GETTER/SETTER *****/
     /*******************************/
+
+    /*
+     * @access public
+     */
 
     public IPlayerState State
     {
@@ -54,9 +60,47 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /**************************************************/
     /**************************************************/
 
+    /***************************************/
+    /***** INPUT HANDLER GETTER/SETTER *****/
+    /***************************************/
+
+    /*
+     * @access public
+     */
+
+    public IInvoker InputHandler
+    {
+        get { return _inputHandler; }
+        set { _inputHandler = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************************/
+    /***** COMMAND FACTORY GETTER/SETTER *****/
+    /*****************************************/
+
+    /*
+     * @access public
+     */
+
+    public IFactory<ICommand, IProduct> CommandFactory
+    {
+        get { return _commandFactory; }
+        set { _commandFactory = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /*****************/
     /***** START *****/
     /*****************/
+
+    /**
+     * @access private
+     */
 
     void Start()
     {
@@ -69,6 +113,10 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /******************/
     /***** UPDATE *****/
     /******************/
+
+    /**
+     * @access private
+     */
 
     void Update()
     {
@@ -83,6 +131,7 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /********************************/
 
     /**
+     * @access private
      * @param IObserver observer observer to attach
      */
 
@@ -99,6 +148,7 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /********************************/
 
     /**
+     * @access private
      * @param IObserver observer observer to detach
      */
 
@@ -113,6 +163,10 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /********************************/
     /***** IOBSERVABLE - NOTIFY *****/
     /********************************/
+
+    /**
+     * @access private
+     */
 
     void IObservable.Notify()
     {
@@ -129,22 +183,13 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /***** IWITH STATE - UPDATE STATE *****/
     /**************************************/
 
+    /**
+     * @access private
+     */
+
     void IWithState.UpdateState()
     {
         
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /**************************************/
-    /***** INPUTHANDLER GETTER/SETTER *****/
-    /**************************************/
-
-    public IInvoker InputHandler
-    {
-        get { return _inputHandler; }
-        set { _inputHandler = value; }
     }
 
     /**************************************************/
@@ -154,9 +199,13 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /***** HANDLE INPUT *****/
     /************************/
 
+    /**
+     * @access private
+     */
+
     void HandleInput()
     {
-        ICommand command = new JumpCommand(_state);
+        ICommand command = _commandFactory.Create();
         _inputHandler.SetCommand(command);
         _inputHandler.ExecuteCommand();
     }

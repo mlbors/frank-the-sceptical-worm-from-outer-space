@@ -22,7 +22,7 @@ using UnityEngine;
 /***** JUMP COMMAND *****/
 /************************/
 
-public class JumpCommand : ICommand
+public class JumpCommand : AbstractCommand, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -38,6 +38,7 @@ public class JumpCommand : ICommand
     /**************************************************/
 
     /**
+     * @access public
      * @param IState state player's state
      */
 
@@ -46,11 +47,18 @@ public class JumpCommand : ICommand
         _state = state;
     }
 
+    /**************************************************/
+    /**************************************************/
+
     /****************************/
     /***** ICOMMAND EXECUTE *****/
     /****************************/
 
-    public void Execute()
+    /**
+     * @access public
+     */
+
+    public override void Execute()
     {
         _state.Jump();
     }

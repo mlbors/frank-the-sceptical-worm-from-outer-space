@@ -22,18 +22,16 @@ using UnityEngine;
 /***** ABSTRACT FACTORY *****/
 /****************************/
 
-abstract public class AbstractFactory<T> : IGenericFactory<T> where T : class, new()
+abstract public class AbstractFactory<T, K> : IFactory<T, K> where T : class, K, new()
 {
     /******************/
     /***** CREATE *****/
     /******************/
 
     /**
+     * @access public
      * @return T 
      */
 
-    public T Create()
-    {
-        return new T();
-    }
+    public abstract T Create();
 }

@@ -28,6 +28,10 @@ public class NormalPlayerState : AbstractPlayerState {
     /***** JUMP *****/
     /****************/
 
+    /**
+     * @access public
+     */
+
     public override void Jump()
     {
         

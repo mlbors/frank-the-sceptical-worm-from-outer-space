@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - JumpAction - Concrete Classe
+ * FTSWFOS - IFactory - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,22 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/***********************/
-/***** JUMP ACTION *****/
-/***********************/
+/********************/
+/***** IFACTORY *****/
+/********************/
 
-public class JumpAction : IAction
+public interface IFactory<out T, K>
 {
-    /***************************/
-    /***** IACTION EXECUTE *****/
-    /***************************/
-
-    /**
-     * @access public
-     */
-
-    public void Execute()
-    {
-        
-    }
+    T Create();
 }

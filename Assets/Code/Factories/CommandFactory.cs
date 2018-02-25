@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - AbstractGenerator - Abstract Class
+ * FTSWFOS - CommandFactory - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,46 +18,53 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/******************************/
-/***** ABSTRACT GENERATOR *****/
-/******************************/
+/***************************/
+/***** COMMAND FACTORY *****/
+/***************************/
 
-abstract public class AbstractGenerator : IGenerator
+public class CommandFactory<T, K> : AbstractFactory<T, K> where T : class, K, new()
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
-     * @access public
-     * @var IPool _pool objects pool
+     * @var IPlayerState _state player's state
      */
 
-    private IPool _pool;
+    private IPlayerState _state;
 
     /**************************************************/
     /**************************************************/
 
-    /******************************/
-    /***** POOL GETTER/SETTER *****/
-    /******************************/
+    /*******************************/
+    /***** STATE GETTER/SETTER *****/
+    /*******************************/
 
-    /**
+    /*
      * @access public
      */
 
-    public IPool Pool
+    public IPlayerState State
     {
-        get { return _pool; }
-        set { _pool = value; }
+        get { return _state; }
+        set { _state = value; }
     }
 
     /**************************************************/
     /**************************************************/
 
-    /********************/
-    /***** GENERATE *****/
-    /********************/
+    /******************/
+    /***** CREATE *****/
+    /******************/
 
-    public abstract void Generate();
+    /**
+     * @access public
+     * @return T 
+     */
+
+    public override T Create()
+    {
+        return new T();   
+    }
 }

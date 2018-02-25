@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IGenericFactory - Interface
+ * FTSWFOS - AbstractCommand - Abstract Class
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -19,10 +19,18 @@ using UnityEngine;
 /**************************************************/
 
 /****************************/
-/***** IGENERIC FACTORY *****/
+/***** ABSTRACT COMMAND *****/
 /****************************/
 
-public interface IGenericFactory<out T>
+abstract public class AbstractCommand : ICommand
 {
-    T Create();
+    /****************************/
+    /***** ICOMMAND EXECUTE *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public abstract void Execute();
 }
