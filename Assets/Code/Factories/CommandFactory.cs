@@ -24,36 +24,6 @@ using UnityEngine;
 
 public class CommandFactory<T, K> : AbstractFactory<T, K> where T : class, K, new()
 {
-    /*********************/
-    /***** ATTRIBUTS *****/
-    /*********************/
-
-    /**
-     * @var IPlayerState _state player's state
-     */
-
-    private IPlayerState _state;
-
-    /**************************************************/
-    /**************************************************/
-
-    /*******************************/
-    /***** STATE GETTER/SETTER *****/
-    /*******************************/
-
-    /*
-     * @access public
-     */
-
-    public IPlayerState State
-    {
-        get { return _state; }
-        set { _state = value; }
-    }
-
-    /**************************************************/
-    /**************************************************/
-
     /******************/
     /***** CREATE *****/
     /******************/

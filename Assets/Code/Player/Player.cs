@@ -206,7 +206,8 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     void HandleInput()
     {
         ICommand command = _commandFactory.Create();
-        _inputHandler.SetCommand(command);
+        command.State = _state;
+        _inputHandler.Command = command;
         _inputHandler.ExecuteCommand();
     }
 }

@@ -24,5 +24,11 @@ using UnityEngine;
 
 public interface ICommand
 {
+    IPlayerState State
+    {
+        get;
+        set;
+    }
+
     void Execute();
 }

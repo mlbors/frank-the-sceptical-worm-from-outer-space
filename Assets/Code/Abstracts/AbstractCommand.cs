@@ -24,6 +24,36 @@ using UnityEngine;
 
 abstract public class AbstractCommand : ICommand
 {
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var IPlayerState _state player's state
+     */
+
+    protected IPlayerState _state;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*******************************/
+    /***** STATE GETTER/SETTER *****/
+    /*******************************/
+
+    /*
+     * @access public
+     */
+
+    public IPlayerState State
+    {
+        get { return _state; }
+        set { _state = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /****************************/
     /***** ICOMMAND EXECUTE *****/
     /****************************/
