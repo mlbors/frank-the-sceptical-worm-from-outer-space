@@ -24,5 +24,12 @@ using UnityEngine;
 
 public interface IPlayerState
 {
-    void Jump();
+    IPlayer Player
+    {
+        get;
+        set;
+    }
+
+    void Enter();
+    void Update();
 }

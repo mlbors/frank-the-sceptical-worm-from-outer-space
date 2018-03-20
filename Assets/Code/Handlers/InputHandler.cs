@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IInvoker - Interface
+ * FTSWFOS - InputHandler - Concrete Class
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,17 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/********************/
-/***** IINVOKER *****/
-/********************/
+/*************************/
+/***** INPUT HANDLER *****/
+/*************************/
 
-public interface IInvoker
+public class InputHandler : AbstractInputHandler
 {
-    ICommand Command
-    {
-        get;
-        set;
-    }
-
-    void ExecuteCommand();
 }

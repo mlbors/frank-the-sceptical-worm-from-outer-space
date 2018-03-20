@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - Player - Concrete Classe
+ * FTSWFOS - Player - Concrete Class
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -31,13 +31,13 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /**
      * @var IPlayerState _state player's state
      * @var List<IObserver> _observers list of observers
-     * @var IInvoker _inputHandler manage input commands
+     * @var IInputHandler _inputHandler manage input commands
      * @var IFactory _commandfactory object that creates commands
      */
 
     private IPlayerState _state;
     private List<IObserver> _observers = new List<IObserver>();
-    private IInvoker _inputHandler;
+    private IInputHandler _inputHandler;
     private IFactory<ICommand, IProduct> _commandFactory;
 
     /**************************************************/
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
      * @access public
      */
 
-    public IInvoker InputHandler
+    public IInputHandler InputHandler
     {
         get { return _inputHandler; }
         set { _inputHandler = value; }
@@ -207,7 +207,6 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     {
         ICommand command = _commandFactory.Create();
         command.State = _state;
-        _inputHandler.Command = command;
-        _inputHandler.ExecuteCommand();
+        _inputHandler.HandleInput(command);
     }
 }

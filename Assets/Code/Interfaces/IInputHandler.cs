@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - JumpCommand - Concrete Class
+ * FTSWFOS - IInputHandler - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,22 +18,18 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/************************/
-/***** JUMP COMMAND *****/
-/************************/
+/**************************/
+/***** IINPUT HANDLER *****/
+/**************************/
 
-public class JumpCommand : AbstractCommand, IProduct
+public interface IInputHandler
 {
-    /****************************/
-    /***** ICOMMAND EXECUTE *****/
-    /****************************/
-
-    /**
-     * @access public
-     */
-
-    public override void Execute()
+    ICommand Command
     {
-
+        get;
+        set;
     }
+
+    void HandleInput(ICommand Command);
+    void ExecuteCommand();
 }

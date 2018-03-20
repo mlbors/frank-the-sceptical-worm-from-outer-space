@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - Normal Player State - Concrete Classe
+ * FTSWFOS - Normal Player State - Concrete Class
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -24,16 +24,5 @@ using UnityEngine;
 
 public class NormalPlayerState : AbstractPlayerState {
 
-    /****************/
-    /***** JUMP *****/
-    /****************/
 
-    /**
-     * @access public
-     */
-
-    public override void Jump()
-    {
-        
-    }
 }

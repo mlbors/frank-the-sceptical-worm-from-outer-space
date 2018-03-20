@@ -22,15 +22,80 @@ using UnityEngine;
 /***** ABSTRACT PLAYER STATE *****/
 /*********************************/
 
-abstract public class AbstractPlayerState : IPlayerState 
+abstract public class AbstractPlayerState : AbstractInputHandler, IPlayerState
 {
-    /****************/
-    /***** JUMP *****/
-    /****************/
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
 
     /**
+     * @var IPlayer _player player
+     */
+
+    protected IPlayer _player;
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** PLAYER GETTER/SETTER *****/
+    /********************************/
+
+    /*
      * @access public
      */
 
-    abstract public void Jump();
+    public IPlayer Player
+    {
+        get { return _player; }
+        set { _player = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /************************/
+    /***** PLAYER STATE *****/
+    /************************/
+
+    /*
+     * @access public
+     */
+
+    public AbstractPlayerState(IPlayer player)
+    {
+        _player = player;   
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
+    /***** ENTER *****/
+    /*****************/
+
+    /*
+     * @access public
+     */
+
+    public void Enter()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************/
+    /***** UPDATE *****/
+    /******************/
+
+    /*
+     * @access public
+     */
+
+    public void Update()
+    {
+        throw new System.NotImplementedException();
+    }
 }
