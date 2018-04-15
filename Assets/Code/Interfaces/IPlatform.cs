@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - ILoader - Interface
+ * FTSWFOS - IPlatform - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,18 +18,27 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*******************/
-/***** ILOADER *****/
-/*******************/
+/*********************/
+/***** IPLATFORM *****/
+/*********************/
 
-public interface ILoader
+public interface IPlatform
 {
-    List<IManager> Managers
+    List<IOperator> Operators
     {
         get;
         set;
     }
 
-    void Awake();
-    void InitManagers();
+    float X
+    {
+        get;
+        set;
+    }
+
+    float Y
+    {
+        get;
+        set;
+    }
 }

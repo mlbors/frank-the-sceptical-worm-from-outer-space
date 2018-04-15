@@ -24,5 +24,5 @@ using UnityEngine;
 
 public interface IComposite
 {
-    void AddElement();
+    void AddElement<T>(T element);
 }

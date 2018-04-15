@@ -1,5 +1,5 @@
-﻿/**
- * FTSWFOS - IWithState - Interface
+/**
+ * FTSWFOS - IStatInputHandler - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,11 +18,17 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/***********************/
-/***** IWITH STATE *****/
-/***********************/
+/********************************/
+/***** ISTATE INPUT HANDLER *****/
+/********************************/
 
-public interface IWithState
+public interface IStateInputHandler
 {
-    void UpdateState();
+    ICommandHandler InputHandler
+    {
+        get;
+        set;
+    }
+
+    void HandleInput();
 }

@@ -24,5 +24,11 @@ using UnityEngine;
 
 public interface IGenerator
 {
+    IPool Pool
+    {
+        get;
+        set;
+    }
+
     void Generate();
 }

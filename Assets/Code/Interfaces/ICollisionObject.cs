@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - ILoader - Interface
+ * FTSWFOS - ICollisionObject - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,18 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*******************/
-/***** ILOADER *****/
-/*******************/
+/*****************************/
+/***** ICOLLISION OBJECT *****/
+/*****************************/
 
-public interface ILoader
+public interface ICollisionObject
 {
-    List<IManager> Managers
-    {
-        get;
-        set;
-    }
-
-    void Awake();
-    void InitManagers();
+    void OnCollisionEnter2D(Collision2D other);
 }

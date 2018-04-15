@@ -24,5 +24,24 @@ using UnityEngine;
 
 public interface IPool
 {
-    GameObject GetPooledObject();
+    GameObject PooledObject
+    {
+        get;
+        set;
+    }
+
+    List<GameObject> PooledObjects
+    {
+        get;
+        set;
+    }
+
+    int Amount
+    {
+        get;
+        set;
+    }
+
+    void Init();
+    void AddObject(GameObject gameObject);
 }

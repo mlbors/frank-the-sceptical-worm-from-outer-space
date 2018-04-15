@@ -24,4 +24,5 @@ using UnityEngine;
 
 public interface IPlayer
 {
+    void HandleInput();
 }

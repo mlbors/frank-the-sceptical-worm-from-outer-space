@@ -1,5 +1,5 @@
-﻿/**
- * FTSWFOS - ILoader - Interface
+/**
+ * FTSWFOS - ICommandSubject - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,18 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*******************/
-/***** ILOADER *****/
-/*******************/
+/****************************/
+/***** ICOMMAND SUBJECT *****/
+/****************************/
 
-public interface ILoader
+public interface ICommandSubject
 {
-    List<IManager> Managers
-    {
-        get;
-        set;
-    }
-
-    void Awake();
-    void InitManagers();
 }

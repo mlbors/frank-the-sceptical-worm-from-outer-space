@@ -24,5 +24,17 @@ using UnityEngine;
 
 public interface ICollectable
 {
-    void OnCollisionEnter2D(Collision2D other);
+    float X
+    {
+        get;
+        set;
+    }
+
+    float Y
+    {
+        get;
+        set;
+    }
+
+    void Perform();
 }

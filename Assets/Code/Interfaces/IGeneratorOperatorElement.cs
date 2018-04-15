@@ -1,5 +1,5 @@
-﻿/**
- * FTSWFOS - IInputHandler - Interface
+/**
+ * FTSWFOS - IGeneratorOperatorElement - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,18 +18,21 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/**************************/
-/***** IINPUT HANDLER *****/
-/**************************/
+/***************************************/
+/***** IGENERATOR OPERATOR ELEMENT *****/
+/***************************************/
 
-public interface IInputHandler
+public interface IGeneratorOperatorElement
 {
-    ICommand Command
+    IGenerator Generator
     {
         get;
         set;
     }
 
-    void HandleInput(ICommand Command);
-    void ExecuteCommand();
+    IDestroyer Destroyer
+    {
+        get;
+        set;
+    }
 }

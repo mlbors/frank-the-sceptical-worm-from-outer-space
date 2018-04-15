@@ -1,5 +1,5 @@
-﻿/**
- * FTSWFOS - ILoader - Interface
+/**
+ * FTSWFOS - IOperatorElement - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,18 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*******************/
-/***** ILOADER *****/
-/*******************/
+/*****************************/
+/***** IOEPRATOR ELEMENT *****/
+/*****************************/
 
-public interface ILoader
+public interface IOperatorElement
 {
-    List<IManager> Managers
-    {
-        get;
-        set;
-    }
-
-    void Awake();
-    void InitManagers();
+    void Operate();
 }

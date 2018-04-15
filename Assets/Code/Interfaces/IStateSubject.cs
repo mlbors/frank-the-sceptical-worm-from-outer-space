@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - ILoader - Interface
+ * FTSWFOS - IStateSubject - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,18 +18,17 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*******************/
-/***** ILOADER *****/
-/*******************/
+/**************************/
+/***** ISTATE SUBJECT *****/
+/**************************/
 
-public interface ILoader
+public interface IStateSubject
 {
-    List<IManager> Managers
+    IState State
     {
         get;
         set;
     }
 
-    void Awake();
-    void InitManagers();
+    void UpdateState();
 }

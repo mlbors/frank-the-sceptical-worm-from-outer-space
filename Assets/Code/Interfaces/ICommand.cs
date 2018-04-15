@@ -24,7 +24,13 @@ using UnityEngine;
 
 public interface ICommand
 {
-    IPlayerState State
+    ICommandSubject CommandSubject
+    {
+        get;
+        set;
+    }
+
+    IAction Action
     {
         get;
         set;

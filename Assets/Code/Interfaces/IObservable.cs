@@ -24,6 +24,12 @@ using UnityEngine;
 
 public interface IObservable
 {
+    List<IObserver> Observers
+    {
+        get;
+        set;
+    }
+
     void Attach(IObserver observer);
     void Detach(IObserver observer);
     void Notify();

@@ -24,4 +24,9 @@ using UnityEngine;
 
 public interface ICamera
 {
+    ICameraTarget CameraTarget
+    {
+        get;
+        set;
+    }
 }

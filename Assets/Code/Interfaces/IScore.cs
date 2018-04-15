@@ -1,5 +1,5 @@
-﻿/**
- * FTSWFOS - ILoader - Interface
+/**
+ * FTSWFOS - IScore - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,18 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*******************/
-/***** ILOADER *****/
-/*******************/
+/******************/
+/***** ISCORE *****/
+/******************/
 
-public interface ILoader
+public interface IScore
 {
-    List<IManager> Managers
-    {
-        get;
-        set;
-    }
-
-    void Awake();
-    void InitManagers();
 }
