@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - CommandFactory - Interface
+ * FTSWFOS - CommandFactory - Concrete Class
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -14,6 +14,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 /**************************************************/
 /**************************************************/
@@ -22,19 +23,67 @@ using UnityEngine;
 /***** COMMAND FACTORY *****/
 /***************************/
 
-public class CommandFactory<T, K> : AbstractFactory<T, K> where T : class, K, new()
+public class CommandFactory : AbstractDIFactory
 {
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var String _type type of command
+     */
+
+    protected string _type;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @param DiContainer container DI container
+     * @param String type type of command
+     */
+
+    public CommandFactory(DiContainer container, string type) : base (container)
+    {
+        _type = type;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /******************/
     /***** CREATE *****/
     /******************/
 
     /**
      * @access public
-     * @return T 
+     * @param params object constructorArguments comma-separated list of arguments
+     * @return ICommand 
      */
 
-    public override T Create()
+    public override ICommand Create<ICommand, IProduct>(params object[] constructorArguments)
     {
-        return new T();   
+        var command = _container.Instantiate<JumpCommand>();
+        return command as ICommand;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /************************************/
+    /***** IVALIDATABLE VALIDATABLE *****/
+    /************************************/
+
+    /**
+     * @access public
+     */
+
+    public override void Validate()
+    {
+        _container.Instantiate<JumpCommand>();
     }
 }

@@ -41,4 +41,8 @@ public interface IPlatform
         get;
         set;
     }
+
+    void AddOperator(IOperator operatorElement);
+    void RemoveOperator(IOperator operatorElement);
+    void ExecuteOperators();
 }

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - ICollisionObject - Interface
+ * FTSWFOS - ITriggerCollision - Interface
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,11 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*****************************/
-/***** ICOLLISION OBJECT *****/
-/*****************************/
+/******************************/
+/***** ITRIGGER COLLISION *****/
+/******************************/
 
-public interface ICollisionObject
+public interface ITriggerCollision
 {
-    void OnCollisionEnter2D(Collision2D other);
+    void OnTriggerEnter2D(Collider2D other);
 }

@@ -24,5 +24,11 @@ using UnityEngine;
 
 public interface ISoundingObject
 {
+    AudioSource Sound
+    {
+        get;
+        set;
+    }
+
     void PlaySound();
 }

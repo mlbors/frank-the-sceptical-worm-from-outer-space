@@ -22,33 +22,52 @@ using UnityEngine;
 /***** ABSTRACT COMMAND *****/
 /****************************/
 
-abstract public class AbstractCommand : ICommand
+abstract public class AbstractCommand : ICommand, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
-     * @var IPlayerState _state player's state
+     * @var ICommandSubject _commandSubject subject on which to perform command
+     * @var IAction _action action to perform
      */
 
-    protected IPlayerState _state;
+    protected ICommandSubject _commandSubject;
+    protected IAction _action;
 
     /**************************************************/
     /**************************************************/
 
-    /*******************************/
-    /***** STATE GETTER/SETTER *****/
-    /*******************************/
+    /*********************************/
+    /***** SUBJECT GETTER/SETTER *****/
+    /*********************************/
 
     /*
      * @access public
      */
 
-    public IPlayerState State
+    public ICommandSubject CommandSubject
     {
-        get { return _state; }
-        set { _state = value; }
+        get { return _commandSubject; }
+        set { _commandSubject = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** ACTION GETTER/SETTER *****/
+    /********************************/
+
+    /*
+     * @access public
+     */
+
+    public IAction Action
+    {
+        get { return _action; }
+        set { _action = value; }
     }
 
     /**************************************************/

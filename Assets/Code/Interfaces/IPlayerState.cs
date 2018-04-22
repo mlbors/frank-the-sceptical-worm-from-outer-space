@@ -24,12 +24,11 @@ using UnityEngine;
 
 public interface IPlayerState
 {
-    IPlayer Player
+    IStateInputHandler StateInputHandler
     {
         get;
         set;
     }
 
-    void Enter();
-    void Update();
+    void HandleInput();
 }

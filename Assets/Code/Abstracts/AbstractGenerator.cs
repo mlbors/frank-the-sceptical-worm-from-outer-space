@@ -29,11 +29,10 @@ abstract public class AbstractGenerator : IGenerator
     /*********************/
 
     /**
-     * @access public
      * @var IPool _pool objects pool
      */
 
-    private IPool _pool;
+    protected IPool _pool;
 
     /**************************************************/
     /**************************************************/

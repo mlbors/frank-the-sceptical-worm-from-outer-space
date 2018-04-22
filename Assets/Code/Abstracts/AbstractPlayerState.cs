@@ -22,80 +22,90 @@ using UnityEngine;
 /***** ABSTRACT PLAYER STATE *****/
 /*********************************/
 
-abstract public class AbstractPlayerState : AbstractInputHandler, IPlayerState
+abstract public class AbstractPlayerState : AbstractState, IPlayerState
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
-     * @var IPlayer _player player
+     * @var IStateInputHandler object to handle inputs
+     * @var IFactory object that create other objects, here, ICommand
      */
 
-    protected IPlayer _player;
+    protected IStateInputHandler _stateInputHandler;
+    protected IFactory _commandFactory;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************************************/
+    /***** STATE INPUT HANDLER GETTER/SETTER *****/
+    /*********************************************/
+
+    /*
+     * @access public
+     */
+
+    public IStateInputHandler StateInputHandler
+    {
+        get { return _stateInputHandler; }
+        set { _stateInputHandler = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************************/
+    /***** COMMAND FACTORY GETTER/SETTER *****/
+    /*****************************************/
+
+    /*
+     * @access public
+     */
+
+    public IFactory CommandFactory
+    {
+        get { return _commandFactory; }
+        set { _commandFactory = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*******************************/
+    /***** ABSTRACTSTATE ENTER *****/
+    /*******************************/
+
+    /**
+     * @access public
+     */
+
+    public abstract override void Enter();
 
     /**************************************************/
     /**************************************************/
 
     /********************************/
-    /***** PLAYER GETTER/SETTER *****/
+    /***** ABSTRACTSTATE UPDATE *****/
     /********************************/
 
-    /*
+    /**
      * @access public
      */
 
-    public IPlayer Player
-    {
-        get { return _player; }
-        set { _player = value; }
-    }
+    public abstract override void Update();
 
     /**************************************************/
     /**************************************************/
 
-    /************************/
-    /***** PLAYER STATE *****/
-    /************************/
+    /*******************************/
+    /***** IPALYERSTATE UPDATE *****/
+    /*******************************/
 
-    /*
+    /**
      * @access public
      */
 
-    public AbstractPlayerState(IPlayer player)
-    {
-        _player = player;   
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /*****************/
-    /***** ENTER *****/
-    /*****************/
-
-    /*
-     * @access public
-     */
-
-    public void Enter()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /******************/
-    /***** UPDATE *****/
-    /******************/
-
-    /*
-     * @access public
-     */
-
-    public void Update()
-    {
-        throw new System.NotImplementedException();
-    }
+    public abstract void HandleInput();
 }

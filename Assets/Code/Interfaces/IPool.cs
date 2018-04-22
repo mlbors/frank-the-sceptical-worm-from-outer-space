@@ -44,4 +44,5 @@ public interface IPool
 
     void Init();
     void AddObject(GameObject gameObject);
+    void RemoveObject(GameObject gameObject);
 }

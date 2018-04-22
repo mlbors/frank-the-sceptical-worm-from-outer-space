@@ -24,5 +24,11 @@ using UnityEngine;
 
 public interface IDestroyer
 {
+    IPool Pool
+    {
+        get;
+        set;
+    }
+
     void Destroy();
 }

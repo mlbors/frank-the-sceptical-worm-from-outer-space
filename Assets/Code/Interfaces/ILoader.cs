@@ -30,6 +30,7 @@ public interface ILoader
         set;
     }
 
-    void Awake();
     void InitManagers();
+    void AddManager(IManager manager);
+    void RemoveManager(IManager manager);
 }

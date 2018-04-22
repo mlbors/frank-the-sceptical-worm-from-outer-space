@@ -22,7 +22,7 @@ using UnityEngine;
 /***** JUMP COMMAND *****/
 /************************/
 
-public class JumpCommand : AbstractCommand, IProduct
+public class JumpCommand : AbstractCommand
 {
     /****************************/
     /***** ICOMMAND EXECUTE *****/

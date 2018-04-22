@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - AbstractInputHandler - Abstract Class
+ * FTSWFOS - AbstractCommandHandler - Abstract Class
  *
  * @since       09.01.2018
  * @version     1.0.0.0
@@ -18,11 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*************************/
-/***** INPUT HANDLER *****/
-/*************************/
+/************************************/
+/***** ABSTRACT COMMAND HANDLER *****/
+/************************************/
 
-abstract public class AbstractInputHandler : IInputHandler
+abstract public class AbstractInputHandler : ICommandHandler
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -76,12 +76,7 @@ abstract public class AbstractInputHandler : IInputHandler
 
     /**
      * @access public
-     * @param ICommand Command command to handle
      */
 
-    public void HandleInput(ICommand Command)
-    {
-        _command = Command;
-        ExecuteCommand();
-    }
+    public abstract void HandleInput();
 }

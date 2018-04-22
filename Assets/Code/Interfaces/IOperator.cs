@@ -26,5 +26,6 @@ public interface IOperator
 {
     void Init();
     void AddElement(IOperatorElement component);
+    void RemoveElement(IOperatorElement component);
     void Operate();
 }
