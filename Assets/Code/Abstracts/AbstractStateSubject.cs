@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractStateSubject - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -41,7 +41,7 @@ abstract public class AbstractStateSubject : IStateSubject
     /***** STATE GETTER/SETTER *****/
     /*******************************/
 
-    /*
+    /**
      * @access public
      */
 

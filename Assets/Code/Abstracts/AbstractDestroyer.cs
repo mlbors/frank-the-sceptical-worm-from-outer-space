@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractDestroyer - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT DESTROYER *****/
 /******************************/
 
-abstract public class AbstractDestroyer : IDestroyer
+abstract public class AbstractDestroyer<T> : IDestroyer<T>, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -32,7 +32,7 @@ abstract public class AbstractDestroyer : IDestroyer
      * @var IPool _pool objects pool
      */
 
-    protected IPool _pool;
+    protected IPool<T> _pool;
 
     /**************************************************/
     /**************************************************/
@@ -45,7 +45,7 @@ abstract public class AbstractDestroyer : IDestroyer
      * @access public
      */
 
-    public IPool Pool
+    public IPool<T> Pool
     {
         get { return _pool; }
         set { _pool = value; }

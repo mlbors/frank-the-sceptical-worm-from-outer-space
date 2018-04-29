@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - JumpAction - Concrete Classe
+ * FTSWFOS - DoubleJumpAction - Concrete Classe
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -19,11 +19,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/***********************/
-/***** JUMP ACTION *****/
-/***********************/
+/******************************/
+/***** DOUBLE JUMP ACTION *****/
+/******************************/
 
-public class JumpAction : IAction
+public class DoubleJumpAction : IAction
 {
     /***************************/
     /***** IACTION EXECUTE *****/

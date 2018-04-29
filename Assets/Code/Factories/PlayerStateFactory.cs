@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - CommandFactory - Concrete Class
+ * FTSWFOS - PlayerStateFactory - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -19,21 +19,21 @@ using Zenject;
 /**************************************************/
 /**************************************************/
 
-/***************************/
-/***** COMMAND FACTORY *****/
-/***************************/
+/********************************/
+/***** PALYER STATE FACTORY *****/
+/********************************/
 
-public class CommandFactory : AbstractDIFactory
+public class PlayerStateFactory : AbstractDIFactory
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
-     * @var CommandTypes _type type of command
+     * @var PlayerStates _type type of state
      */
 
-    protected CommandTypes _type;
+    protected PlayerStates _type;
 
     /**************************************************/
     /**************************************************/
@@ -45,10 +45,10 @@ public class CommandFactory : AbstractDIFactory
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param CommandTypes type type of command
+     * @param PlayerStates type type of state
      */
 
-    public CommandFactory(DiContainer container, CommandTypes type) : base (container)
+    public PlayerStateFactory(DiContainer container, PlayerStates type) : base (container)
     {
         _type = type;
     }
@@ -64,7 +64,7 @@ public class CommandFactory : AbstractDIFactory
      * @access public
      */
 
-    public CommandTypes Type
+    public PlayerStates Type
     {
         get { return _type; }
         set { _type = value; }
@@ -80,27 +80,24 @@ public class CommandFactory : AbstractDIFactory
     /**
      * @access public
      * @param params object constructorArguments comma-separated list of arguments
-     * @return ICommand 
+     * @return IState
      */
 
-    public override ICommand Create<ICommand, IProduct>(params object[] constructorArguments)
+    public override IState Create<IState, IProduct>(params object[] constructorArguments)
     {
-        ICommand command;
+        IState state;
 
         switch (_type)
         {
-            case CommandTypes.Jump:
-                command = _container.Instantiate<JumpCommand>() as ICommand;
-                break;
-            case CommandTypes.DoubleJump:
-                command = _container.Instantiate<DoubleJumpCommand>() as ICommand;
+            case PlayerStates.Standing:
+                state = _container.Instantiate<StandingPlayerState>() as IState;
                 break;
             default:
-                command = _container.Instantiate<JumpCommand>() as ICommand;
+                state = _container.Instantiate<StandingPlayerState>() as IState;
                 break;
         }
 
-        return command;
+        return state;
     }
 
     /**************************************************/
@@ -116,7 +113,6 @@ public class CommandFactory : AbstractDIFactory
 
     public override void Validate()
     {
-        _container.Instantiate<JumpCommand>();
-        _container.Instantiate<DoubleJumpCommand>();
+        _container.Instantiate<StandingPlayerState>();
     }
 }

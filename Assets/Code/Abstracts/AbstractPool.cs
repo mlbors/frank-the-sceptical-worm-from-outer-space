@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractPool - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,21 +22,44 @@ using UnityEngine;
 /***** ABSTRACT POOL *****/
 /*************************/
 
-abstract public class AbstractPool : IPool
+abstract public class AbstractPool<T> : IPool<T>, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
-     * @var GameObject _pooledObject current pooled object
-     * @var List<GameObject> _pooledObjects list of all objects in the pool
+     * @var T _pooledObject current pooled object
+     * @var List<T> _pooledObjects list of all objects in the pool
      * @var Int _amount initinal amount
+     * @var IFactory _factory object that creates other objects, here object of type T
      */
 
-    protected GameObject _pooledObject;
-    protected List<GameObject> _pooledObjects;
+    protected T _pooledObject;
+    protected List<T> _pooledObjects;
     protected int _amount;
+    protected IFactory _factory;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access protected
+     * @param T pooledObject current pooled object
+     * @param Int amount initinal amount
+     * @param IFactory factory object that other creates objects, here object of type T
+     */
+
+    protected AbstractPool(T pooledObject, int amount, IFactory factory)
+    {
+        _pooledObject = pooledObject;
+        _amount = amount;
+        _factory = factory;
+    }
 
     /**************************************************/
     /**************************************************/
@@ -45,11 +68,11 @@ abstract public class AbstractPool : IPool
     /***** POOLED OBJECT GETTER/SETTER *****/
     /***************************************/
 
-    /*
+    /**
      * @access public
      */
 
-    public GameObject PooledObject
+    public T PooledObject
     {
         get { return _pooledObject; }
         set { _pooledObject = value; }
@@ -62,11 +85,11 @@ abstract public class AbstractPool : IPool
     /***** POOLED OBJECTS GETTER/SETTER *****/
     /****************************************/
 
-    /*
+    /**
      * @access public
      */
 
-    public List<GameObject> PooledObjects
+    public List<T> PooledObjects
     {
         get { return _pooledObjects; }
         set { _pooledObjects = value; }
@@ -79,7 +102,7 @@ abstract public class AbstractPool : IPool
     /***** AMOUNT GETTER/SETTER *****/
     /********************************/
 
-    /*
+    /**
      * @access public
      */
 
@@ -87,6 +110,23 @@ abstract public class AbstractPool : IPool
     {
         get { return _amount; }
         set { _amount = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************************/
+    /***** FACTORY GETTER/SETTER *****/
+    /*********************************/
+
+    /**
+     * @access public
+     */
+
+    public IFactory Factory
+    {
+        get { return _factory; }
+        set { _factory = value; }
     }
 
     /**************************************************/
@@ -105,6 +145,20 @@ abstract public class AbstractPool : IPool
     /**************************************************/
     /**************************************************/
 
+    /****************************************/
+    /***** IPOOL INSTANTIATE NEW OBJECT *****/
+    /****************************************/
+
+    /**
+     * @access public
+     * @return T
+     */
+
+    public abstract T InstantiateNewObject();
+
+    /**************************************************/
+    /**************************************************/
+
     /****************************/
     /***** IPOOL ADD OBJECT *****/
     /****************************/
@@ -114,7 +168,7 @@ abstract public class AbstractPool : IPool
      * @param GameObject pooledObject object to add
      */
 
-    public void AddObject(GameObject pooledObject)
+    public void AddObject(T pooledObject)
     {
         _pooledObjects.Add(pooledObject);
     }
@@ -131,8 +185,69 @@ abstract public class AbstractPool : IPool
      * @param GameObject pooledObject object to remove
      */
 
-    public void RemoveObject(GameObject pooledObject)
+    public void RemoveObject(T pooledObject)
     {
         _pooledObjects.Remove(pooledObject);
     }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IPOOL ADD OBJECT *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public void FillPool()
+    {
+        for (int i = 0; i < _amount; i++)
+        {
+            AddObject(_pooledObject);
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IPOOL GET OBEJCT *****/
+    /****************************/
+
+    /**
+     * @access public
+     * @return T
+     */
+
+    public virtual T GetObject()
+    {
+        for (int i = 0; i < _pooledObjects.Count; i++)
+        {
+            if (CheckIfObjectAvailable(_pooledObjects[i]))
+            {
+                return _pooledObjects[i];
+            }
+        }
+
+        var newObj = InstantiateNewObject();
+        AddObject(newObj);
+        return newObj;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*******************************************/
+    /***** IPOOL CHECK IF OBJECT AVAILABLE *****/
+    /*******************************************/
+
+    /**
+     * @access public
+     * @param T currentObject object to check
+     * @return Bool
+     */
+
+    public abstract bool CheckIfObjectAvailable(T currentObject);
 }

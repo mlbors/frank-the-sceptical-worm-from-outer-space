@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractCollectable - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT COLLECTABLE *****/
 /********************************/
 
-abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObservable, ISoundingObject
+abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObservable, IProduct, ISoundingObject
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -47,7 +47,7 @@ abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObserv
     /***** X GETTER/SETTER *****/
     /***************************/
 
-    /*
+    /**
      * @access public
      */
 
@@ -64,7 +64,7 @@ abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObserv
     /***** Y GETTER/SETTER *****/
     /***************************/
 
-    /*
+    /**
      * @access public
      */
 
@@ -81,7 +81,7 @@ abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObserv
     /***** SOUND GETTER/SETTER *****/
     /*******************************/
 
-    /*
+    /**
      * @access public
      */
 
@@ -98,7 +98,7 @@ abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObserv
     /***** OBSERVERS GETTER/SETTER *****/
     /***********************************/
 
-    /*
+    /**
      * @access public
      */
 

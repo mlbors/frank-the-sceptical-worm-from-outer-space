@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - JumpCommand - Concrete Class
+ * FTSWFOS - DoubleJumpCommand - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -22,7 +22,7 @@ using UnityEngine;
 /***** JUMP COMMAND *****/
 /************************/
 
-public class JumpCommand : AbstractCommand
+public class DoubleJumpCommand : AbstractCommand
 {
     /*********************/
     /***** CONSTRUCT *****/
@@ -33,7 +33,7 @@ public class JumpCommand : AbstractCommand
      * @param IAction action action to perform
      */
 
-    public JumpCommand(IAction action) : base(action)
+    public DoubleJumpCommand(IAction action) : base (action)
     {
 
     }

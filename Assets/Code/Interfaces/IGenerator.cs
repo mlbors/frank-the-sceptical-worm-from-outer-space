@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - IGenerator - Interface
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,9 +22,9 @@ using UnityEngine;
 /***** IGENERATOR *****/
 /**********************/
 
-public interface IGenerator
+public interface IGenerator<T>
 {
-    IPool Pool
+    IPool<T> Pool
     {
         get;
         set;

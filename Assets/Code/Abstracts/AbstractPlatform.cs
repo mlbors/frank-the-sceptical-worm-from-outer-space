@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractPlatform - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT PLATFORM *****/
 /*****************************/
 
-abstract public class AbstractPlatform : MonoBehaviour, IPlatform
+abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -45,7 +45,7 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform
     /***** OPERATORS GETTER/SETTER *****/
     /***********************************/
 
-    /*
+    /**
      * @access public
      */
 
@@ -62,7 +62,7 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform
     /***** X GETTER/SETTER *****/
     /***************************/
 
-    /*
+    /**
      * @access public
      */
 
@@ -79,7 +79,7 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform
     /***** Y GETTER/SETTER *****/
     /***************************/
 
-    /*
+    /**
      * @access public
      */
 

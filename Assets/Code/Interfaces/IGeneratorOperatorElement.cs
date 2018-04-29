@@ -1,7 +1,7 @@
 /**
  * FTSWFOS - IGeneratorOperatorElement - Interface
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,15 +22,15 @@ using UnityEngine;
 /***** IGENERATOR OPERATOR ELEMENT *****/
 /***************************************/
 
-public interface IGeneratorOperatorElement
+public interface IGeneratorOperatorElement<T>
 {
-    IGenerator Generator
+    IGenerator<T> Generator
     {
         get;
         set;
     }
 
-    IDestroyer Destroyer
+    IDestroyer<T> Destroyer
     {
         get;
         set;

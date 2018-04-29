@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractStateInputHandler - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT STATE INPUT HANDLER *****/
 /****************************************/
 
-abstract public class AbstractStateInputHandler : IStateInputHandler
+abstract public class AbstractStateInputHandler : IProduct, IStateInputHandler
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -41,7 +41,7 @@ abstract public class AbstractStateInputHandler : IStateInputHandler
     /***** INPUT HANDLER SUBJECT GETTER/SETTER *****/
     /***********************************************/
 
-    /*
+    /**
      * @access public
      */
 

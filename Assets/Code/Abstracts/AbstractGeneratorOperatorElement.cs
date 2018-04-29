@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractGeneratorOperatorElement - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT GENERATOR OPERATOR ELEMENT *****/
 /***********************************************/
 
-abstract public class AbstractGeneratorOperatorElement : IGeneratorOperatorElement
+abstract public class AbstractGeneratorOperatorElement<T> : IGeneratorOperatorElement<T>, IOperatorElement, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -33,8 +33,8 @@ abstract public class AbstractGeneratorOperatorElement : IGeneratorOperatorEleme
      * @var IDestroyer _destroyer object that destroys generated object using a pool system
      */
 
-    protected IGenerator _generator;
-    protected IDestroyer _destroyer;
+    protected IGenerator<T> _generator;
+    protected IDestroyer<T> _destroyer;
 
     /**************************************************/
     /**************************************************/
@@ -43,11 +43,11 @@ abstract public class AbstractGeneratorOperatorElement : IGeneratorOperatorEleme
     /***** GENERATOR GETTER/SETTER *****/
     /***********************************/
 
-    /*
+    /**
      * @access public
      */
 
-    public IGenerator Generator
+    public IGenerator<T> Generator
     {
         get { return _generator; }
         set { _generator = value; }
@@ -60,11 +60,11 @@ abstract public class AbstractGeneratorOperatorElement : IGeneratorOperatorEleme
     /***** DESTROYER GETTER/SETTER *****/
     /***********************************/
 
-    /*
+    /**
      * @access public
      */
 
-    public IDestroyer Destroyer
+    public IDestroyer<T> Destroyer
     {
         get { return _destroyer; }
         set { _destroyer = value; }

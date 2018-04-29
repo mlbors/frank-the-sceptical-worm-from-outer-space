@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractCamera - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT CAMERA *****/
 /***************************/
 
-abstract public class AbstractCamera : ICamera
+abstract public class AbstractCamera : ICamera, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -32,22 +32,39 @@ abstract public class AbstractCamera : ICamera
      * @var ICameraTarget _cameraTarget camera target
      */
 
-    protected ICameraTarget _target;
+    protected ICameraTarget _cameraTarget;
 
     /**************************************************/
     /**************************************************/
 
-    /********************************/
-    /***** TARGET GETTER/SETTER *****/
-    /********************************/
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
 
-    /*
+    /**
+     * @access protected
+     * @param ICameraTarget cameraTarget camera's target
+     */
+
+    protected AbstractCamera(ICameraTarget cameraTarget)
+    {
+        _cameraTarget = cameraTarget;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***************************************/
+    /***** CAMERA TARGET GETTER/SETTER *****/
+    /***************************************/
+
+    /**
      * @access public
      */
 
     public ICameraTarget CameraTarget
     {
-        get { return _target; }
-        set { _target = value; }
+        get { return _cameraTarget; }
+        set { _cameraTarget = value; }
     }
 }

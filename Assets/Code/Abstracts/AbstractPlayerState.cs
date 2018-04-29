@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractPlayerState - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -29,8 +29,8 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
     /*********************/
 
     /**
-     * @var IStateInputHandler object to handle inputs
-     * @var IFactory object that create other objects, here, ICommand
+     * @var IStateInputHandler _stateInputHandler object to handle inputs
+     * @var IFactory _commandFactory object that create other objects, here, ICommand
      */
 
     protected IStateInputHandler _stateInputHandler;
@@ -39,11 +39,31 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
     /**************************************************/
     /**************************************************/
 
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access protected
+     * @param IStateSubject stateSubject subject affected by the state
+     * @param IStateInputHandler stateInputHandler object to handle inputs
+     * @param IFactory commandFactory object that create other objects, here, ICommand
+     */
+
+    protected AbstractPlayerState(IStateSubject stateSubject, IStateInputHandler stateInputHandler, IFactory commandFactory) : base (stateSubject)
+    {
+        _stateInputHandler = stateInputHandler;
+        _commandFactory = commandFactory;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /*********************************************/
     /***** STATE INPUT HANDLER GETTER/SETTER *****/
     /*********************************************/
 
-    /*
+    /**
      * @access public
      */
 
@@ -60,7 +80,7 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
     /***** COMMAND FACTORY GETTER/SETTER *****/
     /*****************************************/
 
-    /*
+    /**
      * @access public
      */
 
@@ -99,9 +119,9 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
     /**************************************************/
     /**************************************************/
 
-    /*******************************/
-    /***** IPALYERSTATE UPDATE *****/
-    /*******************************/
+    /*************************************/
+    /***** IPALYERSTATE HANDLE INPUT *****/
+    /*************************************/
 
     /**
      * @access public

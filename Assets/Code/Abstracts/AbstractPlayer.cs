@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractPlayer - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT PLAYER *****/
 /***************************/
 
-abstract public class AbstractPlayer : MonoBehaviour, IPlayer, IStateSubject, IObserver, IObservable, ICameraTarget
+abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubject, IObserver, IObservable, IPlayer, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -45,7 +45,7 @@ abstract public class AbstractPlayer : MonoBehaviour, IPlayer, IStateSubject, IO
     /***** STATE GETTER/SETTER *****/
     /*******************************/
 
-    /*
+    /**
      * @access public
      */
 
@@ -62,7 +62,7 @@ abstract public class AbstractPlayer : MonoBehaviour, IPlayer, IStateSubject, IO
     /***** STATE FACTORY GETTER/SETTER *****/
     /***************************************/
 
-    /*
+    /**
      * @access public
      */
 
@@ -79,7 +79,7 @@ abstract public class AbstractPlayer : MonoBehaviour, IPlayer, IStateSubject, IO
     /***** OBSERVERS GETTER/SETTER *****/
     /***********************************/
 
-    /*
+    /**
      * @access public
      */
 

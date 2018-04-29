@@ -1,5 +1,5 @@
-/**
- * FTSWFOS - IStatInputHandler - Interface
+﻿/**
+ * FTSWFOS - IHasRigidbody - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,17 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/********************************/
-/***** ISTATE INPUT HANDLER *****/
-/********************************/
+/**************************/
+/***** IHAS RIGIDBODY *****/
+/**************************/
 
-public interface IStateInputHandler
+public interface IHasRigidbody
 {
-    ICommandHandler InputHandler
+    Rigidbody2D Rigidbody
     {
         get;
         set;
     }
-
-    void HandleInput();
 }

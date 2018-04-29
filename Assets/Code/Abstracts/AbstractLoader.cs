@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractLoader - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT LOADER *****/
 /***************************/
 
-abstract public class AbstractLoader : MonoBehaviour, ILoader
+abstract public class AbstractLoader : MonoBehaviour, ILoader, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -41,7 +41,7 @@ abstract public class AbstractLoader : MonoBehaviour, ILoader
     /***** MANAGERS GETTER/SETTER *****/
     /**********************************/
 
-    /*
+    /**
      * @access public
      */
 

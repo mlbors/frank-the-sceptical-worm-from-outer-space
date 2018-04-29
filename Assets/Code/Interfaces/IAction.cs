@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - IAction - Interface
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -13,6 +13,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 /**************************************************/
@@ -24,5 +25,5 @@ using UnityEngine;
 
 public interface IAction
 {
-    void Perform<T>(T subject);
+    void Perform<T>([Optional] T subject);
 }

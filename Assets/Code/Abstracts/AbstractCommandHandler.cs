@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractCommandHandler - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT COMMAND HANDLER *****/
 /************************************/
 
-abstract public class AbstractInputHandler : ICommandHandler
+abstract public class AbstractInputHandler : ICommandHandler, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -41,7 +41,7 @@ abstract public class AbstractInputHandler : ICommandHandler
     /***** COMMAND GETTER/SETTER *****/
     /*********************************/
 
-    /*
+    /**
      * @access public
      */
 

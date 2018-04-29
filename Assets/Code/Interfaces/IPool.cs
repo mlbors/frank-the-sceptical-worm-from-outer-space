@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - IPool - Interface
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,15 +22,15 @@ using UnityEngine;
 /***** IPOOL *****/
 /*****************/
 
-public interface IPool
+public interface IPool<T>
 {
-    GameObject PooledObject
+    T PooledObject
     {
         get;
         set;
     }
 
-    List<GameObject> PooledObjects
+    List<T> PooledObjects
     {
         get;
         set;
@@ -42,7 +42,17 @@ public interface IPool
         set;
     }
 
+    IFactory Factory
+    {
+        get;
+        set;
+    }
+
     void Init();
-    void AddObject(GameObject gameObject);
-    void RemoveObject(GameObject gameObject);
+    T InstantiateNewObject();
+    void AddObject(T pooledObject);
+    void RemoveObject(T pooledObject);
+    void FillPool();
+    T GetObject();
+    bool CheckIfObjectAvailable(T currentObject);
 }

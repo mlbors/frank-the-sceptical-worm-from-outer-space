@@ -1,7 +1,7 @@
 ﻿/**
  * FTSWFOS - AbstractOperator - Abstract Class
  *
- * @since       09.01.2018
+ * @since       2018.01.09
  * @version     1.0.0.0
  * @author      MLB
  * @copyright   -
@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT OPERATOR *****/
 /*****************************/
 
-abstract public class AbstractOperator : IOperator
+abstract public class AbstractOperator : IOperator, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -41,7 +41,7 @@ abstract public class AbstractOperator : IOperator
     /***** ELEMENTS GETTER/SETTER *****/
     /**********************************/
 
-    /*
+    /**
      * @access public
      */
 
