@@ -24,5 +24,11 @@ using UnityEngine;
 
 public interface IPlayer
 {
+    GameObject GameObject
+    {
+        get;
+        set;
+    }
+
     void HandleInput();
 }

@@ -29,14 +29,33 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
     /*********************/
 
     /**
+     * @var GameObject _gameObject player's game object
      * @var IState _state player's state
      * @var IFactory _stateFactory object that create other objects, here, IState
      * @var List<IObserver> _observers list of observers
      */
 
+    protected GameObject _gameObject;
     protected IState _state;
     protected IFactory _stateFactory;
     protected List<IObserver> _observers;
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************************/
+    /***** GAME OBEJECT GETTER/SETTER *****/
+    /**************************************/
+
+    /**
+     * @access public
+     */
+
+    public GameObject GameObject
+    {
+        get { return _gameObject; }
+        set { _gameObject = value; }
+    }
 
     /**************************************************/
     /**************************************************/
@@ -189,7 +208,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
     /*****************/
 
     /**
-     * @access private
+     * @access public
      */
 
     public abstract void Start();
@@ -202,7 +221,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
     /******************/
 
     /**
-     * @access private
+     * @access public
      */
 
     public abstract void Update();
@@ -215,7 +234,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
     /*********************************/
 
     /**
-     * @access private
+     * @access public
      */
   
     public abstract void OnCollisionEnter2D(Collision2D other);

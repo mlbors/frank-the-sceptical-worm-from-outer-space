@@ -22,73 +22,51 @@ using UnityEngine;
 /***** PLAYER *****/
 /******************/
 
-public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithState
+public class Player : AbstractPlayer
 {
-    /*********************/
-    /***** ATTRIBUTS *****/
-    /*********************/
+    /****************************/
+    /***** IOBSERVER UPDATE *****/
+    /****************************/
 
     /**
-     * @var IPlayerState _state player's state
-     * @var List<IObserver> _observers list of observers
-     * @var IInputHandler _inputHandler manage input commands
-     * @var IFactory _commandfactory object that creates commands
-     */
-
-    private IPlayerState _state;
-    private List<IObserver> _observers = new List<IObserver>();
-    private IInputHandler _inputHandler;
-    private IFactory<ICommand, IProduct> _commandFactory;
-
-    /**************************************************/
-    /**************************************************/
-
-    /*******************************/
-    /***** STATE GETTER/SETTER *****/
-    /*******************************/
-
-    /*
      * @access public
      */
 
-    public IPlayerState State
+    public override void ObserverUpdate()
     {
-        get { return _state; }
-        set { _state = value; }
+        
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IPLAYER HANDLE INPUT *****/
+    /********************************/
+
+    /**
+     * @access public
+     */
+
+    public override void HandleInput()
+    {
+        
     }
 
     /**************************************************/
     /**************************************************/
 
     /***************************************/
-    /***** INPUT HANDLER GETTER/SETTER *****/
+    /***** ISTATE SUBJECT UPDATE STATE *****/
     /***************************************/
 
-    /*
+    /**
      * @access public
      */
 
-    public IInputHandler InputHandler
+    public override void UpdateState()
     {
-        get { return _inputHandler; }
-        set { _inputHandler = value; }
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /*****************************************/
-    /***** COMMAND FACTORY GETTER/SETTER *****/
-    /*****************************************/
-
-    /*
-     * @access public
-     */
-
-    public IFactory<ICommand, IProduct> CommandFactory
-    {
-        get { return _commandFactory; }
-        set { _commandFactory = value; }
+        
     }
 
     /**************************************************/
@@ -99,12 +77,12 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /*****************/
 
     /**
-     * @access private
+     * @access public
      */
 
-    void Start()
+    public override void Start()
     {
-
+        
     }
 
     /**************************************************/
@@ -115,10 +93,10 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /******************/
 
     /**
-     * @access private
+     * @access public
      */
 
-    void Update()
+    public override void Update()
     {
         
     }
@@ -126,87 +104,16 @@ public class Player : MonoBehaviour, IPlayer, ICameraTarget, IObservable, IWithS
     /**************************************************/
     /**************************************************/
 
-    /********************************/
-    /***** IOBSERVABLE - ATTACH *****/
-    /********************************/
+    /*********************************/
+    /***** ON COLLISION ENTER 2D *****/
+    /*********************************/
 
     /**
-     * @access private
-     * @param IObserver observer observer to attach
+     * @access public
      */
 
-    void IObservable.Attach(IObserver observer)
-    {
-        _observers.Add(observer);
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /********************************/
-    /***** IOBSERVABLE - DETACH *****/
-    /********************************/
-
-    /**
-     * @access private
-     * @param IObserver observer observer to detach
-     */
-
-    void IObservable.Detach(IObserver observer)
-    {
-        _observers.Remove(observer);
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /********************************/
-    /***** IOBSERVABLE - NOTIFY *****/
-    /********************************/
-
-    /**
-     * @access private
-     */
-
-    void IObservable.Notify()
-    {
-        foreach (IObserver o in _observers)
-        {
-            //o.Update();
-        }
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /**************************************/
-    /***** IWITH STATE - UPDATE STATE *****/
-    /**************************************/
-
-    /**
-     * @access private
-     */
-
-    void IWithState.UpdateState()
+    public override void OnCollisionEnter2D(Collision2D other)
     {
         
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /************************/
-    /***** HANDLE INPUT *****/
-    /************************/
-
-    /**
-     * @access private
-     */
-
-    void HandleInput()
-    {
-        ICommand command = _commandFactory.Create();
-        command.State = _state;
-        _inputHandler.HandleInput(command);
     }
 }
