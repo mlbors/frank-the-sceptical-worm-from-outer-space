@@ -14,6 +14,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 /**************************************************/
 /**************************************************/
@@ -39,6 +40,24 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
     protected IState _state;
     protected IFactory _stateFactory;
     protected List<IObserver> _observers;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access public
+     * @param GameObject gameObject player's game object
+     */
+
+    [Inject]
+    public virtual void Construct(GameObject gameObject)
+    {
+        _gameObject = gameObject;
+    }
 
     /**************************************************/
     /**************************************************/

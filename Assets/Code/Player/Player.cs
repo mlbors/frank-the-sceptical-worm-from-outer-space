@@ -14,6 +14,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 /**************************************************/
 /**************************************************/
@@ -24,6 +25,24 @@ using UnityEngine;
 
 public class Player : AbstractPlayer
 {
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access public
+     * @param GameObject gameObject player's game object
+     */
+
+    [Inject]
+    public override void Construct(GameObject gameObject)
+    {
+        base.Construct(gameObject);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /****************************/
     /***** IOBSERVER UPDATE *****/
     /****************************/
