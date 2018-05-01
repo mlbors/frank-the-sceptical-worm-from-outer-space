@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT FACTORY *****/
 /****************************/
 
-abstract public class AbstractFactory
+abstract public class AbstractFactory : IFactory
 {
     /******************/
     /***** CREATE *****/

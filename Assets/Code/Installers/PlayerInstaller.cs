@@ -24,7 +24,7 @@ using Zenject;
 /***** PALYER INSTALLER *****/
 /****************************/
 
-public class PlayerInstaller : MonoInstaller
+public class PlayerInstaller : MonoInstaller<PlayerInstaller>
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -35,7 +35,7 @@ public class PlayerInstaller : MonoInstaller
      */
 
     [SerializeField]
-    Settings _settings = null;
+    Settings _settings;
 
     /**************************************************/
     /**************************************************/
@@ -50,7 +50,12 @@ public class PlayerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.Bind<IFactory>().To<PlayerStateFactory>().AsSingle().WhenInjectedInto<PlayerFactory>();
+        GameObject gameObject = Container.InstantiatePrefabResource("player");
+        Container.Bind<IFactory>()
+                 .To<PlayerStateFactory>()
+                 .AsSingle()
+                 .WithArguments(gameObject)
+                 .WhenInjectedInto<PlayerFactory>();
     }
 
     /**************************************************/
@@ -67,6 +72,6 @@ public class PlayerInstaller : MonoInstaller
     [Serializable]
     public class Settings
     {
-        public GameObject GameObject;
+      
     }
 }
