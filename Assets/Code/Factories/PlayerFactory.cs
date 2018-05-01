@@ -26,17 +26,69 @@ using Zenject;
 public class PlayerFactory : AbstractDIFactory
 {
     /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var GameObject _gameObject player's game object
+     * @var IFactory _stateFactory object that create other objects, here, IState
+     */
+
+    protected GameObject _gameObject;
+    protected IFactory _stateFactory;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
     /***** CONSTRUCT *****/
     /*********************/
 
     /**
      * @access public
      * @param DiContainer container DI container
+     * @var GameObject _gameObject player's game object
+     * @param IFactory stateFactory object that create other objects, here, IState
      */
 
-    public PlayerFactory(DiContainer container) : base (container)
+    public PlayerFactory(DiContainer container, GameObject gameObject, IFactory stateFactory) : base (container)
     {
-  
+        _gameObject = gameObject;
+        _stateFactory = stateFactory;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************************/
+    /***** GAME OBJECT GETTER/SETTER *****/
+    /*************************************/
+
+    /**
+     * @access public
+     */
+
+    public GameObject GameObject
+    {
+        get { return _gameObject; }
+        set { _gameObject = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***************************************/
+    /***** STATE FACTORY GETTER/SETTER *****/
+    /***************************************/
+
+    /**
+     * @access public
+     */
+
+    public IFactory StateFactory
+    {
+        get { return _stateFactory; }
+        set { _stateFactory = value; }
     }
 
     /**************************************************/
@@ -55,9 +107,7 @@ public class PlayerFactory : AbstractDIFactory
     public override IPlayer Create<IPlayer, IProduct>(params object[] constructorArguments)
     {
         IPlayer player;
-
-        player = _container.Instantiate<Player>() as IPlayer;
-
+        player = _container.Instantiate<Player>(new object[] { _gameObject, _stateFactory }) as IPlayer;
         return player;
     }
 

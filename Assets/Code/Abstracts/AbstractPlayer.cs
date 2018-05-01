@@ -51,12 +51,14 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
     /**
      * @access public
      * @param GameObject gameObject player's game object
+     * @param IFactory stateFactory object that create other objects, here, IState
      */
 
     [Inject]
-    public virtual void Construct(GameObject gameObject)
+    public virtual void Construct(GameObject gameObject, IFactory stateFactory)
     {
         _gameObject = gameObject;
+        _stateFactory = stateFactory;
     }
 
     /**************************************************/
