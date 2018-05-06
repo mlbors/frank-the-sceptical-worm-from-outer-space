@@ -32,13 +32,13 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
     /**
      * @var GameObject _gameObject player's game object
      * @var IState _state player's state
-     * @var IFactory _stateFactory object that create other objects, here, IState
+     * @var IPlayerStateFactory _stateFactory object that create other objects, here, IState
      * @var List<IObserver> _observers list of observers
      */
 
     protected GameObject _gameObject;
     protected IState _state;
-    protected IFactory _stateFactory;
+    protected IPlayerStateFactory _stateFactory;
     protected List<IObserver> _observers;
 
     /**************************************************/
@@ -51,11 +51,11 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
     /**
      * @access public
      * @param GameObject gameObject player's game object
-     * @param IFactory stateFactory object that create other objects, here, IState
+     * @param IPlayerStateFactory stateFactory object that create other objects, here, IState
      */
 
     [Inject]
-    public virtual void Construct(GameObject gameObject, IFactory stateFactory)
+    public virtual void Construct(GameObject gameObject, IPlayerStateFactory stateFactory)
     {
         _gameObject = gameObject;
         _stateFactory = stateFactory;

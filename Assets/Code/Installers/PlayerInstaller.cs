@@ -24,7 +24,7 @@ using Zenject;
 /***** PALYER INSTALLER *****/
 /****************************/
 
-public class PlayerInstaller : MonoInstaller<PlayerInstaller>
+public class PlayerInstaller : MonoInstaller
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -50,11 +50,11 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
 
     public override void InstallBindings()
     {
-        GameObject gameObject = Container.InstantiatePrefabResource("player");
+        // GameObject gameObject = Container.InstantiatePrefabResource("Prefabs/Player");
         Container.Bind<IFactory>()
                  .To<PlayerStateFactory>()
                  .AsSingle()
-                 .WithArguments(gameObject)
+                 .WithArguments(_settings.playerGameObject)
                  .WhenInjectedInto<PlayerFactory>();
     }
 
@@ -72,6 +72,14 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
     [Serializable]
     public class Settings
     {
-      
+        /*********************/
+        /***** ATTRIBUTS *****/
+        /*********************/
+
+        /**
+         * @var GameObject playerGameObject prefab to use for player
+         */
+
+        public GameObject playerGameObject;
     }
 }

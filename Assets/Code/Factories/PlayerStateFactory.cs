@@ -23,7 +23,7 @@ using Zenject;
 /***** PALYER STATE FACTORY *****/
 /********************************/
 
-public class PlayerStateFactory : AbstractDIFactory
+public class PlayerStateFactory : AbstractDIFactory, IPlayerStateFactory
 {
     /*********************/
     /***** ATTRIBUTS *****/

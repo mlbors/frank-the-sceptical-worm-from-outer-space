@@ -32,11 +32,11 @@ public class Player : AbstractPlayer
     /**
      * @access public
      * @param GameObject gameObject player's game object
-     * @param IFactory stateFactory object that create other objects, here, IState
+     * @param IPlayerStateFactory stateFactory object that create other objects, here, IState
      */
 
     [Inject]
-    public override void Construct(GameObject gameObject, IFactory stateFactory)
+    public override void Construct(GameObject gameObject, IPlayerStateFactory stateFactory)
     {
         base.Construct(gameObject, stateFactory);
     }
@@ -118,7 +118,7 @@ public class Player : AbstractPlayer
 
     public override void Update()
     {
-        
+        _stateFactory.Type = PlayerStates.Running;
     }
 
     /**************************************************/
