@@ -23,7 +23,7 @@ using Zenject;
 /***** PALYER STATE FACTORY *****/
 /********************************/
 
-public class PlayerStateFactory : AbstractDIFactory, IPlayerStateFactory
+public class PlayerStateFactory : AbstractDIFactory<IState>, IPlayerStateFactory<IState>
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -83,7 +83,7 @@ public class PlayerStateFactory : AbstractDIFactory, IPlayerStateFactory
      * @return IState
      */
 
-    public override IState Create<IState, IProduct>(params object[] constructorArguments)
+    public override IState Create(params object[] constructorArguments)
     {
         IState state;
 

@@ -22,7 +22,11 @@ using UnityEngine;
 /***** ABSTRACT FACTORY *****/
 /****************************/
 
-abstract public class AbstractFactory : IFactory
+/**
+ * @constraints object of type T where T is a class, inherits from K and can be instantiated
+ */
+
+abstract public class AbstractFactory<T> : IFactory<T>
 {
     /******************/
     /***** CREATE *****/
@@ -30,18 +34,8 @@ abstract public class AbstractFactory : IFactory
 
     /**
      * @access public
-     * @param params object constructorArguments comma-separated list of arguments
      * @return T 
      */
 
-    public abstract T Create<T, K>(params object[] constructorArguments) where T : class, K, new();
-
-    /*
-    public static T Create<T>(params object[] constructorArguments) where T : class, K
-    {
-        return (T)Activator.CreateInstance(typeof(T), constructorArguments);
-    }
-
-    HandlerFactory.CreateInstance<Handler3>(param1, param2);
-    */
+    public abstract T Create(params object[] constructorArguments);
 }

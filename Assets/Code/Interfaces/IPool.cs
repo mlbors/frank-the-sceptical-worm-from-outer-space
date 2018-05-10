@@ -42,7 +42,7 @@ public interface IPool<T>
         set;
     }
 
-    IFactory Factory
+    IFactory<T> Factory
     {
         get;
         set;

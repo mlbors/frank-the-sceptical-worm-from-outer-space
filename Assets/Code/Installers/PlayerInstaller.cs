@@ -51,7 +51,7 @@ public class PlayerInstaller : MonoInstaller
     public override void InstallBindings()
     {
         // GameObject gameObject = Container.InstantiatePrefabResource("Prefabs/Player");
-        Container.Bind<IFactory>()
+        Container.Bind<IPlayerStateFactory<IState>>()
                  .To<PlayerStateFactory>()
                  .AsSingle()
                  .WithArguments(_settings.playerGameObject)

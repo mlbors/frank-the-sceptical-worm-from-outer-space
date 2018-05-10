@@ -23,7 +23,7 @@ using Zenject;
 /***** PLAYER FACTORY *****/
 /**************************/
 
-public class PlayerFactory : AbstractDIFactory
+public class PlayerFactory : AbstractDIFactory<IPlayer>
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -104,7 +104,7 @@ public class PlayerFactory : AbstractDIFactory
      * @return IPlayer
      */
 
-    public override IPlayer Create<IPlayer, IProduct>(params object[] constructorArguments)
+    public override IPlayer Create(params object[] constructorArguments)
     {
         IPlayer player;
         player = _container.Instantiate<Player>(new object[] { _gameObject, _stateFactory }) as IPlayer;

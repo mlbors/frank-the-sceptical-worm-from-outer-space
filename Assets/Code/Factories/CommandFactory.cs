@@ -23,7 +23,7 @@ using Zenject;
 /***** COMMAND FACTORY *****/
 /***************************/
 
-public class CommandFactory : AbstractDIFactory
+public class CommandFactory : AbstractDIFactory<ICommand>
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -83,7 +83,7 @@ public class CommandFactory : AbstractDIFactory
      * @return ICommand 
      */
 
-    public override ICommand Create<ICommand, IProduct>(params object[] constructorArguments)
+    public override ICommand Create(params object[] constructorArguments)
     {
         ICommand command;
 

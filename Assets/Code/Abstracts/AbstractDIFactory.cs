@@ -23,7 +23,7 @@ using Zenject;
 /***** ABSTRACT DI FACTORY *****/
 /*******************************/
 
-abstract public class AbstractDIFactory : AbstractFactory, IValidatable
+abstract public class AbstractDIFactory<T> : AbstractFactory<T>, IValidatable
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -62,10 +62,9 @@ abstract public class AbstractDIFactory : AbstractFactory, IValidatable
     /**
      * @access public
      * @param params object constructorArguments comma-separated list of arguments
-     * @return object of type T where T is a class, inherits from K and can be instantiated
      */
 
-    public override T Create<T, K>(params object[] constructorArguments)
+    public override T Create (params object[] constructorArguments)
     {
         return _container.Instantiate<T>();
     }

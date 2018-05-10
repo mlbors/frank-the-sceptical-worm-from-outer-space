@@ -36,7 +36,7 @@ public class Player : AbstractPlayer
      */
 
     [Inject]
-    public override void Construct(GameObject gameObject, IPlayerStateFactory stateFactory)
+    public override void Construct(GameObject gameObject, IPlayerStateFactory<IState> stateFactory)
     {
         base.Construct(gameObject, stateFactory);
     }
@@ -119,6 +119,8 @@ public class Player : AbstractPlayer
     public override void Update()
     {
         _stateFactory.Type = PlayerStates.Running;
+        var state = _stateFactory.Create();
+        print(state);
     }
 
     /**************************************************/

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlayerStateFactory - Interface
+ * FTSWFOS - IProduct - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,10 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*********************************/
-/***** IPLAYER STATE FACTORY *****/
-/*********************************/
+/********************/
+/***** IPRODUCT *****/
+/********************/
 
-public interface IPlayerStateFactory
+public interface IProduct
 {
 }

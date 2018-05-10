@@ -38,7 +38,7 @@ abstract public class AbstractPool<T> : IPool<T>, IProduct
     protected T _pooledObject;
     protected List<T> _pooledObjects;
     protected int _amount;
-    protected IFactory _factory;
+    protected IFactory<T> _factory;
 
     /**************************************************/
     /**************************************************/
@@ -54,7 +54,7 @@ abstract public class AbstractPool<T> : IPool<T>, IProduct
      * @param IFactory factory object that other creates objects, here object of type T
      */
 
-    protected AbstractPool(T pooledObject, int amount, IFactory factory)
+    protected AbstractPool(T pooledObject, int amount, IFactory<T> factory)
     {
         _pooledObject = pooledObject;
         _amount = amount;
@@ -123,7 +123,7 @@ abstract public class AbstractPool<T> : IPool<T>, IProduct
      * @access public
      */
 
-    public IFactory Factory
+    public IFactory<T> Factory
     {
         get { return _factory; }
         set { _factory = value; }

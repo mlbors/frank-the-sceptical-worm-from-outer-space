@@ -22,7 +22,7 @@ using UnityEngine;
 /***** IFACTORY *****/
 /********************/
 
-public interface IFactory
+public interface IFactory<T>
 {
-    T Create<T, K>(params object[] constructorArguments) where T : class, K, new();
+    T Create(params object[] constructorArguments);
 }
