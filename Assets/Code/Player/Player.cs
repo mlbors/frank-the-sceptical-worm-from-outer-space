@@ -118,6 +118,7 @@ public class Player : AbstractPlayer
 
     public override void Update()
     {
+        print("::: player update :::");
         _stateFactory.Type = PlayerStates.Running;
         var state = _stateFactory.Create();
         print(state);

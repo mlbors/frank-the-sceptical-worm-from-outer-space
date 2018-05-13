@@ -31,11 +31,11 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>
 
     /**
      * @var GameObject _gameObject player's game object
-     * @var IFactory _stateFactory object that create other objects, here, IState
+     * @var IPlayerStateFactory _stateFactory object that create other objects, here, IState
      */
 
     protected GameObject _gameObject;
-    protected IFactory _stateFactory;
+    protected IPlayerStateFactory<IState> _stateFactory;
 
     /**************************************************/
     /**************************************************/
@@ -48,10 +48,10 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>
      * @access public
      * @param DiContainer container DI container
      * @var GameObject _gameObject player's game object
-     * @param IFactory stateFactory object that create other objects, here, IState
+     * @param IPlayerStateFactory stateFactory object that create other objects, here, IState
      */
 
-    public PlayerFactory(DiContainer container, GameObject gameObject, IFactory stateFactory) : base (container)
+    public PlayerFactory(DiContainer container, GameObject gameObject, IPlayerStateFactory<IState> stateFactory) : base (container)
     {
         _gameObject = gameObject;
         _stateFactory = stateFactory;
@@ -85,7 +85,7 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>
      * @access public
      */
 
-    public IFactory StateFactory
+    public IPlayerStateFactory<IState> StateFactory
     {
         get { return _stateFactory; }
         set { _stateFactory = value; }

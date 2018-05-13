@@ -31,9 +31,11 @@ public class PlayerStateFactory : AbstractDIFactory<IState>, IPlayerStateFactory
 
     /**
      * @var PlayerStates _type type of state
+     * @var IStateSubject _subject subject of the state
      */
 
     protected PlayerStates _type;
+    protected IStateSubject _subject;
 
     /**************************************************/
     /**************************************************/
@@ -45,12 +47,14 @@ public class PlayerStateFactory : AbstractDIFactory<IState>, IPlayerStateFactory
     /**
      * @access public
      * @param DiContainer container DI container
+     * @param IStateSubject _subject subject of the state
      * @param PlayerStates type type of state
      */
 
-    public PlayerStateFactory(DiContainer container, PlayerStates type) : base (container)
+    public PlayerStateFactory(DiContainer container, IStateSubject subject, PlayerStates type = PlayerStates.Standing) : base (container)
     {
         _type = type;
+        _subject = subject;
     }
 
     /**************************************************/
@@ -73,6 +77,24 @@ public class PlayerStateFactory : AbstractDIFactory<IState>, IPlayerStateFactory
     /**************************************************/
     /**************************************************/
 
+    /*********************************/
+    /***** SUBJECT GETTER/SETTER *****/
+    /*********************************/
+
+    /**
+     * @access public
+     */
+
+    public IStateSubject Subject
+    {
+        get { return _subject; }
+        set { _subject = value; }
+    }
+
+
+    /**************************************************/
+    /**************************************************/
+
     /******************/
     /***** CREATE *****/
     /******************/
@@ -90,10 +112,10 @@ public class PlayerStateFactory : AbstractDIFactory<IState>, IPlayerStateFactory
         switch (_type)
         {
             case PlayerStates.Standing:
-                state = _container.Instantiate<StandingPlayerState>() as IState;
+                state = _container.Instantiate<StandingPlayerState>(new object[] { _subject }) as IState;
                 break;
             default:
-                state = _container.Instantiate<StandingPlayerState>() as IState;
+                state = _container.Instantiate<StandingPlayerState>(new object[] { _subject }) as IState;
                 break;
         }
 
