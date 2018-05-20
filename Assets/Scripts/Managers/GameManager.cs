@@ -22,7 +22,7 @@ using UnityEngine;
 /***** MANAGER *****/
 /*******************/
 
-public class GameManager : MonoBehaviour {
+public class GameManagerOld : MonoBehaviour {
 
 	/**********************/
 	/***** PROPERTIES *****/
