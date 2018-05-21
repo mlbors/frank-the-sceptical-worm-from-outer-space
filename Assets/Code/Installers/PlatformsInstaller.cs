@@ -51,7 +51,12 @@ public class PlatformsInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<IPlatformFactory<IPlatform>>()
-                 .To<PlatformFactory>();
+                 .To<PlatformFactory>()
+                 .AsSingle();
+        
+        Container.Bind<List<GameObject>>()
+                 .FromInstance(_settings.platforms)
+                 .WhenInjectedInto<PlatformFactory>();
     }
 
     /**************************************************/

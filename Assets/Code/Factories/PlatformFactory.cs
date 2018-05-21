@@ -31,9 +31,11 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
 
     /**
      * @var PlatformTypes _type type of platform
+     * @var List<GameObject> _gameObjects game objects to use
      */
 
     protected PlatformTypes _type;
+    protected List<GameObject> _gameObjects;
 
     /**************************************************/
     /**************************************************/
@@ -46,11 +48,13 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
      * @access public
      * @param DiContainer container DI container
      * @param PlatformTypes type type of platform
+     * @param List<GameObject> _gameObjects game objects to use
      */
 
-    public PlatformFactory(DiContainer container, PlatformTypes type) : base (container)
+    public PlatformFactory(DiContainer container, PlatformTypes type, List<GameObject> gameObjects) : base (container)
     {
         _type = type;
+        _gameObjects = gameObjects;
     }
 
     /**************************************************/
@@ -73,6 +77,23 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
     /**************************************************/
     /**************************************************/
 
+    /**************************************/
+    /***** GAME OBJECTS GETTER/SETTER *****/
+    /**************************************/
+
+    /**
+     * @access public
+     */
+
+    public List<GameObject> GameObjects
+    {
+        get { return _gameObjects; }
+        set { _gameObjects = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /******************/
     /***** CREATE *****/
     /******************/
@@ -90,18 +111,25 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
         switch (_type)
         {
             case PlatformTypes.One:
+                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
                 break;
             case PlatformTypes.Two:
+                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
                 break;
             case PlatformTypes.Four:
+                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
                 break;
             case PlatformTypes.Five:
+                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
                 break;
             case PlatformTypes.Seven:
+                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
                 break;
             case PlatformTypes.Nine:
+                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
                 break;
             default:
+                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
                 break;
         }
 
