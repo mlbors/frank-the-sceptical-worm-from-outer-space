@@ -53,7 +53,7 @@ public class PlatformsInstaller : MonoInstaller
         Container.Bind<IPlatformFactory<IPlatform>>()
                  .To<PlatformFactory>()
                  .AsSingle();
-        
+
         Container.Bind<List<GameObject>>()
                  .FromInstance(_settings.platforms)
                  .WhenInjectedInto<PlatformFactory>();

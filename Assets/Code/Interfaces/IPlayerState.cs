@@ -22,7 +22,7 @@ using UnityEngine;
 /***** IPLAYER STATE *****/
 /*************************/
 
-public interface IPlayerState
+public interface IPlayerState : IState
 {
     IStateInputHandler StateInputHandler
     {

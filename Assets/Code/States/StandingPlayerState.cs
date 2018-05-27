@@ -30,12 +30,10 @@ public class StandingPlayerState : AbstractPlayerState
 
     /**
      * @access public
-     * @param IStateSubject stateSubject subject affected by the state
-     * @param IStateInputHandler stateInputHandler object to handle inputs
      * @param IFactory commandFactory object that create other objects, here, ICommand
      */
 
-    public StandingPlayerState(IStateSubject stateSubject, IStateInputHandler stateInputHandler, IFactory<ICommand> commandFactory) : base (stateSubject, stateInputHandler, commandFactory)
+    public StandingPlayerState(IFactory<ICommand> commandFactory) : base (commandFactory)
     {
     }
 

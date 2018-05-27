@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,7 @@ using Zenject;
 /***** PALYER STATE FACTORY *****/
 /********************************/
 
-public class PlayerStateFactory : AbstractDIFactory<IState>, IPlayerStateFactory<IState>
+public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateFactory<IPlayerState>
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -47,14 +48,12 @@ public class PlayerStateFactory : AbstractDIFactory<IState>, IPlayerStateFactory
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param IStateSubject _subject subject of the state
      * @param PlayerStates type type of state
      */
 
-    public PlayerStateFactory(DiContainer container, IStateSubject subject, PlayerStates type = PlayerStates.Standing) : base (container)
+    public PlayerStateFactory(DiContainer container, PlayerStates type = PlayerStates.Standing) : base (container)
     {
         _type = type;
-        _subject = subject;
     }
 
     /**************************************************/
@@ -105,19 +104,29 @@ public class PlayerStateFactory : AbstractDIFactory<IState>, IPlayerStateFactory
      * @return IState
      */
 
-    public override IState Create(params object[] constructorArguments)
+    public override IPlayerState Create(params object[] constructorArguments)
     {
-        IState state;
+        if (_subject == null) {
+            throw new Exception("No subject defined");
+        }
+
+        IPlayerState state;
+        IStateInputHandler stateInputHandler;
 
         switch (_type)
         {
             case PlayerStates.Standing:
-                state = _container.Instantiate<StandingPlayerState>(new object[] { _subject }) as IState;
+                state = _container.Instantiate<StandingPlayerState>(new object[] { });
+                stateInputHandler = _container.Instantiate<StandingPlayerStateInputHandler>(new object[] {});
                 break;
             default:
-                state = _container.Instantiate<StandingPlayerState>(new object[] { _subject }) as IState;
+                state = _container.Instantiate<StandingPlayerState>(new object[] { });
+                stateInputHandler = _container.Instantiate<StandingPlayerStateInputHandler>(new object[] { });
                 break;
         }
+
+        state.StateSubject = _subject;
+        state.StateInputHandler = stateInputHandler;
 
         return state;
     }

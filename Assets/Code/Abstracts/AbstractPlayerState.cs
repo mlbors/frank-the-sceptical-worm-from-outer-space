@@ -45,14 +45,11 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
 
     /**
      * @access protected
-     * @param IStateSubject stateSubject subject affected by the state
-     * @param IStateInputHandler stateInputHandler object to handle inputs
      * @param IFactory commandFactory object that create other objects, here, ICommand
      */
 
-    protected AbstractPlayerState(IStateSubject stateSubject, IStateInputHandler stateInputHandler, IFactory<ICommand> commandFactory) : base (stateSubject)
+    protected AbstractPlayerState(IFactory<ICommand> commandFactory) : base ()
     {
-        _stateInputHandler = stateInputHandler;
         _commandFactory = commandFactory;
     }
 

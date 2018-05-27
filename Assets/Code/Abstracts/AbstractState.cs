@@ -46,9 +46,9 @@ abstract public class AbstractState : IState, IProduct
      * @param IStateSubject stateSubject subject affected by the state
      */
 
-    protected AbstractState(IStateSubject stateSubject)
+    protected AbstractState()
     {
-        _stateSubject = stateSubject;
+
     }
 
     /**************************************************/

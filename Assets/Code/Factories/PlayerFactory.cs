@@ -108,6 +108,7 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>
     {
         IPlayer player;
         player = _container.Instantiate<Player>(new object[] { _gameObject, _stateFactory }) as IPlayer;
+
         return player;
     }
 
