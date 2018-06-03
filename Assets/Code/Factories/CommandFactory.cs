@@ -23,7 +23,7 @@ using Zenject;
 /***** COMMAND FACTORY *****/
 /***************************/
 
-public class CommandFactory : AbstractDIFactory<ICommand>
+public class CommandFactory : AbstractDIFactory<ICommand>, ICommandFactory<ICommand>
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -48,7 +48,7 @@ public class CommandFactory : AbstractDIFactory<ICommand>
      * @param CommandTypes type type of command
      */
 
-    public CommandFactory(DiContainer container, CommandTypes type) : base (container)
+    public CommandFactory(DiContainer container, CommandTypes type = CommandTypes.None) : base (container)
     {
         _type = type;
     }

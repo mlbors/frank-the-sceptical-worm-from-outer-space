@@ -30,11 +30,11 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
 
     /**
      * @var IStateInputHandler _stateInputHandler object to handle inputs
-     * @var IFactory _commandFactory object that create other objects, here, ICommand
+     * @var ICommandFactory _commandFactory object that create other objects, here, ICommand
      */
 
     protected IStateInputHandler _stateInputHandler;
-    protected IFactory<ICommand> _commandFactory;
+    protected ICommandFactory<ICommand> _commandFactory;
 
     /**************************************************/
     /**************************************************/
@@ -45,10 +45,10 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
 
     /**
      * @access protected
-     * @param IFactory commandFactory object that create other objects, here, ICommand
+     * @param ICommandFactory commandFactory object that create other objects, here, ICommand
      */
 
-    protected AbstractPlayerState(IFactory<ICommand> commandFactory) : base ()
+    protected AbstractPlayerState(ICommandFactory<ICommand> commandFactory) : base ()
     {
         _commandFactory = commandFactory;
     }
@@ -81,7 +81,7 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
      * @access public
      */
 
-    public IFactory<ICommand> CommandFactory
+    public ICommandFactory<ICommand> CommandFactory
     {
         get { return _commandFactory; }
         set { _commandFactory = value; }

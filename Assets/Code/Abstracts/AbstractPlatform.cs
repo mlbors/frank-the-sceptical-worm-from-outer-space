@@ -14,6 +14,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 /**************************************************/
 /**************************************************/
@@ -29,14 +30,34 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct
     /*********************/
 
     /**
+     * @var GameObject _gameObject player's game object
      * @var List<IOperator> _operators list of operators to generate various components
      * @var Float _x x position
      * @var Float _y y position;
      */
 
+    protected GameObject _gameObject;
     protected List<IOperator> _operators;
     protected float _x;
     protected float _y;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access public
+     * @param GameObject gameObject platform's game object
+     */
+
+    [Inject]
+    public virtual void Construct(GameObject gameObject)
+    {
+        _gameObject = gameObject;
+    }
 
     /**************************************************/
     /**************************************************/

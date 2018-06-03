@@ -52,10 +52,16 @@ public class PlayerInstaller : MonoInstaller
     {
         // GameObject gameObject = Container.InstantiatePrefabResource("Prefabs/Player");
 
+        Container.Bind<ICommandFactory<ICommand>>()
+                 .To<CommandFactory>()
+                 .AsSingle()
+                 .WhenInjectedInto<IPlayerState>();
+
         Container.Bind<IPlayerStateFactory<IPlayerState>>()
                  .To<PlayerStateFactory>()
                  .AsSingle()
                  .WhenInjectedInto<PlayerFactory>();
+        
         Container.Bind<GameObject>()
                  .FromInstance(_settings.playerGameObject)
                  .WhenInjectedInto<PlayerFactory>();

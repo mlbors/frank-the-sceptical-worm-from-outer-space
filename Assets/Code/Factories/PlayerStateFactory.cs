@@ -117,7 +117,7 @@ public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateF
         {
             case PlayerStates.Standing:
                 state = _container.Instantiate<StandingPlayerState>(new object[] { });
-                stateInputHandler = _container.Instantiate<StandingPlayerStateInputHandler>(new object[] {});
+                stateInputHandler = _container.Instantiate<StandingPlayerStateInputHandler>(new object[] { });
                 break;
             default:
                 state = _container.Instantiate<StandingPlayerState>(new object[] { });

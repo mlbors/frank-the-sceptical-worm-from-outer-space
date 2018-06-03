@@ -30,10 +30,10 @@ public class StandingPlayerState : AbstractPlayerState
 
     /**
      * @access public
-     * @param IFactory commandFactory object that create other objects, here, ICommand
+     * @param ICommandFactory commandFactory object that create other objects, here, ICommand
      */
 
-    public StandingPlayerState(IFactory<ICommand> commandFactory) : base (commandFactory)
+    public StandingPlayerState(ICommandFactory<ICommand> commandFactory) : base (commandFactory)
     {
     }
 

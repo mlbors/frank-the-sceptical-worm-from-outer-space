@@ -24,6 +24,7 @@ using UnityEngine;
 
 public enum CommandTypes
 {
+    None,
     Jump,
     DoubleJump
 }

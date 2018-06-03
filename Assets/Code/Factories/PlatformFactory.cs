@@ -111,25 +111,25 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
         switch (_type)
         {
             case PlatformTypes.One:
-                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
+                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[0] }) as IPlatform;
                 break;
             case PlatformTypes.Two:
-                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
+                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[1] }) as IPlatform;
                 break;
             case PlatformTypes.Four:
-                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
+                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[2] }) as IPlatform;
                 break;
             case PlatformTypes.Five:
-                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
+                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[3] }) as IPlatform;
                 break;
             case PlatformTypes.Seven:
-                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
+                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[4] }) as IPlatform;
                 break;
             case PlatformTypes.Nine:
-                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
+                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[5] }) as IPlatform;
                 break;
             default:
-                platform = _container.Instantiate<Platform>(new object[] {}) as IPlatform;
+                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[0] }) as IPlatform;
                 break;
         }
 
