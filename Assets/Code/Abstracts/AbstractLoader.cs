@@ -14,6 +14,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 /**************************************************/
 /**************************************************/
@@ -29,10 +30,30 @@ abstract public class AbstractLoader : MonoBehaviour, ILoader, IProduct
     /*********************/
 
     /**
+     * @var GameObject _gameObject loader's game object
      * @var List<IManager> _managers list of managers
      */
 
+    protected GameObject _gameObject;
     protected List<IManager> _managers;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access public
+     * @param GameObject gameObject platform's game object
+     */
+
+    [Inject]
+    public virtual void Construct(GameObject gameObject)
+    {
+        _gameObject = gameObject;
+    }
 
     /**************************************************/
     /**************************************************/
