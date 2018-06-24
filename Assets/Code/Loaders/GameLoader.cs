@@ -23,8 +23,8 @@ using Zenject;
 /***** GAME LOADER *****/
 /***********************/
 
-public class GameLoader : AbstractLoader, IGameLoader, IInitializable {
-
+public class GameLoader : AbstractLoader, IGameLoader, IInitializable
+{
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -37,7 +37,7 @@ public class GameLoader : AbstractLoader, IGameLoader, IInitializable {
     [Inject]
     public override void Construct(GameObject gameObject)
     {
-        print("::: GameLoader Construct :::");
+        Debug.Log("::: GameLoader Construct :::");
         base.Construct(gameObject);
     }
 
@@ -60,6 +60,38 @@ public class GameLoader : AbstractLoader, IGameLoader, IInitializable {
     /**************************************************/
     /**************************************************/
 
+    /*****************/
+    /***** START *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    void Start()
+    {
+        Debug.Log("::: GameLoader Start :::");
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************/
+    /***** UPDATE *****/
+    /******************/
+
+    /**
+     * @access public
+     */
+
+    void Update()
+    {
+        Debug.Log("::: GameLoader Update :::");
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /*********************************/
     /***** ILOADER INIT MANAGERS *****/
     /*********************************/
@@ -70,7 +102,7 @@ public class GameLoader : AbstractLoader, IGameLoader, IInitializable {
 
     public override void InitManagers()
     {
-        
+
     }
 
     /**************************************************/
@@ -84,5 +116,5 @@ public class GameLoader : AbstractLoader, IGameLoader, IInitializable {
     {
         Debug.Log("::: GameLoader Initialize :::");
     }
-    
+
 }

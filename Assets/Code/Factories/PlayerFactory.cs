@@ -53,6 +53,7 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>
 
     public PlayerFactory(DiContainer container, GameObject gameObject, IPlayerStateFactory<IState> stateFactory) : base (container)
     {
+        Debug.Log("::: Player Factory :::");
         _gameObject = gameObject;
         _stateFactory = stateFactory;
     }

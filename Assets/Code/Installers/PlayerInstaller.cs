@@ -50,7 +50,7 @@ public class PlayerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        // GameObject gameObject = Container.InstantiatePrefabResource("Prefabs/Player");
+        Debug.Log("::: Install player bindings :::");
 
         Container.Bind<ICommandFactory<ICommand>>()
                  .To<CommandFactory>()

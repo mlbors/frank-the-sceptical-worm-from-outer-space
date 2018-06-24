@@ -46,13 +46,17 @@ public class MainInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        Debug.Log("::: Install main bindings :::");
         Container.Bind<GameObject>()
                  .FromInstance(_settings.mainLoader)
                  .WhenInjectedInto<GameLoader>();
 
         Container.Bind<IGameLoader>()
                  .To<GameLoader>()
-                 .AsSingle();
+                 .FromNewComponentOnNewGameObject()
+                 .WithGameObjectName("MainLoader")
+                 .AsSingle()
+                 .NonLazy();
     }
 
     /**************************************************/
