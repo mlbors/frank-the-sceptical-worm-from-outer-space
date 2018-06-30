@@ -30,12 +30,12 @@ abstract public class AbstractLoader : MonoBehaviour, ILoader, IProduct
     /*********************/
 
     /**
-     * @var GameObject _gameObject loader's game object
      * @var List<IManager> _managers list of managers
+     * @var IManagerFactory<IManager> _managerFactory factory object that creates other objects, here, IManager
      */
 
-    protected GameObject _gameObject;
-    protected List<IManager> _managers;
+    protected List<IManager> _managers = new List<IManager>();
+    protected IManagerFactory<IManager> _managerFactory;
 
     /**************************************************/
     /**************************************************/
@@ -46,13 +46,13 @@ abstract public class AbstractLoader : MonoBehaviour, ILoader, IProduct
 
     /**
      * @access public
-     * @param GameObject gameObject platform's game object
+     * @param IManagerFactory managerFactory factory object that creates other objects, here, IManager
      */
 
     [Inject]
-    public virtual void Construct(GameObject gameObject)
+    public virtual void Construct(IManagerFactory<IManager> managerFactory)
     {
-        _gameObject = gameObject;
+        _managerFactory = managerFactory;
     }
 
     /**************************************************/
@@ -110,7 +110,7 @@ abstract public class AbstractLoader : MonoBehaviour, ILoader, IProduct
      * @param IManager manager manager to add
      */
 
-    public void AddManager(IManager manager)
+    public virtual void AddManager(IManager manager)
     {
         _managers.Add(manager);
     }

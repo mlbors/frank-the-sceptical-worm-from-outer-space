@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,25 +25,40 @@ using Zenject;
 /***********************/
 
 public class GameLoader : AbstractLoader, IGameLoader, IInitializable
-{
+{   
+    /**************************************************/
+    /**************************************************/
+
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
 
     /**
      * @access public
-     * @param GameObject gameObject platform's game object
+     * @param IManagerFactory managerFactory factory object that creates other objects, here, IManager
      */
 
     [Inject]
-    public override void Construct(GameObject gameObject)
+    public override void Construct(IManagerFactory<IManager> managerFactory)
     {
-        Debug.Log("::: GameLoader Construct :::");
-        base.Construct(gameObject);
+        base.Construct(managerFactory);
+        _SetValues();
+        InitManagers();
     }
 
     /**************************************************/
     /**************************************************/
+
+    /**********************/
+    /***** SET VALUES *****/
+    /**********************/
+
+    void _SetValues()
+    {
+        _managerFactory.Type = ManagerTypes.GameManager;
+        IManager gameManager = _managerFactory.Create();
+        AddManager(gameManager);
+    }
 
     /*************************/
     /***** ILOADER AWAKE *****/
@@ -102,7 +118,11 @@ public class GameLoader : AbstractLoader, IGameLoader, IInitializable
 
     public override void InitManagers()
     {
-
+        foreach(IManager manager in _managers) 
+        {
+            Debug.Log("::: Init Manager :::");
+            manager.Init();
+        }
     }
 
     /**************************************************/

@@ -36,7 +36,7 @@ abstract public class AbstractPool<T> : IPool<T>, IProduct
      */
 
     protected T _pooledObject;
-    protected List<T> _pooledObjects;
+    protected List<T> _pooledObjects = new List<T>();
     protected int _amount;
     protected IFactory<T> _factory;
 

@@ -51,7 +51,7 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
      * @param List<GameObject> _gameObjects game objects to use
      */
 
-    public PlatformFactory(DiContainer container, List<GameObject> gameObjects, PlatformTypes type = PlatformTypes.One) : base (container)
+    public PlatformFactory(DiContainer container, List<GameObject> gameObjects, PlatformTypes type = PlatformTypes.One) : base(container)
     {
         _type = type;
         _gameObjects = gameObjects;

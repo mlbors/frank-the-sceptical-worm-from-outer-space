@@ -37,7 +37,7 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct
      */
 
     protected GameObject _gameObject;
-    protected List<IOperator> _operators;
+    protected List<IOperator> _operators = new List<IOperator>();
     protected float _x;
     protected float _y;
 

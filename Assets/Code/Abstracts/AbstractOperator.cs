@@ -32,7 +32,7 @@ abstract public class AbstractOperator : IOperator, IProduct
      * @var List<IOperatorElement> _elements list of elements to use
      */
 
-    protected List<IOperatorElement> _elements;
+    protected List<IOperatorElement> _elements = new List<IOperatorElement>();
 
     /**************************************************/
     /**************************************************/

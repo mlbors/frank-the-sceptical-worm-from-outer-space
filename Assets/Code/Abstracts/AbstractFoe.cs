@@ -36,7 +36,7 @@ abstract public class AbstractFoe : MonoBehaviour, IFoe, IObservable, IProduct
 
     protected float _x;
     protected float _y;
-    protected List<IObserver> _observers;
+    protected List<IObserver> _observers = new List<IObserver>();
 
     /**************************************************/
     /**************************************************/

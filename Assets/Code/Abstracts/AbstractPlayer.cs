@@ -39,7 +39,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
     protected GameObject _gameObject;
     protected IState _state;
     protected IPlayerStateFactory<IState> _stateFactory;
-    protected List<IObserver> _observers;
+    protected List<IObserver> _observers = new List<IObserver>();
 
     /**************************************************/
     /**************************************************/

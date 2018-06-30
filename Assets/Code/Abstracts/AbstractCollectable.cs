@@ -37,7 +37,7 @@ abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObserv
 
     protected float _x;
     protected float _y;
-    protected List<IObserver> _observers;
+    protected List<IObserver> _observers = new List<IObserver>();
     protected AudioSource _sound;
 
     /**************************************************/

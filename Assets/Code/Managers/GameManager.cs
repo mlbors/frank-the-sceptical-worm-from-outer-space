@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -31,7 +32,7 @@ public class GameManager : AbstractManager, IGameManager
      * @var List<IOperator> _operators list of operators to use
      */
 
-    protected List<IOperator> _operators;
+    protected List<IOperator> _operators = new List<IOperator>();
 
     /**************************************************/
     /**************************************************/
@@ -63,6 +64,7 @@ public class GameManager : AbstractManager, IGameManager
 
     public override void Init()
     {
+        Console.WriteLine("::: GameManager Init :::");
         foreach (IOperator o in _operators)
         {
             o.Init();
