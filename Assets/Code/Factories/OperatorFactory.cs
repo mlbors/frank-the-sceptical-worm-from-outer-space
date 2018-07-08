@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - ManagerFactory - Concrete Class
+ * FTSWFOS - OperatorFactory - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -20,21 +20,21 @@ using Zenject;
 /**************************************************/
 /**************************************************/
 
-/***************************/
-/***** MANAGER FACTORY *****/
-/***************************/
+/****************************/
+/***** OPERATOR FACTORY *****/
+/****************************/
 
-public class ManagerFactory : AbstractDIFactory<IManager>, IManagerFactory<IManager>
+public class OperatorFactory : AbstractDIFactory<IOperator>, IOperatorFactory<IOperator>
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
-     * @var ManagerTypes _type type of manager
+     * @var OperatorTypes _type type of operator
      */
 
-    protected ManagerTypes _type;
+    protected OperatorTypes _type;
 
     /**************************************************/
     /**************************************************/
@@ -46,10 +46,10 @@ public class ManagerFactory : AbstractDIFactory<IManager>, IManagerFactory<IMana
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param ManagerTypes type type of command
+     * @param OperatorTypes type type of command
      */
 
-    public ManagerFactory(DiContainer container, ManagerTypes type = ManagerTypes.GameManager) : base (container)
+    public OperatorFactory(DiContainer container, OperatorTypes type = OperatorTypes.GameOperator) : base (container)
     {
         _type = type;
     }
@@ -65,7 +65,7 @@ public class ManagerFactory : AbstractDIFactory<IManager>, IManagerFactory<IMana
      * @access public
      */
 
-    public ManagerTypes Type
+    public OperatorTypes Type
     {
         get { return _type; }
         set { _type = value; }
@@ -81,24 +81,24 @@ public class ManagerFactory : AbstractDIFactory<IManager>, IManagerFactory<IMana
     /**
      * @access public
      * @param params object constructorArguments comma-separated list of arguments
-     * @return IManager
+     * @return IOperator
      */
 
-    public override IManager Create(params object[] constructorArguments)
+    public override IOperator Create(params object[] constructorArguments)
     {
-        IManager manager;
+        IOperator theOperator;
 
         switch (_type)
         {
-            case ManagerTypes.GameManager:
-                manager = _container.Instantiate<GameManager>() as IManager;
+            case OperatorTypes.GameOperator:
+                theOperator = _container.Instantiate<GameOperator>() as IOperator;
                 break;
             default:
-                manager = _container.Instantiate<GameManager>() as IManager;
+                theOperator = _container.Instantiate<GameOperator>() as IOperator;
                 break;
         }
 
-        return manager;
+        return theOperator;
     }
 
     /**************************************************/
@@ -114,6 +114,6 @@ public class ManagerFactory : AbstractDIFactory<IManager>, IManagerFactory<IMana
 
     public override void Validate()
     {
-        _container.Instantiate<GameManager>();
+        _container.Instantiate<GameOperator>();
     }
 }

@@ -62,7 +62,14 @@ public class MainInstaller : MonoInstaller
 
         Container.Bind<IGameManager>()
                  .To<GameManager>()
-                 .AsSingle();
+                 .AsSingle()
+                 .NonLazy();
+
+        Container.Bind<IOperatorFactory<IOperator>>()
+                 .To<OperatorFactory>()
+                 .AsSingle()
+                 .WhenInjectedInto<IGameManager>()
+                 .NonLazy();
     }
 
     /**************************************************/

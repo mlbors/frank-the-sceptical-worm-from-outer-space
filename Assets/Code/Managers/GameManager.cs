@@ -14,6 +14,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Zenject;
 
 /**************************************************/
 /**************************************************/
@@ -25,30 +26,35 @@ using System.Collections.Generic;
 public class GameManager : AbstractManager, IGameManager
 {
     /*********************/
-    /***** ATTRIBUTS *****/
+    /***** CONSTRUCT *****/
     /*********************/
 
     /**
-     * @var List<IOperator> _operators list of operators to use
-     */
-
-    protected List<IOperator> _operators = new List<IOperator>();
-
-    /**************************************************/
-    /**************************************************/
-
-    /***********************************/
-    /***** OPERATORS GETTER/SETTER *****/
-    /***********************************/
-
-    /**
      * @access public
+     * @param IOperatorFactory operatorFactory factory object that creates other objects, here, IOperator
      */
 
-    public List<IOperator> Operators
+    [Inject]
+    public override void Construct(IOperatorFactory<IOperator> operatorFactory)
     {
-        get { return _operators; }
-        set { _operators = value; }
+        base.Construct(operatorFactory);
+        _SetValues();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**********************/
+    /***** SET VALUES *****/
+    /**********************/
+
+    void _SetValues()
+    {
+        _operatorFactory.Type = OperatorTypes.GameOperator;
+        IOperator gameOperator = _operatorFactory.Create();
+        Console.WriteLine("::: GameOperator Object :::");
+        Console.WriteLine(gameOperator);
+        AddOperator(gameOperator);
     }
 
     /**************************************************/
@@ -70,39 +76,4 @@ public class GameManager : AbstractManager, IGameManager
             o.Init();
         }
     }
-
-    /**************************************************/
-    /**************************************************/
-
-    /**************************************/
-    /***** IGAME MANAGER ADD OPERATOR *****/
-    /**************************************/
-
-    /**
-     * @access public
-     * @param IOperator theOperator operator to add
-     */
-
-    public void AddOperator(IOperator theOperator)
-    {
-        _operators.Add(theOperator);
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /*****************************************/
-    /***** IGAME MANAGER REMOVE OPERATOR *****/
-    /*****************************************/
-
-    /**
-     * @access public
-     * @param IOperator theOperator operator to remove
-     */
-
-    public void RemoveOperator(IOperator theOperator)
-    {
-        _operators.Remove(theOperator);
-    }
-
 }

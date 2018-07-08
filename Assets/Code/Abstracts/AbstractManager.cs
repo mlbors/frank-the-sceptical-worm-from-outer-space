@@ -13,6 +13,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Zenject;
 
 /**************************************************/
 /**************************************************/
@@ -21,8 +22,109 @@ using System.Collections.Generic;
 /***** ABSTRACT MANAGER *****/
 /****************************/
 
-abstract public class AbstractManager : IManager, IProduct
+abstract public class AbstractManager : IManager, IGameManager, IProduct
 {
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var IOperatorFactory operatorFactory factory object that creates other objects, here, IOperator
+     * @var List<IOperator> _operators list of operators to generate various components
+     */
+
+    protected IOperatorFactory<IOperator> _operatorFactory;
+    protected List<IOperator> _operators = new List<IOperator>();
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access public
+     * @param IOperatorFactory operatorFactory factory object that creates other objects, here, IOperator
+     */
+
+    [Inject]
+    public virtual void Construct(IOperatorFactory<IOperator> operatorFactory)
+    {
+        _operatorFactory = operatorFactory;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************************/
+    /***** OPERATORS GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public List<IOperator> Operators
+    {
+        get { return _operators; }
+        set { _operators = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************************/
+    /***** OPERATOR FACTORY GETTER/SETTER *****/
+    /******************************************/
+
+    /**
+     * @access public
+     */
+
+    public IOperatorFactory<IOperator> OperatorFactory
+    {
+        get { return _operatorFactory; }
+        set { _operatorFactory = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************************/
+    /***** IGAME MANAGER ADD OPERATOR *****/
+    /**************************************/
+
+    /**
+     * @access public
+     * @param IOperator theOperator operator to add
+     */
+
+    public void AddOperator(IOperator theOperator)
+    {
+        _operators.Add(theOperator);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************************/
+    /***** IGAME MANAGER REMOVE OPERATOR *****/
+    /*****************************************/
+
+    /**
+     * @access public
+     * @param IOperator theOperator operator to remove
+     */
+
+    public void RemoveOperator(IOperator theOperator)
+    {
+        _operators.Remove(theOperator);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /*************************/
     /***** IMANAGER INIT *****/
     /*************************/

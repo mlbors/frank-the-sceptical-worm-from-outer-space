@@ -1,5 +1,5 @@
-/**
- * FTSWFOS - IGameManager - Interface
+﻿/**
+ * FTSWFOS - IOperatorElementFactory - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,24 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*************************/
-/***** IGAME MANAGER *****/
-/*************************/
+/*************************************/
+/***** IOPERATOR ELEMENT FACTORY *****/
+/*************************************/
 
-public interface IGameManager
+public interface IOperatorElementFactory<T> : IFactory<T>
 {
-    List<IOperator> Operators
+    OperatorElementTypes Type
     {
         get;
         set;
     }
-
-    IOperatorFactory<IOperator> OperatorFactory
-    {
-        get;
-        set;
-    }
-
-    void AddOperator(IOperator theOperator);
-    void RemoveOperator(IOperator theOperator);
 }

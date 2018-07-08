@@ -26,9 +26,6 @@ using Zenject;
 
 public class GameLoader : AbstractLoader, IGameLoader, IInitializable
 {   
-    /**************************************************/
-    /**************************************************/
-
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -121,6 +118,8 @@ public class GameLoader : AbstractLoader, IGameLoader, IInitializable
         foreach(IManager manager in _managers) 
         {
             Debug.Log("::: Init Manager :::");
+            Debug.Log("::: Manager object :::");
+            Debug.Log(manager);
             manager.Init();
         }
     }
