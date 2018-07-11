@@ -11,9 +11,10 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Zenject;
+using UnityEngine;
 
 /**************************************************/
 /**************************************************/
@@ -44,12 +45,11 @@ abstract public class AbstractManager : IManager, IGameManager, IProduct
     /*********************/
 
     /**
-     * @access public
+     * @access protected
      * @param IOperatorFactory operatorFactory factory object that creates other objects, here, IOperator
      */
 
-    [Inject]
-    public virtual void Construct(IOperatorFactory<IOperator> operatorFactory)
+    protected AbstractManager(IOperatorFactory<IOperator> operatorFactory)
     {
         _operatorFactory = operatorFactory;
     }
@@ -102,6 +102,8 @@ abstract public class AbstractManager : IManager, IGameManager, IProduct
 
     public void AddOperator(IOperator theOperator)
     {
+        Debug.Log("::: Adding operator :::");
+        Debug.Log(theOperator);
         _operators.Add(theOperator);
     }
 

@@ -112,6 +112,8 @@ abstract public class AbstractLoader : MonoBehaviour, ILoader, IProduct
 
     public virtual void AddManager(IManager manager)
     {
+        Debug.Log("::: Adding manager :::");
+        Debug.Log(manager);
         _managers.Add(manager);
     }
 

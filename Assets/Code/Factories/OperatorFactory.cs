@@ -98,6 +98,7 @@ public class OperatorFactory : AbstractDIFactory<IOperator>, IOperatorFactory<IO
                 break;
         }
 
+        Debug.Log("::: operator created :::");
         return theOperator;
     }
 

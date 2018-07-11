@@ -38,6 +38,7 @@ public class GameLoader : AbstractLoader, IGameLoader, IInitializable
     [Inject]
     public override void Construct(IManagerFactory<IManager> managerFactory)
     {
+        Debug.Log("::: GameLoader construct :::");
         base.Construct(managerFactory);
         _SetValues();
         InitManagers();
@@ -50,8 +51,9 @@ public class GameLoader : AbstractLoader, IGameLoader, IInitializable
     /***** SET VALUES *****/
     /**********************/
 
-    void _SetValues()
+    protected void _SetValues()
     {
+        Debug.Log("::: GameLoader setting values :::");
         _managerFactory.Type = ManagerTypes.GameManager;
         IManager gameManager = _managerFactory.Create();
         AddManager(gameManager);
@@ -99,7 +101,7 @@ public class GameLoader : AbstractLoader, IGameLoader, IInitializable
 
     void Update()
     {
-        Debug.Log("::: GameLoader Update :::");
+        //Debug.Log("::: GameLoader Update :::");
     }
 
     /**************************************************/
@@ -115,6 +117,7 @@ public class GameLoader : AbstractLoader, IGameLoader, IInitializable
 
     public override void InitManagers()
     {
+        Debug.Log("::: Try to init managers :::");
         foreach(IManager manager in _managers) 
         {
             Debug.Log("::: Init Manager :::");

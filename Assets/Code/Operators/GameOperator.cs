@@ -36,7 +36,7 @@ public class GameOperator : AbstractOperator
 
     public override void Init() 
     {
-        Console.WriteLine("::: GameOperator Init :::");
+        Debug.Log("::: GameOperator Init :::");
     }
 
     /**************************************************/
