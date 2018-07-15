@@ -60,15 +60,16 @@ public class MainInstaller : MonoInstaller
                  .WhenInjectedInto<IGameLoader>()
                  .NonLazy();
 
-        Container.Bind<IGameManager>()
-                 .To<GameManager>()
-                 .AsSingle()
-                 .NonLazy();
-
         Container.Bind<IOperatorFactory<IOperator>>()
                  .To<OperatorFactory>()
                  .AsSingle()
                  .WhenInjectedInto<IGameManager>()
+                 .NonLazy();
+
+        Container.Bind<IOperatorElementFactory<IOperatorElement>>()
+                 .To<OperatorElementFactory>()
+                 .AsSingle()
+                 .WhenInjectedInto<IGameOperator>()
                  .NonLazy();
     }
 

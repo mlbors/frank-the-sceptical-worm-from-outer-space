@@ -149,6 +149,6 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
 
     public override void Validate()
     {
-
+        _container.Instantiate<Platform>();
     }
 }

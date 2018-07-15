@@ -30,9 +30,28 @@ abstract public class AbstractOperator : IOperator, IProduct
 
     /**
      * @var List<IOperatorElement> _elements list of elements to use
+     * @var IOperatorElementFactory _operatorElementFactory factory object that creates other objects, here, IOperatorElement
      */
 
     protected List<IOperatorElement> _elements = new List<IOperatorElement>();
+    protected IOperatorElementFactory<IOperatorElement> _operatorElementFactory;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access protected
+     * @param IOperatorElementFactory operatorElementFactory factory object that creates other objects, here, IOperatorElement
+     */
+
+    protected AbstractOperator(IOperatorElementFactory<IOperatorElement> operatorElementFactory)
+    {
+        _operatorElementFactory = operatorElementFactory;
+    }
 
     /**************************************************/
     /**************************************************/
@@ -49,6 +68,23 @@ abstract public class AbstractOperator : IOperator, IProduct
     {
         get { return _elements; }
         set { _elements = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************************************/
+    /***** OPERATOR ELEMENT FACTORY GETTER/SETTER *****/
+    /**************************************************/
+
+    /**
+     * @access public
+     */
+
+    public IOperatorElementFactory<IOperatorElement> OperatorElementFactory
+    {
+        get { return _operatorElementFactory; }
+        set { _operatorElementFactory = value; }
     }
 
     /**************************************************/

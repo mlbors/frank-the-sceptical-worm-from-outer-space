@@ -1,5 +1,5 @@
 /**
- * FTSWFOS - IOperator - Interface
+ * FTSWFOS - IGameOperator - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,14 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*********************/
-/***** IOPERATOR *****/
-/*********************/
+/**************************/
+/***** IGAME OPERATOR *****/
+/**************************/
 
-public interface IOperator
+public interface IGameOperator : IOperator
 {
-    void Init();
-    void AddElement(IOperatorElement component);
-    void RemoveElement(IOperatorElement component);
-    void Operate();
 }
