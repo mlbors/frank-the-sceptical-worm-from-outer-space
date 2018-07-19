@@ -23,7 +23,7 @@ using Zenject;
 /***** PLAYER FACTORY *****/
 /**************************/
 
-public class PlayerFactory : AbstractDIFactory<IPlayer>
+public class PlayerFactory : AbstractDIFactory<IPlayer>, IPlayerFactory<IPlayer>
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -35,7 +35,7 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>
      */
 
     protected GameObject _gameObject;
-    protected IPlayerStateFactory<IState> _stateFactory;
+    protected IPlayerStateFactory<IPlayerState> _stateFactory;
 
     /**************************************************/
     /**************************************************/
@@ -51,7 +51,7 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>
      * @param IPlayerStateFactory stateFactory object that create other objects, here, IState
      */
 
-    public PlayerFactory(DiContainer container, GameObject gameObject, IPlayerStateFactory<IState> stateFactory) : base (container)
+    public PlayerFactory(DiContainer container, GameObject gameObject, IPlayerStateFactory<IPlayerState> stateFactory) : base (container)
     {
         Debug.Log("::: Player Factory :::");
         _gameObject = gameObject;
@@ -86,7 +86,7 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>
      * @access public
      */
 
-    public IPlayerStateFactory<IState> StateFactory
+    public IPlayerStateFactory<IPlayerState> StateFactory
     {
         get { return _stateFactory; }
         set { _stateFactory = value; }

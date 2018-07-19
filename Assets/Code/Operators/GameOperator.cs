@@ -72,6 +72,9 @@ public class GameOperator : AbstractOperator, IGameOperator
         AddElement(_operatorElementFactory.Create());
     }
 
+    /**************************************************/
+    /**************************************************/
+
     /**************************/
     /***** IOPERATOR INIT *****/
     /**************************/
@@ -83,6 +86,11 @@ public class GameOperator : AbstractOperator, IGameOperator
     public override void Init() 
     {
         Debug.Log("::: GameOperator Init :::");
+
+        foreach(IOperatorElement element in _elements)
+        {
+            element.Operate();   
+        }
     }
 
     /**************************************************/

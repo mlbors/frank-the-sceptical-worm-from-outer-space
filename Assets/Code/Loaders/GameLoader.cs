@@ -24,7 +24,7 @@ using Zenject;
 /***** GAME LOADER *****/
 /***********************/
 
-public class GameLoader : AbstractLoader, IGameLoader, IInitializable
+public class GameLoader : AbstractLoader, IGameLoader
 {   
     /*********************/
     /***** CONSTRUCT *****/
@@ -126,17 +126,4 @@ public class GameLoader : AbstractLoader, IGameLoader, IInitializable
             manager.Init();
         }
     }
-
-    /**************************************************/
-    /**************************************************/
-
-    /******************************/
-    /***** ZENJECT INITIALIZE *****/
-    /******************************/
-
-    public void Initialize()
-    {
-        Debug.Log("::: GameLoader Initialize :::");
-    }
-
 }

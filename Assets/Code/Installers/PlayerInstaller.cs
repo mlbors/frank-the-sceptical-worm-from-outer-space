@@ -60,11 +60,17 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<IPlayerStateFactory<IPlayerState>>()
                  .To<PlayerStateFactory>()
                  .AsSingle()
-                 .WhenInjectedInto<PlayerFactory>();
+                 .WhenInjectedInto<IPlayerFactory<IPlayer>>();
         
         Container.Bind<GameObject>()
                  .FromInstance(_settings.playerGameObject)
                  .WhenInjectedInto<PlayerFactory>();
+
+        Container.Bind<IPlayerFactory<IPlayer>>()
+                 .To<PlayerFactory>()
+                 .AsSingle()
+                 .WhenInjectedInto<PlayerOperatorElement>()
+                 .NonLazy();
     }
 
     /**************************************************/
