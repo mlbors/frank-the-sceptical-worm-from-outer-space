@@ -40,8 +40,6 @@ public class GameLoader : AbstractLoader, IGameLoader
     {
         Debug.Log("::: GameLoader construct :::");
         base.Construct(managerFactory);
-        _SetValues();
-        InitManagers();
     }
 
     /**************************************************/
@@ -59,6 +57,9 @@ public class GameLoader : AbstractLoader, IGameLoader
         AddManager(gameManager);
     }
 
+    /**************************************************/
+    /**************************************************/
+
     /*************************/
     /***** ILOADER AWAKE *****/
     /*************************/
@@ -70,6 +71,8 @@ public class GameLoader : AbstractLoader, IGameLoader
     public override void Awake()
     {
         Debug.Log("::: GameLoader Awake :::");
+        _SetValues();
+        InitManagers();
     }
 
     /**************************************************/

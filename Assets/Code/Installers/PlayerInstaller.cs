@@ -64,6 +64,7 @@ public class PlayerInstaller : MonoInstaller
         
         Container.Bind<GameObject>()
                  .FromInstance(_settings.playerGameObject)
+                 .AsCached()
                  .WhenInjectedInto<PlayerFactory>();
 
         Container.Bind<IPlayerFactory<IPlayer>>()

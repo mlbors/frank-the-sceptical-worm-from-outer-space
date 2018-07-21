@@ -31,14 +31,12 @@ public class Player : AbstractPlayer
 
     /**
      * @access public
-     * @param GameObject gameObject player's game object
-     * @param IPlayerStateFactory stateFactory object that create other objects, here, IState
      */
 
     [Inject]
-    public override void Construct(GameObject gameObject, IPlayerStateFactory<IState> stateFactory)
+    public override void Construct()
     {
-        base.Construct(gameObject, stateFactory);
+
     }
 
     /**************************************************/
@@ -102,7 +100,8 @@ public class Player : AbstractPlayer
 
     public override void Start()
     {
-        
+        Debug.Log("::: player starte :::");
+        Debug.Log(_gameObject);
     }
 
     /**************************************************/
@@ -118,10 +117,8 @@ public class Player : AbstractPlayer
 
     public override void Update()
     {
-        print("::: player update :::");
-        _stateFactory.Type = PlayerStates.Running;
-        var state = _stateFactory.Create();
-        print(state);
+        //_stateFactory.Type = PlayerStates.Running;
+        //var state = _stateFactory.Create();
     }
 
     /**************************************************/

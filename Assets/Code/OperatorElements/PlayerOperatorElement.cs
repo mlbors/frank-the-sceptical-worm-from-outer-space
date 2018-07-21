@@ -68,7 +68,6 @@ public class PlayerOperatorElement : IOperatorElement
     protected void _SetValues(IPlayerFactory<IPlayer> playerFactory)
     {
         PlayerFactory = playerFactory;
-        Player = _playerFactory.Create();
     }
 
     /**************************************************/
@@ -103,6 +102,18 @@ public class PlayerOperatorElement : IOperatorElement
     {
         get { return _player; }
         set { _player = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**********************************/
+    /***** OPERATORELEMENT - INIT *****/
+    /**********************************/
+
+    public void Init()
+    {
+        Player = _playerFactory.Create();
     }
 
     /**************************************************/

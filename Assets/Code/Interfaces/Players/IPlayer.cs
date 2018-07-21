@@ -30,5 +30,17 @@ public interface IPlayer
         set;
     }
 
+    IState State
+    {
+        get;
+        set;
+    }
+
+    IPlayerStateFactory<IPlayerState> StateFactory
+    {
+        get;
+        set;
+    }
+
     void HandleInput();
 }

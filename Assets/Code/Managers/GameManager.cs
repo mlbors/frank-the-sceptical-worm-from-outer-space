@@ -75,6 +75,7 @@ public class GameManager : AbstractManager, IGameManager
         foreach (IOperator o in _operators)
         {
             o.Init();
+            o.Operate();
         }
     }
 }

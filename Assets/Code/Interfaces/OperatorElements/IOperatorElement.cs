@@ -24,5 +24,6 @@ using UnityEngine;
 
 public interface IOperatorElement
 {
+    void Init();
     void Operate();
 }

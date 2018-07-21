@@ -38,7 +38,6 @@ public class GameOperator : AbstractOperator, IGameOperator
     public GameOperator(IOperatorElementFactory<IOperatorElement> operatorElementFactory) : base(operatorElementFactory)
     {
         Debug.Log("::: GameOperator construct :::");
-        _SetValues();
     }
 
     /**************************************************/
@@ -85,12 +84,7 @@ public class GameOperator : AbstractOperator, IGameOperator
 
     public override void Init() 
     {
-        Debug.Log("::: GameOperator Init :::");
-
-        foreach(IOperatorElement element in _elements)
-        {
-            element.Operate();   
-        }
+        _SetValues();
     }
 
     /**************************************************/
@@ -106,6 +100,12 @@ public class GameOperator : AbstractOperator, IGameOperator
 
     public override void Operate()
     {
-        
+        Debug.Log("::: GameOperator Operate :::");
+
+        foreach (IOperatorElement element in _elements)
+        {
+            element.Init();
+            element.Operate();
+        }
     }
 }

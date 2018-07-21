@@ -38,7 +38,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
 
     protected GameObject _gameObject;
     protected IState _state;
-    protected IPlayerStateFactory<IState> _stateFactory;
+    protected IPlayerStateFactory<IPlayerState> _stateFactory;
     protected List<IObserver> _observers = new List<IObserver>();
 
     /**************************************************/
@@ -50,15 +50,12 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
 
     /**
      * @access public
-     * @param GameObject gameObject player's game object
-     * @param IPlayerStateFactory stateFactory object that create other objects, here, IState
      */
 
     [Inject]
-    public virtual void Construct(GameObject gameObject, IPlayerStateFactory<IState> stateFactory)
+    public virtual void Construct()
     {
-        _gameObject = gameObject;
-        _stateFactory = stateFactory;
+
     }
 
     /**************************************************/
@@ -106,7 +103,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
      * @access public
      */
 
-    public IPlayerStateFactory<IState> StateFactory
+    public IPlayerStateFactory<IPlayerState> StateFactory
     {
         get { return _stateFactory; }
         set { _stateFactory = value; }

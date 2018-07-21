@@ -107,9 +107,12 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>, IPlayerFactory<IPlayer>
 
     public override IPlayer Create(params object[] constructorArguments)
     {
+        Debug.Log("::: Creating Player :::");
         IPlayer player;
-        player = _container.Instantiate<Player>(new object[] { _gameObject, _stateFactory }) as IPlayer;
-
+        _container.Bind<IPlayer>().To<Player>().AsSingle();
+        var prefab = _container.InstantiatePrefab(_gameObject);
+        player = _container.InstantiateComponent<Player>(prefab);
+        player.StateFactory = _stateFactory;
         return player;
     }
 
@@ -126,6 +129,6 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>, IPlayerFactory<IPlayer>
 
     public override void Validate()
     {
-        _container.Instantiate<Player>();
+        //_container.Instantiate<Player>();
     }
 }

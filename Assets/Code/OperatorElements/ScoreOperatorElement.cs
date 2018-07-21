@@ -24,6 +24,17 @@ using UnityEngine;
 
 public class ScoreOperatorElement : IOperatorElement
 {
+    /**********************************/
+    /***** OPERATORELEMENT - INIT *****/
+    /**********************************/
+
+    public void Init()
+    {
+
+    }
+
+    /**************************************************/
+    /**************************************************/
 
     /*************************************/
     /***** OPERATORELEMENT - OPERATE *****/

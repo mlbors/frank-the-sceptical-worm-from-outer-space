@@ -24,6 +24,17 @@ using UnityEngine;
 
 public class PlatformOperatorElement : IOperatorElement
 {
+    /**********************************/
+    /***** OPERATORELEMENT - INIT *****/
+    /**********************************/
+
+    public void Init()
+    {
+
+    }
+
+    /**************************************************/
+    /**************************************************/
 
     /*************************************/
     /***** OPERATORELEMENT - OPERATE *****/

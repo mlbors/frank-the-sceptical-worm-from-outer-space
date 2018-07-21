@@ -24,6 +24,17 @@ using UnityEngine;
 
 public class CollectableOperatorElement : IOperatorElement
 {
+    /**********************************/
+    /***** OPERATORELEMENT - INIT *****/
+    /**********************************/
+
+    public void Init()
+    {
+
+    }
+
+    /**************************************************/
+    /**************************************************/
 
     /*************************************/
     /***** OPERATORELEMENT - OPERATE *****/
