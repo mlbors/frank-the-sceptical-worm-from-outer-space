@@ -107,31 +107,35 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
     public override IPlatform Create(params object[] constructorArguments)
     {
         IPlatform platform;
+        GameObject prefab;
 
         switch (_type)
         {
             case PlatformTypes.One:
-                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[0] }) as IPlatform;
+                prefab = _container.InstantiatePrefab(_gameObjects[0]);
                 break;
             case PlatformTypes.Two:
-                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[1] }) as IPlatform;
+                prefab = _container.InstantiatePrefab(_gameObjects[1]);
                 break;
             case PlatformTypes.Four:
-                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[2] }) as IPlatform;
+                prefab = _container.InstantiatePrefab(_gameObjects[2]);
                 break;
             case PlatformTypes.Five:
-                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[3] }) as IPlatform;
+                prefab = _container.InstantiatePrefab(_gameObjects[3]);
                 break;
             case PlatformTypes.Seven:
-                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[4] }) as IPlatform;
+                prefab = _container.InstantiatePrefab(_gameObjects[4]);
                 break;
             case PlatformTypes.Nine:
-                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[5] }) as IPlatform;
+                prefab = _container.InstantiatePrefab(_gameObjects[5]);
                 break;
             default:
-                platform = _container.Instantiate<Platform>(new object[] { _gameObjects[0] }) as IPlatform;
+                prefab = _container.InstantiatePrefab(_gameObjects[0]);
                 break;
         }
+
+        _container.Bind<IPlatform>().To<Platform>().AsTransient();
+        platform = _container.InstantiateComponent<Platform>(prefab);
 
         return platform;
     }

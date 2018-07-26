@@ -31,29 +31,12 @@ public class Platform : AbstractPlatform
 
     /**
      * @access public
-     * @param GameObject gameObject platform's game object
      */
 
     [Inject]
-    public override void Construct(GameObject gameObject)
+    public override void Construct()
     {
-        base.Construct(gameObject);
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /***************************************/
-    /***** IPLATFORM EXECUTE OPERATORS *****/
-    /***************************************/
-
-    /**
-     * @access public
-     */
-
-    public override void ExecuteOperators()
-    {
-        
+        base.Construct();
     }
 
     /**************************************************/

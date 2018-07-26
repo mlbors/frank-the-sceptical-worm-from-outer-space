@@ -101,7 +101,6 @@ public class Player : AbstractPlayer
     public override void Start()
     {
         Debug.Log("::: player starte :::");
-        Debug.Log(_gameObject);
     }
 
     /**************************************************/

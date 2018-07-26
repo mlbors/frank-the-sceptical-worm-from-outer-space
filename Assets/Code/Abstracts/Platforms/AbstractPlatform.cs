@@ -30,14 +30,10 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct
     /*********************/
 
     /**
-     * @var GameObject _gameObject player's game object
-     * @var List<IOperator> _operators list of operators to generate various components
      * @var Float _x x position
      * @var Float _y y position;
      */
 
-    protected GameObject _gameObject;
-    protected List<IOperator> _operators = new List<IOperator>();
     protected float _x;
     protected float _y;
 
@@ -50,30 +46,11 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct
 
     /**
      * @access public
-     * @param GameObject gameObject platform's game object
      */
 
     [Inject]
-    public virtual void Construct(GameObject gameObject)
+    public virtual void Construct()
     {
-        _gameObject = gameObject;
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /***********************************/
-    /***** OPERATORS GETTER/SETTER *****/
-    /***********************************/
-
-    /**
-     * @access public
-     */
-
-    public List<IOperator> Operators
-    {
-        get { return _operators; }
-        set { _operators = value; }
     }
 
     /**************************************************/
@@ -109,53 +86,6 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct
         get { return _y; }
         set { _y = value; }
     }
-
-    /**************************************************/
-    /**************************************************/
-
-    /**********************************/
-    /***** IPLATFORM ADD OPERATOR *****/
-    /**********************************/
-
-    /**
-     * @access public
-     * @param IOperator operatorElement opertaor to add
-     */
-
-    public void AddOperator(IOperator operatorElement)
-    {
-        _operators.Add(operatorElement);
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /*************************************/
-    /***** IPLATFORM REMOVE OPERATOR *****/
-    /*************************************/
-
-    /**
-     * @access public
-     * @param IOperator operatorElement opertaor to remove
-     */
-
-    public void RemoveOperator(IOperator operatorElement)
-    {
-        _operators.Remove(operatorElement);
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /***************************************/
-    /***** IPLATFORM EXECUTE OPERATORS *****/
-    /***************************************/
-
-    /**
-     * @access public
-     */
-
-    public abstract void ExecuteOperators();
 
     /**************************************************/
     /**************************************************/

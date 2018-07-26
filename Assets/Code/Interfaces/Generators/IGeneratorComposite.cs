@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlayer - Interface
+ * FTSWFOS - IGeneratorComposite - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,23 +18,19 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*******************/
-/***** IPLAYER *****/
-/*******************/
+/********************************/
+/***** IGENERATOR COMPOSITE *****/
+/********************************/
 
-public interface IPlayer
+public interface IGeneratorComposite<T> : IGenerator<T>
 {
-    IState State
+    List<IOperator> Operators
     {
         get;
         set;
     }
 
-    IPlayerStateFactory<IPlayerState> StateFactory
-    {
-        get;
-        set;
-    }
-
-    void HandleInput();
+    void AddOperator(IOperator operatorElement);
+    void RemoveOperator(IOperator operatorElement);
+    void ExecuteOperators();
 }

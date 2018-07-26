@@ -24,12 +24,6 @@ using UnityEngine;
 
 public interface IPlatform
 {
-    List<IOperator> Operators
-    {
-        get;
-        set;
-    }
-
     float X
     {
         get;
@@ -41,8 +35,4 @@ public interface IPlatform
         get;
         set;
     }
-
-    void AddOperator(IOperator operatorElement);
-    void RemoveOperator(IOperator operatorElement);
-    void ExecuteOperators();
 }
