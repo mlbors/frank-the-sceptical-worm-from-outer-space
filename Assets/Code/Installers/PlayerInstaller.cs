@@ -56,6 +56,11 @@ public class PlayerInstaller : MonoInstaller
                  .To<CommandFactory>()
                  .AsSingle()
                  .WhenInjectedInto<IPlayerState>();
+        
+        Container.Bind<IPlayerInputHandlerFactory<IStateInputHandler>>()
+                 .To<PlayerInputHandlerFactory>()
+                 .AsSingle()
+                 .WhenInjectedInto<IPlayerStateFactory<IPlayerState>>();
 
         Container.Bind<IPlayerStateFactory<IPlayerState>>()
                  .To<PlayerStateFactory>()

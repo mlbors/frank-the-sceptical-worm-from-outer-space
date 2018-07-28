@@ -26,6 +26,21 @@ using Zenject;
 public class Player : AbstractPlayer
 {
     /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var Rigibody2D _rigibody player rigidbody
+     * @var Animator _animator player animator
+     */
+
+    protected Rigidbody2D _rigidbody;
+    protected Animator _animator;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
     /***** CONSTRUCT *****/
     /*********************/
 
@@ -37,6 +52,48 @@ public class Player : AbstractPlayer
     public override void Construct()
     {
 
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************/
+    /***** GET COMPONENTS *****/
+    /**************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _GetComponents()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+    }
+
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************/
+    /***** INIT PLAYER *****/
+    /***********************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InitPlayer()
+    {
+        Debug.Log("::: init player :::");
+
+        _GetComponents();
+
+        transform.position = new Vector3(0, 0, transform.position.z);
+
+        _stateFactory.Subject = this;
+        _stateFactory.Type = PlayerStates.Running;
+        State = _stateFactory.Create();
     }
 
     /**************************************************/
@@ -100,7 +157,8 @@ public class Player : AbstractPlayer
 
     public override void Start()
     {
-        Debug.Log("::: player starte :::");
+        Debug.Log("::: player start :::");
+        _InitPlayer();
     }
 
     /**************************************************/
@@ -116,8 +174,7 @@ public class Player : AbstractPlayer
 
     public override void Update()
     {
-        //_stateFactory.Type = PlayerStates.Running;
-        //var state = _stateFactory.Create();
+        
     }
 
     /**************************************************/

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - PlayerStateFactory - Concrete Class
+ * FTSWFOS - PlayerInputHandlerFactory - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -20,23 +20,38 @@ using Zenject;
 /**************************************************/
 /**************************************************/
 
-/********************************/
-/***** PALYER STATE FACTORY *****/
-/********************************/
+/****************************************/
+/***** PALYER INPUT HANDLER FACTORY *****/
+/****************************************/
 
-public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateFactory<IPlayerState>
+public class PlayerInputHandlerFactory : AbstractDIFactory<IStateInputHandler>, IPlayerInputHandlerFactory<IStateInputHandler>
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
-     * @var PlayerStates _type type of state
-     * @var IStateSubject _subject subject of the state
+     * @var PlayerInputHandlerTypes _type type of state
      */
 
-    protected PlayerStates _type;
-    protected IStateSubject _subject;
+    protected PlayerInputHandlerTypes _type;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*******************************/
+    /***** TYPES GETTER/SETTER *****/
+    /*******************************/
+
+    /**
+     * @access public
+     */
+
+    public PlayerInputHandlerTypes Type
+    {
+        get { return _type; }
+        set { _type = value; }
+    }
 
     /**************************************************/
     /**************************************************/
@@ -51,45 +66,10 @@ public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateF
      * @param PlayerStates type type of state
      */
 
-    public PlayerStateFactory(DiContainer container, PlayerStates type = PlayerStates.Standing) : base (container)
+    public PlayerInputHandlerFactory(DiContainer container, PlayerInputHandlerTypes type = PlayerInputHandlerTypes.Standing) : base (container)
     {
         _type = type;
     }
-
-    /**************************************************/
-    /**************************************************/
-
-    /*******************************/
-    /***** TYPES GETTER/SETTER *****/
-    /*******************************/
-
-    /**
-     * @access public
-     */
-
-    public PlayerStates Type
-    {
-        get { return _type; }
-        set { _type = value; }
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /*********************************/
-    /***** SUBJECT GETTER/SETTER *****/
-    /*********************************/
-
-    /**
-     * @access public
-     */
-
-    public IStateSubject Subject
-    {
-        get { return _subject; }
-        set { _subject = value; }
-    }
-
 
     /**************************************************/
     /**************************************************/
@@ -101,34 +81,24 @@ public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateF
     /**
      * @access public
      * @param params object constructorArguments comma-separated list of arguments
-     * @return IState
+     * @return IStateInputHandler
      */
 
-    public override IPlayerState Create(params object[] constructorArguments)
+    public override IStateInputHandler Create(params object[] constructorArguments)
     {
-        if (_subject == null) {
-            throw new Exception("No subject defined");
-        }
-
-        IPlayerState state;
         IStateInputHandler stateInputHandler;
 
         switch (_type)
         {
-            case PlayerStates.Standing:
-                state = _container.Instantiate<StandingPlayerState>(new object[] { });
+            case PlayerInputHandlerTypes.Standing:
                 stateInputHandler = _container.Instantiate<StandingPlayerStateInputHandler>(new object[] { });
                 break;
             default:
-                state = _container.Instantiate<StandingPlayerState>(new object[] { });
                 stateInputHandler = _container.Instantiate<StandingPlayerStateInputHandler>(new object[] { });
                 break;
         }
 
-        state.StateSubject = _subject;
-        state.StateInputHandler = stateInputHandler;
-
-        return state;
+        return stateInputHandler;
     }
 
     /**************************************************/
@@ -144,6 +114,6 @@ public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateF
 
     public override void Validate()
     {
-        _container.Instantiate<StandingPlayerState>();
+        _container.Instantiate<StandingPlayerStateInputHandler>();
     }
 }

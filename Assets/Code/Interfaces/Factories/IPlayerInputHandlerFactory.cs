@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlayerStateFactory - Interface
+ * FTSWFOS - IPlayerInputHandlerFactory - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -22,21 +22,9 @@ using UnityEngine;
 /***** IPLAYER STATE FACTORY *****/
 /*********************************/
 
-public interface IPlayerStateFactory<T> : IFactory<T>
+public interface IPlayerInputHandlerFactory<T> : IFactory<T>
 {
-    IPlayerInputHandlerFactory<IStateInputHandler> InputHandlerFactory
-    {
-        get;
-        set;
-    }
-
-    PlayerStates Type
-    {
-        get;
-        set;
-    }
-
-    IStateSubject Subject
+    PlayerInputHandlerTypes Type
     {
         get;
         set;
