@@ -93,6 +93,9 @@ public class PlayerInputHandlerFactory : AbstractDIFactory<IStateInputHandler>, 
             case PlayerInputHandlerTypes.Standing:
                 stateInputHandler = _container.Instantiate<StandingPlayerStateInputHandler>(new object[] { });
                 break;
+            case PlayerInputHandlerTypes.Running:
+                stateInputHandler = _container.Instantiate<RunningPlayerStateInputHandler>(new object[] { });
+                break;
             default:
                 stateInputHandler = _container.Instantiate<StandingPlayerStateInputHandler>(new object[] { });
                 break;

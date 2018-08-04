@@ -23,19 +23,23 @@ using Zenject;
 /***** ABSTRACT PLAYER *****/
 /***************************/
 
-abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubject, IObserver, IObservable, IPlayer, IProduct
+abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IPlayerStateSubject, IObserver, IObservable, IPlayer, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
+     * @var Stack<IPlayerState> _statesStack stack of passed states, top is the current one
+     * @var Rigibody2D _rigibody player rigidbody
      * @var IState _state player's state
      * @var IPlayerStateFactory _stateFactory object that create other objects, here, IState
      * @var List<IObserver> _observers list of observers
      */
 
-    protected IState _state;
+    protected Rigidbody2D _rigidbody;
+    protected Animator _animator;
+    protected IPlayerState _state;
     protected IPlayerStateFactory<IPlayerState> _stateFactory;
     protected List<IObserver> _observers = new List<IObserver>();
 
@@ -59,6 +63,40 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
     /**************************************************/
     /**************************************************/
 
+    /************************************/
+    /***** RIGIBODY2D GETTER/SETTER *****/
+    /************************************/
+
+    /**
+     * @access public
+     */
+
+    public Rigidbody2D Rigidbody
+    {
+        get { return _rigidbody; }
+        set { _rigidbody = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**********************************/
+    /***** ANIMATOR GETTER/SETTER *****/
+    /**********************************/
+
+    /**
+     * @access public
+     */
+
+    public Animator Animator
+    {
+        get { return _animator; }
+        set { _animator = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /*******************************/
     /***** STATE GETTER/SETTER *****/
     /*******************************/
@@ -67,7 +105,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IStateSubje
      * @access public
      */
 
-    public IState State
+    public IPlayerState State
     {
         get { return _state; }
         set { _state = value; }

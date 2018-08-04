@@ -24,12 +24,6 @@ using UnityEngine;
 
 public interface IState
 {
-    IStateSubject StateSubject
-    {
-        get;
-        set;
-    }
-
     void Enter();
     void Update();
 }

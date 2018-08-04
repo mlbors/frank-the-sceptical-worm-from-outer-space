@@ -30,12 +30,11 @@ public class Player : AbstractPlayer
     /*********************/
 
     /**
-     * @var Rigibody2D _rigibody player rigidbody
      * @var Animator _animator player animator
      */
 
-    protected Rigidbody2D _rigidbody;
-    protected Animator _animator;
+    protected Stack<IPlayerState> _statesStack = new Stack<IPlayerState>();
+
 
     /**************************************************/
     /**************************************************/
@@ -89,11 +88,31 @@ public class Player : AbstractPlayer
 
         _GetComponents();
 
+        _stateFactory.Subject = this;
+        _ChangeState(PlayerStates.Standing);
+
         transform.position = new Vector3(0, 0, transform.position.z);
 
-        _stateFactory.Subject = this;
-        _stateFactory.Type = PlayerStates.Running;
+        _ChangeState(PlayerStates.Running);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /************************/
+    /***** CHANGE STATE *****/
+    /************************/
+
+    /**
+     * @access protected
+     * @param PlayerStates state desired state
+     */
+
+    protected void _ChangeState(PlayerStates state)
+    {
+        _stateFactory.Type = state;
         State = _stateFactory.Create();
+        _statesStack.Push(_state);
     }
 
     /**************************************************/

@@ -29,12 +29,14 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
     /*********************/
 
     /**
+     * @var IStateSubject _stateSubject subject affected by the state
      * @var IStateInputHandler _stateInputHandler object to handle inputs
      * @var ICommandFactory _commandFactory object that create other objects, here, ICommand
      */
 
     protected IStateInputHandler _stateInputHandler;
     protected ICommandFactory<ICommand> _commandFactory;
+    protected IPlayerStateSubject _stateSubject;
 
     /**************************************************/
     /**************************************************/
@@ -85,6 +87,23 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
     {
         get { return _commandFactory; }
         set { _commandFactory = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***************************************/
+    /***** STATE SUBJECT GETTER/SETTER *****/
+    /***************************************/
+
+    /**
+     * @access public
+     */
+
+    public IPlayerStateSubject StateSubject
+    {
+        get { return _stateSubject; }
+        set { _stateSubject = value; }
     }
 
     /**************************************************/

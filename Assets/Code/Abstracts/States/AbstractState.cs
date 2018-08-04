@@ -25,19 +25,6 @@ using UnityEngine;
 abstract public class AbstractState : IState, IProduct
 {
     /*********************/
-    /***** ATTRIBUTS *****/
-    /*********************/
-
-    /**
-     * @var IStateSubject _stateSubject subject affected by the state
-     */
-
-    protected IStateSubject _stateSubject;
-
-    /**************************************************/
-    /**************************************************/
-
-    /*********************/
     /***** CONSTRUCT *****/
     /*********************/
 
@@ -49,23 +36,6 @@ abstract public class AbstractState : IState, IProduct
     protected AbstractState()
     {
 
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /***************************************/
-    /***** STATE SUBJECT GETTER/SETTER *****/
-    /***************************************/
-
-    /**
-     * @access public
-     */
-
-    public IStateSubject StateSubject
-    {
-        get { return _stateSubject; }
-        set { _stateSubject = value; }
     }
 
     /**************************************************/

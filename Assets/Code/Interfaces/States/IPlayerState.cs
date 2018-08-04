@@ -30,5 +30,11 @@ public interface IPlayerState : IState
         set;
     }
 
+    IPlayerStateSubject StateSubject
+    {
+        get;
+        set;
+    }
+
     void HandleInput();
 }
