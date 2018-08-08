@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - CommandFactory - Concrete Class
+ * FTSWFOS - ActionFactory - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -19,21 +19,21 @@ using Zenject;
 /**************************************************/
 /**************************************************/
 
-/***************************/
-/***** COMMAND FACTORY *****/
-/***************************/
+/**************************/
+/***** ACTION FACTORY *****/
+/**************************/
 
-public class CommandFactory : AbstractDIFactory<ICommand>, ICommandFactory<ICommand>
+public class ActionFactory : AbstractDIFactory<IAction>, IActionFactory<IAction>
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
-     * @var CommandTypes _type type of command
+     * @var ActionTypes _type type of command
      */
 
-    protected CommandTypes _type;
+    protected ActionTypes _type;
 
     /**************************************************/
     /**************************************************/
@@ -45,10 +45,10 @@ public class CommandFactory : AbstractDIFactory<ICommand>, ICommandFactory<IComm
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param CommandTypes type type of command
+     * @param ActionTypes type type of command
      */
 
-    public CommandFactory(DiContainer container, CommandTypes type = CommandTypes.None) : base (container)
+    public ActionFactory(DiContainer container, ActionTypes type = ActionTypes.None) : base (container)
     {
         _type = type;
     }
@@ -64,7 +64,7 @@ public class CommandFactory : AbstractDIFactory<ICommand>, ICommandFactory<IComm
      * @access public
      */
 
-    public CommandTypes Type
+    public ActionTypes Type
     {
         get { return _type; }
         set { _type = value; }
@@ -80,30 +80,30 @@ public class CommandFactory : AbstractDIFactory<ICommand>, ICommandFactory<IComm
     /**
      * @access public
      * @param params object constructorArguments comma-separated list of arguments
-     * @return ICommand 
+     * @return IAction
      */
 
-    public override ICommand Create(params object[] constructorArguments)
+    public override IAction Create(params object[] constructorArguments)
     {
-        ICommand command;
+        IAction action;
 
         switch (_type)
         {
-            case CommandTypes.Run:
-                command = _container.Instantiate<RunCommand>() as ICommand;
+            case ActionTypes.Run:
+                action = _container.Instantiate<RunAction>() as IAction;
                 break;
-            case CommandTypes.Jump:
-                command = _container.Instantiate<JumpCommand>() as ICommand;
+            case ActionTypes.Jump:
+                action = _container.Instantiate<JumpAction>() as IAction;
                 break;
-            case CommandTypes.DoubleJump:
-                command = _container.Instantiate<DoubleJumpCommand>() as ICommand;
+            case ActionTypes.DoubleJump:
+                action = _container.Instantiate<DoubleJumpAction>() as IAction;
                 break;
             default:
-                command = _container.Instantiate<JumpCommand>() as ICommand;
+                action = _container.Instantiate<JumpAction>() as IAction;
                 break;
         }
 
-        return command;
+        return action;
     }
 
     /**************************************************/
@@ -119,8 +119,8 @@ public class CommandFactory : AbstractDIFactory<ICommand>, ICommandFactory<IComm
 
     public override void Validate()
     {
-        _container.Instantiate<JumpCommand>();
-        _container.Instantiate<DoubleJumpCommand>();
-        _container.Instantiate<RunCommand>();
+        _container.Instantiate<JumpAction>();
+        _container.Instantiate<DoubleJumpAction>();
+        _container.Instantiate<RunAction>();
     }
 }

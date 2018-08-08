@@ -35,7 +35,6 @@ public class Player : AbstractPlayer
 
     protected Stack<IPlayerState> _statesStack = new Stack<IPlayerState>();
 
-
     /**************************************************/
     /**************************************************/
 
@@ -70,7 +69,6 @@ public class Player : AbstractPlayer
         _animator = GetComponent<Animator>();
     }
 
-
     /**************************************************/
     /**************************************************/
 
@@ -88,7 +86,6 @@ public class Player : AbstractPlayer
 
         _GetComponents();
 
-        _stateFactory.Subject = this;
         _ChangeState(PlayerStates.Standing);
 
         transform.position = new Vector3(0, 0, transform.position.z);
@@ -113,6 +110,7 @@ public class Player : AbstractPlayer
         _stateFactory.Type = state;
         State = _stateFactory.Create();
         _statesStack.Push(_state);
+        _state.Enter();
     }
 
     /**************************************************/
@@ -160,7 +158,8 @@ public class Player : AbstractPlayer
 
     public override void UpdateState()
     {
-        
+        _ChangeState(PlayerStates.Running);
+        _state.Update();
     }
 
     /**************************************************/
@@ -193,7 +192,7 @@ public class Player : AbstractPlayer
 
     public override void Update()
     {
-        
+        UpdateState();
     }
 
     /**************************************************/

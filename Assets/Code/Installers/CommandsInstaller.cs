@@ -36,15 +36,11 @@ public class CommandsInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-
-        Container.Bind<IAction>()
-                 .To<JumpAction>()
+        
+        Container.Bind<IActionFactory<IAction>>()
+                 .To<ActionFactory>()
                  .AsSingle()
-                 .WhenInjectedInto<JumpCommand>();
-
-        Container.Bind<IAction>()
-                 .To<DoubleJumpAction>()
-                 .AsSingle()
-                 .WhenInjectedInto<DoubleJumpCommand>();
+                 .WhenInjectedInto<ICommand>()
+                 .NonLazy();
     }
 }

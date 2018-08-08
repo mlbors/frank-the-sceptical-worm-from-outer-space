@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - CommandTypes - Enum
+ * FTSWFOS - ActionTypes - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,11 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*************************/
-/***** COMMAND TYPES *****/
-/*************************/
+/************************/
+/***** ACTION TYPES *****/
+/************************/
 
-public enum CommandTypes
+public enum ActionTypes
 {
     None,
     Stand,

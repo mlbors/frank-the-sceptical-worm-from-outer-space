@@ -30,10 +30,10 @@ public class JumpCommand : AbstractCommand
 
     /**
      * @access public
-     * @param IAction action action to perform
+     * @param IActionFactory actionFactory factory of objects, here IAction
      */
 
-    public JumpCommand(IAction action) : base(action)
+    public JumpCommand(IActionFactory<IAction> actionFactory) : base(actionFactory)
     {
 
     }

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - DoubleJumpCommand - Concrete Class
+ * FTSWFOS - RunCommand - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,11 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/************************/
-/***** JUMP COMMAND *****/
-/************************/
+/***********************/
+/***** RUN COMMAND *****/
+/***********************/
 
-public class DoubleJumpCommand : AbstractCommand
+public class RunCommand : AbstractCommand
 {
     /*********************/
     /***** CONSTRUCT *****/
@@ -33,9 +33,10 @@ public class DoubleJumpCommand : AbstractCommand
      * @param IActionFactory actionFactory factory of objects, here IAction
      */
 
-    public DoubleJumpCommand(IActionFactory<IAction> actionFactory) : base (actionFactory)
+    public RunCommand(IActionFactory<IAction> actionFactory) : base(actionFactory)
     {
-
+        _actionFactory.Type = ActionTypes.Run;
+        Action = _actionFactory.Create();
     }
 
     /**************************************************/
@@ -51,6 +52,6 @@ public class DoubleJumpCommand : AbstractCommand
 
     public override void Execute()
     {
-
+        _action.Perform<ICommandSubject>(_commandSubject);
     }
 }

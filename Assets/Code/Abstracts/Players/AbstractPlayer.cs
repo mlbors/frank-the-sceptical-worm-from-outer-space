@@ -23,7 +23,7 @@ using Zenject;
 /***** ABSTRACT PLAYER *****/
 /***************************/
 
-abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, IPlayerStateSubject, IObserver, IObservable, IPlayer, IProduct
+abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSubject, IPlayerStateSubject, IObserver, IObservable, IPlayer, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/

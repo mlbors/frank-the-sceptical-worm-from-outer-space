@@ -36,7 +36,7 @@ public interface IPlayerStateFactory<T> : IFactory<T>
         set;
     }
 
-    IStateSubject Subject
+    IPlayerStateSubject Subject
     {
         get;
         set;

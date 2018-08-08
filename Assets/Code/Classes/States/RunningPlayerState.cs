@@ -50,7 +50,7 @@ public class RunningPlayerState : AbstractPlayerState
 
     public override void Enter()
     {
-
+        (_stateSubject as IPlayer).Animator.SetBool("isGrounded", true);
     }
 
     /**************************************************/
@@ -66,7 +66,10 @@ public class RunningPlayerState : AbstractPlayerState
 
     public override void Update()
     {
-
+        _commandFactory.Type = CommandTypes.Run;
+        ICommand command = _commandFactory.Create();
+        command.CommandSubject = (_stateSubject as ICommandSubject);
+        command.Execute();
     }
 
     /**************************************************/

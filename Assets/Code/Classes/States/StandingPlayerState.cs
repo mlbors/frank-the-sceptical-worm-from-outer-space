@@ -50,7 +50,8 @@ public class StandingPlayerState : AbstractPlayerState
 
     public override void Enter()
     {
-
+        (_stateSubject as IPlayer).Animator.SetFloat("Speed", 0);
+        (_stateSubject as IPlayer).Animator.SetBool("isGrounded", true);
     }
 
     /**************************************************/

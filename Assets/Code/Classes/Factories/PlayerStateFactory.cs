@@ -33,12 +33,12 @@ public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateF
     /**
      * @var IPlayerInputHandlerFactory<IStateInputHandler> _inputHandlerFactory input handler factory
      * @var PlayerStates _type type of state
-     * @var IStateSubject _subject subject of the state
+     * @var IPlayerStateSubject _subject subject of the state
      */
 
     protected IPlayerInputHandlerFactory<IStateInputHandler> _inputHandlerFactory;
     protected PlayerStates _type;
-    protected IStateSubject _subject;
+    protected IPlayerStateSubject _subject;
 
     /**************************************************/
     /**************************************************/
@@ -104,7 +104,7 @@ public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateF
      * @access public
      */
 
-    public IStateSubject Subject
+    public IPlayerStateSubject Subject
     {
         get { return _subject; }
         set { _subject = value; }

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - CommandTypes - Enum
+ * FTSWFOS - IActionFactory - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,15 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*************************/
-/***** COMMAND TYPES *****/
-/*************************/
+/***************************/
+/***** IACTION FACTORY *****/
+/***************************/
 
-public enum CommandTypes
+public interface IActionFactory<T> : IFactory<T>
 {
-    None,
-    Stand,
-    Run,
-    Jump,
-    DoubleJump
+    ActionTypes Type
+    {
+        get;
+        set;
+    }
 }

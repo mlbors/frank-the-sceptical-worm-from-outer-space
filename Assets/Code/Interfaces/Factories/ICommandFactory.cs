@@ -24,5 +24,9 @@ using UnityEngine;
 
 public interface ICommandFactory<T> : IFactory<T>
 {
-
+    CommandTypes Type
+    {
+        get;
+        set;
+    }
 }

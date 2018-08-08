@@ -30,10 +30,12 @@ abstract public class AbstractCommand : ICommand, IProduct
 
     /**
      * @var ICommandSubject _commandSubject subject on which to perform command
+     * @var IActionFactory _actionFactory factory of objects, here IAction
      * @var IAction _action action to perform
      */
 
     protected ICommandSubject _commandSubject;
+    protected IActionFactory<IAction> _actionFactory;
     protected IAction _action;
 
     /**************************************************/
@@ -51,6 +53,23 @@ abstract public class AbstractCommand : ICommand, IProduct
     {
         get { return _commandSubject; }
         set { _commandSubject = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************************/
+    /***** ACTION FACTORY GETTER/SETTER *****/
+    /****************************************/
+
+    /**
+     * @access public
+     */
+
+    public IActionFactory<IAction> ActionFactory
+    {
+        get { return _actionFactory; }
+        set { _actionFactory = value; }
     }
 
     /**************************************************/
@@ -79,12 +98,12 @@ abstract public class AbstractCommand : ICommand, IProduct
 
     /**
      * @access protected
-     * @param IAction action action to perform
+     * @param IActionFactory actionFactory factory of objects, here IAction
      */
 
-    protected AbstractCommand(IAction action)
+    protected AbstractCommand(IActionFactory<IAction> actionFactory)
     {
-        _action = action;
+        _actionFactory = actionFactory;
     }
 
     /**************************************************/
