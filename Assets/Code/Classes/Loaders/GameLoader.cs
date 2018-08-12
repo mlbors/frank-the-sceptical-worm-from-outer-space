@@ -72,7 +72,6 @@ public class GameLoader : AbstractLoader, IGameLoader
     {
         Debug.Log("::: GameLoader Awake :::");
         _SetValues();
-        InitManagers();
     }
 
     /**************************************************/
@@ -89,6 +88,7 @@ public class GameLoader : AbstractLoader, IGameLoader
     void Start()
     {
         Debug.Log("::: GameLoader Start :::");
+        InitManagers();
     }
 
     /**************************************************/

@@ -37,7 +37,6 @@ public class GameManager : AbstractManager, IGameManager
     public GameManager(IOperatorFactory<IOperator> operatorFactory) : base (operatorFactory)
     {
         Debug.Log("::: GameManager construct :::");
-        _SetValues();
     }
 
     /**************************************************/
@@ -71,6 +70,9 @@ public class GameManager : AbstractManager, IGameManager
     public override void Init()
     {
         Debug.Log("::: GameManager Init Class :::");
+
+        _SetValues();
+
         Debug.Log("::: Try to init operators :::");
         foreach (IOperator o in _operators)
         {

@@ -52,12 +52,13 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSub
 
     /**
      * @access public
+     * @param IPlayerStateFactory stateFactory object that create other objects, here, IState
      */
 
     [Inject]
-    public virtual void Construct()
+    public virtual void Construct(IPlayerStateFactory<IPlayerState> stateFactory)
     {
-
+        _stateFactory = stateFactory;
     }
 
     /**************************************************/
@@ -236,6 +237,19 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSub
      */
 
     public abstract void UpdateState();
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
+    /***** AWAKE *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public abstract void Awake();
 
     /**************************************************/
     /**************************************************/

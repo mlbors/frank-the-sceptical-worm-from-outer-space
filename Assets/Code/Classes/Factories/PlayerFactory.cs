@@ -111,9 +111,7 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>, IPlayerFactory<IPlayer>
         IPlayer player;
         _container.Bind<IPlayer>().To<Player>().AsSingle();
         var prefab = _container.InstantiatePrefab(_gameObject);
-        player = _container.InstantiateComponent<Player>(prefab);
-        player.StateFactory = _stateFactory;
-        player.StateFactory.Subject = player as IPlayerStateSubject;
+        player = _container.InstantiateComponent<Player>(prefab, new object[]{ _stateFactory });
         return player;
     }
 

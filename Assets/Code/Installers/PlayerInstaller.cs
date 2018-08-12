@@ -64,9 +64,16 @@ public class PlayerInstaller : MonoInstaller
 
         Container.Bind<IPlayerStateFactory<IPlayerState>>()
                  .To<PlayerStateFactory>()
-                 .AsSingle()
-                 .WhenInjectedInto<IPlayerFactory<IPlayer>>();
-        
+                 .AsCached()
+                 .WhenInjectedInto<IPlayerFactory<IPlayer>>()
+                 .NonLazy();;
+
+        Container.Bind<IPlayerStateFactory<IPlayerState>>()
+                 .To<PlayerStateFactory>()
+                 .AsCached()
+                 .WhenInjectedInto<IPlayer>()
+                 .NonLazy();;
+
         Container.Bind<GameObject>()
                  .FromInstance(_settings.playerGameObject)
                  .AsCached()

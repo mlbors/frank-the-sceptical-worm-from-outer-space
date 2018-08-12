@@ -44,12 +44,13 @@ public class Player : AbstractPlayer
 
     /**
      * @access public
+     * @param IPlayerStateFactory stateFactory object that create other objects, here, IState
      */
 
     [Inject]
-    public override void Construct()
+    public override void Construct(IPlayerStateFactory<IPlayerState> stateFactory)
     {
-
+        base.Construct(stateFactory);
     }
 
     /**************************************************/
@@ -80,9 +81,12 @@ public class Player : AbstractPlayer
      * @access protected
      */
 
-    protected void _InitPlayer()
+    protected bool _InitPlayer()
     {
         Debug.Log("::: init player :::");
+
+        _stateFactory.Subject = this as IPlayerStateSubject;
+        Debug.Log(_stateFactory.Subject);
 
         _GetComponents();
 
@@ -91,6 +95,7 @@ public class Player : AbstractPlayer
         transform.position = new Vector3(0, 0, transform.position.z);
 
         _ChangeState(PlayerStates.Running);
+        return true;
     }
 
     /**************************************************/
@@ -166,6 +171,23 @@ public class Player : AbstractPlayer
     /**************************************************/
 
     /*****************/
+    /***** AWAKE *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public override void Awake()
+    {
+        Debug.Log("::: player awake :::");
+        _InitPlayer();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
     /***** START *****/
     /*****************/
 
@@ -176,7 +198,6 @@ public class Player : AbstractPlayer
     public override void Start()
     {
         Debug.Log("::: player start :::");
-        _InitPlayer();
     }
 
     /**************************************************/
