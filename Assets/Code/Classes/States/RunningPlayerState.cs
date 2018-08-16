@@ -35,6 +35,7 @@ public class RunningPlayerState : AbstractPlayerState
 
     public RunningPlayerState(ICommandFactory<ICommand> commandFactory) : base (commandFactory)
     {
+        _name = "Running";
     }
 
     /**************************************************/
@@ -50,6 +51,7 @@ public class RunningPlayerState : AbstractPlayerState
 
     public override void Enter()
     {
+        (_stateSubject as IPlayer).Animator.SetFloat("Speed", 1.55f);
         (_stateSubject as IPlayer).Animator.SetBool("isGrounded", true);
     }
 

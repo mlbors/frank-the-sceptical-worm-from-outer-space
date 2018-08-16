@@ -83,19 +83,26 @@ public class Player : AbstractPlayer
 
     protected bool _InitPlayer()
     {
-        Debug.Log("::: init player :::");
+        Debug.Log("::: Init player :::");
 
-        _stateFactory.Subject = this as IPlayerStateSubject;
-        Debug.Log(_stateFactory.Subject);
+        if (_stateFactory == null)
+        {
+            Debug.Log("Can't initialize player now.");
+            _initialized = false;
+            return _initialized;
+        }
+
+        Debug.Log("Initializing player.");
 
         _GetComponents();
-
-        _ChangeState(PlayerStates.Standing);
+        _stateFactory.Subject = this as IPlayerStateSubject;
+        _initialized = true;
 
         transform.position = new Vector3(0, 0, transform.position.z);
 
-        _ChangeState(PlayerStates.Running);
-        return true;
+        _ChangeState(PlayerStates.Standing);
+
+        return _initialized;
     }
 
     /**************************************************/
@@ -112,6 +119,13 @@ public class Player : AbstractPlayer
 
     protected void _ChangeState(PlayerStates state)
     {
+        Debug.Log("::: Changing player state :::");
+
+        if (!_initialized)
+        {
+            return;    
+        }
+
         _stateFactory.Type = state;
         State = _stateFactory.Create();
         _statesStack.Push(_state);
@@ -147,7 +161,12 @@ public class Player : AbstractPlayer
 
     public override void HandleInput()
     {
-        
+        if (_state.Name != "Running")
+        {
+            _ChangeState(PlayerStates.Running);
+        }
+
+        UpdateState();
     }
 
     /**************************************************/
@@ -163,7 +182,6 @@ public class Player : AbstractPlayer
 
     public override void UpdateState()
     {
-        _ChangeState(PlayerStates.Running);
         _state.Update();
     }
 
@@ -181,7 +199,6 @@ public class Player : AbstractPlayer
     public override void Awake()
     {
         Debug.Log("::: player awake :::");
-        _InitPlayer();
     }
 
     /**************************************************/
@@ -198,6 +215,12 @@ public class Player : AbstractPlayer
     public override void Start()
     {
         Debug.Log("::: player start :::");
+
+        if (!_initialized)
+        {
+            _InitPlayer();
+            return;
+        }
     }
 
     /**************************************************/
@@ -213,7 +236,7 @@ public class Player : AbstractPlayer
 
     public override void Update()
     {
-        UpdateState();
+        HandleInput();
     }
 
     /**************************************************/

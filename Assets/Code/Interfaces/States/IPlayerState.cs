@@ -36,5 +36,11 @@ public interface IPlayerState : IState
         set;
     }
 
+    string Name
+    {
+        get;
+        set;
+    }
+
     void HandleInput();
 }

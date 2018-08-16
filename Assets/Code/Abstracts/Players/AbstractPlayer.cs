@@ -35,6 +35,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSub
      * @var IState _state player's state
      * @var IPlayerStateFactory _stateFactory object that create other objects, here, IState
      * @var List<IObserver> _observers list of observers
+     * @var Bool _initialized tells if player is initialized
      */
 
     protected Rigidbody2D _rigidbody;
@@ -42,6 +43,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSub
     protected IPlayerState _state;
     protected IPlayerStateFactory<IPlayerState> _stateFactory;
     protected List<IObserver> _observers = new List<IObserver>();
+    protected bool _initialized = false;
 
     /**************************************************/
     /**************************************************/
