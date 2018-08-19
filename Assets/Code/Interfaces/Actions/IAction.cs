@@ -25,5 +25,5 @@ using UnityEngine;
 
 public interface IAction
 {
-    void Perform<T>([Optional] T subject);
+    void Perform([Optional] ICommandSubject subject);
 }

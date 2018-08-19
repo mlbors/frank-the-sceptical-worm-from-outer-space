@@ -36,6 +36,12 @@ public interface IPlayerState : IState
         set;
     }
 
+    PlayerStates Type
+    {
+        get;
+        set;
+    }
+
     string Name
     {
         get;

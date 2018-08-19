@@ -33,7 +33,7 @@ public class DoubleJumpAction : IAction
      * @access public
      */
 
-    public void Perform<T>([Optional] T subject)
+    public void Perform([Optional] ICommandSubject subject)
     {
         
     }

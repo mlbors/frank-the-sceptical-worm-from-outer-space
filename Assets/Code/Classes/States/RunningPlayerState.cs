@@ -24,6 +24,23 @@ using UnityEngine;
 
 public class RunningPlayerState : AbstractPlayerState
 {
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var ICommand _command command to execute
+     */
+
+    ICommand _command;
+
+    /**************************************************/
+    /**************************************************/
+
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -35,7 +52,24 @@ public class RunningPlayerState : AbstractPlayerState
 
     public RunningPlayerState(ICommandFactory<ICommand> commandFactory) : base (commandFactory)
     {
+        _SetValues();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**********************/
+    /***** SET VALUES *****/
+    /**********************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetValues()
+    {
         _name = "Running";
+        _type = PlayerStates.Running;
     }
 
     /**************************************************/
@@ -68,10 +102,14 @@ public class RunningPlayerState : AbstractPlayerState
 
     public override void Update()
     {
-        _commandFactory.Type = CommandTypes.Run;
-        ICommand command = _commandFactory.Create();
-        command.CommandSubject = (_stateSubject as ICommandSubject);
-        command.Execute();
+        if (_command == null)
+        {
+            _commandFactory.Type = CommandTypes.Run;
+            _command = _commandFactory.Create();
+            _command.CommandSubject = (_stateSubject as ICommandSubject);
+        }
+
+        _command.Execute();
     }
 
     /**************************************************/

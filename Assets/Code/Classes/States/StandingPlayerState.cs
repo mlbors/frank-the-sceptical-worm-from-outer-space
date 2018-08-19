@@ -35,7 +35,24 @@ public class StandingPlayerState : AbstractPlayerState
 
     public StandingPlayerState(ICommandFactory<ICommand> commandFactory) : base (commandFactory)
     {
+        _SetValues();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**********************/
+    /***** SET VALUES *****/
+    /**********************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetValues()
+    {
         _name = "Standing";
+        _type = PlayerStates.Standing;
     }
 
     /**************************************************/

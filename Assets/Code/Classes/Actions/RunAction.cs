@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -33,8 +34,32 @@ public class RunAction : IAction
      * @access public
      */
 
-    public void Perform<T>([Optional] T subject)
+    public void Perform([Optional] ICommandSubject subject)
     {
-        
+        Debug.Log("Performing action");
+        if (subject != null)
+        {
+            try 
+            {
+                Vector2 vector = (subject as IPlayer).Rigidbody.velocity;
+                float x = vector.x;
+                float y = vector.y;
+                Debug.Log(x);
+
+                float x2 = x;
+
+                if (x2 == 0) {
+                    x2 = 1;
+                }
+
+                x2 = x2 * 1.25f;
+
+                (subject as IPlayer).Rigidbody.velocity = new Vector2(x2, y);
+            }
+            catch(Exception e)
+            {
+                Debug.Log(e);
+            }
+        }
     }
 }
