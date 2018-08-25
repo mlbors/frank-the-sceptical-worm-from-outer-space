@@ -32,34 +32,57 @@ public class RunAction : IAction
 
     /**
      * @access public
+     * @param ICommandSubject subject subject on which action is operated
      */
 
     public void Perform([Optional] ICommandSubject subject)
     {
-        Debug.Log("Performing action");
         if (subject != null)
         {
             try 
             {
                 Vector2 vector = (subject as IPlayer).Rigidbody.velocity;
-                float x = vector.x;
+
                 float y = vector.y;
-                Debug.Log(x);
+                float moveSpeed = _ComputeMoveSpeed(subject);
 
-                float x2 = x;
-
-                if (x2 == 0) {
-                    x2 = 1;
-                }
-
-                x2 = x2 * 1.25f;
-
-                (subject as IPlayer).Rigidbody.velocity = new Vector2(x2, y);
+                (subject as IPlayer).Rigidbody.velocity = new Vector2(moveSpeed, y);
             }
             catch(Exception e)
             {
                 Debug.Log(e);
             }
         }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** COMPUTE MOVE SPEED *****/
+    /******************************/
+
+    /**
+     * @access protected
+     * @param ICommandSubject subject subject on which action is operated
+     * @return float
+     */
+
+    protected float _ComputeMoveSpeed(ICommandSubject subject)
+    {
+        float speedMilestoneCount = (subject as IPlayer).SpeedMilestoneCount;
+        float speedIncreaseMilestone = (subject as IPlayer).SpeedIncreaseMilestone;
+        float speedMultiplier = (subject as IPlayer).SpeedMultiplier;
+        float moveSpeed = (subject as IPlayer).MoveSpeed;
+
+        if ((subject as MonoBehaviour).transform.position.x >= speedMilestoneCount)
+        {
+            Debug.Log("Increase speed");
+            (subject as IPlayer).SpeedMilestoneCount += speedIncreaseMilestone;
+            (subject as IPlayer).SpeedIncreaseMilestone = speedIncreaseMilestone * speedMultiplier;
+            (subject as IPlayer).MoveSpeed = moveSpeed * speedMultiplier;
+        }
+
+        return (subject as IPlayer).MoveSpeed;
     }
 }

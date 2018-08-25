@@ -52,7 +52,6 @@ public class RunCommand : AbstractCommand
 
     public override void Execute()
     {
-        Debug.Log("Executing command");
         _action.Perform(_commandSubject);
     }
 }

@@ -36,6 +36,10 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSub
      * @var IPlayerStateFactory _stateFactory object that create other objects, here, IState
      * @var List<IObserver> _observers list of observers
      * @var Bool _initialized tells if player is initialized
+     * @var Float _moveSpeed player's move speed
+     * @var Float _speedMultiplied how to increase player's speed
+     * @var Float _speedMilestoneCount count number of passed milestones;
+     * @var Float _speedIncreaseMilestone tells when player's speed must be increased
      */
 
     protected Rigidbody2D _rigidbody;
@@ -44,6 +48,10 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSub
     protected IPlayerStateFactory<IPlayerState> _stateFactory;
     protected List<IObserver> _observers = new List<IObserver>();
     protected bool _initialized = false;
+    protected float _moveSpeed;
+    protected float _speedMultiplier;
+    protected float _speedMilestoneCount;
+    protected float _speedIncreaseMilestone;
 
     /**************************************************/
     /**************************************************/
@@ -146,6 +154,74 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSub
     {
         get { return _observers; }
         set { _observers = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /************************************/
+    /***** MOVE SPEED GETTER/SETTER *****/
+    /************************************/
+
+    /**
+     * @access public
+     */
+
+    public float MoveSpeed
+    {
+        get { return _moveSpeed; }
+        set { _moveSpeed = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************************/
+    /***** SPEED MULTIPLIER GETTER/SETTER *****/
+    /******************************************/
+
+    /**
+     * @access public
+     */
+
+    public float SpeedMultiplier
+    {
+        get { return _speedMultiplier; }
+        set { _speedMultiplier = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************************************/
+    /***** SPEED MILESTONE COUNT GETTER/SETTER *****/
+    /***********************************************/
+
+    /**
+     * @access public
+     */
+
+    public float SpeedMilestoneCount
+    {
+        get { return _speedMilestoneCount; }
+        set { _speedMilestoneCount = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************************************/
+    /***** SPEED INCREASE MILESTONE GETTER/SETTER *****/
+    /**************************************************/
+
+    /**
+     * @access public
+     */
+
+    public float SpeedIncreaseMilestone
+    {
+        get { return _speedIncreaseMilestone; }
+        set { _speedIncreaseMilestone = value; }
     }
 
     /**************************************************/

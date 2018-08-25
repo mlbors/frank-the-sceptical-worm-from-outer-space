@@ -48,5 +48,29 @@ public interface IPlayer
         set;
     }
 
+    float MoveSpeed
+    {
+        get;
+        set;
+    }
+
+    float SpeedMultiplier
+    {
+        get;
+        set;
+    }
+
+    float SpeedMilestoneCount
+    {
+        get;
+        set;
+    }
+
+    float SpeedIncreaseMilestone
+    {
+        get;
+        set;
+    }
+
     void HandleInput();
 }

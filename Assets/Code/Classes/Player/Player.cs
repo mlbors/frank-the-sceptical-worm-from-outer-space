@@ -95,7 +95,14 @@ public class Player : AbstractPlayer
         Debug.Log("Initializing player.");
 
         _GetComponents();
+
+        _moveSpeed = 5.50f;
+        _speedMultiplier = 1.75f;
+        _speedMilestoneCount = 0.00f;
+        _speedIncreaseMilestone = 50.50f;
+
         _stateFactory.Subject = this as IPlayerStateSubject;
+
         _initialized = true;
 
         transform.position = new Vector3(0, 0, transform.position.z);
