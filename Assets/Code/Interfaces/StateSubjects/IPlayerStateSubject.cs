@@ -30,5 +30,6 @@ public interface IPlayerStateSubject
         set;
     }
 
+    void ChangeState(PlayerStates state);
     void UpdateState();
 }

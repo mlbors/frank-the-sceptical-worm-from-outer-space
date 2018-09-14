@@ -30,10 +30,12 @@ public class Player : AbstractPlayer
     /*********************/
 
     /**
-     * @var Animator _animator player animator
+     * @var Stack _statesStack a stack containing player states
+     * @var Dictionary _statesPool a dictionary used as a pool for player states
      */
 
     protected Stack<IPlayerState> _statesStack = new Stack<IPlayerState>();
+    protected Dictionary<PlayerStates, IPlayerState> _statesPool = new Dictionary<PlayerStates, IPlayerState>();
 
     /**************************************************/
     /**************************************************/
@@ -107,7 +109,7 @@ public class Player : AbstractPlayer
 
         transform.position = new Vector3(0, 0, transform.position.z);
 
-        _ChangeState(PlayerStates.Standing);
+        ChangeState(PlayerStates.Standing);
 
         return _initialized;
     }
@@ -124,7 +126,7 @@ public class Player : AbstractPlayer
      * @param PlayerStates state desired state
      */
 
-    protected void _ChangeState(PlayerStates state)
+    public override void ChangeState(PlayerStates state)
     {
         Debug.Log("::: Changing player state :::");
 
@@ -133,10 +135,19 @@ public class Player : AbstractPlayer
             return;    
         }
 
+        if (_statesPool.ContainsKey(state)) {
+            State = _statesPool[state];
+            _statesStack.Push(_state);
+            _state.Enter();
+            return;
+        }
+
         _stateFactory.Type = state;
         State = _stateFactory.Create();
         _statesStack.Push(_state);
+        _statesPool[state] = _state;
         _state.Enter();
+        return;
     }
 
     /**************************************************/
@@ -168,12 +179,6 @@ public class Player : AbstractPlayer
 
     public override void HandleInput()
     {
-        if (_state.Name != "Running")
-        {
-            _ChangeState(PlayerStates.Running);
-        }
-
-        UpdateState();
     }
 
     /**************************************************/
@@ -243,7 +248,12 @@ public class Player : AbstractPlayer
 
     public override void Update()
     {
+        if (_state.Name == "Standing")
+        {
+            ChangeState(PlayerStates.Running);
+        }
         HandleInput();
+        UpdateState();
     }
 
     /**************************************************/

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - RunningPlayerState - Abstract Class
+ * FTSWFOS - JumpingPlayerState - Abstract Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -19,10 +19,10 @@ using UnityEngine;
 /**************************************************/
 
 /********************************/
-/***** RUNNING PLAYER STATE *****/
+/***** JUMPING PLAYER STATE *****/
 /********************************/
 
-public class RunningPlayerState : AbstractPlayerState
+public class JumpingPlayerState : AbstractPlayerState
 {
 
     /**************************************************/
@@ -34,11 +34,9 @@ public class RunningPlayerState : AbstractPlayerState
 
     /**
      * @var ICommand _command command to execute
-     * @var Bool _leave if state has to be left
      */
 
     protected ICommand _command;
-    protected bool _leave = false;
 
     /**************************************************/
     /**************************************************/
@@ -52,7 +50,7 @@ public class RunningPlayerState : AbstractPlayerState
      * @param ICommandFactory commandFactory object that create other objects, here, ICommand
      */
 
-    public RunningPlayerState(ICommandFactory<ICommand> commandFactory) : base (commandFactory)
+    public JumpingPlayerState(ICommandFactory<ICommand> commandFactory) : base (commandFactory)
     {
         _SetValues();
     }
@@ -70,8 +68,8 @@ public class RunningPlayerState : AbstractPlayerState
 
     protected void _SetValues()
     {
-        _name = "Running";
-        _type = PlayerStates.Running;
+        _name = "Jumping";
+        _type = PlayerStates.Jumping;
     }
 
     /**************************************************/
@@ -87,8 +85,7 @@ public class RunningPlayerState : AbstractPlayerState
 
     public override void Enter()
     {
-        (_stateSubject as IPlayer).Animator.SetFloat("Speed", 1.55f);
-        (_stateSubject as IPlayer).Animator.SetBool("isGrounded", true);
+        (_stateSubject as IPlayer).Animator.SetBool("isGrounded", false);
     }
 
     /**************************************************/
@@ -104,20 +101,16 @@ public class RunningPlayerState : AbstractPlayerState
 
     public override void Update()
     {
-        HandleInput();
-
-        if (_leave) {
-            return;
-        }
-
         if (_command == null)
         {
-            _commandFactory.Type = CommandTypes.Run;
+            _commandFactory.Type = CommandTypes.Jump;
             _command = _commandFactory.Create();
             _command.CommandSubject = (_stateSubject as ICommandSubject);
         }
 
         _command.Execute();
+
+        _stateSubject.ChangeState(PlayerStates.Running);
     }
 
     /**************************************************/
@@ -133,10 +126,6 @@ public class RunningPlayerState : AbstractPlayerState
 
     public override void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-        {
-            _leave = true;
-            _stateSubject.ChangeState(PlayerStates.Jumping);
-        }
+
     }
 }

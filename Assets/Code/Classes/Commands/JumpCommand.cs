@@ -35,7 +35,8 @@ public class JumpCommand : AbstractCommand
 
     public JumpCommand(IActionFactory<IAction> actionFactory) : base(actionFactory)
     {
-
+        _actionFactory.Type = ActionTypes.Jump;
+        Action = _actionFactory.Create();
     }
 
     /**************************************************/
@@ -51,6 +52,6 @@ public class JumpCommand : AbstractCommand
 
     public override void Execute()
     {
-
+        _action.Perform(_commandSubject);
     }
 }
