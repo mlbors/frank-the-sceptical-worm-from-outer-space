@@ -34,9 +34,11 @@ public class JumpingPlayerState : AbstractPlayerState
 
     /**
      * @var ICommand _command command to execute
+     * @var bool _executed was the command already executed?
      */
 
     protected ICommand _command;
+    protected bool _executed = false;
 
     /**************************************************/
     /**************************************************/
@@ -108,9 +110,31 @@ public class JumpingPlayerState : AbstractPlayerState
             _command.CommandSubject = (_stateSubject as ICommandSubject);
         }
 
-        _command.Execute();
+        if (!_executed)
+        {
+            _command.Execute();
+            _executed = true;
+            return;
+        }
 
-        _stateSubject.ChangeState(PlayerStates.Running);
+        CanBeLeft = true;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /************************/
+    /***** ISTATE LEAVE *****/
+    /************************/
+
+    /**
+     * @access public
+     */
+
+    public override void Leave()
+    {
+        _executed = false;
+        CanBeLeft = false;
     }
 
     /**************************************************/

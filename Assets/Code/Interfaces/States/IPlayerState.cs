@@ -48,5 +48,11 @@ public interface IPlayerState : IState
         set;
     }
 
+    bool CanBeLeft
+    {
+        get;
+        set;
+    }
+
     void HandleInput();
 }

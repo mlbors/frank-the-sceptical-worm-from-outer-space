@@ -32,10 +32,14 @@ public class Player : AbstractPlayer
     /**
      * @var Stack _statesStack a stack containing player states
      * @var Dictionary _statesPool a dictionary used as a pool for player states
+     * @var LayerMask _ground what defines the ground
+     * @var Transform _groundChecker what can check if player is grounded
      */
 
     protected Stack<IPlayerState> _statesStack = new Stack<IPlayerState>();
     protected Dictionary<PlayerStates, IPlayerState> _statesPool = new Dictionary<PlayerStates, IPlayerState>();
+    protected LayerMask _ground;
+    protected Transform _groundChecker;
 
     /**************************************************/
     /**************************************************/
@@ -103,6 +107,9 @@ public class Player : AbstractPlayer
         _speedMilestoneCount = 0.00f;
         _speedIncreaseMilestone = 50.50f;
 
+        _ground = LayerMask.GetMask("Ground");
+        _groundChecker = this.transform.Find("GroundCheck");
+
         _stateFactory.Subject = this as IPlayerStateSubject;
 
         _initialized = true;
@@ -135,19 +142,89 @@ public class Player : AbstractPlayer
             return;    
         }
 
-        if (_statesPool.ContainsKey(state)) {
-            State = _statesPool[state];
-            _statesStack.Push(_state);
-            _state.Enter();
-            return;
-        }
-
-        _stateFactory.Type = state;
-        State = _stateFactory.Create();
-        _statesStack.Push(_state);
-        _statesPool[state] = _state;
+        IPlayerState newState = _CreatePlayerState(state);
+        _statesStack.Push(newState);
+        _LeaveState();
+        State = newState;
         _state.Enter();
         return;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*******************************/
+    /***** CREATE PLAYER STATE *****/
+    /*******************************/
+
+    /**
+     * @access protected
+     * @param PlayerStates state desired state
+     */
+
+    protected IPlayerState _CreatePlayerState(PlayerStates state)
+    {
+        IPlayerState newState;
+
+        if (_statesPool.ContainsKey(state))
+        {
+            newState = _GetStateFromPool(state);
+            return newState;
+        } 
+ 
+        newState = _GetStateFromFactory(state);
+        _statesPool[state] = newState;
+        return newState;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*******************************/
+    /***** GET STATE FROM POOL *****/
+    /*******************************/
+
+    /**
+     * @access protected
+     * @param PlayerStates state desired state
+     */
+
+    protected IPlayerState _GetStateFromPool(PlayerStates state)
+    {
+        return _statesPool[state];
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**********************************/
+    /***** GET STATE FROM FACTORY *****/
+    /**********************************/
+
+    /**
+     * @access protected
+     * @param PlayerStates state desired state
+     */
+
+    protected IPlayerState _GetStateFromFactory(PlayerStates state)
+    {
+        _stateFactory.Type = state;
+        return _stateFactory.Create();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************/
+    /***** LEAVE STATE *****/
+    /***********************/
+
+    protected void _LeaveState()
+    {
+        if (State != null)
+        {
+            State.Leave();
+        }
     }
 
     /**************************************************/
@@ -195,6 +272,12 @@ public class Player : AbstractPlayer
     public override void UpdateState()
     {
         _state.Update();
+
+        if (_state.Name == "Jumping" && _state.CanBeLeft && _CheckIfGrounded())
+        {
+            ChangeState(PlayerStates.Running);
+            return;
+        }
     }
 
     /**************************************************/
@@ -254,6 +337,22 @@ public class Player : AbstractPlayer
         }
         HandleInput();
         UpdateState();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************/
+    /***** CHECK IF GROUNDED *****/
+    /*****************************/
+
+    /**
+     * @access protected
+     */
+
+    protected bool _CheckIfGrounded()
+    {
+        return Physics2D.OverlapCircle(_groundChecker.position, 0.050f, _ground);
     }
 
     /**************************************************/

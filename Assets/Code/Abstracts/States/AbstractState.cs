@@ -63,4 +63,17 @@ abstract public class AbstractState : IState, IProduct
      */
 
     public abstract void Update();
+
+    /**************************************************/
+    /**************************************************/
+
+    /************************/
+    /***** ISTATE LEAVE *****/
+    /************************/
+
+    /**
+     * @access public
+     */
+
+    public abstract void Leave();
 }

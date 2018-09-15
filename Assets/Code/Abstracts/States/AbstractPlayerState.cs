@@ -34,6 +34,7 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
      * @var ICommandFactory _commandFactory object that create other objects, here, ICommand
      * @var PlayerStates _type type of state
      * @var String _name define state's name
+     * @var Bool _canBeLeft does the state can be left?
      */
 
     protected IStateInputHandler _stateInputHandler;
@@ -41,6 +42,7 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
     protected IPlayerStateSubject _stateSubject;
     protected PlayerStates _type;
     protected string _name;
+    protected bool _canBeLeft = false;
 
     /**************************************************/
     /**************************************************/
@@ -130,6 +132,23 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
     /**************************************************/
     /**************************************************/
 
+    /*************************************/
+    /***** CAN BE LEFT GETTER/SETTER *****/
+    /*************************************/
+
+    /**
+     * @access public
+     */
+
+    public bool CanBeLeft
+    {
+        get { return _canBeLeft; }
+        set { _canBeLeft = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /******************************/
     /***** TYPE GETTER/SETTER *****/
     /******************************/
@@ -169,6 +188,19 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
      */
 
     public abstract override void Update();
+
+    /**************************************************/
+    /**************************************************/
+
+    /************************/
+    /***** ISTATE LEAVE *****/
+    /************************/
+
+    /**
+     * @access public
+     */
+
+    public abstract override void Leave();
 
     /**************************************************/
     /**************************************************/
