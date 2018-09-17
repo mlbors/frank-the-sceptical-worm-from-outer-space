@@ -101,7 +101,7 @@ abstract public class AbstractFoe : MonoBehaviour, IFoe, IObservable, IProduct
      * @param IObserver observer observer to attach
      */
 
-    void IObservable.Attach(IObserver observer)
+    public void Attach(IObserver observer)
     {
         _observers.Add(observer);
     }
@@ -118,7 +118,7 @@ abstract public class AbstractFoe : MonoBehaviour, IFoe, IObservable, IProduct
      * @param IObserver observer observer to detach
      */
 
-    void IObservable.Detach(IObserver observer)
+    public void Detach(IObserver observer)
     {
         _observers.Remove(observer);
     }
@@ -132,13 +132,14 @@ abstract public class AbstractFoe : MonoBehaviour, IFoe, IObservable, IProduct
 
     /**
      * @access private
+     * @param String info info for update
      */
 
-    void IObservable.Notify()
+    public void Notify(string info)
     {
         foreach (IObserver o in _observers)
         {
-            o.ObserverUpdate();
+            o.ObserverUpdate(info);
         }
     }
 

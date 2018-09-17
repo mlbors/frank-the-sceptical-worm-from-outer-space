@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - RunningPlayerState - Abstract Class
+ * FTSWFOS - DoubleJumpingPlayerState - Abstract Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,24 +18,23 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/********************************/
-/***** RUNNING PLAYER STATE *****/
-/********************************/
+/***************************************/
+/***** DOUBLE JUMPING PLAYER STATE *****/
+/***************************************/
 
-public class RunningPlayerState : AbstractPlayerState
+public class DoubleJumpingPlayerState : AbstractPlayerState
 {
-
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
      * @var ICommand _command command to execute
-     * @var Bool _leave if state has to be left
+     * @var bool _executed was the command already executed?
      */
 
     protected ICommand _command;
-    protected bool _leave = false;
+    protected bool _executed = false;
 
     /**************************************************/
     /**************************************************/
@@ -49,7 +48,7 @@ public class RunningPlayerState : AbstractPlayerState
      * @param ICommandFactory commandFactory object that create other objects, here, ICommand
      */
 
-    public RunningPlayerState(ICommandFactory<ICommand> commandFactory) : base (commandFactory)
+    public DoubleJumpingPlayerState(ICommandFactory<ICommand> commandFactory) : base (commandFactory)
     {
         _SetValues();
     }
@@ -67,8 +66,8 @@ public class RunningPlayerState : AbstractPlayerState
 
     protected void _SetValues()
     {
-        _name = "Running";
-        _type = PlayerStates.Running;
+        _name = "DoubleJumping";
+        _type = PlayerStates.DoubleJumping;
     }
 
     /**************************************************/
@@ -84,8 +83,8 @@ public class RunningPlayerState : AbstractPlayerState
 
     public override void Enter()
     {
-        (_stateSubject as IPlayer).Animator.SetFloat("Speed", 1.55f);
-        (_stateSubject as IPlayer).Animator.SetBool("isGrounded", true);
+        Debug.Log("Double jumping");
+        (_stateSubject as IPlayer).Animator.SetBool("isGrounded", false);
     }
 
     /**************************************************/
@@ -101,20 +100,21 @@ public class RunningPlayerState : AbstractPlayerState
 
     public override void Update()
     {
-        HandleInput();
-
-        if (_leave) {
-            return;
-        }
-
         if (_command == null)
         {
-            _commandFactory.Type = CommandTypes.Run;
+            _commandFactory.Type = CommandTypes.DoubleJump;
             _command = _commandFactory.Create();
             _command.CommandSubject = (_stateSubject as ICommandSubject);
         }
 
-        _command.Execute();
+        if (!_executed)
+        {
+            _command.Execute();
+            _executed = true;
+            return;
+        }
+
+        CanBeLeft = true;
     }
 
     /**************************************************/
@@ -130,7 +130,7 @@ public class RunningPlayerState : AbstractPlayerState
 
     public override void Leave()
     {
-        _leave = false;
+        _executed = false;
         CanBeLeft = false;
     }
 
@@ -147,10 +147,6 @@ public class RunningPlayerState : AbstractPlayerState
 
     public override void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-        {
-            _leave = true;
-            _stateSubject.ChangeState(PlayerStates.Jumping);
-        }
+
     }
 }

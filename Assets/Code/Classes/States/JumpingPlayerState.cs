@@ -24,10 +24,6 @@ using UnityEngine;
 
 public class JumpingPlayerState : AbstractPlayerState
 {
-
-    /**************************************************/
-    /**************************************************/
-
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
@@ -35,10 +31,12 @@ public class JumpingPlayerState : AbstractPlayerState
     /**
      * @var ICommand _command command to execute
      * @var bool _executed was the command already executed?
+     * @var float _jumpTimeCounter elapsed time
      */
 
     protected ICommand _command;
     protected bool _executed = false;
+    protected float _jumpTimeCounter;
 
     /**************************************************/
     /**************************************************/
@@ -72,6 +70,7 @@ public class JumpingPlayerState : AbstractPlayerState
     {
         _name = "Jumping";
         _type = PlayerStates.Jumping;
+        _jumpTimeCounter = 0.75f;
     }
 
     /**************************************************/
@@ -117,6 +116,11 @@ public class JumpingPlayerState : AbstractPlayerState
             return;
         }
 
+        if (_executed) {
+            _jumpTimeCounter -= Time.deltaTime;
+        }
+
+        HandleInput();
         CanBeLeft = true;
     }
 
@@ -135,6 +139,7 @@ public class JumpingPlayerState : AbstractPlayerState
     {
         _executed = false;
         CanBeLeft = false;
+        _jumpTimeCounter = 0.75f;
     }
 
     /**************************************************/
@@ -150,6 +155,9 @@ public class JumpingPlayerState : AbstractPlayerState
 
     public override void HandleInput()
     {
-
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && _jumpTimeCounter > 0)
+        {
+            _stateSubject.ChangeState(PlayerStates.DoubleJumping);
+        }
     }
 }

@@ -149,6 +149,11 @@ public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateF
                 _inputHandlerFactory.Type = PlayerInputHandlerTypes.Running;
                 stateInputHandler = _inputHandlerFactory.Create();
                 break;
+            case PlayerStates.DoubleJumping:
+                state = _container.Instantiate<DoubleJumpingPlayerState>(new object[] { });
+                _inputHandlerFactory.Type = PlayerInputHandlerTypes.Running;
+                stateInputHandler = _inputHandlerFactory.Create();
+                break;
             default:
                 state = _container.Instantiate<StandingPlayerState>(new object[] { });
                 _inputHandlerFactory.Type = PlayerInputHandlerTypes.Standing;

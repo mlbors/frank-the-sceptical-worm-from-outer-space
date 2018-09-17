@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -35,6 +36,17 @@ public class DoubleJumpAction : IAction
 
     public void Perform([Optional] ICommandSubject subject)
     {
-        
+        if (subject != null)
+        {
+            try
+            {
+                Vector2 velocity = (subject as IPlayer).Rigidbody.velocity;
+                (subject as IPlayer).Rigidbody.velocity = new Vector2(velocity.x, 24.55f);
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+            }
+        }
     }
 }

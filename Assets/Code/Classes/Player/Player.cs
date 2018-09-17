@@ -236,9 +236,10 @@ public class Player : AbstractPlayer
 
     /**
      * @access public
+     * @param String info info for update
      */
 
-    public override void ObserverUpdate()
+    public override void ObserverUpdate(string info)
     {
         
     }
@@ -273,7 +274,7 @@ public class Player : AbstractPlayer
     {
         _state.Update();
 
-        if (_state.Name == "Jumping" && _state.CanBeLeft && _CheckIfGrounded())
+        if ((_state.Name == "Jumping" || _state.Name == "DoubleJumping") && _state.CanBeLeft && _CheckIfGrounded())
         {
             ChangeState(PlayerStates.Running);
             return;
@@ -348,11 +349,18 @@ public class Player : AbstractPlayer
 
     /**
      * @access protected
+     * @return bool
      */
 
     protected bool _CheckIfGrounded()
     {
-        return Physics2D.OverlapCircle(_groundChecker.position, 0.050f, _ground);
+        if (Physics2D.OverlapCircle(_groundChecker.position, 0.025f, _ground))
+        {
+            Notify("player grounded");
+            return true;
+        }
+
+        return false;
     }
 
     /**************************************************/

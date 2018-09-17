@@ -35,7 +35,8 @@ public class DoubleJumpCommand : AbstractCommand
 
     public DoubleJumpCommand(IActionFactory<IAction> actionFactory) : base (actionFactory)
     {
-
+        _actionFactory.Type = ActionTypes.DoubleJump;
+        Action = _actionFactory.Create();
     }
 
     /**************************************************/
@@ -51,6 +52,6 @@ public class DoubleJumpCommand : AbstractCommand
 
     public override void Execute()
     {
-
+        _action.Perform(_commandSubject);
     }
 }

@@ -24,5 +24,5 @@ using UnityEngine;
 
 public interface IObserver
 {
-    void ObserverUpdate();
+    void ObserverUpdate(string info);
 }
