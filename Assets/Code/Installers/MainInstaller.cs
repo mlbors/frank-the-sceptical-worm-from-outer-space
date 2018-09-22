@@ -47,6 +47,7 @@ public class MainInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Debug.Log("::: Install main bindings :::");
+
         Container.Bind<IGameLoader>()
                  .To<GameLoader>()
                  .FromNewComponentOnNewGameObject()
@@ -71,6 +72,17 @@ public class MainInstaller : MonoInstaller
                  .AsSingle()
                  .WhenInjectedInto<IGameOperator>()
                  .NonLazy();
+
+        Container.Bind<GameObject>()
+                 .FromInstance(_settings.cameraGameObject)
+                 .AsCached()
+                 .WhenInjectedInto<CameraFactory>();
+
+        Container.Bind<ICameraFactory<ICamera>>()
+                 .To<CameraFactory>()
+                 .AsSingle()
+                 .WhenInjectedInto<CameraOperatorElement>()
+                 .NonLazy();
     }
 
     /**************************************************/
@@ -90,5 +102,11 @@ public class MainInstaller : MonoInstaller
         /*********************/
         /***** ATTRIBUTS *****/
         /*********************/
+
+        /**
+         * @var GameObject cameraGameObject prefab to use for player
+         */
+
+        public GameObject cameraGameObject;
     }
 }

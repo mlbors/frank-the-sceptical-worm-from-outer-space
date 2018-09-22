@@ -14,6 +14,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 /**************************************************/
 /**************************************************/
@@ -22,7 +23,7 @@ using UnityEngine;
 /***** ABSTRACT CAMERA *****/
 /***************************/
 
-abstract public class AbstractCamera : ICamera, IProduct
+abstract public class AbstractCamera : MonoBehaviour, ICamera, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -30,9 +31,11 @@ abstract public class AbstractCamera : ICamera, IProduct
 
     /**
      * @var ICameraTarget _cameraTarget camera target
+     * @var Bool _initialized tells if camerea is initialized
      */
 
     protected ICameraTarget _cameraTarget;
+    protected bool _initialized = false;
 
     /**************************************************/
     /**************************************************/
@@ -46,7 +49,8 @@ abstract public class AbstractCamera : ICamera, IProduct
      * @param ICameraTarget cameraTarget camera's target
      */
 
-    protected AbstractCamera(ICameraTarget cameraTarget)
+    [Inject]
+    public virtual void Construct(ICameraTarget cameraTarget)
     {
         _cameraTarget = cameraTarget;
     }
@@ -67,4 +71,43 @@ abstract public class AbstractCamera : ICamera, IProduct
         get { return _cameraTarget; }
         set { _cameraTarget = value; }
     }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
+    /***** AWAKE *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public abstract void Awake();
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
+    /***** START *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public abstract void Start();
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************/
+    /***** UPDATE *****/
+    /******************/
+
+    /**
+     * @access public
+     */
+
+    public abstract void Update();
 }
