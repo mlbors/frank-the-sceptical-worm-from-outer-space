@@ -23,7 +23,7 @@ using Zenject;
 /***** CAMERA OPERATOR ELEMENT *****/
 /***********************************/
 
-public class CameraOperatorElement : IOperatorElement
+public class CameraOperatorElement : ICameraOperatorElement
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -137,7 +137,6 @@ public class CameraOperatorElement : IOperatorElement
 
     public void Init()
     {
-        _CreateCamera();
     }
 
     /**************************************************/
@@ -153,6 +152,26 @@ public class CameraOperatorElement : IOperatorElement
 
     public void Operate()
     {
-        _CreateCamera();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IOBSERVER UPDATE *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public void ObserverUpdate(string info, object data)
+    {
+        if (info == "player created")
+        {
+            Debug.Log("Observer updating");
+            CameraFactory.Target = data as ICameraTarget;
+            _CreateCamera();
+        }
     }
 }

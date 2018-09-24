@@ -1,5 +1,5 @@
-﻿/**
- * FTSWFOS - IObservable - Interface
+/**
+ * FTSWFOS - ICameraOperatorElement - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,19 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/***********************/
-/***** IOBSERVABLE *****/
-/***********************/
+/************************************/
+/***** ICAMERA OEPRATOR ELEMENT *****/
+/************************************/
 
-public interface IObservable
+public interface ICameraOperatorElement : IOperatorElement, IObserver
 {
-    List<IObserver> Observers
-    {
-        get;
-        set;
-    }
-
-    void Attach(IObserver observer);
-    void Detach(IObserver observer);
-    void Notify(string info, object data);
 }

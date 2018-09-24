@@ -50,7 +50,8 @@ public class GameOperator : AbstractOperator, IGameOperator
     protected void _SetValues()
     {
         _operatorElementFactory.Type = OperatorElementTypes.CameraOperatorElement;
-        AddElement(_operatorElementFactory.Create());
+        IOperatorElement cameraOperatorElement = _operatorElementFactory.Create();
+        AddElement(cameraOperatorElement);
 
         _operatorElementFactory.Type = OperatorElementTypes.CollectableOperatorElement;
         AddElement(_operatorElementFactory.Create());
@@ -65,7 +66,9 @@ public class GameOperator : AbstractOperator, IGameOperator
         AddElement(_operatorElementFactory.Create());
 
         _operatorElementFactory.Type = OperatorElementTypes.PlayerOperatorElement;
-        AddElement(_operatorElementFactory.Create());
+        IOperatorElement playerOperator = _operatorElementFactory.Create();
+        (playerOperator as IPlayerOperatorElement).Attach(cameraOperatorElement as IObserver);
+        AddElement(playerOperator);
 
         _operatorElementFactory.Type = OperatorElementTypes.ScoreOperatorElement;
         AddElement(_operatorElementFactory.Create());

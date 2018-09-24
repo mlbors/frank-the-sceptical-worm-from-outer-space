@@ -46,13 +46,12 @@ public class Camera : AbstractCamera
 
     /**
      * @access protected
-     * @param ICameraTarget cameraTarget camera's target
      */
 
     [Inject]
-    public override void Construct(ICameraTarget cameraTarget)
+    public override void Construct()
     {
-        base.Construct(cameraTarget);
+        base.Construct();
     }
 
     /**************************************************/

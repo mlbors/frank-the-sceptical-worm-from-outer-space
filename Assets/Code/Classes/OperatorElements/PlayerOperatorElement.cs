@@ -22,17 +22,19 @@ using UnityEngine;
 /***** PLAYER OPERATOR ELEMENT *****/
 /***********************************/
 
-public class PlayerOperatorElement : IOperatorElement
+public class PlayerOperatorElement : IPlayerOperatorElement
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
+     * @var List<IObserver> _observers list of observers
      * @var IPlayer _player player object
      * @var IPlayerFactory playerFactory factory object that creates other objects, here, IPlayer
      */
 
+    protected List<IObserver> _observers = new List<IObserver>();
     protected IPlayer _player;
     protected IPlayerFactory<IPlayer> _playerFactory;
 
@@ -56,9 +58,9 @@ public class PlayerOperatorElement : IOperatorElement
     /**************************************************/
     /**************************************************/
 
-    /*********************/
-    /***** CONSTRUCT *****/
-    /*********************/
+    /**********************/
+    /***** SET VALUES *****/
+    /**********************/
 
     /**
      * @access protected
@@ -107,6 +109,23 @@ public class PlayerOperatorElement : IOperatorElement
     /**************************************************/
     /**************************************************/
 
+    /***********************************/
+    /***** OBSERVERS GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public List<IObserver> Observers
+    {
+        get { return _observers; }
+        set { _observers = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /**********************************/
     /***** OPERATORELEMENT - INIT *****/
     /**********************************/
@@ -114,6 +133,11 @@ public class PlayerOperatorElement : IOperatorElement
     public void Init()
     {
         Player = _playerFactory.Create();
+
+        if (Player != null)
+        {
+            Notify("player created", Player);
+        }
     }
 
     /**************************************************/
@@ -125,6 +149,59 @@ public class PlayerOperatorElement : IOperatorElement
 
     public void Operate()
     {
-        
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - ATTACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to attach
+     */
+
+    public void Attach(IObserver observer)
+    {
+        _observers.Add(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - DETACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to detach
+     */
+
+    public void Detach(IObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** IOBSERVABLE NOTIFY *****/
+    /******************************/
+
+    /**
+     * @access private
+     * @param String info info for update
+     */
+
+    public void Notify(string info, object data)
+    {
+        foreach (IObserver o in _observers)
+        {
+            o.ObserverUpdate(info, data);
+        }
     }
 }

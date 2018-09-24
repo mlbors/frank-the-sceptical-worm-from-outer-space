@@ -50,9 +50,8 @@ abstract public class AbstractCamera : MonoBehaviour, ICamera, IProduct
      */
 
     [Inject]
-    public virtual void Construct(ICameraTarget cameraTarget)
+    public virtual void Construct()
     {
-        _cameraTarget = cameraTarget;
     }
 
     /**************************************************/

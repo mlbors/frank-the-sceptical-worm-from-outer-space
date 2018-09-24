@@ -154,11 +154,11 @@ abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObserv
      * @param String info info for update
      */
 
-    public void Notify(string info)
+    public void Notify(string info, object data)
     {
         foreach (IObserver o in _observers)
         {
-            o.ObserverUpdate(info);
+            o.ObserverUpdate(info, null);
         }
     }
 

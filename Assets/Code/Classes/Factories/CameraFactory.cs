@@ -54,7 +54,6 @@ public class CameraFactory : AbstractDIFactory<ICamera>, ICameraFactory<ICamera>
     {
         Debug.Log("::: Camera Factory :::");
         _gameObject = gameObject;
-        _target = _container.TryResolve<Player>() as ICameraTarget;
     }
 
     /**************************************************/
@@ -107,6 +106,8 @@ public class CameraFactory : AbstractDIFactory<ICamera>, ICameraFactory<ICamera>
     public override ICamera Create(params object[] constructorArguments)
     {
         Debug.Log("::: Creating Camera :::");
+
+        Debug.Log(_target);
         if (_target == null)
         {
             return null;
@@ -115,7 +116,8 @@ public class CameraFactory : AbstractDIFactory<ICamera>, ICameraFactory<ICamera>
         ICamera camera;
         _container.Bind<ICamera>().To<Camera>().AsSingle();
         var prefab = _container.InstantiatePrefab(_gameObject);
-        camera = _container.InstantiateComponent<Camera>(prefab, new object[]{ _target });
+        camera = _container.InstantiateComponent<Camera>(prefab, new object[]{});
+        camera.CameraTarget = _target;
         Debug.Log("::: Camera created :::");
         return camera;
     }

@@ -1,5 +1,5 @@
-﻿/**
- * FTSWFOS - IObservable - Interface
+/**
+ * FTSWFOS - IPlayerOperatorElement - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,19 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/***********************/
-/***** IOBSERVABLE *****/
-/***********************/
+/************************************/
+/***** IPLAYER OEPRATOR ELEMENT *****/
+/************************************/
 
-public interface IObservable
+public interface IPlayerOperatorElement : IOperatorElement, IObservable
 {
-    List<IObserver> Observers
-    {
-        get;
-        set;
-    }
-
-    void Attach(IObserver observer);
-    void Detach(IObserver observer);
-    void Notify(string info, object data);
 }
