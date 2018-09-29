@@ -22,13 +22,13 @@ using UnityEngine;
 /***** PLATFORM OPERATOR ELEMENT *****/
 /*************************************/
 
-public class PlatformOperatorElement : IOperatorElement
+public class PlatformOperatorElement : AbstractGeneratorOperatorElement<Platform>
 {
     /**********************************/
     /***** OPERATORELEMENT - INIT *****/
     /**********************************/
 
-    public void Init()
+    public override void Init()
     {
 
     }
@@ -40,8 +40,8 @@ public class PlatformOperatorElement : IOperatorElement
     /***** OPERATORELEMENT - OPERATE *****/
     /*************************************/
 
-    public void Operate()
+    public override void Operate()
     {
-        
+
     }
 }

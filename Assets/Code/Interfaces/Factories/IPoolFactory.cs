@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPool - Interface
+ * FTSWFOS - IPoolFactory - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,18 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*****************/
-/***** IPOOL *****/
-/*****************/
+/*************************/
+/***** IPOOL FACTORY *****/
+/*************************/
 
-public interface IPool
+public interface IPoolFactory<T> : IFactory<T>
 {
-    int Amount
+    PoolTypes Type
     {
         get;
         set;
     }
-
-    void Init();
-    void FillPool();
 }

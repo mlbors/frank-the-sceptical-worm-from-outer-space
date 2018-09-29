@@ -21,7 +21,7 @@ using Zenject;
 /**************************************************/
 
 /********************************/
-/***** PALYER STATE FACTORY *****/
+/***** PLAYER STATE FACTORY *****/
 /********************************/
 
 public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateFactory<IPlayerState>

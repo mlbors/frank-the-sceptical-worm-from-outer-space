@@ -23,7 +23,7 @@ using Zenject;
 /***** ABSTRACT PLATFORM *****/
 /*****************************/
 
-abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct
+abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct, IRenderable
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -86,6 +86,19 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct
         get { return _y; }
         set { _y = value; }
     }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IRENDERABLE - RENDER *****/
+    /********************************/
+
+    /**
+     * @access public
+     */
+
+    public abstract void Render();
 
     /**************************************************/
     /**************************************************/

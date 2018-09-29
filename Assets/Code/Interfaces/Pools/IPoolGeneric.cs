@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPool - Interface
+ * FTSWFOS - IPoolGeneric - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -22,14 +22,29 @@ using UnityEngine;
 /***** IPOOL *****/
 /*****************/
 
-public interface IPool
+public interface IPool<T> : IPool
 {
-    int Amount
+    T PooledObject
     {
         get;
         set;
     }
 
-    void Init();
-    void FillPool();
+    List<T> PooledObjects
+    {
+        get;
+        set;
+    }
+
+    IFactory<T> Factory
+    {
+        get;
+        set;
+    }
+
+    T InstantiateNewObject();
+    void AddObject(T pooledObject);
+    void RemoveObject(T pooledObject);
+    T GetObject();
+    bool CheckIfObjectAvailable(T currentObject);
 }

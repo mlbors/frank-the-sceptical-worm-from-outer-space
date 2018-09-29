@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPool - Interface
+ * FTSWFOS - PoolTypes - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,18 +18,13 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*****************/
-/***** IPOOL *****/
-/*****************/
+/**********************/
+/***** POOL TYPES *****/
+/**********************/
 
-public interface IPool
+public enum PoolTypes
 {
-    int Amount
-    {
-        get;
-        set;
-    }
-
-    void Init();
-    void FillPool();
+    Collectable,
+    Foe,
+    Platform
 }
