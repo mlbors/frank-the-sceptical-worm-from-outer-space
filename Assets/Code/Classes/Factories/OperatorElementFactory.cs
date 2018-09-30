@@ -105,7 +105,7 @@ public class OperatorElementFactory : AbstractDIFactory<IOperatorElement>, IOper
             case OperatorElementType.PlatformOperatorElement:
                 GameObject gameObject = new GameObject();
                 //operatorElement = _container.Instantiate<PlatformOperatorElement>() as IOperatorElement;
-                operatorElement = _container.InstantiatePrefabForComponent<PlatformOperatorElement>(gameObject) as IOperatorElement;
+                operatorElement = _container.InstantiateComponentOnNewGameObject<PlatformOperatorElement>() as IOperatorElement;
                 break;
             case OperatorElementType.PlayerOperatorElement:
                 operatorElement = _container.Instantiate<PlayerOperatorElement>() as IOperatorElement;
