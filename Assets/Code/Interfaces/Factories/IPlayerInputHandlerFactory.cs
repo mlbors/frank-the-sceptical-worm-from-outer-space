@@ -24,7 +24,7 @@ using UnityEngine;
 
 public interface IPlayerInputHandlerFactory<T> : IFactory<T>
 {
-    PlayerInputHandlerTypes Type
+    PlayerInputHandlerType Type
     {
         get;
         set;

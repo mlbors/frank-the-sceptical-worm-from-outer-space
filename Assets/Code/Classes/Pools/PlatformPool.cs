@@ -30,7 +30,7 @@ public class PlatformPool : AbstractPool<IPlatform>
 
     /**
      * @access protected
-     * @param T pooledObject current pooled object
+     * @param IPlatform pooledObject current pooled object
      * @param Int amount initinal amount
      * @param IFactory factory object that other creates objects, here object of type T
      */

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - OperatorElementTypes - Enum
+ * FTSWFOS - OperatorElementType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,11 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/**********************************/
-/***** OPERATOR ELEMENT TYPES *****/
-/**********************************/
+/*********************************/
+/***** OPERATOR ELEMENT TYPE *****/
+/*********************************/
 
-public enum OperatorElementTypes
+public enum OperatorElementType
 {
     CameraOperatorElement,
     CollectableOperatorElement,

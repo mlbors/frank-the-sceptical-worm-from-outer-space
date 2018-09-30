@@ -30,7 +30,7 @@ public interface IPlayerStateFactory<T> : IFactory<T>
         set;
     }
 
-    PlayerStates Type
+    PlayerState Type
     {
         get;
         set;

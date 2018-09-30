@@ -37,7 +37,7 @@ public class Player : AbstractPlayer
      */
 
     protected Stack<IPlayerState> _statesStack = new Stack<IPlayerState>();
-    protected Dictionary<PlayerStates, IPlayerState> _statesPool = new Dictionary<PlayerStates, IPlayerState>();
+    protected Dictionary<PlayerState, IPlayerState> _statesPool = new Dictionary<PlayerState, IPlayerState>();
     protected LayerMask _ground;
     protected Transform _groundChecker;
 
@@ -116,7 +116,7 @@ public class Player : AbstractPlayer
 
         transform.position = new Vector3(0, 0, transform.position.z);
 
-        ChangeState(PlayerStates.Standing);
+        ChangeState(PlayerState.Standing);
 
         return _initialized;
     }
@@ -130,10 +130,10 @@ public class Player : AbstractPlayer
 
     /**
      * @access protected
-     * @param PlayerStates state desired state
+     * @param PlayerState state desired state
      */
 
-    public override void ChangeState(PlayerStates state)
+    public override void ChangeState(PlayerState state)
     {
         Debug.Log("::: Changing player state :::");
 
@@ -159,10 +159,10 @@ public class Player : AbstractPlayer
 
     /**
      * @access protected
-     * @param PlayerStates state desired state
+     * @param PlayerState state desired state
      */
 
-    protected IPlayerState _CreatePlayerState(PlayerStates state)
+    protected IPlayerState _CreatePlayerState(PlayerState state)
     {
         IPlayerState newState;
 
@@ -186,10 +186,10 @@ public class Player : AbstractPlayer
 
     /**
      * @access protected
-     * @param PlayerStates state desired state
+     * @param PlayerState state desired state
      */
 
-    protected IPlayerState _GetStateFromPool(PlayerStates state)
+    protected IPlayerState _GetStateFromPool(PlayerState state)
     {
         return _statesPool[state];
     }
@@ -203,10 +203,10 @@ public class Player : AbstractPlayer
 
     /**
      * @access protected
-     * @param PlayerStates state desired state
+     * @param PlayerState state desired state
      */
 
-    protected IPlayerState _GetStateFromFactory(PlayerStates state)
+    protected IPlayerState _GetStateFromFactory(PlayerState state)
     {
         _stateFactory.Type = state;
         return _stateFactory.Create();
@@ -276,7 +276,7 @@ public class Player : AbstractPlayer
 
         if ((_state.Name == "Jumping" || _state.Name == "DoubleJumping") && _state.CanBeLeft && _CheckIfGrounded())
         {
-            ChangeState(PlayerStates.Running);
+            ChangeState(PlayerState.Running);
             return;
         }
     }
@@ -334,7 +334,7 @@ public class Player : AbstractPlayer
     {
         if (_state.Name == "Standing")
         {
-            ChangeState(PlayerStates.Running);
+            ChangeState(PlayerState.Running);
         }
         HandleInput();
         UpdateState();

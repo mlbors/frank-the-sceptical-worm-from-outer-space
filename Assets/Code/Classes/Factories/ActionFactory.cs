@@ -30,10 +30,10 @@ public class ActionFactory : AbstractDIFactory<IAction>, IActionFactory<IAction>
     /*********************/
 
     /**
-     * @var ActionTypes _type type of command
+     * @var ActionType _type type of command
      */
 
-    protected ActionTypes _type;
+    protected ActionType _type;
 
     /**************************************************/
     /**************************************************/
@@ -45,10 +45,10 @@ public class ActionFactory : AbstractDIFactory<IAction>, IActionFactory<IAction>
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param ActionTypes type type of command
+     * @param ActionType type type of command
      */
 
-    public ActionFactory(DiContainer container, ActionTypes type = ActionTypes.None) : base (container)
+    public ActionFactory(DiContainer container, ActionType type = ActionType.None) : base (container)
     {
         _type = type;
     }
@@ -64,7 +64,7 @@ public class ActionFactory : AbstractDIFactory<IAction>, IActionFactory<IAction>
      * @access public
      */
 
-    public ActionTypes Type
+    public ActionType Type
     {
         get { return _type; }
         set { _type = value; }
@@ -89,13 +89,13 @@ public class ActionFactory : AbstractDIFactory<IAction>, IActionFactory<IAction>
 
         switch (_type)
         {
-            case ActionTypes.Run:
+            case ActionType.Run:
                 action = _container.Instantiate<RunAction>() as IAction;
                 break;
-            case ActionTypes.Jump:
+            case ActionType.Jump:
                 action = _container.Instantiate<JumpAction>() as IAction;
                 break;
-            case ActionTypes.DoubleJump:
+            case ActionType.DoubleJump:
                 action = _container.Instantiate<DoubleJumpAction>() as IAction;
                 break;
             default:

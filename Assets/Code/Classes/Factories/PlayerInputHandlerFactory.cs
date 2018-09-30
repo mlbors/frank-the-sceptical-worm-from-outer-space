@@ -31,10 +31,10 @@ public class PlayerInputHandlerFactory : AbstractDIFactory<IStateInputHandler>, 
     /*********************/
 
     /**
-     * @var PlayerInputHandlerTypes _type type of state
+     * @var PlayerInputHandlerType _type type of state
      */
 
-    protected PlayerInputHandlerTypes _type;
+    protected PlayerInputHandlerType _type;
 
     /**************************************************/
     /**************************************************/
@@ -47,7 +47,7 @@ public class PlayerInputHandlerFactory : AbstractDIFactory<IStateInputHandler>, 
      * @access public
      */
 
-    public PlayerInputHandlerTypes Type
+    public PlayerInputHandlerType Type
     {
         get { return _type; }
         set { _type = value; }
@@ -63,10 +63,10 @@ public class PlayerInputHandlerFactory : AbstractDIFactory<IStateInputHandler>, 
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param PlayerStates type type of state
+     * @param PlayerState type type of state
      */
 
-    public PlayerInputHandlerFactory(DiContainer container, PlayerInputHandlerTypes type = PlayerInputHandlerTypes.Standing) : base (container)
+    public PlayerInputHandlerFactory(DiContainer container, PlayerInputHandlerType type = PlayerInputHandlerType.Standing) : base (container)
     {
         _type = type;
     }
@@ -90,10 +90,10 @@ public class PlayerInputHandlerFactory : AbstractDIFactory<IStateInputHandler>, 
 
         switch (_type)
         {
-            case PlayerInputHandlerTypes.Standing:
+            case PlayerInputHandlerType.Standing:
                 stateInputHandler = _container.Instantiate<StandingPlayerStateInputHandler>(new object[] { });
                 break;
-            case PlayerInputHandlerTypes.Running:
+            case PlayerInputHandlerType.Running:
                 stateInputHandler = _container.Instantiate<RunningPlayerStateInputHandler>(new object[] { });
                 break;
             default:

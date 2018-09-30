@@ -24,7 +24,7 @@ using UnityEngine;
 
 public interface IManagerFactory<T> : IFactory<T>
 {
-    ManagerTypes Type
+    ManagerType Type
     {
         get;
         set;

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlatformFactory - Interface
+ * FTSWFOS - CollectableType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,15 +18,14 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*****************************/
-/***** IPLATFORM FACTORY *****/
-/*****************************/
+/****************************/
+/***** COLLECTABLE TYPE *****/
+/****************************/
 
-public interface IPlatformFactory<T> : IFactory<T>
+public enum CollectableType
 {
-    PlatformType Type
-    {
-        get;
-        set;
-    }
+    PowerUp,
+    Bonus,
+    Death,
+    NegativeBonus
 }

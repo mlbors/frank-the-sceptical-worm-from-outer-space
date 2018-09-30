@@ -68,7 +68,7 @@ public class RunningPlayerState : AbstractPlayerState
     protected void _SetValues()
     {
         _name = "Running";
-        _type = PlayerStates.Running;
+        _type = PlayerState.Running;
     }
 
     /**************************************************/
@@ -109,7 +109,7 @@ public class RunningPlayerState : AbstractPlayerState
 
         if (_command == null)
         {
-            _commandFactory.Type = CommandTypes.Run;
+            _commandFactory.Type = CommandType.Run;
             _command = _commandFactory.Create();
             _command.CommandSubject = (_stateSubject as ICommandSubject);
         }
@@ -150,7 +150,7 @@ public class RunningPlayerState : AbstractPlayerState
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             _leave = true;
-            _stateSubject.ChangeState(PlayerStates.Jumping);
+            _stateSubject.ChangeState(PlayerState.Jumping);
         }
     }
 }

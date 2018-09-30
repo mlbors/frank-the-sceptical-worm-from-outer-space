@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - CommandTypes - Enum
+ * FTSWFOS - OperatorType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -19,14 +19,10 @@ using UnityEngine;
 /**************************************************/
 
 /*************************/
-/***** COMMAND TYPES *****/
+/***** OPERATOR TYPE *****/
 /*************************/
 
-public enum CommandTypes
+public enum OperatorType
 {
-    None,
-    Stand,
-    Run,
-    Jump,
-    DoubleJump
+    GameOperator
 }

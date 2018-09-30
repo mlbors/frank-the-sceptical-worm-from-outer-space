@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlatformFactory - Interface
+ * FTSWFOS - ManagerType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,15 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*****************************/
-/***** IPLATFORM FACTORY *****/
-/*****************************/
+/************************/
+/***** MANAGER TYPE *****/
+/************************/
 
-public interface IPlatformFactory<T> : IFactory<T>
+public enum ManagerType
 {
-    PlatformType Type
-    {
-        get;
-        set;
-    }
+    GameManager
 }

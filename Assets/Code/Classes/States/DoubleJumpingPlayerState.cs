@@ -67,7 +67,7 @@ public class DoubleJumpingPlayerState : AbstractPlayerState
     protected void _SetValues()
     {
         _name = "DoubleJumping";
-        _type = PlayerStates.DoubleJumping;
+        _type = PlayerState.DoubleJumping;
     }
 
     /**************************************************/
@@ -102,7 +102,7 @@ public class DoubleJumpingPlayerState : AbstractPlayerState
     {
         if (_command == null)
         {
-            _commandFactory.Type = CommandTypes.DoubleJump;
+            _commandFactory.Type = CommandType.DoubleJump;
             _command = _commandFactory.Create();
             _command.CommandSubject = (_stateSubject as ICommandSubject);
         }

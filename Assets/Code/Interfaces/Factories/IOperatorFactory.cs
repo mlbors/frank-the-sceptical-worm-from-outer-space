@@ -24,7 +24,7 @@ using UnityEngine;
 
 public interface IOperatorFactory<T> : IFactory<T>
 {
-    OperatorTypes Type
+    OperatorType Type
     {
         get;
         set;

@@ -35,4 +35,16 @@ public interface IGeneratorOperatorElement<T>
         get;
         set;
     }
+
+    GameObject GeneratorPoint
+    {
+        get;
+        set;
+    }
+
+    GameObject DestroyerPoint
+    {
+        get;
+        set;
+    }
 }

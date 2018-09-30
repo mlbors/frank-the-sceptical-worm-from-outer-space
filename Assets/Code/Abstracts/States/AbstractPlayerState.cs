@@ -32,7 +32,7 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
      * @var IStateSubject _stateSubject subject affected by the state
      * @var IStateInputHandler _stateInputHandler object to handle inputs
      * @var ICommandFactory _commandFactory object that create other objects, here, ICommand
-     * @var PlayerStates _type type of state
+     * @var PlayerState _type type of state
      * @var String _name define state's name
      * @var Bool _canBeLeft does the state can be left?
      */
@@ -40,7 +40,7 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
     protected IStateInputHandler _stateInputHandler;
     protected ICommandFactory<ICommand> _commandFactory;
     protected IPlayerStateSubject _stateSubject;
-    protected PlayerStates _type;
+    protected PlayerState _type;
     protected string _name;
     protected bool _canBeLeft = false;
 
@@ -157,7 +157,7 @@ abstract public class AbstractPlayerState : AbstractState, IPlayerState
      * @access public
      */
 
-    public PlayerStates Type
+    public PlayerState Type
     {
         get { return _type; }
         set { _type = value; }

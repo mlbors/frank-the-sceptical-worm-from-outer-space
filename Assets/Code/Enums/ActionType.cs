@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlatformFactory - Interface
+ * FTSWFOS - ActionType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,15 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*****************************/
-/***** IPLATFORM FACTORY *****/
-/*****************************/
+/***********************/
+/***** ACTION TYPE *****/
+/***********************/
 
-public interface IPlatformFactory<T> : IFactory<T>
+public enum ActionType
 {
-    PlatformType Type
-    {
-        get;
-        set;
-    }
+    None,
+    Stand,
+    Run,
+    Jump,
+    DoubleJump
 }

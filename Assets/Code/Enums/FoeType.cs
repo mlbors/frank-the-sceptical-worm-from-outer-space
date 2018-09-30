@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - PoolTypes - Enum
+ * FTSWFOS - FoeType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,13 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/**********************/
-/***** POOL TYPES *****/
-/**********************/
+/********************/
+/***** FOE TYPE *****/
+/********************/
 
-public enum PoolTypes
+public enum FoeType
 {
-    Collectable,
-    Foe,
-    Platform
+    Spike
 }

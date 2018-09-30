@@ -35,7 +35,7 @@ public class RunCommand : AbstractCommand
 
     public RunCommand(IActionFactory<IAction> actionFactory) : base(actionFactory)
     {
-        _actionFactory.Type = ActionTypes.Run;
+        _actionFactory.Type = ActionType.Run;
         Action = _actionFactory.Create();
     }
 

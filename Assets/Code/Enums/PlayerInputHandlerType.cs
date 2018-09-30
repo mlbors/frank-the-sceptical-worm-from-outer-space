@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - OperatorTypes - Enum
+ * FTSWFOS - PlayerInputHandlerType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,11 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/**************************/
-/***** OPERATOR TYPES *****/
-/**************************/
+/*************************************/
+/***** PLAYER INPUT HANDLER TYPE *****/
+/*************************************/
 
-public enum OperatorTypes
+public enum PlayerInputHandlerType
 {
-    GameOperator
+    Standing,
+    Running,
+    Jumping,
+    DoubleJumping,
+    Dying
 }

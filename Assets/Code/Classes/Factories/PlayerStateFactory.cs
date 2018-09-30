@@ -32,12 +32,12 @@ public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateF
 
     /**
      * @var IPlayerInputHandlerFactory<IStateInputHandler> _inputHandlerFactory input handler factory
-     * @var PlayerStates _type type of state
+     * @var PlayerState _type type of state
      * @var IPlayerStateSubject _subject subject of the state
      */
 
     protected IPlayerInputHandlerFactory<IStateInputHandler> _inputHandlerFactory;
-    protected PlayerStates _type;
+    protected PlayerState _type;
     protected IPlayerStateSubject _subject;
 
     /**************************************************/
@@ -50,10 +50,10 @@ public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateF
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param PlayerStates type type of state
+     * @param PlayerState type type of state
      */
 
-    public PlayerStateFactory(DiContainer container, IPlayerInputHandlerFactory<IStateInputHandler> inputHandlerFactory, PlayerStates type = PlayerStates.Standing) : base(container)
+    public PlayerStateFactory(DiContainer container, IPlayerInputHandlerFactory<IStateInputHandler> inputHandlerFactory, PlayerState type = PlayerState.Standing) : base(container)
     {
         _inputHandlerFactory = inputHandlerFactory;
         _type = type;
@@ -87,7 +87,7 @@ public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateF
      * @access public
      */
 
-    public PlayerStates Type
+    public PlayerState Type
     {
         get { return _type; }
         set { _type = value; }
@@ -134,29 +134,29 @@ public class PlayerStateFactory : AbstractDIFactory<IPlayerState>, IPlayerStateF
 
         switch (_type)
         {
-            case PlayerStates.Standing:
+            case PlayerState.Standing:
                 state = _container.Instantiate<StandingPlayerState>(new object[] { });
-                _inputHandlerFactory.Type = PlayerInputHandlerTypes.Standing;
+                _inputHandlerFactory.Type = PlayerInputHandlerType.Standing;
                 stateInputHandler = _inputHandlerFactory.Create();
                 break;
-            case PlayerStates.Running:
+            case PlayerState.Running:
                 state = _container.Instantiate<RunningPlayerState>(new object[] { });
-                _inputHandlerFactory.Type = PlayerInputHandlerTypes.Running;
+                _inputHandlerFactory.Type = PlayerInputHandlerType.Running;
                 stateInputHandler = _inputHandlerFactory.Create();
                 break;
-            case PlayerStates.Jumping:
+            case PlayerState.Jumping:
                 state = _container.Instantiate<JumpingPlayerState>(new object[] { });
-                _inputHandlerFactory.Type = PlayerInputHandlerTypes.Running;
+                _inputHandlerFactory.Type = PlayerInputHandlerType.Running;
                 stateInputHandler = _inputHandlerFactory.Create();
                 break;
-            case PlayerStates.DoubleJumping:
+            case PlayerState.DoubleJumping:
                 state = _container.Instantiate<DoubleJumpingPlayerState>(new object[] { });
-                _inputHandlerFactory.Type = PlayerInputHandlerTypes.Running;
+                _inputHandlerFactory.Type = PlayerInputHandlerType.Running;
                 stateInputHandler = _inputHandlerFactory.Create();
                 break;
             default:
                 state = _container.Instantiate<StandingPlayerState>(new object[] { });
-                _inputHandlerFactory.Type = PlayerInputHandlerTypes.Standing;
+                _inputHandlerFactory.Type = PlayerInputHandlerType.Standing;
                 stateInputHandler = _inputHandlerFactory.Create();
                 break;
         }

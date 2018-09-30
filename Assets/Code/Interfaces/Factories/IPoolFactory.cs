@@ -24,7 +24,7 @@ using UnityEngine;
 
 public interface IPoolFactory<T> : IFactory<T>
 {
-    PoolTypes Type
+    PoolType Type
     {
         get;
         set;

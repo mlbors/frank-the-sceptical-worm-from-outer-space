@@ -30,11 +30,11 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
     /*********************/
 
     /**
-     * @var PlatformTypes _type type of platform
+     * @var PlatformType _type type of platform
      * @var List<GameObject> _gameObjects game objects to use
      */
 
-    protected PlatformTypes _type;
+    protected PlatformType _type;
     protected List<GameObject> _gameObjects;
 
     /**************************************************/
@@ -47,11 +47,11 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param PlatformTypes type type of platform
+     * @param PlatformType type type of platform
      * @param List<GameObject> _gameObjects game objects to use
      */
 
-    public PlatformFactory(DiContainer container, List<GameObject> gameObjects, PlatformTypes type = PlatformTypes.One) : base(container)
+    public PlatformFactory(DiContainer container, List<GameObject> gameObjects, PlatformType type = PlatformType.One) : base(container)
     {
         _type = type;
         _gameObjects = gameObjects;
@@ -68,7 +68,7 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
      * @access public
      */
 
-    public PlatformTypes Type
+    public PlatformType Type
     {
         get { return _type; }
         set { _type = value; }
@@ -111,22 +111,22 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
 
         switch (_type)
         {
-            case PlatformTypes.One:
+            case PlatformType.One:
                 prefab = _container.InstantiatePrefab(_gameObjects[0]);
                 break;
-            case PlatformTypes.Two:
+            case PlatformType.Two:
                 prefab = _container.InstantiatePrefab(_gameObjects[1]);
                 break;
-            case PlatformTypes.Four:
+            case PlatformType.Four:
                 prefab = _container.InstantiatePrefab(_gameObjects[2]);
                 break;
-            case PlatformTypes.Five:
+            case PlatformType.Five:
                 prefab = _container.InstantiatePrefab(_gameObjects[3]);
                 break;
-            case PlatformTypes.Seven:
+            case PlatformType.Seven:
                 prefab = _container.InstantiatePrefab(_gameObjects[4]);
                 break;
-            case PlatformTypes.Nine:
+            case PlatformType.Nine:
                 prefab = _container.InstantiatePrefab(_gameObjects[5]);
                 break;
             default:

@@ -289,7 +289,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSub
      * @access public
      */
 
-    public abstract void ChangeState(PlayerStates state);
+    public abstract void ChangeState(PlayerState state);
 
     /**************************************************/
     /**************************************************/

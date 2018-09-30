@@ -52,7 +52,7 @@ public class StandingPlayerState : AbstractPlayerState
     protected void _SetValues()
     {
         _name = "Standing";
-        _type = PlayerStates.Standing;
+        _type = PlayerState.Standing;
     }
 
     /**************************************************/

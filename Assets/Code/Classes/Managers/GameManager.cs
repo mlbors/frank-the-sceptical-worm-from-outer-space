@@ -49,7 +49,7 @@ public class GameManager : AbstractManager, IGameManager
     protected void _SetValues()
     {
         Debug.Log("::: GameManager setting values :::");
-        _operatorFactory.Type = OperatorTypes.GameOperator;
+        _operatorFactory.Type = OperatorType.GameOperator;
         IOperator gameOperator = _operatorFactory.Create();
         Debug.Log("::: GameOperator Object :::");
         Debug.Log(gameOperator);

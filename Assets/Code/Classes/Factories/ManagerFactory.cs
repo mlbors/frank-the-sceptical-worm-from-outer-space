@@ -31,10 +31,10 @@ public class ManagerFactory : AbstractDIFactory<IManager>, IManagerFactory<IMana
     /*********************/
 
     /**
-     * @var ManagerTypes _type type of manager
+     * @var ManagerType _type type of manager
      */
 
-    protected ManagerTypes _type;
+    protected ManagerType _type;
 
     /**************************************************/
     /**************************************************/
@@ -46,10 +46,10 @@ public class ManagerFactory : AbstractDIFactory<IManager>, IManagerFactory<IMana
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param ManagerTypes type type of command
+     * @param ManagerType type type of command
      */
 
-    public ManagerFactory(DiContainer container, ManagerTypes type = ManagerTypes.GameManager) : base (container)
+    public ManagerFactory(DiContainer container, ManagerType type = ManagerType.GameManager) : base (container)
     {
         _type = type;
     }
@@ -65,7 +65,7 @@ public class ManagerFactory : AbstractDIFactory<IManager>, IManagerFactory<IMana
      * @access public
      */
 
-    public ManagerTypes Type
+    public ManagerType Type
     {
         get { return _type; }
         set { _type = value; }
@@ -90,7 +90,7 @@ public class ManagerFactory : AbstractDIFactory<IManager>, IManagerFactory<IMana
 
         switch (_type)
         {
-            case ManagerTypes.GameManager:
+            case ManagerType.GameManager:
                 manager = _container.Instantiate<GameManager>() as IManager;
                 break;
             default:

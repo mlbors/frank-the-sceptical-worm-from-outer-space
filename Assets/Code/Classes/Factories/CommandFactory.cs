@@ -30,10 +30,10 @@ public class CommandFactory : AbstractDIFactory<ICommand>, ICommandFactory<IComm
     /*********************/
 
     /**
-     * @var CommandTypes _type type of command
+     * @var CommandType _type type of command
      */
 
-    protected CommandTypes _type;
+    protected CommandType _type;
 
     /**************************************************/
     /**************************************************/
@@ -45,10 +45,10 @@ public class CommandFactory : AbstractDIFactory<ICommand>, ICommandFactory<IComm
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param CommandTypes type type of command
+     * @param CommandType type type of command
      */
 
-    public CommandFactory(DiContainer container, CommandTypes type = CommandTypes.None) : base (container)
+    public CommandFactory(DiContainer container, CommandType type = CommandType.None) : base (container)
     {
         _type = type;
     }
@@ -64,7 +64,7 @@ public class CommandFactory : AbstractDIFactory<ICommand>, ICommandFactory<IComm
      * @access public
      */
 
-    public CommandTypes Type
+    public CommandType Type
     {
         get { return _type; }
         set { _type = value; }
@@ -89,13 +89,13 @@ public class CommandFactory : AbstractDIFactory<ICommand>, ICommandFactory<IComm
 
         switch (_type)
         {
-            case CommandTypes.Run:
+            case CommandType.Run:
                 command = _container.Instantiate<RunCommand>() as ICommand;
                 break;
-            case CommandTypes.Jump:
+            case CommandType.Jump:
                 command = _container.Instantiate<JumpCommand>() as ICommand;
                 break;
-            case CommandTypes.DoubleJump:
+            case CommandType.DoubleJump:
                 command = _container.Instantiate<DoubleJumpCommand>() as ICommand;
                 break;
             default:

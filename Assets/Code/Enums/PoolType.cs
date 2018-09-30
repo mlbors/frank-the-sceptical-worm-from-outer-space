@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlatformFactory - Interface
+ * FTSWFOS - PoolType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,15 +18,13 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*****************************/
-/***** IPLATFORM FACTORY *****/
-/*****************************/
+/*********************/
+/***** POOL TYPE *****/
+/*********************/
 
-public interface IPlatformFactory<T> : IFactory<T>
+public enum PoolType
 {
-    PlatformType Type
-    {
-        get;
-        set;
-    }
+    Collectable,
+    Foe,
+    Platform
 }

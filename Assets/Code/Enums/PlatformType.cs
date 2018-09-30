@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - ManagerTypes - Enum
+ * FTSWFOS - PlatformType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -19,10 +19,15 @@ using UnityEngine;
 /**************************************************/
 
 /*************************/
-/***** MANAGER TYPES *****/
+/***** PLATFORM TYPE *****/
 /*************************/
 
-public enum ManagerTypes
+public enum PlatformType
 {
-    GameManager
+    One,
+    Two,
+    Four,
+    Five,
+    Seven,
+    Nine
 }

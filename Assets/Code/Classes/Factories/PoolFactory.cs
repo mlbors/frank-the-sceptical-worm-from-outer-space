@@ -31,10 +31,10 @@ public class PoolFactory : AbstractDIFactory<IPool>, IPoolFactory<IPool>
     /*********************/
 
     /**
-     * @var PoolTypes _type type of pool
+     * @var PoolType _type type of pool
      */
 
-    protected PoolTypes _type;
+    protected PoolType _type;
 
     /**************************************************/
     /**************************************************/
@@ -46,10 +46,10 @@ public class PoolFactory : AbstractDIFactory<IPool>, IPoolFactory<IPool>
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param PoolTypes type type of pool
+     * @param PoolType type type of pool
      */
 
-    public PoolFactory(DiContainer container, PoolTypes type = PoolTypes.Platform) : base(container)
+    public PoolFactory(DiContainer container, PoolType type = PoolType.Platform) : base(container)
     {
         _type = type;
     }
@@ -65,7 +65,7 @@ public class PoolFactory : AbstractDIFactory<IPool>, IPoolFactory<IPool>
      * @access public
      */
 
-    public PoolTypes Type
+    public PoolType Type
     {
         get { return _type; }
         set { _type = value; }
@@ -90,7 +90,7 @@ public class PoolFactory : AbstractDIFactory<IPool>, IPoolFactory<IPool>
 
         switch (_type)
         {
-            case PoolTypes.Platform:
+            case PoolType.Platform:
                 pool = _container.Instantiate<PlatformPool>() as IPool;
                 break;
             default:

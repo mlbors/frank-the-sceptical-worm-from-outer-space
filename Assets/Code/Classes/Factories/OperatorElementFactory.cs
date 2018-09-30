@@ -31,10 +31,10 @@ public class OperatorElementFactory : AbstractDIFactory<IOperatorElement>, IOper
     /*********************/
 
     /**
-     * @var OperatorElementTypes _type type of operator element
+     * @var OperatorElementType _type type of operator element
      */
 
-    protected OperatorElementTypes _type;
+    protected OperatorElementType _type;
 
     /**************************************************/
     /**************************************************/
@@ -46,10 +46,10 @@ public class OperatorElementFactory : AbstractDIFactory<IOperatorElement>, IOper
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param OperatorElementTypes type type of command
+     * @param OperatorElementType type type of command
      */
 
-    public OperatorElementFactory(DiContainer container, OperatorElementTypes type = OperatorElementTypes.PlayerOperatorElement) : base (container)
+    public OperatorElementFactory(DiContainer container, OperatorElementType type = OperatorElementType.PlayerOperatorElement) : base (container)
     {
         _type = type;
     }
@@ -65,7 +65,7 @@ public class OperatorElementFactory : AbstractDIFactory<IOperatorElement>, IOper
      * @access public
      */
 
-    public OperatorElementTypes Type
+    public OperatorElementType Type
     {
         get { return _type; }
         set { _type = value; }
@@ -90,25 +90,27 @@ public class OperatorElementFactory : AbstractDIFactory<IOperatorElement>, IOper
 
         switch (_type)
         {
-            case OperatorElementTypes.CameraOperatorElement:
+            case OperatorElementType.CameraOperatorElement:
                 operatorElement = _container.Instantiate<CameraOperatorElement>() as IOperatorElement;
                 break;
-            case OperatorElementTypes.CollectableOperatorElement:
+            case OperatorElementType.CollectableOperatorElement:
                 operatorElement = _container.Instantiate<CollectableOperatorElement>() as IOperatorElement;
                 break;
-            case OperatorElementTypes.FoeOperatorElement:
+            case OperatorElementType.FoeOperatorElement:
                 operatorElement = _container.Instantiate<FoeOperatorElement>() as IOperatorElement;
                 break;
-            case OperatorElementTypes.MenuOperatorElement:
+            case OperatorElementType.MenuOperatorElement:
                 operatorElement = _container.Instantiate<MenuOperatorElement>() as IOperatorElement;
                 break;
-            case OperatorElementTypes.PlatformOperatorElement:
-                operatorElement = _container.Instantiate<PlatformOperatorElement>() as IOperatorElement;
+            case OperatorElementType.PlatformOperatorElement:
+                GameObject gameObject = new GameObject();
+                //operatorElement = _container.Instantiate<PlatformOperatorElement>() as IOperatorElement;
+                operatorElement = _container.InstantiatePrefabForComponent<PlatformOperatorElement>(gameObject) as IOperatorElement;
                 break;
-            case OperatorElementTypes.PlayerOperatorElement:
+            case OperatorElementType.PlayerOperatorElement:
                 operatorElement = _container.Instantiate<PlayerOperatorElement>() as IOperatorElement;
                 break;
-            case OperatorElementTypes.ScoreOperatorElement:
+            case OperatorElementType.ScoreOperatorElement:
                 operatorElement = _container.Instantiate<ScoreOperatorElement>() as IOperatorElement;
                 break;
             default:
@@ -136,7 +138,7 @@ public class OperatorElementFactory : AbstractDIFactory<IOperatorElement>, IOper
         _container.Instantiate<CollectableOperatorElement>();
         _container.Instantiate<FoeOperatorElement>();
         _container.Instantiate<MenuOperatorElement>();
-        _container.Instantiate<PlatformOperatorElement>();
+        //_container.Instantiate<PlatformOperatorElement>();
         _container.Instantiate<PlayerOperatorElement>();
         _container.Instantiate< ScoreOperatorElement>();
     }

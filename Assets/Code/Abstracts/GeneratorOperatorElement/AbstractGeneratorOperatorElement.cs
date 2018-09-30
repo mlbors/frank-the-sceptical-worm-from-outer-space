@@ -22,7 +22,7 @@ using UnityEngine;
 /***** ABSTRACT GENERATOR OPERATOR ELEMENT *****/
 /***********************************************/
 
-abstract public class AbstractGeneratorOperatorElement<T> : IGeneratorOperatorElement<T>, IOperatorElement, IProduct
+abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGeneratorOperatorElement<T>, IOperatorElement, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -31,10 +31,14 @@ abstract public class AbstractGeneratorOperatorElement<T> : IGeneratorOperatorEl
     /**
      * @var IGenerator _generator object that generates other kind of objects using a pool system
      * @var IDestroyer _destroyer object that destroys generated object using a pool system
+     * @var GameObject _generatorPoint when to generate objects
+     * @var GameObject _destroyerPoint when to destroy points
      */
 
     protected IGenerator<T> _generator;
     protected IDestroyer<T> _destroyer;
+    protected GameObject _generatorPoint;
+    protected GameObject _destroyerPoint;
 
     /**************************************************/
     /**************************************************/
@@ -68,6 +72,40 @@ abstract public class AbstractGeneratorOperatorElement<T> : IGeneratorOperatorEl
     {
         get { return _destroyer; }
         set { _destroyer = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************************/
+    /***** GENERATOR POINT GETTER/SETTER *****/
+    /*****************************************/
+
+    /**
+     * @access public
+     */
+
+    public GameObject GeneratorPoint
+    {
+        get { return _generatorPoint; }
+        set { _generatorPoint = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************************/
+    /***** DESTROYER POINT GETTER/SETTER *****/
+    /*****************************************/
+
+    /**
+     * @access public
+     */
+
+    public GameObject DestroyerPoint
+    {
+        get { return _destroyerPoint; }
+        set { _destroyerPoint = value; }
     }
 
     /**************************************************/

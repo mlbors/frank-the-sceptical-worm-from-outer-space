@@ -69,7 +69,7 @@ public class JumpingPlayerState : AbstractPlayerState
     protected void _SetValues()
     {
         _name = "Jumping";
-        _type = PlayerStates.Jumping;
+        _type = PlayerState.Jumping;
         _jumpTimeCounter = 0.75f;
     }
 
@@ -104,7 +104,7 @@ public class JumpingPlayerState : AbstractPlayerState
     {
         if (_command == null)
         {
-            _commandFactory.Type = CommandTypes.Jump;
+            _commandFactory.Type = CommandType.Jump;
             _command = _commandFactory.Create();
             _command.CommandSubject = (_stateSubject as ICommandSubject);
         }
@@ -157,7 +157,7 @@ public class JumpingPlayerState : AbstractPlayerState
     {
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && _jumpTimeCounter > 0)
         {
-            _stateSubject.ChangeState(PlayerStates.DoubleJumping);
+            _stateSubject.ChangeState(PlayerState.DoubleJumping);
         }
     }
 }

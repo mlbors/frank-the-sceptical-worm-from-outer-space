@@ -24,7 +24,7 @@ using UnityEngine;
 
 public interface IActionFactory<T> : IFactory<T>
 {
-    ActionTypes Type
+    ActionType Type
     {
         get;
         set;

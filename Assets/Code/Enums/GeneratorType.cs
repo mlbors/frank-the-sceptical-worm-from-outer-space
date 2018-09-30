@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - PlayerInputHandlerTypes - Enum
+ * FTSWFOS - GeneratorType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,15 +18,13 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/**************************************/
-/***** PLAYER INPUT HANDLER TYPES *****/
-/**************************************/
+/**************************/
+/***** GENERATOR TYPE *****/
+/**************************/
 
-public enum PlayerInputHandlerTypes
+public enum GeneratorType
 {
-    Standing,
-    Running,
-    Jumping,
-    DoubleJumping,
-    Dying
+    Collectable,
+    Foe,
+    Platform
 }

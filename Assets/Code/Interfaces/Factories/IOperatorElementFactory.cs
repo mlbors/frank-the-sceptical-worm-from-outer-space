@@ -24,7 +24,7 @@ using UnityEngine;
 
 public interface IOperatorElementFactory<T> : IFactory<T>
 {
-    OperatorElementTypes Type
+    OperatorElementType Type
     {
         get;
         set;

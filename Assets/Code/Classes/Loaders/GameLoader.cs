@@ -52,7 +52,7 @@ public class GameLoader : AbstractLoader, IGameLoader
     protected void _SetValues()
     {
         Debug.Log("::: GameLoader setting values :::");
-        _managerFactory.Type = ManagerTypes.GameManager;
+        _managerFactory.Type = ManagerType.GameManager;
         IManager gameManager = _managerFactory.Create();
         AddManager(gameManager);
     }

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlatformFactory - Interface
+ * FTSWFOS - PlayerState - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,15 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*****************************/
-/***** IPLATFORM FACTORY *****/
-/*****************************/
+/************************/
+/***** PLAYER STATE *****/
+/************************/
 
-public interface IPlatformFactory<T> : IFactory<T>
+public enum PlayerState
 {
-    PlatformType Type
-    {
-        get;
-        set;
-    }
+    Standing,
+    Running,
+    Jumping,
+    DoubleJumping,
+    Dying
 }

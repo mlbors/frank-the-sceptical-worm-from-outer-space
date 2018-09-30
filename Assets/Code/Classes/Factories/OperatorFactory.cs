@@ -31,10 +31,10 @@ public class OperatorFactory : AbstractDIFactory<IOperator>, IOperatorFactory<IO
     /*********************/
 
     /**
-     * @var OperatorTypes _type type of operator
+     * @var OperatorType _type type of operator
      */
 
-    protected OperatorTypes _type;
+    protected OperatorType _type;
 
     /**************************************************/
     /**************************************************/
@@ -46,10 +46,10 @@ public class OperatorFactory : AbstractDIFactory<IOperator>, IOperatorFactory<IO
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param OperatorTypes type type of command
+     * @param OperatorType type type of command
      */
 
-    public OperatorFactory(DiContainer container, OperatorTypes type = OperatorTypes.GameOperator) : base (container)
+    public OperatorFactory(DiContainer container, OperatorType type = OperatorType.GameOperator) : base (container)
     {
         _type = type;
     }
@@ -65,7 +65,7 @@ public class OperatorFactory : AbstractDIFactory<IOperator>, IOperatorFactory<IO
      * @access public
      */
 
-    public OperatorTypes Type
+    public OperatorType Type
     {
         get { return _type; }
         set { _type = value; }
@@ -90,7 +90,7 @@ public class OperatorFactory : AbstractDIFactory<IOperator>, IOperatorFactory<IO
 
         switch (_type)
         {
-            case OperatorTypes.GameOperator:
+            case OperatorType.GameOperator:
                 theOperator = _container.Instantiate<GameOperator>() as IOperator;
                 break;
             default:
