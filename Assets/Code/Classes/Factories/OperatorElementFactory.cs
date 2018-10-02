@@ -103,7 +103,6 @@ public class OperatorElementFactory : AbstractDIFactory<IOperatorElement>, IOper
                 operatorElement = _container.Instantiate<MenuOperatorElement>() as IOperatorElement;
                 break;
             case OperatorElementType.PlatformOperatorElement:
-                GameObject gameObject = new GameObject();
                 //operatorElement = _container.Instantiate<PlatformOperatorElement>() as IOperatorElement;
                 operatorElement = _container.InstantiateComponentOnNewGameObject<PlatformOperatorElement>() as IOperatorElement;
                 break;

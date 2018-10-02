@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IDestroyer - Interface
+ * FTSWFOS - PlatformDestroyer - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,11 +18,18 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/**********************/
-/***** IDESTROYER *****/
-/**********************/
+/******************************/
+/***** PLATFORM DESTROYER *****/
+/******************************/
 
-public interface IDestroyer
+public class PlatformDestroyer : AbstractDestroyer<IPlatform>
 {
-    void Destroy();
+    /*******************/
+    /***** DESTROY *****/
+    /*******************/
+
+    public override void Destroy()
+    {
+
+    }
 }

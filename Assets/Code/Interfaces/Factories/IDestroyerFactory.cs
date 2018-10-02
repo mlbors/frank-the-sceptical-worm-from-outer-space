@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IDestroyer - Interface
+ * FTSWFOS - IDestroyerFactory - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,11 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/**********************/
-/***** IDESTROYER *****/
-/**********************/
+/******************************/
+/***** IDESTROYER FACTORY *****/
+/******************************/
 
-public interface IDestroyer
+public interface IDestroyerFactory<T> : IFactory<T>
 {
-    void Destroy();
+    DestroyerType Type
+    {
+        get;
+        set;
+    }
 }

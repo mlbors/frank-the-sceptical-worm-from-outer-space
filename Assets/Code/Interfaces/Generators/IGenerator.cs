@@ -22,13 +22,7 @@ using UnityEngine;
 /***** IGENERATOR *****/
 /**********************/
 
-public interface IGenerator<T>
+public interface IGenerator
 {
-    IPool<T> Pool
-    {
-        get;
-        set;
-    }
-
     void Generate();
 }

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IDestroyer - Interface
+ * FTSWFOS - FoeGenerator - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,11 +18,18 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/**********************/
-/***** IDESTROYER *****/
-/**********************/
+/*************************/
+/***** FOE GENERATOR *****/
+/*************************/
 
-public interface IDestroyer
+public class FoeGenerator : AbstractGenerator<IFoe>
 {
-    void Destroy();
+    /********************/
+    /***** GENERATE *****/
+    /********************/
+
+    public override void Generate()
+    {
+
+    }
 }

@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IDestroyer - Interface
+ * FTSWFOS - IDestroyerGeneric - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,11 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/**********************/
-/***** IDESTROYER *****/
-/**********************/
+/******************************/
+/***** IDESTROYER GENERIC *****/
+/******************************/
 
-public interface IDestroyer
+public interface IDestroyer<T> : IDestroyer
 {
-    void Destroy();
+    IPool<T> Pool
+    {
+        get;
+        set;
+    }
 }
