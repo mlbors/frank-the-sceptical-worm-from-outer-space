@@ -30,44 +30,80 @@ abstract public class AbstractGeneratorComposite<T> : AbstractGenerator<T>, IGen
 
     /**
      * @var GameObject _gameObject player's game object
-     * @var List<IOperator> _operators list of operators to generate various components
+     * @var List<IOperatorElement> _operatorsElement list of operators to generate various components
+     * @var IOperatorElementFactory<IOperatorElement> _operatorElementFactory object that create other objects, here, IOperatorElementFactory
      */
 
     protected GameObject _gameObject;
-    protected List<IOperator> _operators = new List<IOperator>();
+    protected List<IOperatorElement> _operatorElements = new List<IOperatorElement>();
+    protected IOperatorElementFactory<IOperatorElement> _operatorElementFactory;
 
     /**************************************************/
     /**************************************************/
 
-    /***********************************/
-    /***** OPERATORS GETTER/SETTER *****/
-    /***********************************/
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
 
     /**
-     * @access public
+     * @access protected
+     * @param IOperatorElementFactory<IOperatorElement> operatorElementFactory object that create other objects, here, IOperatorElementFactory
      */
 
-    public List<IOperator> Operators
+    protected AbstractGeneratorComposite(IOperatorElementFactory<IOperatorElement> operatorElementFactory)
     {
-        get { return _operators; }
-        set { _operators = value; }
+        OperatorElementFactory = operatorElementFactory;
     }
 
     /**************************************************/
     /**************************************************/
 
-    /**********************************/
-    /***** IPLATFORM ADD OPERATOR *****/
-    /**********************************/
+    /*******************************************/
+    /***** OPERATOR ELEMENTS GETTER/SETTER *****/
+    /*******************************************/
 
     /**
      * @access public
-     * @param IOperator operatorElement opertaor to add
      */
 
-    public void AddOperator(IOperator operatorElement)
+    public List<IOperatorElement> OperatorElements
     {
-        _operators.Add(operatorElement);
+        get { return _operatorElements; }
+        set { _operatorElements = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************************************/
+    /***** OPERATOR ELEMENT FACTORY GETTER/SETTER *****/
+    /**************************************************/
+
+    /**
+     * @access public
+     */
+
+    public IOperatorElementFactory<IOperatorElement> OperatorElementFactory
+    {
+        get { return _operatorElementFactory; }
+        set { _operatorElementFactory = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************************/
+    /***** IPLATFORM ADD OPERATOR ELEMENT *****/
+    /******************************************/
+
+    /**
+     * @access public
+     * @param IOperatorElement operatorElement opertorElement to add
+     */
+
+    public void AddOperatorElement(IOperatorElement operatorElement)
+    {
+        _operatorElements.Add(operatorElement);
     }
 
     /**************************************************/
@@ -79,24 +115,24 @@ abstract public class AbstractGeneratorComposite<T> : AbstractGenerator<T>, IGen
 
     /**
      * @access public
-     * @param IOperator operatorElement opertaor to remove
+     * @param IOperatorElement operatorElement opertorElement to remove
      */
 
-    public void RemoveOperator(IOperator operatorElement)
+    public void RemoveOperatorElement(IOperatorElement operatorElement)
     {
-        _operators.Remove(operatorElement);
+        _operatorElements.Remove(operatorElement);
     }
 
     /**************************************************/
     /**************************************************/
 
-    /***************************************/
-    /***** IPLATFORM EXECUTE OPERATORS *****/
-    /***************************************/
+    /***********************************************/
+    /***** IPLATFORM EXECUTE OPERATOR ELEMENTS *****/
+    /***********************************************/
 
     /**
      * @access public
      */
 
-    public abstract void ExecuteOperators();
+    public abstract void ExecuteOperatorElements();
 }

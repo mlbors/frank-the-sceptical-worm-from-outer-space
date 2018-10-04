@@ -53,12 +53,6 @@ public class GameOperator : AbstractOperator, IGameOperator
         IOperatorElement cameraOperatorElement = _operatorElementFactory.Create();
         AddElement(cameraOperatorElement);
 
-        _operatorElementFactory.Type = OperatorElementType.CollectableOperatorElement;
-        AddElement(_operatorElementFactory.Create());
-
-        _operatorElementFactory.Type = OperatorElementType.FoeOperatorElement;
-        AddElement(_operatorElementFactory.Create());
-
         _operatorElementFactory.Type = OperatorElementType.MenuOperatorElement;
         AddElement(_operatorElementFactory.Create());
 

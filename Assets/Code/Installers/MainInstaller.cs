@@ -69,8 +69,14 @@ public class MainInstaller : MonoInstaller
 
         Container.Bind<IOperatorElementFactory<IOperatorElement>>()
                  .To<OperatorElementFactory>()
-                 .AsSingle()
+                 .AsCached()
                  .WhenInjectedInto<IGameOperator>()
+                 .NonLazy();
+
+        Container.Bind<IOperatorElementFactory<IOperatorElement>>()
+                 .To<OperatorElementFactory>()
+                 .AsCached()
+                 .WhenInjectedInto<IPlatformGenerator>()
                  .NonLazy();
 
         Container.Bind<GameObject>()

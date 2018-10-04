@@ -24,13 +24,13 @@ using UnityEngine;
 
 public interface IGeneratorComposite<T> : IGenerator<T>
 {
-    List<IOperator> Operators
+    List<IOperatorElement> OperatorElements
     {
         get;
         set;
     }
 
-    void AddOperator(IOperator operatorElement);
-    void RemoveOperator(IOperator operatorElement);
-    void ExecuteOperators();
+    void AddOperatorElement(IOperatorElement operatorElement);
+    void RemoveOperatorElement(IOperatorElement operatorElement);
+    void ExecuteOperatorElements();
 }
