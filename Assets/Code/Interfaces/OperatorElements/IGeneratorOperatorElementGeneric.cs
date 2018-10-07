@@ -1,5 +1,5 @@
 /**
- * FTSWFOS - IGeneratorOperatorElement - Interface
+ * FTSWFOS - IGeneratorOperatorElementGeneric - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,19 +18,19 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/***************************************/
-/***** IGENERATOR OPERATOR ELEMENT *****/
-/***************************************/
+/***********************************************/
+/***** IGENERATOR OPERATOR ELEMENT GENERIC *****/
+/***********************************************/
 
-public interface IGeneratorOperatorElement
+public interface IGeneratorOperatorElement<T> : IGeneratorOperatorElement
 {
-    GameObject GenerationPoint
+    IGenerator<T> Generator
     {
         get;
         set;
     }
 
-    GameObject DestructionPoint
+    IDestroyer<T> Destroyer
     {
         get;
         set;

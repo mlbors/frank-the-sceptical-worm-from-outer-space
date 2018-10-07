@@ -79,6 +79,23 @@ public class MainInstaller : MonoInstaller
                  .WhenInjectedInto<IPlatformGenerator>()
                  .NonLazy();
 
+        Container.Bind<IGeneratorFactory<IGenerator>>()
+                 .To<GeneratorFactory>()
+                 .AsSingle()
+                 .WhenInjectedInto<IGeneratorOperatorElement>()
+                 .NonLazy();
+
+        Container.Bind<IDestroyerFactory<IDestroyer>>()
+                 .To<DestroyerFactory>()
+                 .AsSingle()
+                 .WhenInjectedInto<IGeneratorOperatorElement>()
+                 .NonLazy();
+                 
+        Container.Bind<List<GameObject>>()
+                 .FromInstance(new List<GameObject>{ _settings.objectsGenerationPoint, _settings.objectsDestructionPoint})
+                 .AsCached()
+                 .WhenInjectedInto<IGeneratorOperatorElement>();
+
         Container.Bind<GameObject>()
                  .FromInstance(_settings.cameraGameObject)
                  .AsCached()
@@ -111,8 +128,12 @@ public class MainInstaller : MonoInstaller
 
         /**
          * @var GameObject cameraGameObject prefab to use for player
+         * @var GameObject objectGenerationPoint point from where to generate objects
+         * @var GameObject objectDestructionPoint point from where to destroy objects
          */
 
         public GameObject cameraGameObject;
+        public GameObject objectsGenerationPoint;
+        public GameObject objectsDestructionPoint;
     }
 }

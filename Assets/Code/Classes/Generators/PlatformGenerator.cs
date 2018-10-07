@@ -67,7 +67,11 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     public override void ExecuteOperatorElements()
     {
-
+        foreach (IOperatorElement element in _operatorElements)
+        {
+            element.Init();
+            element.Operate();
+        }
     }
 
     /**************************************************/

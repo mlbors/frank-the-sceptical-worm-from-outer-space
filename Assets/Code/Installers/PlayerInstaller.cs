@@ -109,5 +109,6 @@ public class PlayerInstaller : MonoInstaller
          */
 
         public GameObject playerGameObject;
+
     }
 }
