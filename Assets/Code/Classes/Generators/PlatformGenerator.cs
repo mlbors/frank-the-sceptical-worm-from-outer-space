@@ -36,6 +36,7 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
     public PlatformGenerator(IOperatorElementFactory<IOperatorElement> operatorElementFactory) : base(operatorElementFactory)
     {
         _SetValues();
+        _InitOperators();
     }
 
     /**************************************************/
@@ -57,6 +58,25 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
     /**************************************************/
     /**************************************************/
 
+    /**************************/
+    /***** INIT OPERATORS *****/
+    /**************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InitOperators()
+    {
+        foreach (IOperatorElement element in _operatorElements)
+        {
+            element.Init();
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /***********************************************/
     /***** IPLATFORM EXECUTE OPERATOR ELEMENTS *****/
     /***********************************************/
@@ -69,7 +89,6 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
     {
         foreach (IOperatorElement element in _operatorElements)
         {
-            element.Init();
             element.Operate();
         }
     }

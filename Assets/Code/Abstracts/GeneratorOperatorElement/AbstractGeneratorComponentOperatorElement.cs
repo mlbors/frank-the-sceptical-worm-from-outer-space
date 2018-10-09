@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - AbstractGeneratorOperatorElement - Abstract Class
+ * FTSWFOS - AbstractGeneratorComponentOperatorElement - Abstract Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -20,10 +20,10 @@ using Zenject;
 /**************************************************/
 
 /***********************************************/
-/***** ABSTRACT GENERATOR OPERATOR ELEMENT *****/
+/***** ABSTRACT GENERATOR COMPONENT OPERATOR ELEMENT *****/
 /***********************************************/
 
-abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGeneratorOperatorElement<T>, IOperatorElement, IProduct
+abstract public class AbstractGeneratorComponentOperatorElement<T> : IGeneratorComponentOperatorElement<T>, IOperatorElement, IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -34,16 +34,12 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      * @var IGenerator _generator object that generates other kind of objects using a pool system
      * @var IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
      * @var IDestroyer _destroyer object that destroys generated object using a pool system
-     * @var GameObject _generationPoint when to generate objects
-     * @var GameObject _destructionPoint when to destroy points
      */
 
     protected IGeneratorFactory<IGenerator> _generatorFactory;
     protected IGenerator<T> _generator;
     protected IDestroyerFactory<IDestroyer> _destroyerFactory;
     protected IDestroyer<T> _destroyer;
-    protected GameObject _generationPoint;
-    protected GameObject _destructionPoint;
 
     /**************************************************/
     /**************************************************/
@@ -56,15 +52,13 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      * @access public
      * @param IGeneratorFactory<IGenerator> generatorFactroy object that create other objects, here, IGenerator
      * @param IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
-     * @param List points list of points
      */
 
     [Inject]
     public virtual void Construct(IGeneratorFactory<IGenerator> generatorFactory, 
-                                  IDestroyerFactory<IDestroyer> destroyerFactory,
-                                  List<GameObject> points)
+                                  IDestroyerFactory<IDestroyer> destroyerFactory)
     {
-        _SetValues(generatorFactory, destroyerFactory, points);
+        _SetValues(generatorFactory, destroyerFactory);
     }
 
     /**************************************************/
@@ -82,13 +76,10 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      */
 
     protected void _SetValues(IGeneratorFactory<IGenerator> generatorFactory,
-                              IDestroyerFactory<IDestroyer> destroyerFactory,
-                              List<GameObject> points)
+                              IDestroyerFactory<IDestroyer> destroyerFactory)
     {
         GeneratorFactory = generatorFactory;
         DestroyerFactory = destroyerFactory;
-        GenerationPoint = points[0];
-        DestructionPoint = points[1];
     }
 
     /**************************************************/
@@ -157,40 +148,6 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
     {
         get { return _destroyer; }
         set { _destroyer = value; }
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /******************************************/
-    /***** GENERATION POINT GETTER/SETTER *****/
-    /******************************************/
-
-    /**
-     * @access public
-     */
-
-    public GameObject GenerationPoint
-    {
-        get { return _generationPoint; }
-        set { _generationPoint = value; }
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /*******************************************/
-    /***** DESTRUCTION POINT GETTER/SETTER *****/
-    /*******************************************/
-
-    /**
-     * @access public
-     */
-
-    public GameObject DestructionPoint
-    {
-        get { return _destructionPoint; }
-        set { _destructionPoint = value; }
     }
 
     /**************************************************/

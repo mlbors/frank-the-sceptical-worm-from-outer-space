@@ -71,4 +71,29 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<Platform
     {
 
     }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************************************/
+    /***** IGENERATOR OPERATOR ELEMENT CALL GENERATOR *****/
+    /******************************************************/
+
+    public override void CallGenerator()
+    {
+        _generator.Generate();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************************************/
+    /***** IGENERATOR OPERATOR ELEMENT CALL DESTROYER *****/
+    /******************************************************/
+
+    public override void CallDestroyer()
+    {
+        _destroyer.Destroy();
+    }
+
 }
