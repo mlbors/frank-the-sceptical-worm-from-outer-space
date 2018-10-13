@@ -24,6 +24,22 @@ using UnityEngine;
 
 public class FoeGenerator : AbstractGenerator<IFoe>
 {
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access public
+     * @param IPoolFactory _poolFactory factory object that creates other objects, here, IPool
+     */
+
+    public FoeGenerator(IPoolFactory<IPool> poolFactory) : base(poolFactory)
+    {
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /********************/
     /***** GENERATE *****/
     /********************/

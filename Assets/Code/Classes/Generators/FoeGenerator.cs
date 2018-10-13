@@ -24,6 +24,22 @@ using UnityEngine;
 
 public class CollectableGenerator : AbstractGenerator<ICollectable>
 {
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access public
+     * @param IPoolFactory _poolFactory factory object that creates other objects, here, IPool
+     */
+
+    public CollectableGenerator(IPoolFactory<IPool> poolFactory) : base(poolFactory)
+    {
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /********************/
     /***** GENERATE *****/
     /********************/

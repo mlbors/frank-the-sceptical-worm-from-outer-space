@@ -51,7 +51,11 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
 
     public override void Init()
     {
+        _generatorFactory.Type = GeneratorType.Collectable;
+        Generator = _generatorFactory.Create() as IGenerator<ICollectable>;
 
+        _destroyerFactory.Type = DestroyerType.Collectable;
+        Destroyer = _destroyerFactory.Create() as IDestroyer<ICollectable>;
     }
 
     /**************************************************/

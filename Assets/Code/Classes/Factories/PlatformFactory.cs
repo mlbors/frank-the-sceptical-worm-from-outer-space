@@ -135,7 +135,7 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
         }
 
         _container.Bind<IPlatform>().To<Platform>().AsTransient();
-        platform = _container.InstantiateComponent<Platform>(prefab);
+        platform = _container.InstantiateComponent<Platform>(prefab, new object[] {});
 
         return platform;
     }
@@ -153,6 +153,6 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
 
     public override void Validate()
     {
-        _container.Instantiate<Platform>();
+
     }
 }

@@ -30,12 +30,11 @@ public class PlatformPool : AbstractPool<IPlatform>
 
     /**
      * @access protected
-     * @param IPlatform pooledObject current pooled object
      * @param Int amount initinal amount
      * @param IFactory factory object that other creates objects, here object of type T
      */
 
-    public PlatformPool(IPlatform pooledObject, int amount, IPlatformFactory<IPlatform> factory) : base(pooledObject, amount, factory)
+    public PlatformPool(IPlatformFactory<IPlatform> factory, int amount = 5) : base(amount, factory)
     {
     }
 
@@ -52,6 +51,7 @@ public class PlatformPool : AbstractPool<IPlatform>
 
     public override void Init()
     {
+        (_factory as IPlatformFactory<IPlatform>).Type = PlatformType.One;
         FillPool();
     }
 

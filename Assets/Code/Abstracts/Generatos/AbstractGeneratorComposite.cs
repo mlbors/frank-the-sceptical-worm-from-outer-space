@@ -29,12 +29,10 @@ abstract public class AbstractGeneratorComposite<T> : AbstractGenerator<T>, IGen
     /*********************/
 
     /**
-     * @var GameObject _gameObject player's game object
      * @var List<IOperatorElement> _operatorsElement list of operators to generate various components
      * @var IOperatorElementFactory<IOperatorElement> _operatorElementFactory object that create other objects, here, IOperatorElementFactory
      */
 
-    protected GameObject _gameObject;
     protected List<IOperatorElement> _operatorElements = new List<IOperatorElement>();
     protected IOperatorElementFactory<IOperatorElement> _operatorElementFactory;
 
@@ -48,9 +46,11 @@ abstract public class AbstractGeneratorComposite<T> : AbstractGenerator<T>, IGen
     /**
      * @access protected
      * @param IOperatorElementFactory<IOperatorElement> operatorElementFactory object that create other objects, here, IOperatorElementFactory
+     * @param IPoolFactory _poolFactory factory object that creates other objects, here, IPool
      */
 
-    protected AbstractGeneratorComposite(IOperatorElementFactory<IOperatorElement> operatorElementFactory)
+    protected AbstractGeneratorComposite(IOperatorElementFactory<IOperatorElement> operatorElementFactory,
+                                         IPoolFactory<IPool> poolFactory) : base(poolFactory)
     {
         OperatorElementFactory = operatorElementFactory;
     }

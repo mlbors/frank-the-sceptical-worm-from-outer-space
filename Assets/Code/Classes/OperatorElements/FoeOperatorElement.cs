@@ -23,7 +23,7 @@ using Zenject;
 /***** FOE OPERATOR ELEMENT *****/
 /********************************/
 
-public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<ICollectable>
+public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe>
 {
     /*********************/
     /***** CONSTRUCT *****/
@@ -51,7 +51,11 @@ public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<ICol
 
     public override void Init()
     {
+        _generatorFactory.Type = GeneratorType.Foe;
+        Generator = _generatorFactory.Create() as IGenerator<IFoe>;
 
+        _destroyerFactory.Type = DestroyerType.Foe;
+        Destroyer = _destroyerFactory.Create() as IDestroyer<IFoe>;
     }
 
     /**************************************************/

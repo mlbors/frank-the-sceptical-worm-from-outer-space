@@ -23,7 +23,7 @@ using Zenject;
 /***** PLATFORM OPERATOR ELEMENT *****/
 /*************************************/
 
-public class PlatformOperatorElement : AbstractGeneratorOperatorElement<Platform>
+public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatform>
 {
     /*********************/
     /***** CONSTRUCT *****/
@@ -54,10 +54,10 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<Platform
     public override void Init()
     {
         _generatorFactory.Type = GeneratorType.Platform;
-        Generator = _generatorFactory.Create() as IGenerator<Platform>;
+        Generator = _generatorFactory.Create() as IGenerator<IPlatform>;
 
         _destroyerFactory.Type = DestroyerType.Platform;
-        Destroyer = _destroyerFactory.Create() as IDestroyer<Platform>;
+        Destroyer = _destroyerFactory.Create() as IDestroyer<IPlatform>;
     }
 
     /**************************************************/
@@ -69,7 +69,8 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<Platform
 
     public override void Operate()
     {
-
+        //check point
+        // generate or destroy
     }
 
     /**************************************************/
@@ -94,6 +95,38 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<Platform
     public override void CallDestroyer()
     {
         _destroyer.Destroy();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
+    /***** START *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public override void Start()
+    {
+
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************/
+    /***** UPDATE *****/
+    /******************/
+
+    /**
+     * @access public
+     */
+
+    public override void Update()
+    {
+        Operate();
     }
 
 }

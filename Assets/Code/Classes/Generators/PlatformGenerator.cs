@@ -33,9 +33,11 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
      * @param IOperatorElementFactory<IOperatorElement> operatorElementFactory object that create other objects, here, IOperatorElementFactory
      */
 
-    public PlatformGenerator(IOperatorElementFactory<IOperatorElement> operatorElementFactory) : base(operatorElementFactory)
+    public PlatformGenerator(IOperatorElementFactory<IOperatorElement> operatorElementFactory,
+                             IPoolFactory<IPool> poolFactory) : base(operatorElementFactory, poolFactory)
     {
         _SetValues();
+        _InitPool();
         _InitOperators();
     }
 
@@ -53,6 +55,25 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
         _operatorElementFactory.Type = OperatorElementType.FoeOperatorElement;
         AddOperatorElement(_operatorElementFactory.Create());
+
+        _poolFactory.Type = PoolType.Platform;
+        _pool = _poolFactory.Create() as IPool<IPlatform>;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** INIT POOL *****/
+    /*********************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InitPool()
+    {
+        _pool.Init();
     }
 
     /**************************************************/

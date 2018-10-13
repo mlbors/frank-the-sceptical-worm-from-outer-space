@@ -128,6 +128,6 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>, IPlayerFactory<IPlayer>
 
     public override void Validate()
     {
-        //_container.Instantiate<Player>();
+
     }
 }

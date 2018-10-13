@@ -49,14 +49,12 @@ abstract public class AbstractPool<T> : IPool<T>, IProduct
 
     /**
      * @access protected
-     * @param T pooledObject current pooled object
      * @param Int amount initinal amount
      * @param IFactory factory object that other creates objects, here object of type T
      */
 
-    protected AbstractPool(T pooledObject, int amount, IFactory<T> factory)
+    protected AbstractPool(int amount, IFactory<T> factory)
     {
-        _pooledObject = pooledObject;
         _amount = amount;
         _factory = factory;
     }
@@ -205,6 +203,8 @@ abstract public class AbstractPool<T> : IPool<T>, IProduct
     {
         for (int i = 0; i < _amount; i++)
         {
+            Debug.Log("::: FillPool :::");
+            _pooledObject = InstantiateNewObject();
             AddObject(_pooledObject);
         }
     }
