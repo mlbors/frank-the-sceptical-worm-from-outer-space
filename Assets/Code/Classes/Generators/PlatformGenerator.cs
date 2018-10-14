@@ -25,6 +25,33 @@ using UnityEngine;
 public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatformGenerator
 {
     /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var float _maxYPosition max Y position
+     * @var float _minYPosition min Y position
+     * @var float _maxYGape max Y gape
+     * @var float _minYGape min Y gape
+     * @var float _maxXGape max X gape
+     * @var float _minXGape min X gape
+     * @var float _distanceBetween distance between platforms
+     * @var IPlatform _currentObject current generated object
+     */
+
+    protected float _maxYPosition = 10.00f;
+    protected float _minYPosition = 0.50f;
+    protected float _maxYGape = 2.50f;
+    protected float _minYGape = 1.05f;
+    protected float _maxXGape = 1.75f;
+    protected float _minXGape = 0.50f;
+    protected float _distanceBetween;
+    protected IPlatform _currentObject;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
     /***** CONSTRUCT *****/
     /*********************/
 
@@ -123,6 +150,83 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     public override void Generate()
     {
+        _currentObject = _pool.GetObject();
+        (_currentObject as MonoBehaviour).transform.position = _ComputePosition();
+        (_currentObject as MonoBehaviour).gameObject.SetActive(true);
+    }
 
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** COMPUTE POSITION *****/
+    /****************************/
+
+    /**
+     * @access protected
+     * @return Vector3
+     */
+
+    protected Vector3 _ComputePosition()
+    {
+        float xPosition = _ComputeXPosition();
+        float yPosition = _ComputeYPosition();
+
+        Vector3 position = new Vector3(xPosition, yPosition, (_currentObject as MonoBehaviour).transform.position.z);
+
+        return position;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** COMPUTE X POSITION *****/
+    /******************************/
+
+    /**
+     * @access protected
+     * @return float
+     */
+
+    protected float _ComputeXPosition()
+    {
+        _distanceBetween = Random.Range(_minXGape, _maxXGape);
+        float _objectWidth = (_currentObject as MonoBehaviour).GetComponent<BoxCollider2D>().size.x;
+
+        float temp = (_currentObject as MonoBehaviour).transform.position.x + (_objectWidth / 2);
+        float xPosition = temp + _distanceBetween;
+        return xPosition;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** COMPUTE Y POSITION *****/
+    /******************************/
+
+    /**
+     * @access protected
+     * @return float
+     */
+
+    protected float _ComputeYPosition()
+    {
+
+        float yPosition = (_currentObject as MonoBehaviour).transform.position.y + Random.Range(_maxYGape, -_maxYGape);
+
+        if (yPosition > _maxYPosition)
+        {
+            return _maxYPosition;
+        }
+
+
+        if (yPosition < _minYGape)
+        {
+            return _minYGape;
+        }
+
+        return yPosition;
     }
 }

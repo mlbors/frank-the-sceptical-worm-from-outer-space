@@ -69,8 +69,9 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     public override void Operate()
     {
-        //check point
-        // generate or destroy
+        if (_IsGenerationPointAhead()) {
+            CallGenerator();
+        }
     }
 
     /**************************************************/
@@ -127,6 +128,23 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
     public override void Update()
     {
         Operate();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************************/
+    /***** IS GENERATION POINT BEHIND *****/
+    /**************************************/
+
+    /**
+     * @access protected
+     * @return bool
+     */
+
+    protected bool _IsGenerationPointAhead()
+    {
+        return transform.position.x < _generationPoint.transform.position.x;
     }
 
 }
