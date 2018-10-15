@@ -36,7 +36,6 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
      * @var float _maxXGape max X gape
      * @var float _minXGape min X gape
      * @var float _distanceBetween distance between platforms
-     * @var IPlatform _currentObject current generated object
      */
 
     protected float _maxYPosition = 10.00f;
@@ -46,7 +45,6 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
     protected float _maxXGape = 1.75f;
     protected float _minXGape = 0.50f;
     protected float _distanceBetween;
-    protected IPlatform _currentObject;
 
     /**************************************************/
     /**************************************************/
@@ -194,7 +192,8 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
         _distanceBetween = Random.Range(_minXGape, _maxXGape);
         float _objectWidth = (_currentObject as MonoBehaviour).GetComponent<BoxCollider2D>().size.x;
 
-        float temp = (_currentObject as MonoBehaviour).transform.position.x + (_objectWidth / 2);
+        //float temp = (_currentObject as MonoBehaviour).transform.position.x + (_objectWidth / 2);
+        float temp = _referenceObject.transform.position.x + (_objectWidth / 2);
         float xPosition = temp + _distanceBetween;
         return xPosition;
     }
@@ -213,7 +212,6 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     protected float _ComputeYPosition()
     {
-
         float yPosition = (_currentObject as MonoBehaviour).transform.position.y + Random.Range(_maxYGape, -_maxYGape);
 
         if (yPosition > _maxYPosition)

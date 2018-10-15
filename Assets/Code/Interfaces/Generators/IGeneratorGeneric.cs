@@ -29,4 +29,10 @@ public interface IGenerator<T> : IGenerator
         get;
         set;
     }
+
+    T CurrentObject
+    {
+        get;
+        set;
+    }
 }

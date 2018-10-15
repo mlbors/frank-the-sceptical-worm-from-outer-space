@@ -58,6 +58,8 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
         _destroyerFactory.Type = DestroyerType.Platform;
         Destroyer = _destroyerFactory.Create() as IDestroyer<IPlatform>;
+
+        _generator.ReferenceObject = this;
     }
 
     /**************************************************/
@@ -71,6 +73,7 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
     {
         if (_IsGenerationPointAhead()) {
             CallGenerator();
+            _MoveOperator();
         }
     }
 
@@ -144,7 +147,24 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     protected bool _IsGenerationPointAhead()
     {
+        Debug.Log(_generationPoint.transform.position.x);
         return transform.position.x < _generationPoint.transform.position.x;
     }
 
+    /**************************************************/
+    /**************************************************/
+
+    /**************************************/
+    /***** IS GENERATION POINT BEHIND *****/
+    /**************************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _MoveOperator()
+    {
+        float generatedObjectWidth = (_generator.CurrentObject as MonoBehaviour).GetComponent<BoxCollider2D>().size.x;
+        transform.position = new Vector3(transform.position.x + (generatedObjectWidth / 2), transform.position.y, transform.position.z);
+    }
 }

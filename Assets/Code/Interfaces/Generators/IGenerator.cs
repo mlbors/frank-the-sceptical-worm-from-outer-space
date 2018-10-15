@@ -24,5 +24,11 @@ using UnityEngine;
 
 public interface IGenerator
 {
+    MonoBehaviour ReferenceObject
+    {
+        get;
+        set;
+    }
+
     void Generate();
 }
