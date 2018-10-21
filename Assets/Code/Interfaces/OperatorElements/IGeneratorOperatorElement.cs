@@ -24,13 +24,13 @@ using UnityEngine;
 
 public interface IGeneratorOperatorElement
 {
-    GameObject GenerationPoint
+    Transform GenerationPoint
     {
         get;
         set;
     }
 
-    GameObject DestructionPoint
+    Transform DestructionPoint
     {
         get;
         set;

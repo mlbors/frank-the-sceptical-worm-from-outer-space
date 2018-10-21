@@ -109,10 +109,10 @@ public class MainInstaller : MonoInstaller
                  .WhenInjectedInto<IGenerator>()
                  .NonLazy();
 
-        Container.Bind<List<GameObject>>()
+        /* Container.Bind<List<GameObject>>()
                  .FromInstance(new List<GameObject>{ _settings.objectsGenerationPoint, _settings.objectsDestructionPoint})
                  .AsCached()
-                 .WhenInjectedInto<IGeneratorOperatorElement>();
+                 .WhenInjectedInto<IGeneratorOperatorElement>(); */
 
         Container.Bind<GameObject>()
                  .FromInstance(_settings.cameraGameObject)
@@ -145,7 +145,7 @@ public class MainInstaller : MonoInstaller
         /*********************/
 
         /**
-         * @var GameObject cameraGameObject prefab to use for player
+         * @var GameObject cameraGameObject prefab to use camera
          * @var GameObject objectGenerationPoint point from where to generate objects
          * @var GameObject objectDestructionPoint point from where to destroy objects
          */

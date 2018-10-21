@@ -23,7 +23,7 @@ using Zenject;
 /***** PLATFORM OPERATOR ELEMENT *****/
 /*************************************/
 
-public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatform>
+public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatform>, IPlatformOperatorElement
 {
     /*********************/
     /***** CONSTRUCT *****/
@@ -38,10 +38,9 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     [Inject]
     public override void Construct(IGeneratorFactory<IGenerator> generatorFactory,
-                                   IDestroyerFactory<IDestroyer> destroyerFactory,
-                                   List<GameObject> points)
+                                   IDestroyerFactory<IDestroyer> destroyerFactory)
     {
-        base.Construct(generatorFactory, destroyerFactory, points);
+        base.Construct(generatorFactory, destroyerFactory);
     }
 
     /**************************************************/
@@ -71,9 +70,37 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     public override void Operate()
     {
-        if (_IsGenerationPointAhead()) {
+        if (_generationPoint == null || _destructionPoint == null)
+        {
+            Debug.Log("No generation and destruction points");
+            return;
+        }
+
+        if (_IsGenerationPointAhead())
+        {
             CallGenerator();
             _MoveOperator();
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IOBSERVER UPDATE *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public void ObserverUpdate(string info, object data)
+    {
+        if (info == "camera created")
+        {
+            Debug.Log("Setting generation and destruction points");
+            GenerationPoint = (data as List<Transform>)[0];
+            DestructionPoint = (data as List<Transform>)[1];
         }
     }
 
@@ -147,8 +174,7 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     protected bool _IsGenerationPointAhead()
     {
-        Debug.Log(_generationPoint.transform.position.x);
-        return transform.position.x < _generationPoint.transform.position.x;
+        return transform.position.x < _generationPoint.position.x;
     }
 
     /**************************************************/

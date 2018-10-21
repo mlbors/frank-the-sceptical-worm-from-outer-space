@@ -34,16 +34,16 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      * @var IGenerator _generator object that generates other kind of objects using a pool system
      * @var IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
      * @var IDestroyer _destroyer object that destroys generated object using a pool system
-     * @var GameObject _generationPoint when to generate objects
-     * @var GameObject _destructionPoint when to destroy points
+     * @var Transform _generationPoint when to generate objects
+     * @var Transform _destructionPoint when to destroy points
      */
 
     protected IGeneratorFactory<IGenerator> _generatorFactory;
     protected IGenerator<T> _generator;
     protected IDestroyerFactory<IDestroyer> _destroyerFactory;
     protected IDestroyer<T> _destroyer;
-    protected GameObject _generationPoint;
-    protected GameObject _destructionPoint;
+    protected Transform _generationPoint;
+    protected Transform _destructionPoint;
 
     /**************************************************/
     /**************************************************/
@@ -61,10 +61,9 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
 
     [Inject]
     public virtual void Construct(IGeneratorFactory<IGenerator> generatorFactory, 
-                                  IDestroyerFactory<IDestroyer> destroyerFactory,
-                                  List<GameObject> points)
+                                  IDestroyerFactory<IDestroyer> destroyerFactory)
     {
-        _SetValues(generatorFactory, destroyerFactory, points);
+        _SetValues(generatorFactory, destroyerFactory);
     }
 
     /**************************************************/
@@ -82,13 +81,10 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      */
 
     protected void _SetValues(IGeneratorFactory<IGenerator> generatorFactory,
-                              IDestroyerFactory<IDestroyer> destroyerFactory,
-                              List<GameObject> points)
+                              IDestroyerFactory<IDestroyer> destroyerFactory)
     {
         GeneratorFactory = generatorFactory;
         DestroyerFactory = destroyerFactory;
-        GenerationPoint = points[0];
-        DestructionPoint = points[1];
     }
 
     /**************************************************/
@@ -170,7 +166,7 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      * @access public
      */
 
-    public GameObject GenerationPoint
+    public Transform GenerationPoint
     {
         get { return _generationPoint; }
         set { _generationPoint = value; }
@@ -187,7 +183,7 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      * @access public
      */
 
-    public GameObject DestructionPoint
+    public Transform DestructionPoint
     {
         get { return _destructionPoint; }
         set { _destructionPoint = value; }

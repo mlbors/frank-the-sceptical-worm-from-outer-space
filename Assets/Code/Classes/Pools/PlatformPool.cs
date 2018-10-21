@@ -89,6 +89,6 @@ public class PlatformPool : AbstractPool<IPlatform>
 
     public override bool CheckIfObjectAvailable(IPlatform currentObject)
     {
-        return (currentObject as MonoBehaviour).gameObject.activeInHierarchy;
+        return !(currentObject as MonoBehaviour).gameObject.activeInHierarchy;
     }
 }

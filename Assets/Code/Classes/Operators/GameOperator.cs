@@ -49,14 +49,16 @@ public class GameOperator : AbstractOperator, IGameOperator
 
     protected void _SetValues()
     {
+        _operatorElementFactory.Type = OperatorElementType.PlatformOperatorElement;
+        IOperatorElement platformOperatorElement = _operatorElementFactory.Create();
+        AddElement(platformOperatorElement);
+
         _operatorElementFactory.Type = OperatorElementType.CameraOperatorElement;
         IOperatorElement cameraOperatorElement = _operatorElementFactory.Create();
+        (cameraOperatorElement as ICameraOperatorElement).Attach(platformOperatorElement as IObserver);
         AddElement(cameraOperatorElement);
 
         _operatorElementFactory.Type = OperatorElementType.MenuOperatorElement;
-        AddElement(_operatorElementFactory.Create());
-
-        _operatorElementFactory.Type = OperatorElementType.PlatformOperatorElement;
         AddElement(_operatorElementFactory.Create());
 
         _operatorElementFactory.Type = OperatorElementType.PlayerOperatorElement;

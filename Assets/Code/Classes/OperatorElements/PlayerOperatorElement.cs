@@ -22,7 +22,7 @@ using UnityEngine;
 /***** PLAYER OPERATOR ELEMENT *****/
 /***********************************/
 
-public class PlayerOperatorElement : IPlayerOperatorElement
+public class PlayerOperatorElement : IPlayerOperatorElement, IObservable
 {
     /*********************/
     /***** ATTRIBUTS *****/

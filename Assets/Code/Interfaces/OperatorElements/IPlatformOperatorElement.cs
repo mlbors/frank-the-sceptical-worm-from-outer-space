@@ -1,5 +1,5 @@
 /**
- * FTSWFOS - ICameraOperatorElement - Interface
+ * FTSWFOS - IPlatformOperatorElement - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,10 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/************************************/
-/***** ICAMERA OEPRATOR ELEMENT *****/
-/************************************/
+/**************************************/
+/***** IPLATFORM OPERATOR ELEMENT *****/
+/**************************************/
 
-public interface ICameraOperatorElement : IOperatorElement, IObserver, IObservable
+public interface IPlatformOperatorElement : IOperatorElement, IObserver
 {
 }

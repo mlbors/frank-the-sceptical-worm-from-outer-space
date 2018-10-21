@@ -23,17 +23,19 @@ using Zenject;
 /***** CAMERA OPERATOR ELEMENT *****/
 /***********************************/
 
-public class CameraOperatorElement : ICameraOperatorElement
+public class CameraOperatorElement : ICameraOperatorElement, IObserver
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
+     * @var List<IObserver> _observers list of observers
      * @var ICamera _camera camera object
      * @var ICameraFactory cameraFactory factory object that creates other objects, here, ICamera
      */
 
+    protected List<IObserver> _observers = new List<IObserver>();
     protected ICamera _camera;
     protected ICameraFactory<ICamera> _cameraFactory;
 
@@ -108,6 +110,23 @@ public class CameraOperatorElement : ICameraOperatorElement
     /**************************************************/
     /**************************************************/
 
+    /***********************************/
+    /***** OBSERVERS GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public List<IObserver> Observers
+    {
+        get { return _observers; }
+        set { _observers = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /*************************/
     /***** CREATE CAMERA *****/
     /*************************/
@@ -172,6 +191,64 @@ public class CameraOperatorElement : ICameraOperatorElement
             Debug.Log("Observer updating");
             CameraFactory.Target = data as ICameraTarget;
             _CreateCamera();
+            Transform generationPoint = (_camera as MonoBehaviour).transform.Find("ObjectsGenerationPoint");
+            Transform destructionPoint = (_camera as MonoBehaviour).transform.Find("ObjectsDestructionPoint");
+            List<Transform> points = new List<Transform>() { generationPoint, destructionPoint };
+            Notify("camera created", points);
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - ATTACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to attach
+     */
+
+    public void Attach(IObserver observer)
+    {
+        _observers.Add(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - DETACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to detach
+     */
+
+    public void Detach(IObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** IOBSERVABLE NOTIFY *****/
+    /******************************/
+
+    /**
+     * @access private
+     * @param String info info for update
+     */
+
+    public void Notify(string info, object data)
+    {
+        foreach (IObserver o in _observers)
+        {
+            o.ObserverUpdate(info, data);
         }
     }
 }

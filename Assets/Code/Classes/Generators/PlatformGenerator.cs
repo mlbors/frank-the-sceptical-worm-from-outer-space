@@ -40,10 +40,10 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     protected float _maxYPosition = 10.00f;
     protected float _minYPosition = 0.50f;
-    protected float _maxYGape = 2.50f;
+    protected float _maxYGape = 5.50f;
     protected float _minYGape = 1.05f;
-    protected float _maxXGape = 1.75f;
-    protected float _minXGape = 0.50f;
+    protected float _maxXGape = 12.75f;
+    protected float _minXGape = 9.50f;
     protected float _distanceBetween;
 
     /**************************************************/
@@ -190,10 +190,9 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
     protected float _ComputeXPosition()
     {
         _distanceBetween = Random.Range(_minXGape, _maxXGape);
-        float _objectWidth = (_currentObject as MonoBehaviour).GetComponent<BoxCollider2D>().size.x;
+        float _objectWidth = (_currentObject as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
 
-        //float temp = (_currentObject as MonoBehaviour).transform.position.x + (_objectWidth / 2);
-        float temp = _referenceObject.transform.position.x + (_objectWidth / 2);
+        float temp = _referenceObject.gameObject.transform.position.x + (_objectWidth / 2);
         float xPosition = temp + _distanceBetween;
         return xPosition;
     }
@@ -218,7 +217,6 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
         {
             return _maxYPosition;
         }
-
 
         if (yPosition < _minYGape)
         {
