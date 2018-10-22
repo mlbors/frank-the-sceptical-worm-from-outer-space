@@ -80,6 +80,7 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
         {
             CallGenerator();
             _MoveOperator();
+            _generator.CurrentObject = null;
         }
     }
 
@@ -190,7 +191,7 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     protected void _MoveOperator()
     {
-        float generatedObjectWidth = (_generator.CurrentObject as MonoBehaviour).GetComponent<BoxCollider2D>().size.x;
-        transform.position = new Vector3(transform.position.x + (generatedObjectWidth / 2), transform.position.y, transform.position.z);
+        float generatedObjectWidth = (_generator.CurrentObject as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
+        transform.position = new Vector3(transform.position.x + generatedObjectWidth, transform.position.y, transform.position.z);
     }
 }

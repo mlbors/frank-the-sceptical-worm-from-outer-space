@@ -39,11 +39,11 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
      */
 
     protected float _maxYPosition = 10.00f;
-    protected float _minYPosition = 0.50f;
-    protected float _maxYGape = 5.50f;
-    protected float _minYGape = 1.05f;
-    protected float _maxXGape = 12.75f;
-    protected float _minXGape = 9.50f;
+    protected float _minYPosition = -5.25f;
+    protected float _maxYGape = 8.50f;
+    protected float _minYGape = -2.25f;
+    protected float _maxXGape = 24.75f;
+    protected float _minXGape = 16.50f;
     protected float _distanceBetween;
 
     /**************************************************/
@@ -211,7 +211,7 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     protected float _ComputeYPosition()
     {
-        float yPosition = (_currentObject as MonoBehaviour).transform.position.y + Random.Range(_maxYGape, -_maxYGape);
+        float yPosition = (_currentObject as MonoBehaviour).transform.position.y + Random.Range(_minYGape, _maxYGape);
 
         if (yPosition > _maxYPosition)
         {
