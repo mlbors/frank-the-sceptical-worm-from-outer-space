@@ -192,6 +192,7 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
     protected void _MoveOperator()
     {
         float generatedObjectWidth = (_generator.CurrentObject as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
-        transform.position = new Vector3(transform.position.x + generatedObjectWidth, transform.position.y, transform.position.z);
+        float generatedObjectXPos = (_generator.CurrentObject as MonoBehaviour).gameObject.transform.position.x;
+        transform.position = new Vector3(generatedObjectWidth/2 + generatedObjectXPos, transform.position.y, transform.position.z);
     }
 }

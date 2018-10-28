@@ -38,12 +38,12 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
      * @var float _distanceBetween distance between platforms
      */
 
-    protected float _maxYPosition = 10.00f;
-    protected float _minYPosition = -5.25f;
+    protected float _maxYPosition = 8.50f;
+    protected float _minYPosition = -4.25f;
     protected float _maxYGape = 8.50f;
-    protected float _minYGape = -2.25f;
-    protected float _maxXGape = 24.75f;
-    protected float _minXGape = 16.50f;
+    protected float _minYGape = -4.25f;
+    protected float _maxXGape = 8.25f;
+    protected float _minXGape = 4.25f;
     protected float _distanceBetween;
 
     /**************************************************/
