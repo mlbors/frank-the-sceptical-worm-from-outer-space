@@ -24,5 +24,11 @@ using UnityEngine;
 
 public interface IDestroyer
 {
+    MonoBehaviour ReferenceObject
+    {
+        get;
+        set;
+    }
+
     void Destroy();
 }

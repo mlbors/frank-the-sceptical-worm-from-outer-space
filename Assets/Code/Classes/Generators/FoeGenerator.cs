@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - CollectableGenerator - Concrete Class
+ * FTSWFOS - FoeGenerator - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,11 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*********************************/
-/***** COLLECTABLE GENERATOR *****/
-/*********************************/
+/*************************/
+/***** FOE GENERATOR *****/
+/*************************/
 
-public class CollectableGenerator : AbstractGenerator<ICollectable>
+public class FoeGenerator : AbstractGenerator<IFoe>
 {
     /*********************/
     /***** CONSTRUCT *****/
@@ -33,8 +33,24 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
      * @param IPoolFactory _poolFactory factory object that creates other objects, here, IPool
      */
 
-    public CollectableGenerator(IPoolFactory<IPool> poolFactory) : base(poolFactory)
+    public FoeGenerator() : base()
     {
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************/
+    /***** INIT *****/
+    /****************/
+
+    /**
+     * @access public
+     */
+
+    public override void Init()
+    {
+
     }
 
     /**************************************************/

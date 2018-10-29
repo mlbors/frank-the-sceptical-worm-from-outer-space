@@ -31,13 +31,11 @@ abstract public class AbstractGenerator<T> : IGenerator<T>, IProduct
     /**
      * @var MonoBehaviour _referenceObject object used as a reference
      * @var IPool _pool objects pool
-     * @var IPoolFactory _poolFactory factory object that creates other objects, here, IPool
      * @var IPlatform _currentObject current generated object
      */
 
     protected MonoBehaviour _referenceObject;
     protected IPool<T> _pool;
-    protected IPoolFactory<IPool> _poolFactory;
     protected T _currentObject;
 
     /**************************************************/
@@ -49,12 +47,10 @@ abstract public class AbstractGenerator<T> : IGenerator<T>, IProduct
 
     /**
      * @access protected
-     * @param IPoolFactory _poolFactory factory object that creates other objects, here, IPool
      */
 
-    protected AbstractGenerator(IPoolFactory<IPool> poolFactory)
+    protected AbstractGenerator()
     {
-        PoolFactory = poolFactory;
     }
 
     /**************************************************/
@@ -94,23 +90,6 @@ abstract public class AbstractGenerator<T> : IGenerator<T>, IProduct
     /**************************************************/
     /**************************************************/
 
-    /**************************************/
-    /***** POOL FACTORY GETTER/SETTER *****/
-    /**************************************/
-
-    /**
-     * @access public
-     */
-
-    public IPoolFactory<IPool> PoolFactory
-    {
-        get { return _poolFactory; }
-        set { _poolFactory = value; }
-    }
-
-    /**************************************************/
-    /**************************************************/
-
     /****************************************/
     /***** CURRENT OBJECT GETTER/SETTER *****/
     /****************************************/
@@ -124,6 +103,15 @@ abstract public class AbstractGenerator<T> : IGenerator<T>, IProduct
         get { return _currentObject; }
         set { _currentObject = value; }
     }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************/
+    /***** INIT *****/
+    /****************/
+
+    public abstract void Init();
 
     /**************************************************/
     /**************************************************/

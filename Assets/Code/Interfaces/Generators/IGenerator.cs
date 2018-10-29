@@ -30,5 +30,6 @@ public interface IGenerator
         set;
     }
 
+    void Init();
     void Generate();
 }

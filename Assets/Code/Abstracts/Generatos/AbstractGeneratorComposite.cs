@@ -46,11 +46,9 @@ abstract public class AbstractGeneratorComposite<T> : AbstractGenerator<T>, IGen
     /**
      * @access protected
      * @param IOperatorElementFactory<IOperatorElement> operatorElementFactory object that create other objects, here, IOperatorElementFactory
-     * @param IPoolFactory _poolFactory factory object that creates other objects, here, IPool
      */
 
-    protected AbstractGeneratorComposite(IOperatorElementFactory<IOperatorElement> operatorElementFactory,
-                                         IPoolFactory<IPool> poolFactory) : base(poolFactory)
+    protected AbstractGeneratorComposite(IOperatorElementFactory<IOperatorElement> operatorElementFactory) : base()
     {
         OperatorElementFactory = operatorElementFactory;
     }

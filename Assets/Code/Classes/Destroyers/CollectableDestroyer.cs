@@ -24,6 +24,21 @@ using UnityEngine;
 
 public class CollectableDestroyer : AbstractDestroyer<ICollectable>
 {
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access public
+     */
+
+    public CollectableDestroyer() : base()
+    {
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /*******************/
     /***** DESTROY *****/
     /*******************/

@@ -91,6 +91,12 @@ public class MainInstaller : MonoInstaller
                  .WhenInjectedInto<IGeneratorOperatorElement>()
                  .NonLazy();
 
+        Container.Bind<IPoolFactory<IPool>>()
+                 .To<PoolFactory>()
+                 .AsCached()
+                 .WhenInjectedInto<IGeneratorOperatorElement>()
+                 .NonLazy();
+
         Container.Bind<IGeneratorFactory<IGenerator>>()
                  .To<GeneratorFactory>()
                  .AsCached()
@@ -102,13 +108,7 @@ public class MainInstaller : MonoInstaller
                  .AsCached()
                  .WhenInjectedInto<IGeneratorComponentOperatorElement>()
                  .NonLazy();
-
-        Container.Bind<IPoolFactory<IPool>>()
-                 .To<PoolFactory>()
-                 .AsCached()
-                 .WhenInjectedInto<IGenerator>()
-                 .NonLazy();
-
+                 
         /* Container.Bind<List<GameObject>>()
                  .FromInstance(new List<GameObject>{ _settings.objectsGenerationPoint, _settings.objectsDestructionPoint})
                  .AsCached()

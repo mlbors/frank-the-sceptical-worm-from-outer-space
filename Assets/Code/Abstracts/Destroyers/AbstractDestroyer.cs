@@ -29,10 +29,44 @@ abstract public class AbstractDestroyer<T> : IDestroyer<T>, IProduct
     /*********************/
 
     /**
+     * @var MonoBehaviour _referenceObject object used as a reference
      * @var IPool _pool objects pool
      */
 
+    protected MonoBehaviour _referenceObject;
     protected IPool<T> _pool;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access protected
+     */
+
+    protected AbstractDestroyer()
+    {
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************************/
+    /***** REFERENCE OBJECT GETTER/SETTER *****/
+    /******************************************/
+
+    /**
+     * @access public
+     */
+
+    public MonoBehaviour ReferenceObject
+    {
+        get { return _referenceObject; }
+        set { _referenceObject = value; }
+    }
 
     /**************************************************/
     /**************************************************/

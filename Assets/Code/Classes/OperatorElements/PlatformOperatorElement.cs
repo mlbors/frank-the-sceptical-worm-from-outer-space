@@ -33,14 +33,15 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
      * @access public
      * @param IGeneratorFactory<IGenerator> generatorFactroy object that create other objects, here, IGenerator
      * @param IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
-     * @param List points list of points
+     * @param IPoolFactory _poolFactory factory object that creates other objects, here, IPool
      */
 
     [Inject]
     public override void Construct(IGeneratorFactory<IGenerator> generatorFactory,
-                                   IDestroyerFactory<IDestroyer> destroyerFactory)
+                                   IDestroyerFactory<IDestroyer> destroyerFactory,
+                                   IPoolFactory<IPool> poolFactory)
     {
-        base.Construct(generatorFactory, destroyerFactory);
+        base.Construct(generatorFactory, destroyerFactory, poolFactory);
     }
 
     /**************************************************/
@@ -58,7 +59,15 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
         _destroyerFactory.Type = DestroyerType.Platform;
         Destroyer = _destroyerFactory.Create() as IDestroyer<IPlatform>;
 
+        _poolFactory.Type = PoolType.Platform;
+        IPool pool = _poolFactory.Create();
+        _generator.Pool = pool as IPool<IPlatform>;
+        _destroyer.Pool = pool as IPool<IPlatform>;
+
         _generator.ReferenceObject = this;
+        _destroyer.ReferenceObject = this;
+
+        _generator.Init();
     }
 
     /**************************************************/
@@ -81,6 +90,11 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
             CallGenerator();
             _MoveOperator();
             _generator.CurrentObject = null;
+        }
+
+        if (_IsDestructionPointBehind())
+        {
+            CallDestroyer();
         }
     }
 
@@ -164,9 +178,9 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
     /**************************************************/
     /**************************************************/
 
-    /**************************************/
-    /***** IS GENERATION POINT BEHIND *****/
-    /**************************************/
+    /*************************************/
+    /***** IS GENERATION POINT AHEAD *****/
+    /*************************************/
 
     /**
      * @access protected
@@ -176,6 +190,23 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
     protected bool _IsGenerationPointAhead()
     {
         return transform.position.x < _generationPoint.position.x;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***************************************/
+    /***** IS DESTRUCTION POINT BEHIND *****/
+    /***************************************/
+
+    /**
+     * @access protected
+     * @return bool
+     */
+
+    protected bool _IsDestructionPointBehind()
+    {
+        return transform.position.x > _destructionPoint.position.x;
     }
 
     /**************************************************/

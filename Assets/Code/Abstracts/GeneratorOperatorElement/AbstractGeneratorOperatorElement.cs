@@ -36,6 +36,7 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      * @var IDestroyer _destroyer object that destroys generated object using a pool system
      * @var Transform _generationPoint when to generate objects
      * @var Transform _destructionPoint when to destroy points
+     * @var IPoolFactory _poolFactory factory object that creates other objects, here, IPool
      */
 
     protected IGeneratorFactory<IGenerator> _generatorFactory;
@@ -44,6 +45,7 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
     protected IDestroyer<T> _destroyer;
     protected Transform _generationPoint;
     protected Transform _destructionPoint;
+    protected IPoolFactory<IPool> _poolFactory;
 
     /**************************************************/
     /**************************************************/
@@ -61,9 +63,10 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
 
     [Inject]
     public virtual void Construct(IGeneratorFactory<IGenerator> generatorFactory, 
-                                  IDestroyerFactory<IDestroyer> destroyerFactory)
+                                  IDestroyerFactory<IDestroyer> destroyerFactory,
+                                  IPoolFactory<IPool> poolFactory)
     {
-        _SetValues(generatorFactory, destroyerFactory);
+        _SetValues(generatorFactory, destroyerFactory, poolFactory);
     }
 
     /**************************************************/
@@ -77,14 +80,16 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      * @access public
      * @param IGeneratorFactory<IGenerator> generatorFactroy object that create other objects, here, IGenerator
      * @param IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
-     * @param List points list of points
+     * @param IPoolFactory _poolFactory factory object that creates other objects, here, IPool
      */
 
     protected void _SetValues(IGeneratorFactory<IGenerator> generatorFactory,
-                              IDestroyerFactory<IDestroyer> destroyerFactory)
+                              IDestroyerFactory<IDestroyer> destroyerFactory,
+                              IPoolFactory<IPool> poolFactory)
     {
         GeneratorFactory = generatorFactory;
         DestroyerFactory = destroyerFactory;
+        PoolFactory = poolFactory;
     }
 
     /**************************************************/
@@ -153,6 +158,23 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
     {
         get { return _destroyer; }
         set { _destroyer = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************************/
+    /***** POOL FACTORY GETTER/SETTER *****/
+    /**************************************/
+
+    /**
+     * @access public
+     */
+
+    public IPoolFactory<IPool> PoolFactory
+    {
+        get { return _poolFactory; }
+        set { _poolFactory = value; }
     }
 
     /**************************************************/

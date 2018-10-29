@@ -19,9 +19,9 @@ using Zenject;
 /**************************************************/
 /**************************************************/
 
-/***********************************************/
+/*********************************************************/
 /***** ABSTRACT GENERATOR COMPONENT OPERATOR ELEMENT *****/
-/***********************************************/
+/*********************************************************/
 
 abstract public class AbstractGeneratorComponentOperatorElement<T> : IGeneratorComponentOperatorElement<T>, IOperatorElement, IProduct
 {
