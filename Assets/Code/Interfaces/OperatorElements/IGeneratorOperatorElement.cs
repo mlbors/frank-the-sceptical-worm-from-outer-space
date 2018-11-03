@@ -36,6 +36,12 @@ public interface IGeneratorOperatorElement
         set;
     }
 
+    IPool Pool
+    {
+        get;
+        set;
+    }
+
     void CallGenerator();
     void CallDestroyer();
 }

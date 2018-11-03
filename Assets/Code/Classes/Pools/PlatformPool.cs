@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -69,7 +70,14 @@ public class PlatformPool : AbstractPool<IPlatform>
 
     public override IPlatform InstantiateNewObject()
     {
+        Array values = Enum.GetValues(typeof(PlatformType));
+        System.Random random = new System.Random();
+        PlatformType platformType = (PlatformType)values.GetValue(random.Next(values.Length));
+
+        (_factory as IPlatformFactory<IPlatform>).Type = platformType;
+
         IPlatform platform = _factory.Create();
+
         (platform as MonoBehaviour).gameObject.SetActive(false);
         return platform;
     }

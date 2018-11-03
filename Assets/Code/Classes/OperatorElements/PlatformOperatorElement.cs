@@ -25,6 +25,8 @@ using Zenject;
 
 public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatform>, IPlatformOperatorElement
 {
+    
+
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -53,20 +55,84 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     public override void Init()
     {
-        _generatorFactory.Type = GeneratorType.Platform;
-        Generator = _generatorFactory.Create() as IGenerator<IPlatform>;
+        _SetInitialOffset();
+        _SetPool();
+        _SetDestroyer();
+        _SetGenerator();
+    }
 
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** SET INITIAL OFFSET *****/
+    /******************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetInitialOffset()
+    {
+        GameObject initialPlatform = GameObject.Find("InitialPlatform");
+        float initialPlatformWidth = initialPlatform.GetComponent<BoxCollider2D>().size.x;
+        float initialPlatformXPos = initialPlatform.transform.position.x;
+        transform.position = new Vector3(initialPlatformWidth / 2 + initialPlatformXPos, transform.position.y, transform.position.z);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************/
+    /***** SET POOL *****/
+    /********************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetPool()
+    {
+        _poolFactory.Type = PoolType.Platform;
+        Pool = _poolFactory.Create();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** SET DESTROYER *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetDestroyer()
+    {
         _destroyerFactory.Type = DestroyerType.Platform;
         Destroyer = _destroyerFactory.Create() as IDestroyer<IPlatform>;
-
-        _poolFactory.Type = PoolType.Platform;
-        IPool pool = _poolFactory.Create();
-        _generator.Pool = pool as IPool<IPlatform>;
-        _destroyer.Pool = pool as IPool<IPlatform>;
-
-        _generator.ReferenceObject = this;
+        _destroyer.Pool = _pool as IPool<IPlatform>;
         _destroyer.ReferenceObject = this;
+    }
 
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** SET GENERATOR *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetGenerator()
+    {
+        _generatorFactory.Type = GeneratorType.Platform;
+        Generator = _generatorFactory.Create() as IGenerator<IPlatform>;
+        _generator.Pool = _pool as IPool<IPlatform>;
+        _generator.ReferenceObject = this;
         _generator.Init();
     }
 

@@ -36,6 +36,7 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      * @var IDestroyer _destroyer object that destroys generated object using a pool system
      * @var Transform _generationPoint when to generate objects
      * @var Transform _destructionPoint when to destroy points
+     * @var IPool _pool pool object objects
      * @var IPoolFactory _poolFactory factory object that creates other objects, here, IPool
      */
 
@@ -45,6 +46,7 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
     protected IDestroyer<T> _destroyer;
     protected Transform _generationPoint;
     protected Transform _destructionPoint;
+    protected IPool _pool;
     protected IPoolFactory<IPool> _poolFactory;
 
     /**************************************************/
@@ -158,6 +160,23 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
     {
         get { return _destroyer; }
         set { _destroyer = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** POOL GETTER/SETTER *****/
+    /******************************/
+
+    /**
+     * @access public
+     */
+
+    public IPool Pool
+    {
+        get { return _pool; }
+        set { _pool = value; }
     }
 
     /**************************************************/
