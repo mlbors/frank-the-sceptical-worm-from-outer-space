@@ -56,10 +56,11 @@ public class PlatformDestroyer : AbstractDestroyer<IPlatform>
 
         foreach (IPlatform platform in _pool.PooledObjects)
         {
-            float _objectWidth = (platform as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
-            float _objectPosition = (platform as MonoBehaviour).gameObject.transform.position.x;
+            float objectWidth = (platform as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
+            float objectPosition = (platform as MonoBehaviour).gameObject.transform.position.x;
+            float destructionPointPosition = (_referenceObject as IGeneratorOperatorElement).DestructionPoint.transform.position.x;
 
-            if ((_objectWidth/2 + _objectPosition) < _referenceObject.transform.position.x) {
+            if ((objectWidth/2 + objectPosition) < destructionPointPosition) {
                 (platform as MonoBehaviour).gameObject.SetActive(false);
             }
         }
