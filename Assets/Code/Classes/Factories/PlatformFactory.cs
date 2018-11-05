@@ -136,6 +136,7 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
 
         _container.Bind<IPlatform>().To<Platform>().AsTransient();
         platform = _container.InstantiateComponent<Platform>(prefab, new object[] {});
+        platform.Type = _type;
 
         return platform;
     }

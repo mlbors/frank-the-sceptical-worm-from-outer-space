@@ -24,6 +24,12 @@ using UnityEngine;
 
 public interface IPlatform
 {
+    PlatformType Type
+    {
+        get;
+        set;
+    }
+
     float X
     {
         get;

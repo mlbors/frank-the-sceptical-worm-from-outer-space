@@ -26,6 +26,19 @@ using UnityEngine;
 public class PlatformPool : AbstractPool<IPlatform>
 {
     /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var PlatformType _neededType type of platform needed
+     */
+
+    protected PlatformType _neededType;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
     /***** CONSTRUCT *****/
     /*********************/
 
@@ -59,6 +72,59 @@ public class PlatformPool : AbstractPool<IPlatform>
     /**************************************************/
     /**************************************************/
 
+    /****************************/
+    /***** IPOOL ADD OBJECT *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public override void FillPool()
+    {
+        for (int i = 0; i < _amount; i++)
+        {
+            Debug.Log("::: FillPool :::");
+            _neededType = _GetRandomPlatformType();
+            _pooledObject = InstantiateNewObject();
+            AddObject(_pooledObject);
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IPOOL GET OBEJCT *****/
+    /****************************/
+
+    /**
+     * @access public
+     * @return IPlatform
+     */
+
+    public override IPlatform GetObject()
+    {
+        PlatformType platformType = _GetRandomPlatformType();
+
+        for (int i = 0; i < _pooledObjects.Count; i++)
+        {
+            if (CheckIfObjectAvailable(_pooledObjects[i]) 
+                && (_pooledObjects[i] as IPlatform).Type == platformType)
+            {
+                return _pooledObjects[i];
+            }
+        }
+
+        _neededType = platformType;
+        var newObj = InstantiateNewObject();
+        AddObject(newObj);
+        return newObj;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /****************************************/
     /***** IPOOL INSTANTIATE NEW OBJECT *****/
     /****************************************/
@@ -70,11 +136,7 @@ public class PlatformPool : AbstractPool<IPlatform>
 
     public override IPlatform InstantiateNewObject()
     {
-        Array values = Enum.GetValues(typeof(PlatformType));
-        System.Random random = new System.Random();
-        PlatformType platformType = (PlatformType)values.GetValue(random.Next(values.Length));
-
-        (_factory as IPlatformFactory<IPlatform>).Type = platformType;
+        (_factory as IPlatformFactory<IPlatform>).Type = _neededType;
 
         IPlatform platform = _factory.Create();
 
@@ -98,5 +160,25 @@ public class PlatformPool : AbstractPool<IPlatform>
     public override bool CheckIfObjectAvailable(IPlatform currentObject)
     {
         return !(currentObject as MonoBehaviour).gameObject.activeInHierarchy;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /************************************/
+    /***** GET RANDOM PLATFORM TYPE *****/
+    /************************************/
+
+    /**
+     * @access protected
+     * @return PlatformType
+     */
+
+    protected PlatformType _GetRandomPlatformType()
+    {
+        Array values = Enum.GetValues(typeof(PlatformType));
+        System.Random random = new System.Random();
+        PlatformType platformType = (PlatformType)values.GetValue(random.Next(values.Length));
+        return platformType;
     }
 }

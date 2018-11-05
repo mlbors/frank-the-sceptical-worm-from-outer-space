@@ -199,7 +199,7 @@ abstract public class AbstractPool<T> : IPool<T>, IProduct
      * @access public
      */
 
-    public void FillPool()
+    public virtual void FillPool()
     {
         for (int i = 0; i < _amount; i++)
         {

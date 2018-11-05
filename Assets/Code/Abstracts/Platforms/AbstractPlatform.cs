@@ -30,10 +30,12 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct, IRe
     /*********************/
 
     /**
+     * @var PlatformType _type platform type
      * @var Float _x x position
      * @var Float _y y position;
      */
 
+    protected PlatformType _type;
     protected float _x;
     protected float _y;
 
@@ -51,6 +53,23 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct, IRe
     [Inject]
     public virtual void Construct()
     {
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** TYPE GETTER/SETTER *****/
+    /******************************/
+
+    /**
+     * @access public
+     */
+
+    public PlatformType Type
+    {
+        get { return _type; }
+        set { _type = value; }
     }
 
     /**************************************************/
