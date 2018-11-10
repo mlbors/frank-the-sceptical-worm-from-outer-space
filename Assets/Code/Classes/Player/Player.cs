@@ -102,10 +102,10 @@ public class Player : AbstractPlayer
 
         _GetComponents();
 
-        _moveSpeed = 5.50f;
-        _speedMultiplier = 1.75f;
+        _moveSpeed = 6.75f;
+        _speedMultiplier = 1.25f;
         _speedMilestoneCount = 0.00f;
-        _speedIncreaseMilestone = 50.50f;
+        _speedIncreaseMilestone = 80.25f;
 
         _ground = LayerMask.GetMask("Ground");
         _groundChecker = this.transform.Find("GroundCheck");
@@ -354,7 +354,7 @@ public class Player : AbstractPlayer
 
     protected bool _CheckIfGrounded()
     {
-        if (Physics2D.OverlapCircle(_groundChecker.position, 0.025f, _ground))
+        if (Physics2D.OverlapCircle(_groundChecker.position, 0.015f, _ground))
         {
             Notify("player grounded", null);
             return true;
@@ -376,6 +376,9 @@ public class Player : AbstractPlayer
 
     public override void OnCollisionEnter2D(Collision2D other)
     {
-        
+        if (other.gameObject.tag == "ground" && other.otherCollider.GetType() == typeof(CircleCollider2D))
+        {
+            Physics2D.IgnoreCollision(other.collider, GetComponent<CircleCollider2D>());
+        }
     }
 }

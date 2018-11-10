@@ -41,7 +41,7 @@ public class JumpAction : IAction
             try
             {
                 Vector2 velocity = (subject as IPlayer).Rigidbody.velocity;
-                (subject as IPlayer).Rigidbody.velocity = new Vector2(velocity.x, 19.55f);
+                (subject as IPlayer).Rigidbody.velocity = new Vector2(velocity.x, 19.75f);
             }
             catch (Exception e)
             {

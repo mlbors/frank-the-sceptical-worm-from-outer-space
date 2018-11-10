@@ -149,11 +149,17 @@ public class Camera : AbstractCamera
     /***** MOVE CAMERA *****/
     /***********************/
 
+    /**
+     * @access protected
+     */
+
     protected void _MoveCamera()
     {
         _distanceToMove = (_cameraTarget as MonoBehaviour).transform.position.x - _targetLastPosition.x;
-        float xPosition = transform.position.x + _distanceToMove;
-        transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
 
+        float xPosition = transform.position.x + _distanceToMove;
+        float yPosition = _targetLastPosition.y - (_targetLastPosition.y/1.50f);
+
+        transform.position = new Vector3(xPosition, yPosition, transform.position.z);
     }
 }
