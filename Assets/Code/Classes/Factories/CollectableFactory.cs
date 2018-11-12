@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - PlatformFactory - Concrete Class
+ * FTSWFOS - CollectableFactory - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -19,22 +19,22 @@ using Zenject;
 /**************************************************/
 /**************************************************/
 
-/****************************/
-/***** PLATFORM FACTORY *****/
-/****************************/
+/*******************************/
+/***** COLLECTABLE FACTORY *****/
+/*******************************/
 
-public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IPlatform>
+public class CollectableFactory : AbstractDIFactory<ICollectable>, ICollectableFactory<ICollectable>
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
-     * @var PlatformType _type type of platform
+     * @var CollectableType _type type of collectable
      * @var List<GameObject> _gameObjects game objects to use
      */
 
-    protected PlatformType _type;
+    protected CollectableType _type;
     protected List<GameObject> _gameObjects;
 
     /**************************************************/
@@ -47,11 +47,11 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param PlatformType type type of platform
+     * @param CollectableType type type of collectable
      * @param List<GameObject> gameObjects game objects to use
      */
 
-    public PlatformFactory(DiContainer container, List<GameObject> gameObjects, PlatformType type = PlatformType.One) : base(container)
+    public CollectableFactory(DiContainer container, List<GameObject> gameObjects, CollectableType type = CollectableType.Bonus) : base(container)
     {
         _type = type;
         _gameObjects = gameObjects;
@@ -68,7 +68,7 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
      * @access public
      */
 
-    public PlatformType Type
+    public CollectableType Type
     {
         get { return _type; }
         set { _type = value; }
@@ -101,46 +101,31 @@ public class PlatformFactory : AbstractDIFactory<IPlatform>, IPlatformFactory<IP
     /**
      * @access public
      * @param params object constructorArguments comma-separated list of arguments
-     * @return IPlatform
+     * @return ICollectable
      */
 
-    public override IPlatform Create(params object[] constructorArguments)
+    public override ICollectable Create(params object[] constructorArguments)
     {
-        IPlatform platform;
+        ICollectable collectable;
         GameObject prefab;
 
         switch (_type)
         {
-            case PlatformType.One:
+            case CollectableType.Bonus:
                 prefab = _container.InstantiatePrefab(_gameObjects[0]);
-                break;
-            case PlatformType.Two:
-                prefab = _container.InstantiatePrefab(_gameObjects[1]);
-                break;
-            case PlatformType.Four:
-                prefab = _container.InstantiatePrefab(_gameObjects[2]);
-                break;
-            case PlatformType.Five:
-                prefab = _container.InstantiatePrefab(_gameObjects[3]);
-                break;
-            case PlatformType.Seven:
-                prefab = _container.InstantiatePrefab(_gameObjects[4]);
-                break;
-            case PlatformType.Nine:
-                prefab = _container.InstantiatePrefab(_gameObjects[5]);
+                //_container.Bind<ICollectable>().To<Bonus>().AsTransient();
+                //collectable = _container.InstantiateComponent<Bonus>(prefab, new object[] {});
                 break;
             default:
                 prefab = _container.InstantiatePrefab(_gameObjects[0]);
+                //_container.Bind<ICollectable>().To<Bonus>().AsTransient();
+                //collectable = _container.InstantiateComponent<Bonus>(prefab, new object[] {});
                 break;
         }
 
-        _container.Bind<IPlatform>().To<Platform>().AsTransient();
-        platform = _container.InstantiateComponent<Platform>(prefab, new object[] {});
-        platform.Type = _type;
-
-        return platform;
+        return collectable;
     }
-
+   
     /**************************************************/
     /**************************************************/
 
