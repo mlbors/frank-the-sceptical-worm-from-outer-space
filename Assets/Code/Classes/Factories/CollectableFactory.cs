@@ -113,13 +113,13 @@ public class CollectableFactory : AbstractDIFactory<ICollectable>, ICollectableF
         {
             case CollectableType.Bonus:
                 prefab = _container.InstantiatePrefab(_gameObjects[0]);
-                //_container.Bind<ICollectable>().To<Bonus>().AsTransient();
-                //collectable = _container.InstantiateComponent<Bonus>(prefab, new object[] {});
+                _container.Bind<ICollectable>().To<Bonus>().AsTransient();
+                collectable = _container.InstantiateComponent<Bonus>(prefab, new object[] {});
                 break;
             default:
                 prefab = _container.InstantiatePrefab(_gameObjects[0]);
-                //_container.Bind<ICollectable>().To<Bonus>().AsTransient();
-                //collectable = _container.InstantiateComponent<Bonus>(prefab, new object[] {});
+                _container.Bind<ICollectable>().To<Bonus>().AsTransient();
+                collectable = _container.InstantiateComponent<Bonus>(prefab, new object[] { });
                 break;
         }
 

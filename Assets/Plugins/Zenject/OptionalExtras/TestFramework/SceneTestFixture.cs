@@ -1,17 +1,14 @@
 #if UNITY_EDITOR
 
+using System.Collections;
 using System.Collections.Generic;
-using Zenject.Internal;
+using System.Linq;
 using ModestTree;
 using NUnit.Framework;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zenject;
-using System.Collections;
-using UnityEngine.TestTools;
+using Zenject.Internal;
 using Assert = ModestTree.Assert;
-using System.Linq;
 
 // Ignore warning about using SceneManager.UnloadScene instead of SceneManager.UnloadSceneAsync
 #pragma warning disable 618
@@ -78,10 +75,10 @@ namespace Zenject
                         .TryGetSceneContextForScene(scene);
                 }
 
-                _sceneContainers.Add(sceneContext.Container);
+                _sceneContainers.Add(sceneContext == null ? null : sceneContext.Container);
             }
 
-            _sceneContainer = _sceneContainers.Where(x => x != null).Last();
+            _sceneContainer = _sceneContainers.Where(x => x != null).LastOrDefault();
 
             if (_sceneContainer != null)
             {

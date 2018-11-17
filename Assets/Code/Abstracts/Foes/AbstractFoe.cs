@@ -29,14 +29,33 @@ abstract public class AbstractFoe : MonoBehaviour, IFoe, IObservable, IProduct
     /*********************/
 
     /**
+     * @var FoeType _type type of foe
      * @var Float _x x position
      * @var Float _y y position;
      * @var List<IObserver> _observers list of observers
      */
 
+    protected FoeType _type;
     protected float _x;
     protected float _y;
     protected List<IObserver> _observers = new List<IObserver>();
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** TYPE GETTER/SETTER *****/
+    /******************************/
+
+    /**
+     * @access public
+     */
+
+    public FoeType Type
+    {
+        get { return _type; }
+        set { _type = value; }
+    }
 
     /**************************************************/
     /**************************************************/

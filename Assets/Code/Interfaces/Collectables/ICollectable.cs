@@ -24,6 +24,12 @@ using UnityEngine;
 
 public interface ICollectable
 {
+    CollectableType Type
+    {
+        get;
+        set;
+    }
+
     float X
     {
         get;

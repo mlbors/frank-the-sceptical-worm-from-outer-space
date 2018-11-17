@@ -29,16 +29,35 @@ abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObserv
     /*********************/
 
     /**
+     * @var CollectableType _type type of collectable
      * @var Float _x x position
      * @var Float _y y position;
      * @var List<IObserver> _observers list of observers
      * @var AudioSource _sound sound to use
      */
 
+    protected CollectableType _type;
     protected float _x;
     protected float _y;
     protected List<IObserver> _observers = new List<IObserver>();
     protected AudioSource _sound;
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** TYPE GETTER/SETTER *****/
+    /******************************/
+
+    /**
+     * @access public
+     */
+
+    public CollectableType Type
+    {
+        get { return _type; }
+        set { _type = value; }
+    }
 
     /**************************************************/
     /**************************************************/

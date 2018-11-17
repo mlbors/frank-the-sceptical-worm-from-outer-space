@@ -1,6 +1,6 @@
+using ModestTree;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using ModestTree;
 
 namespace Zenject.Internal
 {

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using ModestTree;
 
 namespace Zenject
@@ -9,7 +10,7 @@ namespace Zenject
 
         Action<object> _callback;
         SignalDeclaration _declaration;
-        Type _signalType;
+        BindingId _signalId;
 
         public SignalSubscription(Pool pool)
         {
@@ -18,9 +19,9 @@ namespace Zenject
             SetDefaults();
         }
 
-        public Type SignalType
+        public BindingId SignalId
         {
-            get { return _signalType; }
+            get { return _signalId; }
         }
 
         public void OnSpawned(
@@ -30,7 +31,7 @@ namespace Zenject
             _callback = callback;
             _declaration = declaration;
             // Cache this in case OnDeclarationDespawned is called
-            _signalType = declaration.SignalType;
+            _signalId = declaration.BindingId;
 
             declaration.Add(this);
         }
@@ -49,12 +50,18 @@ namespace Zenject
         {
             _callback = null;
             _declaration = null;
-            _signalType = null;
+            _signalId = new BindingId();
         }
 
         public void Dispose()
         {
-            _pool.Despawn(this);
+            // Allow calling this twice since signals automatically unsubscribe in SignalBus.LateDispose
+            // and so this causes issues if users also unsubscribe in a MonoBehaviour OnDestroy on a
+            // root game object
+            if (!_pool.InactiveItems.Contains(this))
+            {
+                _pool.Despawn(this);
+            }
         }
 
         // See comment in SignalDeclaration for why this exists

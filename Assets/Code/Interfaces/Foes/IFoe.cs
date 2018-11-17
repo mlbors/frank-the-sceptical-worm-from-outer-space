@@ -24,6 +24,12 @@ using UnityEngine;
 
 public interface IFoe
 {
+    FoeType Type
+    {
+        get;
+        set;
+    }
+
     float X
     {
         get;

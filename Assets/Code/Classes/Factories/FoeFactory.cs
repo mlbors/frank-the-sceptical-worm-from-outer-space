@@ -113,13 +113,13 @@ public class FoeFactory : AbstractDIFactory<IFoe>, IFoeFactory<IFoe>
         {
             case FoeType.Spike:
                 prefab = _container.InstantiatePrefab(_gameObjects[0]);
-                //_container.Bind<IFoe>().To<Spike>().AsTransient();
-                //foe = _container.InstantiateComponent<Spike>(prefab, new object[] {});
+                _container.Bind<IFoe>().To<Spike>().AsTransient();
+                foe = _container.InstantiateComponent<Spike>(prefab, new object[] {});
                 break;
             default:
                 prefab = _container.InstantiatePrefab(_gameObjects[0]);
-                //_container.Bind<IFoe>().To<Spike>().AsTransient();
-                //foe = _container.InstantiateComponent<Spike>(prefab, new object[] { });
+                _container.Bind<IFoe>().To<Spike>().AsTransient();
+                foe = _container.InstantiateComponent<Spike>(prefab, new object[] { });
                 break;
         }
 

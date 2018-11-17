@@ -1,0 +1,56 @@
+﻿/**
+ * FTSWFOS - Spike - Concrete Class
+ *
+ * @since       2018.01.09
+ * @version     1.0.0.0
+ * @author      MLB
+ * @copyright   -
+ */
+
+/*******************/
+/***** IMPORTS *****/
+/*******************/
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/**************************************************/
+/**************************************************/
+
+/*****************/
+/***** SPIKE *****/
+/*****************/
+
+public class Spike : AbstractFoe
+{
+    /*********************/
+    /***** IFOE LIVE *****/
+    /*********************/
+
+    /**
+     * @access public
+     */
+
+    public override void Live()
+    {
+
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*******************************/
+    /***** ON TRIGGER ENTER 2D *****/
+    /*******************************/
+
+    /**
+     * @access private
+     */
+
+    public override void OnTriggerEnter2D(Collision2D otherObject)
+    {
+
+    }
+}
+ 

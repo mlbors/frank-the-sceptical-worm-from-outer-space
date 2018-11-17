@@ -3,10 +3,10 @@
 using System;
 using System.Collections.Generic;
 using ModestTree;
-using UnityEngine;
 
 namespace Zenject
 {
+    [NoReflectionBaking]
     public class PrefabResourceBindingFinalizer : ProviderBindingFinalizer
     {
         readonly GameObjectCreationParameters _gameObjectBindInfo;
@@ -56,7 +56,8 @@ namespace Zenject
                                     _gameObjectBindInfo,
                                     concreteType,
                                     BindInfo.Arguments,
-                                    new PrefabProviderResource(_resourcePath))));
+                                    new PrefabProviderResource(_resourcePath),
+                                    BindInfo.InstantiatedCallback)));
                     break;
                 }
                 case ScopeTypes.Singleton:
@@ -75,7 +76,8 @@ namespace Zenject
                             _gameObjectBindInfo,
                             argumentTarget,
                             BindInfo.Arguments,
-                            new PrefabProviderResource(_resourcePath)));
+                            new PrefabProviderResource(_resourcePath),
+                            BindInfo.InstantiatedCallback));
 
                     RegisterProvidersForAllContractsPerConcreteType(
                         container,
@@ -109,7 +111,8 @@ namespace Zenject
                                     _gameObjectBindInfo,
                                     contractType,
                                     BindInfo.Arguments,
-                                    new PrefabProviderResource(_resourcePath))));
+                                    new PrefabProviderResource(_resourcePath),
+                                    BindInfo.InstantiatedCallback)));
                     break;
                 }
                 case ScopeTypes.Singleton:
@@ -128,7 +131,8 @@ namespace Zenject
                             _gameObjectBindInfo,
                             argumentTarget,
                             BindInfo.Arguments,
-                            new PrefabProviderResource(_resourcePath)));
+                            new PrefabProviderResource(_resourcePath),
+                            BindInfo.InstantiatedCallback));
 
                     RegisterProviderPerContract(
                         container,

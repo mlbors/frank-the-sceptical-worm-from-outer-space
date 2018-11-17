@@ -2,7 +2,7 @@ using System;
 
 namespace Zenject
 {
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method)]
     public class ValidateOnlyAttribute : Attribute
     {
     }

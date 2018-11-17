@@ -34,7 +34,6 @@ namespace Zenject.MemoryPoolMonitor
         Texture2D _rowBackgroundSelected;
         Texture2D _lineTexture;
         Type _selectedPoolType;
-        float _headerTop;
         string _searchFilter = "";
         string _actualFilter = "";
 
@@ -44,6 +43,11 @@ namespace Zenject.MemoryPoolMonitor
         {
             _settings = settings;
             _window = window;
+        }
+
+        public float HeaderTop
+        {
+            get { return _settings.HeaderHeight + _settings.FilterHeight; }
         }
 
         public float TotalWidth
@@ -140,7 +144,6 @@ namespace Zenject.MemoryPoolMonitor
             StaticMemoryPoolRegistry.PoolAdded += OnPoolListChanged;
             StaticMemoryPoolRegistry.PoolRemoved += OnPoolListChanged;
             _poolListDirty = true;
-            _headerTop = _settings.HeaderHeight + _settings.FilterHeight;
         }
 
         void OnPoolListChanged(IMemoryPool pool)
@@ -163,12 +166,12 @@ namespace Zenject.MemoryPoolMonitor
 
         bool ShouldIncludePool(IMemoryPool pool)
         {
-            var poolType = pool.GetType();
+            //var poolType = pool.GetType();
 
-            if (poolType.Namespace == "Zenject")
-            {
-                return false;
-            }
+            //if (poolType.Namespace == "Zenject")
+            //{
+                //return false;
+            //}
 
             if (_actualFilter.IsEmpty())
             {
@@ -201,13 +204,13 @@ namespace Zenject.MemoryPoolMonitor
                 _poolListDirty = true;
             }
 
-            Rect viewArea = new Rect(0, _headerTop, TotalWidth - scrollbarSize.y, _window.position.height - _headerTop);
+            Rect viewArea = new Rect(0, HeaderTop, TotalWidth - scrollbarSize.y, _window.position.height - HeaderTop);
 
             Rect contentRect = new Rect(
                 0, 0, viewArea.width, _pools.Count() * _settings.RowHeight);
 
             Rect vScrRect = new Rect(
-                windowBounds.x + viewArea.width, _headerTop, scrollbarSize.y, viewArea.height);
+                windowBounds.x + viewArea.width, HeaderTop, scrollbarSize.y, viewArea.height);
 
             _scrollPosition = GUI.VerticalScrollbar(
                 vScrRect, _scrollPosition, viewArea.height, 0, contentRect.height);
@@ -235,7 +238,7 @@ namespace Zenject.MemoryPoolMonitor
                 0, _settings.FilterHeight - 0.5f * _settings.SplitterWidth, width, _settings.SplitterWidth), LineTexture);
 
             GUI.DrawTexture(new Rect(
-                0, _headerTop - 0.5f * _settings.SplitterWidth, width, _settings.SplitterWidth), LineTexture);
+                0, HeaderTop - 0.5f * _settings.SplitterWidth, width, _settings.SplitterWidth), LineTexture);
 
             var columnPos = 0.0f;
 
@@ -293,7 +296,7 @@ namespace Zenject.MemoryPoolMonitor
                 var pool = _pools[i];
 
                 var rowRect = GetPoolRowRect(i);
-                rowRect.y += _headerTop;
+                rowRect.y += HeaderTop;
 
                 if (rowRect.Contains(mousePositionInContent))
                 {

@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Zenject
 {
+    [NoReflectionBaking]
     public class PrefabBindingFinalizer : ProviderBindingFinalizer
     {
         readonly GameObjectCreationParameters _gameObjectBindInfo;
@@ -56,7 +57,8 @@ namespace Zenject
                                     _gameObjectBindInfo,
                                     concreteType,
                                     BindInfo.Arguments,
-                                    new PrefabProvider(_prefab))));
+                                    new PrefabProvider(_prefab),
+                                    BindInfo.InstantiatedCallback)));
                     break;
                 }
                 case ScopeTypes.Singleton:
@@ -75,7 +77,8 @@ namespace Zenject
                             _gameObjectBindInfo,
                             argumentTarget,
                             BindInfo.Arguments,
-                            new PrefabProvider(_prefab)));
+                            new PrefabProvider(_prefab),
+                            BindInfo.InstantiatedCallback));
 
                     RegisterProvidersForAllContractsPerConcreteType(
                         container,
@@ -109,7 +112,8 @@ namespace Zenject
                                     _gameObjectBindInfo,
                                     contractType,
                                     BindInfo.Arguments,
-                                    new PrefabProvider(_prefab))));
+                                    new PrefabProvider(_prefab),
+                                    BindInfo.InstantiatedCallback)));
                     break;
                 }
                 case ScopeTypes.Singleton:
@@ -128,7 +132,8 @@ namespace Zenject
                             _gameObjectBindInfo,
                             argumentTarget,
                             BindInfo.Arguments,
-                            new PrefabProvider(_prefab)));
+                            new PrefabProvider(_prefab),
+                            BindInfo.InstantiatedCallback));
 
                     RegisterProviderPerContract(
                         container,
