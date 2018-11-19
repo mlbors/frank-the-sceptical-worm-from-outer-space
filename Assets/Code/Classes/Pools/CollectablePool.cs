@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - FoePool - Concrete Class
+ * FTSWFOS - CollectablePool - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -19,25 +19,24 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/********************/
-/***** FOE POOL *****/
-/********************/
+/****************************/
+/***** COLLECTABLE POOL *****/
+/****************************/
 
-public class FoePool : AbstractPool<IFoe>, IFoePool
-{   
+public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
+{
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
-     * @var FoeType _neededType type of foe needed
+     * @var CollectableType _neededType type of collectable needed
      */
 
-    protected FoeType _neededType;
+    protected CollectableType _neededType;
 
     /**************************************************/
     /**************************************************/
-
 
     /*********************/
     /***** CONSTRUCT *****/
@@ -49,7 +48,7 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
      * @param IFactory factory object that other creates objects, here object of type T
      */
 
-    public FoePool(IFoeFactory<IFoe> factory, int amount = 5) : base(amount, factory)
+    public CollectablePool(ICollectableFactory<ICollectable> factory, int amount = 5) : base(amount, factory)
     {
     }
 
@@ -64,7 +63,7 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
      * @access public
      */
 
-    public FoeType NeedType
+    public CollectableType NeedType
     {
         get { return _neededType; }
         set { _neededType = value; }
@@ -83,7 +82,7 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
 
     public override void Init()
     {
-        (_factory as IFoeFactory<IFoe>).Type = FoeType.Spike;
+        (_factory as ICollectableFactory<ICollectable>).Type = CollectableType.Bonus;
         FillPool();
     }
 
@@ -96,17 +95,17 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
 
     /**
      * @access public
-     * @return IFoe
+     * @return ICollectable
      */
 
-    public override IFoe InstantiateNewObject()
+    public override ICollectable InstantiateNewObject()
     {
-        (_factory as IFoeFactory<IFoe>).Type = FoeType.Spike;
+        (_factory as ICollectableFactory<ICollectable>).Type = CollectableType.Bonus;
 
-        IFoe foe = _factory.Create();
+        ICollectable collectable = _factory.Create();
 
-        (foe as MonoBehaviour).gameObject.SetActive(false);
-        return foe;
+        (collectable as MonoBehaviour).gameObject.SetActive(false);
+        return collectable;
     }
 
     /**************************************************/
@@ -118,11 +117,11 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
 
     /**
      * @access public
-     * @param IFoe currentObject object to check
+     * @param ICollectable currentObject object to check
      * @return Bool
      */
 
-    public override bool CheckIfObjectAvailable(IFoe currentObject)
+    public override bool CheckIfObjectAvailable(ICollectable currentObject)
     {
         return !(currentObject as MonoBehaviour).gameObject.activeInHierarchy;
     }
