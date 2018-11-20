@@ -33,13 +33,15 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
      * @access public
      * @param IGeneratorFactory<IGenerator> generatorFactroy object that create other objects, here, IGenerator
      * @param IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
+     * @param IPoolFactory poolFactory factory object that creates other objects, here, IPool
      */
 
     [Inject]
     public override void Construct(IGeneratorFactory<IGenerator> generatorFactory,
-                                   IDestroyerFactory<IDestroyer> destroyerFactory)
+                                   IDestroyerFactory<IDestroyer> destroyerFactory,
+                                   IPoolFactory<IPool> poolFactory)
     {
-        base.Construct(generatorFactory, destroyerFactory);
+        base.Construct(generatorFactory, destroyerFactory, poolFactory);
     }
 
     /**************************************************/
@@ -51,11 +53,65 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
 
     public override void Init()
     {
-        _generatorFactory.Type = GeneratorType.Collectable;
-        Generator = _generatorFactory.Create() as IGenerator<ICollectable>;
+        _SetPool();
+        _SetDestroyer();
+        _SetGenerator();
+    }
 
+    /**************************************************/
+    /**************************************************/
+
+    /********************/
+    /***** SET POOL *****/
+    /********************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetPool()
+    {
+        _poolFactory.Type = PoolType.Collectable;
+        Pool = _poolFactory.Create();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** SET DESTROYER *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetDestroyer()
+    {
         _destroyerFactory.Type = DestroyerType.Collectable;
         Destroyer = _destroyerFactory.Create() as IDestroyer<ICollectable>;
+        _destroyer.Pool = _pool as IPool<ICollectable>;
+        _destroyer.ReferenceObject = _referenceObject;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** SET GENERATOR *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetGenerator()
+    {
+        _generatorFactory.Type = GeneratorType.Collectable;
+        Generator = _generatorFactory.Create() as IGenerator<ICollectable>;
+        _generator.Pool = _pool as IPool<ICollectable>;
+        _generator.ReferenceObject = _referenceObject;
+        _generator.Init();
     }
 
     /**************************************************/

@@ -73,10 +73,14 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
     protected void _SetValues()
     {
         _operatorElementFactory.Type = OperatorElementType.CollectableOperatorElement;
-        AddOperatorElement(_operatorElementFactory.Create());
+        IOperatorElement collectableOperatorElement = _operatorElementFactory.Create();
+        (collectableOperatorElement as IGeneratorComponentOperatorElement).ReferenceObject = _referenceObject;
+        AddOperatorElement(collectableOperatorElement);
 
         _operatorElementFactory.Type = OperatorElementType.FoeOperatorElement;
-        AddOperatorElement(_operatorElementFactory.Create());
+        IOperatorElement foeOperatorElement = _operatorElementFactory.Create();
+        (foeOperatorElement as IGeneratorComponentOperatorElement).ReferenceObject = _referenceObject;
+        AddOperatorElement(foeOperatorElement);
     }
 
     /**************************************************/

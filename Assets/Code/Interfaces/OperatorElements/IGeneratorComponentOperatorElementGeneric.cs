@@ -24,15 +24,5 @@ using UnityEngine;
 
 public interface IGeneratorComponentOperatorElement<T> : IGeneratorComponentOperatorElement
 {
-    IGenerator<T> Generator
-    {
-        get;
-        set;
-    }
 
-    IDestroyer<T> Destroyer
-    {
-        get;
-        set;
-    }
 }

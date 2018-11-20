@@ -54,9 +54,7 @@ public class CollectablesInstaller : MonoInstaller
                  .FromInstance(_settings.collectables)
                  .WhenInjectedInto<CollectableFactory>();
 
-        Container.Bind<ICollectableFactory<ICollectable>>()
-                 .To<CollectableFactory>()
-                 .AsSingle();
+ 
     }
 
     /**************************************************/

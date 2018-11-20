@@ -33,13 +33,15 @@ public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe
      * @access public
      * @param IGeneratorFactory<IGenerator> generatorFactroy object that create other objects, here, IGenerator
      * @param IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
+     * @param IPoolFactory poolFactory factory object that creates other objects, here, IPool
      */
 
     [Inject]
     public override void Construct(IGeneratorFactory<IGenerator> generatorFactory,
-                                   IDestroyerFactory<IDestroyer> destroyerFactory)
+                                   IDestroyerFactory<IDestroyer> destroyerFactory,
+                                   IPoolFactory<IPool> poolFactory)
     {
-        base.Construct(generatorFactory, destroyerFactory);
+        base.Construct(generatorFactory, destroyerFactory, poolFactory);
     }
 
     /**************************************************/
@@ -51,12 +53,67 @@ public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe
 
     public override void Init()
     {
-        _generatorFactory.Type = GeneratorType.Foe;
-        Generator = _generatorFactory.Create() as IGenerator<IFoe>;
+        _SetPool();
+        _SetDestroyer();
+        _SetGenerator();
+    }
 
+    /**************************************************/
+    /**************************************************/
+
+    /********************/
+    /***** SET POOL *****/
+    /********************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetPool()
+    {
+        _poolFactory.Type = PoolType.Foe;
+        Pool = _poolFactory.Create();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** SET DESTROYER *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetDestroyer()
+    {
         _destroyerFactory.Type = DestroyerType.Foe;
         Destroyer = _destroyerFactory.Create() as IDestroyer<IFoe>;
+        _destroyer.Pool = _pool as IPool<IFoe>;
+        _destroyer.ReferenceObject = _referenceObject;
     }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** SET GENERATOR *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetGenerator()
+    {
+        _generatorFactory.Type = GeneratorType.Foe;
+        Generator = _generatorFactory.Create() as IGenerator<IFoe>;
+        _generator.Pool = _pool as IPool<IFoe>;
+        _generator.ReferenceObject = _referenceObject;
+        _generator.Init();
+    }
+
 
     /**************************************************/
     /**************************************************/

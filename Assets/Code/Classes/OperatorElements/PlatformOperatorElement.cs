@@ -25,8 +25,6 @@ using Zenject;
 
 public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatform>, IPlatformOperatorElement
 {
-    
-
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -35,7 +33,7 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
      * @access public
      * @param IGeneratorFactory<IGenerator> generatorFactroy object that create other objects, here, IGenerator
      * @param IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
-     * @param IPoolFactory _poolFactory factory object that creates other objects, here, IPool
+     * @param IPoolFactory poolFactory factory object that creates other objects, here, IPool
      */
 
     [Inject]

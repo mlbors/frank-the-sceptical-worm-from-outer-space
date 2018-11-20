@@ -90,6 +90,12 @@ public class PoolFactory : AbstractDIFactory<IPool>, IPoolFactory<IPool>
 
         switch (_type)
         {
+            case PoolType.Collectable:
+                pool = _container.Instantiate<CollectablePool>() as IPool;
+                break;
+            case PoolType.Foe:
+                pool = _container.Instantiate<FoePool>() as IPool;
+                break;
             case PoolType.Platform:
                 pool = _container.Instantiate<PlatformPool>() as IPool;
                 break;

@@ -52,11 +52,7 @@ public class FoesInstaller : MonoInstaller
     {
         Container.Bind<List<GameObject>>()
                  .FromInstance(_settings.foes)
-                 .WhenInjectedInto<FoeFactory>();
-
-        Container.Bind<IFoeFactory<IFoe>>()
-                 .To<FoeFactory>()
-                 .AsSingle();
+                 .WhenInjectedInto<FoeFactory>();      
     }
 
     /**************************************************/

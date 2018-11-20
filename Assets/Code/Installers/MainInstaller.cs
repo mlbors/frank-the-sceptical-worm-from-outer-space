@@ -97,22 +97,13 @@ public class MainInstaller : MonoInstaller
                  .WhenInjectedInto<IGeneratorOperatorElement>()
                  .NonLazy();
 
-        Container.Bind<IGeneratorFactory<IGenerator>>()
-                 .To<GeneratorFactory>()
-                 .AsCached()
-                 .WhenInjectedInto<IGeneratorComponentOperatorElement>()
-                 .NonLazy();
+        Container.Bind<ICollectableFactory<ICollectable>>()
+                  .To<CollectableFactory>()
+                  .AsSingle();
 
-        Container.Bind<IDestroyerFactory<IDestroyer>>()
-                 .To<DestroyerFactory>()
-                 .AsCached()
-                 .WhenInjectedInto<IGeneratorComponentOperatorElement>()
-                 .NonLazy();
-                 
-        /* Container.Bind<List<GameObject>>()
-                 .FromInstance(new List<GameObject>{ _settings.objectsGenerationPoint, _settings.objectsDestructionPoint})
-                 .AsCached()
-                 .WhenInjectedInto<IGeneratorOperatorElement>(); */
+        Container.Bind<IFoeFactory<IFoe>>()
+                 .To<FoeFactory>()
+                 .AsSingle();
 
         Container.Bind<GameObject>()
                  .FromInstance(_settings.cameraGameObject)

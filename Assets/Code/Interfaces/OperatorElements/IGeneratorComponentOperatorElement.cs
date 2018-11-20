@@ -24,6 +24,9 @@ using UnityEngine;
 
 public interface IGeneratorComponentOperatorElement
 {
-    void CallGenerator();
-    void CallDestroyer();
+    MonoBehaviour ReferenceObject
+    {
+        get;
+        set;
+    }
 }
