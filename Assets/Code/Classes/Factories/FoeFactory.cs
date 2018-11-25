@@ -123,6 +123,7 @@ public class FoeFactory : AbstractDIFactory<IFoe>, IFoeFactory<IFoe>
                 break;
         }
 
+        foe.Type = _type;
         return foe;
     }
 

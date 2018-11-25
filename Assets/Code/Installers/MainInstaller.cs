@@ -47,20 +47,69 @@ public class MainInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Debug.Log("::: Install main bindings :::");
+        _InstallLoaders();
+        _InstallManagers();
+        _InstallOperators();
+        _InstallGeneratorsAndDestroyers();
+        _InstallCollectables();
+        _InstallFoes();
+        _InstallCamera();
+    }
 
+    /**************************************************/
+    /**************************************************/
+
+    /***************************/
+    /***** INSTALL LOADERS *****/
+    /***************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InstallLoaders()
+    {
         Container.Bind<IGameLoader>()
                  .To<GameLoader>()
                  .FromNewComponentOnNewGameObject()
                  .WithGameObjectName("MainLoader")
                  .AsSingle()
                  .NonLazy();
-        
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** INSTALL MANAGERS *****/
+    /****************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InstallManagers()
+    {
         Container.Bind<IManagerFactory<IManager>>()
                  .To<ManagerFactory>()
                  .AsSingle()
                  .WhenInjectedInto<IGameLoader>()
                  .NonLazy();
+    }
 
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************/
+    /***** INSTALL OPERATORS *****/
+    /*****************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InstallOperators()
+    {
         Container.Bind<IOperatorFactory<IOperator>>()
                  .To<OperatorFactory>()
                  .AsSingle()
@@ -78,7 +127,21 @@ public class MainInstaller : MonoInstaller
                  .AsCached()
                  .WhenInjectedInto<IPlatformGenerator>()
                  .NonLazy();
+    }
 
+    /**************************************************/
+    /**************************************************/
+
+    /********************************************/
+    /***** INSTALL GENRATORS AND DESTROYERS *****/
+    /********************************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InstallGeneratorsAndDestroyers()
+    {
         Container.Bind<IGeneratorFactory<IGenerator>>()
                  .To<GeneratorFactory>()
                  .AsCached()
@@ -96,15 +159,65 @@ public class MainInstaller : MonoInstaller
                  .AsCached()
                  .WhenInjectedInto<IGeneratorOperatorElement>()
                  .NonLazy();
+    }
 
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** INSTALL COLLECTABLES *****/
+    /********************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InstallCollectables()
+    {
         Container.Bind<ICollectableFactory<ICollectable>>()
                   .To<CollectableFactory>()
                   .AsSingle();
 
+        Container.Bind<List<GameObject>>()
+                 .FromInstance(_settings.collectables)
+                 .WhenInjectedInto<CollectableFactory>();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /************************/
+    /***** INSTALL FOES *****/
+    /************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InstallFoes()
+    {
         Container.Bind<IFoeFactory<IFoe>>()
                  .To<FoeFactory>()
                  .AsSingle();
 
+        Container.Bind<List<GameObject>>()
+                 .FromInstance(_settings.foes)
+                 .WhenInjectedInto<FoeFactory>();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************/
+    /***** INSTALL CAMERA *****/
+    /**************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InstallCamera()
+    {
         Container.Bind<GameObject>()
                  .FromInstance(_settings.cameraGameObject)
                  .AsCached()
@@ -139,10 +252,14 @@ public class MainInstaller : MonoInstaller
          * @var GameObject cameraGameObject prefab to use camera
          * @var GameObject objectGenerationPoint point from where to generate objects
          * @var GameObject objectDestructionPoint point from where to destroy objects
+         * @var List<GameObject> collectables list of collectables
+         * @var List<GameObject> foes list of foes
          */
 
         public GameObject cameraGameObject;
         public GameObject objectsGenerationPoint;
         public GameObject objectsDestructionPoint;
+        public List<GameObject> collectables;
+        public List<GameObject> foes;
     }
 }

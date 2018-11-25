@@ -51,7 +51,9 @@ public class CollectableFactory : AbstractDIFactory<ICollectable>, ICollectableF
      * @param List<GameObject> gameObjects game objects to use
      */
 
-    public CollectableFactory(DiContainer container, List<GameObject> gameObjects, CollectableType type = CollectableType.Bonus) : base(container)
+    public CollectableFactory(DiContainer container, 
+                              List<GameObject> gameObjects, 
+                              CollectableType type = CollectableType.Bonus) : base(container)
     {
         _type = type;
         _gameObjects = gameObjects;
@@ -116,6 +118,11 @@ public class CollectableFactory : AbstractDIFactory<ICollectable>, ICollectableF
                 _container.Bind<ICollectable>().To<Bonus>().AsTransient();
                 collectable = _container.InstantiateComponent<Bonus>(prefab, new object[] {});
                 break;
+            case CollectableType.PowerUp:
+                prefab = _container.InstantiatePrefab(_gameObjects[1]);
+                _container.Bind<ICollectable>().To<PowerUp>().AsTransient();
+                collectable = _container.InstantiateComponent<PowerUp>(prefab, new object[] { });
+                break;
             default:
                 prefab = _container.InstantiatePrefab(_gameObjects[0]);
                 _container.Bind<ICollectable>().To<Bonus>().AsTransient();
@@ -123,6 +130,7 @@ public class CollectableFactory : AbstractDIFactory<ICollectable>, ICollectableF
                 break;
         }
 
+        collectable.Type = _type;
         return collectable;
     }
    

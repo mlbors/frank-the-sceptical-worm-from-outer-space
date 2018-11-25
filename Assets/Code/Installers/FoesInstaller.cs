@@ -50,9 +50,7 @@ public class FoesInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.Bind<List<GameObject>>()
-                 .FromInstance(_settings.foes)
-                 .WhenInjectedInto<FoeFactory>();      
+     
     }
 
     /**************************************************/
@@ -73,10 +71,5 @@ public class FoesInstaller : MonoInstaller
         /***** ATTRIBUTS *****/
         /*********************/
 
-        /**
-         * @var List<GameObject> foes list of foes
-         */
-
-        public List<GameObject> foes;
     }
 }

@@ -73,10 +73,5 @@ public class CameraInstaller : MonoInstaller
         /***** ATTRIBUTS *****/
         /*********************/
 
-        /**
-         * @var GameObject cameraGameObject prefab to use for player
-         */
-
-        public GameObject cameraGameObject;
     }
 }

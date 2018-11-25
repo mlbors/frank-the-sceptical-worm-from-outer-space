@@ -50,11 +50,7 @@ public class CollectablesInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.Bind<List<GameObject>>()
-                 .FromInstance(_settings.collectables)
-                 .WhenInjectedInto<CollectableFactory>();
 
- 
     }
 
     /**************************************************/
@@ -75,10 +71,5 @@ public class CollectablesInstaller : MonoInstaller
         /***** ATTRIBUTS *****/
         /*********************/
 
-        /**
-         * @var List<GameObject> collectables list of collectables
-         */
-
-        public List<GameObject> collectables;
     }
 }

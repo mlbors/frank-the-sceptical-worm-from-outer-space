@@ -50,7 +50,7 @@ public class FoeGenerator : AbstractGenerator<IFoe>
 
     public override void Init()
     {
-
+        _pool.Init();
     }
 
     /**************************************************/

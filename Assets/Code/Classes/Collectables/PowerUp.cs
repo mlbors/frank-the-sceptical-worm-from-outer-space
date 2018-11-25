@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - CollectableGenerator - Concrete Class
+ * FTSWFOS - PowerUp - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,49 +18,55 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*********************************/
-/***** COLLECTABLE GENERATOR *****/
-/*********************************/
+/********************/
+/***** POWER UP *****/
+/********************/
 
-public class CollectableGenerator : AbstractGenerator<ICollectable>
+public class PowerUp : AbstractCollectable
 {
-    /*********************/
-    /***** CONSTRUCT *****/
-    /*********************/
+    /********************************/
+    /***** ICOLLECTABLE PERFORM *****/
+    /********************************/
 
     /**
      * @access public
      */
 
-    public CollectableGenerator() : base()
+    public override void Perform()
     {
+
     }
 
     /**************************************************/
     /**************************************************/
 
-    /****************/
-    /***** INIT *****/
-    /****************/
+    /***************************************/
+    /***** ISOUNDING OBEJCT PLAY SOUND *****/
+    /***************************************/
 
     /**
      * @access public
      */
 
-    public override void Init()
+    public override void PlaySound()
     {
-        _pool.Init();
+
     }
 
     /**************************************************/
     /**************************************************/
 
-    /********************/
-    /***** GENERATE *****/
-    /********************/
+    /*******************************/
+    /***** ON TRIGGER ENTER 2D *****/
+    /*******************************/
 
-    public override void Generate()
+    /**
+     * @access private
+     */
+
+    public override void OnTriggerEnter2D(Collision2D otherObject)
     {
 
     }
 }
+ 
