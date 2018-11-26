@@ -22,7 +22,7 @@ using UnityEngine;
 /***** PLATFORM DESTROYER *****/
 /******************************/
 
-public class PlatformDestroyer : AbstractDestroyer<IPlatform>
+public class PlatformDestroyer : AbstractDestroyerComposite<IPlatform>
 {
     /*********************/
     /***** CONSTRUCT *****/
@@ -34,6 +34,60 @@ public class PlatformDestroyer : AbstractDestroyer<IPlatform>
 
     public PlatformDestroyer() : base()
     {
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************/
+    /***** INIT *****/
+    /****************/
+
+    /**
+     * @access public
+     */
+
+    public override void Init()
+    {
+
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************/
+    /***** INIT OPERATORS *****/
+    /**************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InitOperators()
+    {
+        foreach (IOperatorElement element in _operatorElements)
+        {
+            element.Init();
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************************************/
+    /***** IPLATFORM EXECUTE OPERATOR ELEMENTS *****/
+    /***********************************************/
+
+    /**
+     * @access public
+     */
+
+    public override void ExecuteOperatorElements()
+    {
+        foreach (IOperatorElement element in _operatorElements)
+        {
+            element.Operate();
+        }
     }
 
     /**************************************************/

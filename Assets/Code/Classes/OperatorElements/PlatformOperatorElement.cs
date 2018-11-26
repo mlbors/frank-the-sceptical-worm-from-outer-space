@@ -34,14 +34,16 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
      * @param IGeneratorFactory<IGenerator> generatorFactroy object that create other objects, here, IGenerator
      * @param IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
      * @param IPoolFactory poolFactory factory object that creates other objects, here, IPool
+     * @param IOperatorElementFactory<IOperatorElement> operatorElementFactory object that create other objects, here, IOperatorElementFactory
      */
 
     [Inject]
     public override void Construct(IGeneratorFactory<IGenerator> generatorFactory,
                                    IDestroyerFactory<IDestroyer> destroyerFactory,
-                                   IPoolFactory<IPool> poolFactory)
+                                   IPoolFactory<IPool> poolFactory,
+                                   IOperatorElementFactory<IOperatorElement> operatorElementFactory)
     {
-        base.Construct(generatorFactory, destroyerFactory, poolFactory);
+        base.Construct(generatorFactory, destroyerFactory, poolFactory, operatorElementFactory);
     }
 
     /**************************************************/
@@ -57,6 +59,9 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
         _SetPool();
         _SetDestroyer();
         _SetGenerator();
+        _SetComposites();
+        _InitDestroyer();
+        _InitGenerator();
     }
 
     /**************************************************/
@@ -131,6 +136,66 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
         Generator = _generatorFactory.Create() as IGenerator<IPlatform>;
         _generator.Pool = _pool as IPool<IPlatform>;
         _generator.ReferenceObject = this;
+        _generator.Init();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************/
+    /***** SET COMPOSITES *****/
+    /**************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetComposites()
+    {
+        _operatorElementFactory.Type = OperatorElementType.CollectableOperatorElement;
+        IOperatorElement collectableOperatorElement = _operatorElementFactory.Create();
+        (collectableOperatorElement as IGeneratorComponentOperatorElement).ReferenceObject = this;
+
+        (_destroyer as IDestroyerComposite).AddOperatorElement(collectableOperatorElement);
+        (_generator as IGeneratorComposite).AddOperatorElement(collectableOperatorElement);
+
+        _operatorElementFactory.Type = OperatorElementType.FoeOperatorElement;
+        IOperatorElement foeOperatorElement = _operatorElementFactory.Create();
+        (foeOperatorElement as IGeneratorComponentOperatorElement).ReferenceObject = this;
+
+        (_destroyer as IDestroyerComposite).AddOperatorElement(foeOperatorElement);
+        (_generator as IGeneratorComposite).AddOperatorElement(foeOperatorElement);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************/
+    /***** INIT DESTROYER *****/
+    /**************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InitDestroyer()
+    {
+        _destroyer.Init();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************/
+    /***** INIT GENERATOR *****/
+    /**************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InitGenerator()
+    {
         _generator.Init();
     }
 

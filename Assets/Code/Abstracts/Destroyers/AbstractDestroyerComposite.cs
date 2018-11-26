@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - AbstractGeneratorComposite - Abstract Class
+ * FTSWFOS - AbstractDestroyerComposite - Abstract Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -19,10 +19,10 @@ using UnityEngine;
 /**************************************************/
 
 /****************************************/
-/***** ABSTRACT GENERATOR COMPOSITE *****/
+/***** ABSTRACT DESTROYER COMPOSITE *****/
 /****************************************/
 
-abstract public class AbstractGeneratorComposite<T> : AbstractGenerator<T>, IGeneratorComposite<T> ,IProduct
+abstract public class AbstractDestroyerComposite<T> : AbstractDestroyer<T>, IDestroyerComposite<T> ,IProduct
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -45,7 +45,7 @@ abstract public class AbstractGeneratorComposite<T> : AbstractGenerator<T>, IGen
      * @access protected
      */
 
-    protected AbstractGeneratorComposite() : base()
+    protected AbstractDestroyerComposite() : base()
     {
     }
 

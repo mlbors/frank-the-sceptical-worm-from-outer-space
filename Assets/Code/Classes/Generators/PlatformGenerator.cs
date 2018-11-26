@@ -55,10 +55,9 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     /**
      * @access public
-     * @param IOperatorElementFactory<IOperatorElement> operatorElementFactory object that create other objects, here, IOperatorElementFactory
      */
 
-    public PlatformGenerator(IOperatorElementFactory<IOperatorElement> operatorElementFactory) : base(operatorElementFactory)
+    public PlatformGenerator() : base()
     {
         _SetValues();
     }
@@ -72,15 +71,6 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     protected void _SetValues()
     {
-        _operatorElementFactory.Type = OperatorElementType.CollectableOperatorElement;
-        IOperatorElement collectableOperatorElement = _operatorElementFactory.Create();
-        (collectableOperatorElement as IGeneratorComponentOperatorElement).ReferenceObject = _referenceObject;
-        AddOperatorElement(collectableOperatorElement);
-
-        _operatorElementFactory.Type = OperatorElementType.FoeOperatorElement;
-        IOperatorElement foeOperatorElement = _operatorElementFactory.Create();
-        (foeOperatorElement as IGeneratorComponentOperatorElement).ReferenceObject = _referenceObject;
-        AddOperatorElement(foeOperatorElement);
     }
 
     /**************************************************/
@@ -166,6 +156,7 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
         _currentObject = _pool.GetObject();
         (_currentObject as MonoBehaviour).transform.position = _ComputePosition();
         (_currentObject as MonoBehaviour).gameObject.SetActive(true);
+        ExecuteOperatorElements();
     }
 
     /**************************************************/

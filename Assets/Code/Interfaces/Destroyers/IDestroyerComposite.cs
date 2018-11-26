@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IGeneratorComposite - Interface
+ * FTSWFOS - IDestroyerComposite - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -19,10 +19,10 @@ using UnityEngine;
 /**************************************************/
 
 /********************************/
-/***** IGENERATOR COMPOSITE *****/
+/***** IDESTROYER COMPOSITE *****/
 /********************************/
 
-public interface IGeneratorComposite : IGenerator
+public interface IDestroyerComposite : IDestroyer
 {
     List<IOperatorElement> OperatorElements
     {

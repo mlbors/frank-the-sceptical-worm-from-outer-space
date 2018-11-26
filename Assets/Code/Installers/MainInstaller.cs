@@ -125,7 +125,7 @@ public class MainInstaller : MonoInstaller
         Container.Bind<IOperatorElementFactory<IOperatorElement>>()
                  .To<OperatorElementFactory>()
                  .AsCached()
-                 .WhenInjectedInto<IPlatformGenerator>()
+                 .WhenInjectedInto<IGeneratorOperatorElement>()
                  .NonLazy();
     }
 

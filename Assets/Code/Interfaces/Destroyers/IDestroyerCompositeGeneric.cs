@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IDestroyer - Interface
+ * FTSWFOS - IDestroyerCompositeGeneric - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,18 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/**********************/
-/***** IDESTROYER *****/
-/**********************/
+/****************************************/
+/***** IDESTROYER COMPOSITE GENERIC *****/
+/****************************************/
 
-public interface IDestroyer
+public interface IDestroyerComposite<T> : IDestroyer<T>, IDestroyerComposite
 {
-    MonoBehaviour ReferenceObject
-    {
-        get;
-        set;
-    }
 
-    void Init();
-    void Destroy();
 }

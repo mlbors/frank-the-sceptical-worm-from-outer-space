@@ -38,6 +38,7 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      * @var Transform _destructionPoint when to destroy points
      * @var IPool _pool pool object objects
      * @var IPoolFactory _poolFactory factory object that creates other objects, here, IPool
+     * @var IOperatorElementFactory<IOperatorElement> _operatorElementFactory object that create other objects, here, IOperatorElementFactory
      */
 
     protected IGeneratorFactory<IGenerator> _generatorFactory;
@@ -48,6 +49,7 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
     protected Transform _destructionPoint;
     protected IPool _pool;
     protected IPoolFactory<IPool> _poolFactory;
+    protected IOperatorElementFactory<IOperatorElement> _operatorElementFactory;
 
     /**************************************************/
     /**************************************************/
@@ -61,14 +63,16 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      * @param IGeneratorFactory<IGenerator> generatorFactroy object that create other objects, here, IGenerator
      * @param IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
      * @param List points list of points
+     * @param IOperatorElementFactory<IOperatorElement> operatorElementFactory object that create other objects, here, IOperatorElementFactory
      */
 
     [Inject]
     public virtual void Construct(IGeneratorFactory<IGenerator> generatorFactory, 
                                   IDestroyerFactory<IDestroyer> destroyerFactory,
-                                  IPoolFactory<IPool> poolFactory)
+                                  IPoolFactory<IPool> poolFactory,
+                                  IOperatorElementFactory<IOperatorElement> operatorElementFactory)
     {
-        _SetValues(generatorFactory, destroyerFactory, poolFactory);
+        _SetValues(generatorFactory, destroyerFactory, poolFactory, operatorElementFactory);
     }
 
     /**************************************************/
@@ -83,15 +87,18 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
      * @param IGeneratorFactory<IGenerator> generatorFactroy object that create other objects, here, IGenerator
      * @param IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
      * @param IPoolFactory _poolFactory factory object that creates other objects, here, IPool
+     * @param IOperatorElementFactory<IOperatorElement> operatorElementFactory object that create other objects, here, IOperatorElementFactory
      */
 
     protected void _SetValues(IGeneratorFactory<IGenerator> generatorFactory,
                               IDestroyerFactory<IDestroyer> destroyerFactory,
-                              IPoolFactory<IPool> poolFactory)
+                              IPoolFactory<IPool> poolFactory,
+                              IOperatorElementFactory<IOperatorElement> operatorElementFactory)
     {
         GeneratorFactory = generatorFactory;
         DestroyerFactory = destroyerFactory;
         PoolFactory = poolFactory;
+        OperatorElementFactory = operatorElementFactory;
     }
 
     /**************************************************/
@@ -194,6 +201,23 @@ abstract public class AbstractGeneratorOperatorElement<T> : MonoBehaviour, IGene
     {
         get { return _poolFactory; }
         set { _poolFactory = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************************************/
+    /***** OPERATOR ELEMENT FACTORY GETTER/SETTER *****/
+    /**************************************************/
+
+    /**
+     * @access public
+     */
+
+    public IOperatorElementFactory<IOperatorElement> OperatorElementFactory
+    {
+        get { return _operatorElementFactory; }
+        set { _operatorElementFactory = value; }
     }
 
     /**************************************************/
