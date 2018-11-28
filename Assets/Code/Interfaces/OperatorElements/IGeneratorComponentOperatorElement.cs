@@ -29,4 +29,10 @@ public interface IGeneratorComponentOperatorElement
         get;
         set;
     }
+
+    string RequiredAction
+    {
+        get;
+        set;
+    }
 }

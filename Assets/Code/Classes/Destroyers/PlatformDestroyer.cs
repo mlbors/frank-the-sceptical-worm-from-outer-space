@@ -86,6 +86,7 @@ public class PlatformDestroyer : AbstractDestroyerComposite<IPlatform>
     {
         foreach (IOperatorElement element in _operatorElements)
         {
+            (element as IGeneratorComponentOperatorElement).RequiredAction = "destroy";
             element.Operate();
         }
     }

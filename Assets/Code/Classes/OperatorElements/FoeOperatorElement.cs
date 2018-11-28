@@ -124,7 +124,17 @@ public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe
 
     public override void Operate()
     {
-        
+        switch(_requiredAction)
+        {
+            case "generate" :
+                CallGenerator();
+                break;
+            case "destroy" :
+                CallDestroyer();
+                break;
+            default:
+                break;
+        }
     }
 
     /**************************************************/

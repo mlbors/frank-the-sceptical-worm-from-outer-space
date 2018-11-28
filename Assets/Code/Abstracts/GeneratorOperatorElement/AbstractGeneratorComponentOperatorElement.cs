@@ -39,6 +39,7 @@ abstract public class AbstractGeneratorComponentOperatorElement<T> : IGeneratorC
      * @var Transform _destructionPoint when to destroy points
      * @var IPool _pool pool object objects
      * @var IPoolFactory _poolFactory factory object that creates other objects, here, IPool
+     * @var String _requiredAction action too execute
      */
 
     protected MonoBehaviour _referenceObject;
@@ -50,6 +51,7 @@ abstract public class AbstractGeneratorComponentOperatorElement<T> : IGeneratorC
     protected Transform _destructionPoint;
     protected IPool _pool;
     protected IPoolFactory<IPool> _poolFactory;
+    protected string _requiredAction;
 
     /**************************************************/
     /**************************************************/
@@ -246,6 +248,23 @@ abstract public class AbstractGeneratorComponentOperatorElement<T> : IGeneratorC
     {
         get { return _destructionPoint; }
         set { _destructionPoint = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***************************/
+    /***** REQUIRED ACTION *****/
+    /***************************/
+
+    /**
+     * @access public
+     */
+
+    public string RequiredAction
+    {
+        get { return _requiredAction; }
+        set { _requiredAction = value; }
     }
 
     /**************************************************/

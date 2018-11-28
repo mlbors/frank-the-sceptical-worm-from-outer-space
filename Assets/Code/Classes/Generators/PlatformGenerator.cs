@@ -140,6 +140,7 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
     {
         foreach (IOperatorElement element in _operatorElements)
         {
+            (element as IGeneratorComponentOperatorElement).RequiredAction = "generate";
             element.Operate();
         }
     }

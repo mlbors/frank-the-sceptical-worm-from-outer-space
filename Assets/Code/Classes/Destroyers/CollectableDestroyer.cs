@@ -61,6 +61,20 @@ public class CollectableDestroyer : AbstractDestroyer<ICollectable>
 
     public override void Destroy()
     {
+        if (_pool.PooledObjects == null || _pool.PooledObjects.Count == 0)
+        {
+            return;
+        }
 
+        foreach (ICollectable collectable in _pool.PooledObjects)
+        {
+            float objectPosition = (collectable as MonoBehaviour).gameObject.transform.position.x;
+            float destructionPointPosition = (_referenceObject as IGeneratorOperatorElement).DestructionPoint.transform.position.x;
+
+            if (objectPosition < destructionPointPosition)
+            {
+                (collectable as MonoBehaviour).gameObject.SetActive(false);
+            }
+        }
     }
 }

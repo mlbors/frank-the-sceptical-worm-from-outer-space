@@ -123,7 +123,17 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
 
     public override void Operate()
     {
-        
+        switch (_requiredAction)
+        {
+            case "generate":
+                CallGenerator();
+                break;
+            case "destroy":
+                CallDestroyer();
+                break;
+            default:
+                break;
+        }
     }
 
     /**************************************************/

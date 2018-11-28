@@ -62,6 +62,7 @@ public class FoeGenerator : AbstractGenerator<IFoe>
 
     public override void Generate()
     {
-
+        _currentObject = _pool.GetObject();
+        (_currentObject as MonoBehaviour).gameObject.SetActive(true);
     }
 }
