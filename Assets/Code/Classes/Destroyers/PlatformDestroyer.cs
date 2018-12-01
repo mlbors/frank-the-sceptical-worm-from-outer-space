@@ -119,5 +119,7 @@ public class PlatformDestroyer : AbstractDestroyerComposite<IPlatform>
                 (platform as MonoBehaviour).gameObject.SetActive(false);
             }
         }
+
+        ExecuteOperatorElements();
     }
 }
