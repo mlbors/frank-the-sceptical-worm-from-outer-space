@@ -178,6 +178,8 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
         float yPosition = _ComputeYPosition();
 
         Vector3 position = new Vector3(xPosition, yPosition, (_currentObject as MonoBehaviour).transform.position.z);
+        _currentObject.X = xPosition;
+        _currentObject.Y = yPosition;
 
         return position;
     }

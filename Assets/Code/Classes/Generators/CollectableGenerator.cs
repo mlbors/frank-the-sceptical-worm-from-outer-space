@@ -25,6 +25,15 @@ using UnityEngine;
 
 public class CollectableGenerator : AbstractGenerator<ICollectable>
 {
+    /**
+     * @var Stack _generatedObjects stack of generated objects
+     */
+
+    protected Stack<ICollectable> _generatedObjects;
+
+    /**************************************************/
+    /**************************************************/
+
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -62,6 +71,8 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
 
     public override void Generate()
     {
+        _generatedObjects = new Stack<ICollectable>();
+
         CollectableType collectableType = _GetRandomCollectableType();
         (_pool as ICollectablePool).NeedType = collectableType;
 
@@ -116,7 +127,8 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
     {
         int maxItem;
 
-        PlatformType platformType = (_referenceObject as IGeneratorOperatorElement<IPlatform>).Generator.CurrentObject.Type;
+        IPlatform platform = (_referenceObject as IGeneratorOperatorElement<IPlatform>).Generator.CurrentObject;
+        PlatformType platformType = platform.Type;
 
         switch (platformType)
         {
@@ -143,7 +155,86 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
         for (int i = 0; i <= amount; i++)
         {
             _currentObject = _pool.GetObject();
+            (_currentObject as MonoBehaviour).transform.position = _ComputePosition(amount, platform);
             (_currentObject as MonoBehaviour).gameObject.SetActive(true);
+            _generatedObjects.Push(_currentObject);
         }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** COMPUTE POSITION *****/
+    /****************************/
+
+    /**
+     * @access protected
+     * @param int numberOfItem number of generated objects
+     * @param IPlatform platform platform used as a reference
+     * @return Vector3
+     */
+
+
+    protected Vector3 _ComputePosition(int numberOfItem, IPlatform platform)
+    {
+        float xPosition = _ComputeXPosition(numberOfItem, platform);
+        float yPosition = _ComputeYPosition(numberOfItem, platform);
+
+        Vector3 position = new Vector3(xPosition, yPosition, (_currentObject as MonoBehaviour).transform.position.z);
+        _currentObject.X = xPosition;
+        _currentObject.Y = yPosition;
+
+        return position;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** COMPUTE X POSITION *****/
+    /******************************/
+
+    /**
+     * @access protected
+     * @param int numberOfItem number of generated objects
+     * @param IPlatform platform platform used as a reference
+     * @return float
+     */
+
+
+    protected float _ComputeXPosition(int numberOfItem, IPlatform platform)
+    {
+        float xPosition = 0.00f;
+        float offset = 0.00f;
+
+        if (_generatedObjects.Count > 0) {
+            ICollectable previousObject = _generatedObjects.Peek();
+            float width = (previousObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2;
+            offset = previousObject.X + width;
+        }
+
+        return xPosition;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** COMPUTE Y POSITION *****/
+    /******************************/
+
+    /**
+     * @access protected
+     * @param int numberOfItem number of generated objects
+     * @param IPlatform platform platform used as a reference
+     * @return float
+     */
+
+
+    protected float _ComputeYPosition(int numberOfItem, IPlatform platform)
+    {
+        float yPosition = 0.00f;
+        return yPosition;
     }
 }
