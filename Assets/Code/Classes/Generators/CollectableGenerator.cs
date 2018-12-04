@@ -27,9 +27,11 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
 {
     /**
      * @var Stack _generatedObjects stack of generated objects
+     * @var Array _gapes array of the different gapes between each object
      */
 
     protected Stack<ICollectable> _generatedObjects;
+    protected float[] _gapes;
 
     /**************************************************/
     /**************************************************/
@@ -207,11 +209,27 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
     {
         float xPosition = 0.00f;
         float offset = 0.00f;
+        float platformWidth = (platform as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
+        float platformPosition = (platform as MonoBehaviour).transform.position.x - platformWidth / 2;
+        float currentObjectWidth = (_currentObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2;
 
         if (_generatedObjects.Count > 0) {
             ICollectable previousObject = _generatedObjects.Peek();
             float width = (previousObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2;
             offset = previousObject.X + width;
+        }
+
+        if (_generatedObjects.Count == 0) {
+            _gapes = new float[numberOfItem];
+            float position = UnityEngine.Random.Range(0, platformPosition + platformWidth);
+
+            for (int i = 0; i < numberOfItem; i++)
+            {
+                _gapes[i] = UnityEngine.Random.Range(currentObjectWidth / 2, (platformWidth / numberOfItem) / 10);
+            }
+
+            //TO DO: check if object will go outside the platform or not
+
         }
 
         return xPosition;
