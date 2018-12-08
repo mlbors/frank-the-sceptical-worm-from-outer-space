@@ -27,11 +27,13 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
 {
     /**
      * @var CollectableType _lastCollectableType type of the last generated object
+     * @var CollectableType _currentType type of the current generated object
      * @var Stack _generatedObjects stack of generated objects
      * @var Array _gapes array of the different gapes between each object
      */
 
     protected CollectableType _lastCollectableType = CollectableType.Death;
+    protected CollectableType _currentType = CollectableType.Death;
     protected Stack<ICollectable> _generatedObjects;
     protected float[] _gapes;
 
@@ -79,13 +81,13 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
 
         _generatedObjects = new Stack<ICollectable>();
 
-        CollectableType collectableType = _GetRandomCollectableType();
-        _lastCollectableType = collectableType;
-        (_pool as ICollectablePool).NeedType = collectableType;
+        _lastCollectableType = _currentType;
+        _currentType = _GetRandomCollectableType();
+        (_pool as ICollectablePool).NeedType = _currentType;
 
-        Debug.Log(collectableType);
+        Debug.Log(_currentType);
 
-        switch(collectableType)
+        switch(_currentType)
         {
             case CollectableType.Bonus:
                 _GenerateBonuses();
@@ -230,16 +232,18 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
         float platformPosition = (platform as MonoBehaviour).transform.position.x - platformWidth / 2;
         float currentObjectWidth = (_currentObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2;
 
-        // TO DO: fix this and the pool
         if (_generatedObjects.Count == 0 && index == 0)
         {
+            Debug.Log("First bonus");
+
             float position = 0.00f;
             float sumOfGapes = 0.00f;
             float neededSpace = 0.00f;
 
             _gapes = new float[numberOfItem];
 
-            while (neededSpace == 0.00f || neededSpace > platformWidth)
+            // TO DO: fix this
+            do
             {
                 position = UnityEngine.Random.Range(platformPosition, platformPosition + platformWidth);
 
@@ -251,17 +255,17 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
 
                 neededSpace = position + sumOfGapes + (currentObjectWidth * numberOfItem);
                 Debug.Log(neededSpace);
-            }
+            } while (neededSpace > platformWidth);
 
             xPosition = position;
         }
 
         if (index > 0 && _generatedObjects.Count > 0)
         {
-            ICollectable previousObject = _generatedObjects.Peek();
-            float width = (previousObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2;
-            offset = previousObject.X + width;
+            Debug.Log("Other bonus");
 
+            ICollectable previousObject = _generatedObjects.Peek();
+            offset = previousObject.X;
             xPosition = offset + _gapes[index];
         }
 
@@ -281,7 +285,6 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
      * @param IPlatform platform platform used as a reference
      * @return float
      */
-
 
     protected float _ComputeYPosition(int numberOfItem, IPlatform platform)
     {

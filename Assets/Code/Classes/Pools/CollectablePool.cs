@@ -82,8 +82,36 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
 
     public override void Init()
     {
-        (_factory as ICollectableFactory<ICollectable>).Type = CollectableType.Bonus;
+        _neededType = CollectableType.Bonus;
         FillPool();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IPOOL GET OBEJCT *****/
+    /****************************/
+
+    /**
+     * @access public
+     * @return ICollectable
+     */
+
+    public override ICollectable GetObject()
+    {
+        for (int i = 0; i < _pooledObjects.Count; i++)
+        {
+            if (CheckIfObjectAvailable(_pooledObjects[i])
+                && (_pooledObjects[i] as ICollectable).Type == _neededType)
+            {
+                return _pooledObjects[i];
+            }
+        }
+
+        var newObj = InstantiateNewObject();
+        AddObject(newObj);
+        return newObj;
     }
 
     /**************************************************/
@@ -100,7 +128,7 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
 
     public override ICollectable InstantiateNewObject()
     {
-        (_factory as ICollectableFactory<ICollectable>).Type = CollectableType.Bonus;
+        (_factory as ICollectableFactory<ICollectable>).Type = _neededType;
 
         ICollectable collectable = _factory.Create();
 

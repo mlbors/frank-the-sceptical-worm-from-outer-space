@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - Bonus - Concrete Class
+ * FTSWFOS - Death - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -19,10 +19,10 @@ using UnityEngine;
 /**************************************************/
 
 /*****************/
-/***** BONUS *****/
+/***** DEATH *****/
 /*****************/
 
-public class Bonus : AbstractCollectable
+public class Death : AbstractCollectable
 {
     /********************************/
     /***** ICOLLECTABLE PERFORM *****/

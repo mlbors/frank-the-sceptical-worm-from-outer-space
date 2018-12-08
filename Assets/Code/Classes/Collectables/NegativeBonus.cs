@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - Bonus - Concrete Class
+ * FTSWFOS - NegativeBonus - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,11 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*****************/
-/***** BONUS *****/
-/*****************/
+/**************************/
+/***** NEGATIVE BONUS *****/
+/**************************/
 
-public class Bonus : AbstractCollectable
+public class NegativeBonus : AbstractCollectable
 {
     /********************************/
     /***** ICOLLECTABLE PERFORM *****/
