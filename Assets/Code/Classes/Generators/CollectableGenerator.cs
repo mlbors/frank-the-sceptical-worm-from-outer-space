@@ -151,6 +151,8 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
         switch (platformType)
         {
             case PlatformType.One:
+                maxItem = 2;
+                break;
             case PlatformType.Two:
                 maxItem = 3;
                 break;
@@ -235,26 +237,39 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
         if (_generatedObjects.Count == 0 && index == 0)
         {
             Debug.Log("First bonus");
+            Debug.Log($"platform width: {platformWidth}");
+            Debug.Log($"platform position: {platformPosition}");
+            Debug.Log($"current object width: {currentObjectWidth}");
 
             float position = 0.00f;
             float sumOfGapes = 0.00f;
             float neededSpace = 0.00f;
+            float delta = 0.00f;
+            float minPosition =  platformPosition + (currentObjectWidth / 4);
+            float maxPosition = (platformPosition + platformWidth) - (currentObjectWidth / 4);
+
+            Debug.Log($"min position: {minPosition}");
+            Debug.Log($"max position: {maxPosition}");
 
             _gapes = new float[numberOfItem];
 
-            // TO DO: fix this
             do
             {
-                position = UnityEngine.Random.Range(platformPosition, platformPosition + platformWidth);
-
+                // TO DO: fix this
                 for (int i = 0; i < numberOfItem; i++)
                 {
-                    _gapes[i] = UnityEngine.Random.Range(currentObjectWidth / 2, (platformWidth / numberOfItem) / 10);
+                    position = UnityEngine.Random.Range(minPosition, maxPosition);
+                    delta = position - platformPosition;
+                
+                    _gapes[i] = UnityEngine.Random.Range(currentObjectWidth / 8, currentObjectWidth);
                     sumOfGapes += _gapes[i];
                 }
 
-                neededSpace = position + sumOfGapes + (currentObjectWidth * numberOfItem);
-                Debug.Log(neededSpace);
+                neededSpace = delta + sumOfGapes + (currentObjectWidth * numberOfItem);
+
+                Debug.Log($"position: {position}");
+                Debug.Log($"delta: {delta}");
+                Debug.Log($"needed space: {neededSpace}");
             } while (neededSpace > platformWidth);
 
             xPosition = position;
