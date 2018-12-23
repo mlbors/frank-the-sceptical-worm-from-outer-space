@@ -46,7 +46,6 @@ public class MainInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Debug.Log("::: Install main bindings :::");
         _InstallLoaders();
         _InstallManagers();
         _InstallOperators();

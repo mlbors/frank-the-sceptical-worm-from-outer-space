@@ -101,7 +101,6 @@ public class PlatformPool : AbstractPool<IPlatform>
     {
         for (int i = 0; i < _amount; i++)
         {
-            Debug.Log("::: FillPool :::");
             _neededType = _GetRandomPlatformType();
             _pooledObject = InstantiateNewObject();
             AddObject(_pooledObject);

@@ -67,7 +67,6 @@ public class Camera : AbstractCamera
 
     protected bool _InitCamera()
     {
-        Debug.Log("::: Init camera :::");
         transform.position = new Vector3(0, 0, transform.position.z);
         _initialized = true;
         return _initialized;
@@ -86,7 +85,6 @@ public class Camera : AbstractCamera
 
     public override void Awake()
     {
-        Debug.Log("::: player awake :::");
     }
 
     /**************************************************/
@@ -102,8 +100,6 @@ public class Camera : AbstractCamera
 
     public override void Start()
     {
-        Debug.Log("::: camera start :::");
-
         if (!_initialized)
         {
             _InitCamera();

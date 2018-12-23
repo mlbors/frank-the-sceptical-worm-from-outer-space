@@ -210,7 +210,6 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
     {
         if (_generationPoint == null || _destructionPoint == null)
         {
-            Debug.Log("No generation and destruction points");
             return;
         }
 
@@ -242,7 +241,6 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
     {
         if (info == "camera created")
         {
-            Debug.Log("Setting generation and destruction points");
             GenerationPoint = (data as List<Transform>)[0];
             DestructionPoint = (data as List<Transform>)[1];
         }

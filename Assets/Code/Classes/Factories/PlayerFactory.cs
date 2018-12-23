@@ -53,7 +53,6 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>, IPlayerFactory<IPlayer>
 
     public PlayerFactory(DiContainer container, GameObject gameObject, IPlayerStateFactory<IPlayerState> stateFactory) : base (container)
     {
-        Debug.Log("::: Player Factory :::");
         _gameObject = gameObject;
         _stateFactory = stateFactory;
     }
@@ -107,7 +106,6 @@ public class PlayerFactory : AbstractDIFactory<IPlayer>, IPlayerFactory<IPlayer>
 
     public override IPlayer Create(params object[] constructorArguments)
     {
-        Debug.Log("::: Creating Player :::");
         IPlayer player;
         _container.Bind<IPlayer>().To<Player>().AsSingle();
         var prefab = _container.InstantiatePrefab(_gameObject);

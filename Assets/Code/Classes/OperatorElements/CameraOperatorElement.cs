@@ -188,7 +188,6 @@ public class CameraOperatorElement : ICameraOperatorElement, IObserver
     {
         if (info == "player created")
         {
-            Debug.Log("Observer updating");
             CameraFactory.Target = data as ICameraTarget;
             _CreateCamera();
             Transform generationPoint = (_camera as MonoBehaviour).transform.Find("ObjectsGenerationPoint");

@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -89,36 +90,39 @@ public class Player : AbstractPlayer
 
     protected bool _InitPlayer()
     {
-        Debug.Log("::: Init player :::");
-
-        if (_stateFactory == null)
+        try
         {
-            Debug.Log("Can't initialize player now.");
-            _initialized = false;
+            if (_stateFactory == null)
+            {
+                _initialized = false;
+                return _initialized;
+            }
+
+            _GetComponents();
+
+            _moveSpeed = 6.75f;
+            _speedMultiplier = 1.25f;
+            _speedMilestoneCount = 0.00f;
+            _speedIncreaseMilestone = 80.25f;
+
+            _ground = LayerMask.GetMask("Ground");
+            _groundChecker = this.transform.Find("GroundCheck");
+
+            _stateFactory.Subject = this as IPlayerStateSubject;
+
+            _initialized = true;
+
+            transform.position = new Vector3(0, 0, transform.position.z);
+
+            ChangeState(PlayerState.Standing);
+
             return _initialized;
         }
-
-        Debug.Log("Initializing player.");
-
-        _GetComponents();
-
-        _moveSpeed = 6.75f;
-        _speedMultiplier = 1.25f;
-        _speedMilestoneCount = 0.00f;
-        _speedIncreaseMilestone = 80.25f;
-
-        _ground = LayerMask.GetMask("Ground");
-        _groundChecker = this.transform.Find("GroundCheck");
-
-        _stateFactory.Subject = this as IPlayerStateSubject;
-
-        _initialized = true;
-
-        transform.position = new Vector3(0, 0, transform.position.z);
-
-        ChangeState(PlayerState.Standing);
-
-        return _initialized;
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+            return false;
+        }
     }
 
     /**************************************************/
@@ -135,8 +139,6 @@ public class Player : AbstractPlayer
 
     public override void ChangeState(PlayerState state)
     {
-        Debug.Log("::: Changing player state :::");
-
         if (!_initialized)
         {
             return;    
@@ -294,7 +296,6 @@ public class Player : AbstractPlayer
 
     public override void Awake()
     {
-        Debug.Log("::: player awake :::");
     }
 
     /**************************************************/
@@ -310,8 +311,6 @@ public class Player : AbstractPlayer
 
     public override void Start()
     {
-        Debug.Log("::: player start :::");
-
         if (!_initialized)
         {
             _InitPlayer();

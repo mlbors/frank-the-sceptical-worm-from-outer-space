@@ -50,8 +50,6 @@ public class PlayerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Debug.Log("::: Install player bindings :::");
-
         Container.Bind<ICommandFactory<ICommand>>()
                  .To<CommandFactory>()
                  .AsSingle()

@@ -102,8 +102,6 @@ abstract public class AbstractManager : IManager, IGameManager, IProduct
 
     public void AddOperator(IOperator theOperator)
     {
-        Debug.Log("::: Adding operator :::");
-        Debug.Log(theOperator);
         _operators.Add(theOperator);
     }
 

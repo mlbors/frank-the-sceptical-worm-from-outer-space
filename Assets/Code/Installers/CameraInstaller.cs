@@ -50,9 +50,6 @@ public class CameraInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Debug.Log("::: Install camera bindings :::");
-
-
     }
 
     /**************************************************/

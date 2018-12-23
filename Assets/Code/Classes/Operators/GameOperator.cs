@@ -37,7 +37,6 @@ public class GameOperator : AbstractOperator, IGameOperator
 
     public GameOperator(IOperatorElementFactory<IOperatorElement> operatorElementFactory) : base(operatorElementFactory)
     {
-        Debug.Log("::: GameOperator construct :::");
     }
 
     /**************************************************/
@@ -100,11 +99,16 @@ public class GameOperator : AbstractOperator, IGameOperator
 
     protected void _InitOperators()
     {
-        Debug.Log("::: GameOperator Init operators :::");
-
         foreach (IOperatorElement element in _elements)
         {
-            element.Init();
+            try 
+            {
+                element.Init();
+            }
+            catch(Exception e)
+            {
+                Debug.Log($"Exception thrown: {e.Message}");
+            }
         }
     }
 
@@ -121,11 +125,16 @@ public class GameOperator : AbstractOperator, IGameOperator
 
     public override void Operate()
     {
-        Debug.Log("::: GameOperator Operate :::");
-
         foreach (IOperatorElement element in _elements)
         {
-            element.Operate();
+            try
+            {
+                element.Operate();
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"Exception thrown: {e.Message}");
+            }
         }
     }
 }

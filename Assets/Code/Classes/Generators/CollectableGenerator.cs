@@ -77,30 +77,33 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
 
     public override void Generate()
     {
-        Debug.Log("::: Generate collectable :::");
-
-        _generatedObjects = new Stack<ICollectable>();
-
-        _lastCollectableType = _currentType;
-        _currentType = _GetRandomCollectableType();
-        (_pool as ICollectablePool).NeedType = _currentType;
-
-        Debug.Log(_currentType);
-
-        switch(_currentType)
+        try 
         {
-            case CollectableType.Bonus:
-                _GenerateBonuses();
-                break;
-            case CollectableType.Death:
-                break;
-            case CollectableType.NegativeBonus:
-                break;
-            case CollectableType.PowerUp:
-                break;
-            default:
-                _GenerateBonuses();
-                break;
+            _generatedObjects = new Stack<ICollectable>();
+
+            _lastCollectableType = _currentType;
+            _currentType = _GetRandomCollectableType();
+            (_pool as ICollectablePool).NeedType = _currentType;
+
+            switch (_currentType)
+            {
+                case CollectableType.Bonus:
+                    _GenerateBonuses();
+                    break;
+                case CollectableType.Death:
+                    break;
+                case CollectableType.NegativeBonus:
+                    break;
+                case CollectableType.PowerUp:
+                    break;
+                default:
+                    _GenerateBonuses();
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
         }
     }
 
@@ -141,8 +144,6 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
 
     protected void _GenerateBonuses()
     {
-        Debug.Log("::: Generate Bonus :::");
-
         int maxItem;
 
         IPlatform platform = (_referenceObject as IGeneratorOperatorElement<IPlatform>).Generator.CurrentObject;
@@ -158,11 +159,11 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
                 break;
             case PlatformType.Four:
             case PlatformType.Five:
-                maxItem = 4;
+                maxItem = 5;
                 break;
             case PlatformType.Seven:
             case PlatformType.Nine:
-                maxItem = 5;
+                maxItem = 6;
                 break;
             default:
                 maxItem = 3;
@@ -176,7 +177,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
             return;
         }
 
-        for (int i = 0; i <= amount; i++)
+        for (int i = 0; i < amount; i++)
         {
             _currentObject = _pool.GetObject();
             (_currentObject as MonoBehaviour).transform.position = _ComputePosition(amount, platform, i);
@@ -199,7 +200,6 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
      * @param int index generation index
      * @return Vector3
      */
-
 
     protected Vector3 _ComputePosition(int numberOfItem, IPlatform platform, int index)
     {
@@ -230,8 +230,6 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
 
     protected float _ComputeXPosition(int numberOfItem, IPlatform platform, int index)
     {
-        Debug.Log("::: Compute x position :::");
-
         float xPosition = 0.00f;
         float offset = 0.00f;
         float platformWidth = (platform as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
@@ -240,11 +238,6 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
 
         if (_generatedObjects.Count == 0 && index == 0)
         {
-            Debug.Log("First bonus");
-            Debug.Log($"platform width: {platformWidth}");
-            Debug.Log($"platform position: {platformPosition}");
-            Debug.Log($"current object width: {currentObjectWidth}");
-
             float position = 0.00f;
             float sumOfGapes = 0.00f;
             float neededSpace = 0.00f;
@@ -252,30 +245,21 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
             float minPosition =  platformPosition + (currentObjectWidth / 2.00f);
             float maxPosition = (platformPosition + platformWidth) - (currentObjectWidth / 2.00f);
 
-            Debug.Log($"min position: {minPosition}");
-            Debug.Log($"max position: {maxPosition}");
-
             do
             {
                 _gapes = new float[numberOfItem + 1];
                 sumOfGapes = 0.00f;
 
-                // TO DO: fix this/improve
                 for (int i = 0; i <= numberOfItem; i++)
                 {
                     position = UnityEngine.Random.Range(minPosition, maxPosition);
                     delta = position - platformPosition;
                 
-                    _gapes[i] = UnityEngine.Random.Range(currentObjectWidth / 8.00f, currentObjectWidth / 2.00f);
+                    _gapes[i] = UnityEngine.Random.Range(currentObjectWidth * 1.50f, currentObjectWidth * 5.50f);
                     sumOfGapes += _gapes[i];
                 }
 
                 neededSpace = delta + sumOfGapes + (currentObjectWidth * numberOfItem);
-
-                Debug.Log($"position: {position}");
-                Debug.Log($"delta: {delta}");
-                Debug.Log($"needed space: {neededSpace}");
-                Debug.Log($"array gapes: {_gapes.Length}");
             } while (neededSpace > platformWidth);
 
             xPosition = position;
@@ -283,9 +267,6 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
 
         if (index > 0 && _generatedObjects.Count > 0)
         {
-            Debug.Log("Other bonus");
-            Debug.Log($"Index: {index}");
-
             ICollectable previousObject = _generatedObjects.Peek();
             offset = previousObject.X;
             xPosition = offset + _gapes[index];
@@ -313,8 +294,10 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>
         float yPosition = 0.00f;
         float platformPosition = (platform as MonoBehaviour).transform.position.y;
         float platformHeight = (platform as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.y;
+        float minPosition = platformPosition + platformHeight;
+        float maxPosition = platformPosition + platformHeight * 2.00f;
 
-        yPosition = platformPosition + platformHeight * 1.50f;
+        yPosition = UnityEngine.Random.Range(minPosition, maxPosition);
 
         return yPosition;
     }

@@ -77,7 +77,6 @@ public class RunAction : IAction
 
         if ((subject as MonoBehaviour).transform.position.x >= speedMilestoneCount)
         {
-            Debug.Log("Increase speed");
             (subject as IPlayer).SpeedMilestoneCount += speedIncreaseMilestone;
             (subject as IPlayer).SpeedIncreaseMilestone = speedIncreaseMilestone * speedMultiplier;
             (subject as IPlayer).MoveSpeed = moveSpeed * speedMultiplier;

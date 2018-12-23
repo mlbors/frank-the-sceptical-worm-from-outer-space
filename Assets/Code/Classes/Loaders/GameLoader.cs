@@ -38,7 +38,6 @@ public class GameLoader : AbstractLoader, IGameLoader
     [Inject]
     public override void Construct(IManagerFactory<IManager> managerFactory)
     {
-        Debug.Log("::: GameLoader construct :::");
         base.Construct(managerFactory);
     }
 
@@ -51,7 +50,6 @@ public class GameLoader : AbstractLoader, IGameLoader
 
     protected void _SetValues()
     {
-        Debug.Log("::: GameLoader setting values :::");
         _managerFactory.Type = ManagerType.GameManager;
         IManager gameManager = _managerFactory.Create();
         AddManager(gameManager);
@@ -70,7 +68,6 @@ public class GameLoader : AbstractLoader, IGameLoader
 
     public override void Awake()
     {
-        Debug.Log("::: GameLoader Awake :::");
         _SetValues();
     }
 
@@ -87,7 +84,6 @@ public class GameLoader : AbstractLoader, IGameLoader
 
     void Start()
     {
-        Debug.Log("::: GameLoader Start :::");
         InitManagers();
     }
 
@@ -104,7 +100,6 @@ public class GameLoader : AbstractLoader, IGameLoader
 
     void Update()
     {
-        //Debug.Log("::: GameLoader Update :::");
     }
 
     /**************************************************/
@@ -120,13 +115,16 @@ public class GameLoader : AbstractLoader, IGameLoader
 
     public override void InitManagers()
     {
-        Debug.Log("::: Try to init managers :::");
         foreach(IManager manager in _managers) 
         {
-            Debug.Log("::: Init Manager :::");
-            Debug.Log("::: Manager object :::");
-            Debug.Log(manager);
-            manager.Init();
+            try
+            {
+                manager.Init();
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"Exception thrown: {e.Message}");
+            }
         }
     }
 }

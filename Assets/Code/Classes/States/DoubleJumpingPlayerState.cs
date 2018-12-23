@@ -83,7 +83,6 @@ public class DoubleJumpingPlayerState : AbstractPlayerState
 
     public override void Enter()
     {
-        Debug.Log("Double jumping");
         (_stateSubject as IPlayer).Animator.SetBool("isGrounded", false);
     }
 

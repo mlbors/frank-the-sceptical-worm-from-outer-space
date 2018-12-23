@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -154,10 +155,17 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     public override void Generate()
     {
-        _currentObject = _pool.GetObject();
-        (_currentObject as MonoBehaviour).transform.position = _ComputePosition();
-        (_currentObject as MonoBehaviour).gameObject.SetActive(true);
-        ExecuteOperatorElements();
+        try
+        {
+            _currentObject = _pool.GetObject();
+            (_currentObject as MonoBehaviour).transform.position = _ComputePosition();
+            (_currentObject as MonoBehaviour).gameObject.SetActive(true);
+            ExecuteOperatorElements();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+        }
     }
 
     /**************************************************/
@@ -198,7 +206,7 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     protected float _ComputeXPosition()
     {
-        _distanceBetween = Random.Range(_minXGape, _maxXGape);
+        _distanceBetween = UnityEngine.Random.Range(_minXGape, _maxXGape);
         float _objectWidth = (_currentObject as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
 
         float temp = _referenceObject.gameObject.transform.position.x + (_objectWidth / 2);
@@ -220,7 +228,7 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     protected float _ComputeYPosition()
     {
-        float yPosition = (_currentObject as MonoBehaviour).transform.position.y + Random.Range(_minYGape, _maxYGape);
+        float yPosition = (_currentObject as MonoBehaviour).transform.position.y + UnityEngine.Random.Range(_minYGape, _maxYGape);
 
         if (yPosition > _maxYPosition)
         {
