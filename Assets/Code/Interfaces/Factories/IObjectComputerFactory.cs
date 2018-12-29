@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - CollectableType - Enum
+ * FTSWFOS - IOjectComputerFactory - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,14 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/****************************/
-/***** COLLECTABLE TYPE *****/
-/****************************/
+/************************************/
+/***** IOBJECT COMPUTER FACTORY *****/
+/************************************/
 
-public enum CollectableType
+public interface IObjectComputerFactory<T> : IFactory<T>
 {
-    Bonus,
-    Death,
-    PowerUp,
-    NegativeBonus
+    ObjectComputerType Type
+    {
+        get;
+        set;
+    }
 }

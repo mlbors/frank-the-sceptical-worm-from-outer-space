@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - CollectableType - Enum
+ * FTSWFOS - ObjectComputerType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,14 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/****************************/
-/***** COLLECTABLE TYPE *****/
-/****************************/
+/********************************/
+/***** OBJECT COMPUTER TYPE *****/
+/********************************/
 
-public enum CollectableType
+public enum ObjectComputerType
 {
     Bonus,
     Death,
     PowerUp,
-    NegativeBonus
+    NegativeBonus,
+    Spike
 }
