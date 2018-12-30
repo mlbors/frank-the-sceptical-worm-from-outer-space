@@ -32,7 +32,7 @@ public class PowerUpComputer : AbstractObjectComputer<ICollectable>
      * @access protected
      */
 
-    public PowerUpComputer()
+    public PowerUpComputer() : base()
     {
     }
 
@@ -47,8 +47,8 @@ public class PowerUpComputer : AbstractObjectComputer<ICollectable>
      * @access public
      */
 
-    public override Vector3 ExecuteComputation()
+    public override void ExecuteComputation()
     {
-        return new Vector3();
+
     }
 }

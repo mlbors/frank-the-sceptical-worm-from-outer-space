@@ -32,11 +32,15 @@ abstract public class AbstractObjectComputer<T> : IObjectComputer<T>
      * @var PlatformType _platformType platfrom type used for computation
      * @var Stack<T> _generatedObjects stack of generated objects
      * @var T _currentObject current object used for computation
+     * @var IPool _pool objects pool
+     * @var MonoBehaviour _referenceObject object used as a reference
      */
 
     protected PlatformType _platformType;
     protected Stack<T> _generatedObjects = new Stack<T>();
     protected T _currentObject;
+    protected IPool<T> _pool;
+    protected MonoBehaviour _referenceObject;
 
     /**************************************************/
     /**************************************************/
@@ -103,6 +107,39 @@ abstract public class AbstractObjectComputer<T> : IObjectComputer<T>
         get { return _currentObject; }
         set { _currentObject = value; }
     }
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** POOL GETTER/SETTER *****/
+    /******************************/
+
+    /**
+     * @access public
+     */
+
+    public IPool<T> Pool
+    {
+        get { return _pool; }
+        set { _pool = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************************/
+    /***** REFERENCE OBJECT GETTER/SETTER *****/
+    /******************************************/
+
+    /**
+     * @access public
+     */
+
+    public MonoBehaviour ReferenceObject
+    {
+        get { return _referenceObject; }
+        set { _referenceObject = value; }
+    }
 
     /**************************************************/
     /**************************************************/
@@ -115,5 +152,5 @@ abstract public class AbstractObjectComputer<T> : IObjectComputer<T>
      * @access public
      */
 
-    public abstract Vector3 ExecuteComputation();
+    public abstract void ExecuteComputation();
 }

@@ -32,7 +32,7 @@ public class NegativeBonusComputer : AbstractObjectComputer<ICollectable>
      * @access protected
      */
 
-    public NegativeBonusComputer()
+    public NegativeBonusComputer() : base()
     {
     }
 
@@ -47,8 +47,8 @@ public class NegativeBonusComputer : AbstractObjectComputer<ICollectable>
      * @access public
      */
 
-    public override Vector3 ExecuteComputation()
+    public override void ExecuteComputation()
     {
-        return new Vector3();
+
     }
 }

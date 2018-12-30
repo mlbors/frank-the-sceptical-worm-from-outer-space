@@ -32,7 +32,7 @@ public class DeathComputer : AbstractObjectComputer<ICollectable>
      * @access protected
      */
 
-    public DeathComputer()
+    public DeathComputer() : base()
     {
     }
 
@@ -47,8 +47,8 @@ public class DeathComputer : AbstractObjectComputer<ICollectable>
      * @access public
      */
 
-    public override Vector3 ExecuteComputation()
+    public override void ExecuteComputation()
     {
-        return new Vector3();
+       
     }
 }

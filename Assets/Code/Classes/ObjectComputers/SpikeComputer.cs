@@ -32,7 +32,7 @@ public class SpikeComputer : AbstractObjectComputer<IFoe>
      * @access protected
      */
 
-    public SpikeComputer()
+    public SpikeComputer() : base()
     {
     }
 
@@ -47,8 +47,8 @@ public class SpikeComputer : AbstractObjectComputer<IFoe>
      * @access public
      */
 
-    public override Vector3 ExecuteComputation()
+    public override void ExecuteComputation()
     {
-        return new Vector3();
+
     }
 }

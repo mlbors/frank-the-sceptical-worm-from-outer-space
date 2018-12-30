@@ -35,4 +35,10 @@ public interface IObjectComputer<T> : IObjectComputer
         get;
         set;
     }
+
+    IPool<T> Pool
+    {
+        get;
+        set;
+    }
 }

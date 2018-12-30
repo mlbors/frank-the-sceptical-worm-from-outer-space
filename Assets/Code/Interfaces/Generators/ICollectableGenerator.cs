@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IOjectComputer - Interface
+ * FTSWFOS - ICollectableGenerator - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,23 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/****************************/
-/***** IOBJECT COMPUTER *****/
-/****************************/
+/**********************************/
+/***** ICOLLECTABLE GENERATOR *****/
+/**********************************/
 
-public interface IObjectComputer
+public interface ICollectableGenerator
 {
-    PlatformType PlatformType
+    IObjectComputer ObjectComputer
     {
         get;
         set;
     }
-
-    MonoBehaviour ReferenceObject
-    {
-        get;
-        set;
-    }
-
-    void ExecuteComputation();
 }

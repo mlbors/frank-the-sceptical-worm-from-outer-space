@@ -158,6 +158,12 @@ public class MainInstaller : MonoInstaller
                  .AsCached()
                  .WhenInjectedInto<IGeneratorOperatorElement>()
                  .NonLazy();
+
+        Container.Bind<IObjectComputerFactory<IObjectComputer>>()
+                 .To<ObjectComputerFactory>()
+                 .AsCached()
+                 .WhenInjectedInto<IGenerator>()
+                 .NonLazy();
     }
 
     /**************************************************/
