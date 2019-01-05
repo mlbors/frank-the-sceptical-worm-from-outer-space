@@ -90,17 +90,21 @@ public class BonusComputer: AbstractObjectComputer<ICollectable>
             case PlatformType.One:
                 maxItem = 2;
                 break;
+
             case PlatformType.Two:
                 maxItem = 3;
                 break;
+
             case PlatformType.Four:
             case PlatformType.Five:
                 maxItem = 5;
                 break;
+
             case PlatformType.Seven:
             case PlatformType.Nine:
                 maxItem = 6;
                 break;
+
             default:
                 maxItem = 3;
                 break;

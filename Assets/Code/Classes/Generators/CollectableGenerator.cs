@@ -34,12 +34,14 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
      * @var CollectableType _currentType type of the current generated object
      * @var IObjectComputer _objectComputer contains algorithm to compute required object
      * @var IObjectComputerFactory _objectComputerFactory object that create other objects, here, IObjectComputer
+     * @var Dictionary<string, IObjectComputer> _objectComputers dictionary of needed various object computers
      */
 
     protected CollectableType _lastCollectableType = CollectableType.Death;
     protected CollectableType _currentType = CollectableType.Death;
     protected IObjectComputer _objectComputer;
     protected IObjectComputerFactory<IObjectComputer> _objectComputerFactory;
+    protected Dictionary<string, IObjectComputer> _objectComputers = new Dictionary<string, IObjectComputer>();
 
     /**************************************************/
     /**************************************************/
@@ -99,7 +101,16 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
         _pool.Init();
 
         _objectComputerFactory.Type = ObjectComputerType.Bonus;
-        _objectComputer = _objectComputerFactory.Create();
+        _objectComputers["bonus"] = _objectComputerFactory.Create();
+
+        _objectComputerFactory.Type = ObjectComputerType.Death;
+        _objectComputers["death"] = _objectComputerFactory.Create();
+
+        _objectComputerFactory.Type = ObjectComputerType.NegativeBonus;
+        _objectComputers["negative"] = _objectComputerFactory.Create();
+
+        _objectComputerFactory.Type = ObjectComputerType.PowerUp;
+        _objectComputers["powerup"] = _objectComputerFactory.Create();
     }
 
     /**************************************************/
@@ -120,18 +131,27 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
             switch (_currentType)
             {
                 case CollectableType.Bonus:
-                    _GenerateBonuses();
+                    _objectComputer = _objectComputers["bonus"];
                     break;
+
                 case CollectableType.Death:
+                    _objectComputer = _objectComputers["death"];
                     break;
+
                 case CollectableType.NegativeBonus:
+                    _objectComputer = _objectComputers["negative"];
                     break;
+
                 case CollectableType.PowerUp:
+                    _objectComputer = _objectComputers["powerup"];
                     break;
+
                 default:
-                    _GenerateBonuses();
+                    _objectComputer = _objectComputers["bonus"];
                     break;
             }
+
+            _GenerateCollectables();
         }
         catch (Exception e)
         {
@@ -166,15 +186,15 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
     /**************************************************/
     /**************************************************/
 
-    /****************************/
-    /***** GENERATE BONUSES *****/
-    /****************************/
+    /*********************************/
+    /***** GENERATE COLLECTABLES *****/
+    /*********************************/
 
     /**
      * @access protected
      */
 
-    protected void _GenerateBonuses()
+    protected void _GenerateCollectables()
     {
         (_objectComputer as IObjectComputer<ICollectable>).Pool = _pool;
         _objectComputer.ReferenceObject = _referenceObject;
