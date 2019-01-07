@@ -186,6 +186,6 @@ abstract public class AbstractFoe : MonoBehaviour, IFoe, IObservable, IProduct
      * @access private
      */
 
-    public abstract void OnTriggerEnter2D(Collision2D otherObject);
+    public abstract void OnTriggerEnter2D(Collider2D otherObject);
 }
  

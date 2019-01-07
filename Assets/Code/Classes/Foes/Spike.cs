@@ -48,7 +48,7 @@ public class Spike : AbstractFoe
      * @access private
      */
 
-    public override void OnTriggerEnter2D(Collision2D otherObject)
+    public override void OnTriggerEnter2D(Collider2D otherObject)
     {
 
     }

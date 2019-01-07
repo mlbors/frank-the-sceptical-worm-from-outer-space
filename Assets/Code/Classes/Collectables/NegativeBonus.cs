@@ -61,12 +61,12 @@ public class NegativeBonus : AbstractCollectable
     /*******************************/
 
     /**
-     * @access private
+     * @access public
      */
 
-    public override void OnTriggerEnter2D(Collision2D otherObject)
+    public override void OnTriggerEnter2D(Collider2D otherObject)
     {
-
+        base.OnTriggerEnter2D(otherObject);
     }
 }
  

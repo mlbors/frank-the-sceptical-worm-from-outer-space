@@ -130,6 +130,6 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct, IRe
      * @access private
      */
 
-    public abstract void OnTriggerEnter2D(Collision2D otherObject);
+    public abstract void OnTriggerEnter2D(Collider2D otherObject);
 }
  

@@ -215,9 +215,17 @@ abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObserv
     /*******************************/
 
     /**
-     * @access private
+     * @access public
      */
 
-    public abstract void OnTriggerEnter2D(Collision2D otherObject);
+    public virtual void OnTriggerEnter2D(Collider2D otherObject)
+    {
+        if (otherObject.gameObject.tag == "Player" && otherObject.GetType() == typeof(CircleCollider2D))
+        {
+            PlaySound();
+            Perform();
+            (this as MonoBehaviour).gameObject.SetActive(false);
+        }
+    }
 }
  

@@ -67,6 +67,14 @@ public class PowerUpComputer : AbstractObjectComputer<ICollectable>
     {
         IPlatform platform = (_referenceObject as IGeneratorOperatorElement<IPlatform>).Generator.CurrentObject;
 
+        System.Random rnd = new System.Random();
+        int amount = rnd.Next(0, 1);
+
+        if (amount == 0)
+        {
+            return;
+        }
+
         _currentObject = _pool.GetObject();
         (_currentObject as MonoBehaviour).transform.position = _ComputePosition(platform);
         (_currentObject as MonoBehaviour).gameObject.SetActive(true);
