@@ -23,13 +23,14 @@ using UnityEngine;
 /***** COLLECTABLE GENERATOR *****/
 /*********************************/
 
-public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectableGenerator
+public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectableGenerator, IObservable
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
+     * @var List<IObserver> _observers list of observers
      * @var CollectableType _lastCollectableType type of the last generated object
      * @var CollectableType _currentType type of the current generated object
      * @var IObjectComputer _objectComputer contains algorithm to compute required object
@@ -42,6 +43,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
     protected IObjectComputer _objectComputer;
     protected IObjectComputerFactory<IObjectComputer> _objectComputerFactory;
     protected Dictionary<string, IObjectComputer> _objectComputers = new Dictionary<string, IObjectComputer>();
+    protected List<IObserver> _observers = new List<IObserver>();
 
     /**************************************************/
     /**************************************************/
@@ -88,6 +90,23 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
     /**************************************************/
     /**************************************************/
 
+    /***********************************/
+    /***** OBSERVERS GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public List<IObserver> Observers
+    {
+        get { return _observers; }
+        set { _observers = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /****************/
     /***** INIT *****/
     /****************/
@@ -111,6 +130,60 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
 
         _objectComputerFactory.Type = ObjectComputerType.PowerUp;
         _objectComputers["powerup"] = _objectComputerFactory.Create();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - ATTACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to attach
+     */
+
+    public void Attach(IObserver observer)
+    {
+        _observers.Add(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - DETACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to detach
+     */
+
+    public void Detach(IObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** IOBSERVABLE NOTIFY *****/
+    /******************************/
+
+    /**
+     * @access private
+     * @param String info info for update
+     */
+
+    public void Notify(string info, object data)
+    {
+        foreach (IObserver o in _observers)
+        {
+            o.ObserverUpdate(info, data);
+        }
     }
 
     /**************************************************/
@@ -199,5 +272,10 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
         (_objectComputer as IObjectComputer<ICollectable>).Pool = _pool;
         _objectComputer.ReferenceObject = _referenceObject;
         _objectComputer.ExecuteComputation();
+
+        foreach (ICollectable collectable in (_objectComputer as IObjectComputer<ICollectable>).GeneratedObjects)
+        {
+            Notify("platformobject added", new PlatformObjectData());
+        }
     }
 }

@@ -32,12 +32,14 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct, IRe
     /**
      * @var PlatformType _type platform type
      * @var Float _x x position
-     * @var Float _y y position;
+     * @var Float _y y position
+     * @var List<PlatformObjectData> _objectsData data of the various objects on the platform
      */
 
     protected PlatformType _type;
     protected float _x;
     protected float _y;
+    protected List<PlatformObjectData> _objectsData = new List<PlatformObjectData>();
 
     /**************************************************/
     /**************************************************/
@@ -104,6 +106,23 @@ abstract public class AbstractPlatform : MonoBehaviour, IPlatform, IProduct, IRe
     {
         get { return _y; }
         set { _y = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************************/
+    /***** OBJECTS DATA GETTER/SETTER *****/
+    /**************************************/
+
+    /**
+     * @access public
+     */
+
+    public List<PlatformObjectData> ObjectsData
+    {
+        get { return _objectsData; }
+        set { _objectsData = value; }
     }
 
     /**************************************************/

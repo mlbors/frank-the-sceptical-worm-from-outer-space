@@ -78,7 +78,7 @@ abstract public class AbstractObjectComputer<T> : IObjectComputer<T>
     /**************************************************/
 
     /*******************************************/
-    /***** GENERATED OBEJCTS GETTER/SETTER *****/
+    /***** GENERATED OBJECTS GETTER/SETTER *****/
     /*******************************************/
 
     /**

@@ -23,7 +23,7 @@ using UnityEngine;
 /***** PLATFORM GENERATOR *****/
 /******************************/
 
-public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatformGenerator
+public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatformGenerator, IObserver
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -123,6 +123,25 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
         foreach (IOperatorElement element in _operatorElements)
         {
             element.Init();
+
+            IGenerator generator;
+
+            switch (element.GetType().ToString())
+            {
+                case "FoeOperatorElement":
+                    generator = (element as IGeneratorOperatorElement<IFoe>).Generator;
+                    break;
+
+                case "CollectableOperatorElement":
+                    generator = (element as IGeneratorOperatorElement<ICollectable>).Generator;
+                    break;
+
+                default:
+                    generator = (element as IGeneratorOperatorElement<IFoe>).Generator;
+                    break;
+            }
+
+            (generator as IObservable).Attach(this);
         }
     }
 
@@ -143,6 +162,25 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
         {
             (element as IGeneratorComponentOperatorElement).RequiredAction = "generate";
             element.Operate();
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IOBSERVER UPDATE *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public void ObserverUpdate(string info, object data)
+    {
+        if (info == "platformobject added")
+        {
+            Debug.Log("::: platform object added :::");
         }
     }
 

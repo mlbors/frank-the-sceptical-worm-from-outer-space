@@ -114,7 +114,6 @@ public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe
         _generator.Init();
     }
 
-
     /**************************************************/
     /**************************************************/
 

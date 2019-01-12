@@ -41,4 +41,10 @@ public interface IPlatform
         get;
         set;
     }
+
+    List<PlatformObjectData> ObjectsData
+    {
+        get;
+        set;
+    }
 }

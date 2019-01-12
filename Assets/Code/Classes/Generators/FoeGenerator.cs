@@ -22,8 +22,21 @@ using UnityEngine;
 /***** FOE GENERATOR *****/
 /*************************/
 
-public class FoeGenerator : AbstractGenerator<IFoe>
+public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObservable
 {
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var List<IObserver> _observers list of observers
+     */
+
+    protected List<IObserver> _observers = new List<IObserver>();
+
+    /**************************************************/
+    /**************************************************/
+
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -40,6 +53,23 @@ public class FoeGenerator : AbstractGenerator<IFoe>
     /**************************************************/
     /**************************************************/
 
+    /***********************************/
+    /***** OBSERVERS GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public List<IObserver> Observers
+    {
+        get { return _observers; }
+        set { _observers = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /****************/
     /***** INIT *****/
     /****************/
@@ -51,6 +81,60 @@ public class FoeGenerator : AbstractGenerator<IFoe>
     public override void Init()
     {
         _pool.Init();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - ATTACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to attach
+     */
+
+    public void Attach(IObserver observer)
+    {
+        _observers.Add(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - DETACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to detach
+     */
+
+    public void Detach(IObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** IOBSERVABLE NOTIFY *****/
+    /******************************/
+
+    /**
+     * @access private
+     * @param String info info for update
+     */
+
+    public void Notify(string info, object data)
+    {
+        foreach (IObserver o in _observers)
+        {
+            o.ObserverUpdate(info, data);
+        }
     }
 
     /**************************************************/

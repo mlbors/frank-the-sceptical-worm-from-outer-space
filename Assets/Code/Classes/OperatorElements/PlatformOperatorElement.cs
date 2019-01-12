@@ -152,19 +152,19 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     protected void _SetComposites()
     {
-        _operatorElementFactory.Type = OperatorElementType.CollectableOperatorElement;
-        IOperatorElement collectableOperatorElement = _operatorElementFactory.Create();
-        (collectableOperatorElement as IGeneratorComponentOperatorElement).ReferenceObject = this;
-
-        (_destroyer as IDestroyerComposite).AddOperatorElement(collectableOperatorElement);
-        (_generator as IGeneratorComposite).AddOperatorElement(collectableOperatorElement);
-
         _operatorElementFactory.Type = OperatorElementType.FoeOperatorElement;
         IOperatorElement foeOperatorElement = _operatorElementFactory.Create();
         (foeOperatorElement as IGeneratorComponentOperatorElement).ReferenceObject = this;
 
         (_destroyer as IDestroyerComposite).AddOperatorElement(foeOperatorElement);
         (_generator as IGeneratorComposite).AddOperatorElement(foeOperatorElement);
+
+        _operatorElementFactory.Type = OperatorElementType.CollectableOperatorElement;
+        IOperatorElement collectableOperatorElement = _operatorElementFactory.Create();
+        (collectableOperatorElement as IGeneratorComponentOperatorElement).ReferenceObject = this;
+
+        (_destroyer as IDestroyerComposite).AddOperatorElement(collectableOperatorElement);
+        (_generator as IGeneratorComposite).AddOperatorElement(collectableOperatorElement);
     }
 
     /**************************************************/
