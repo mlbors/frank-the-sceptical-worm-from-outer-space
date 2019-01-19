@@ -30,12 +30,12 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
     /*********************/
 
     /**
-     * @var List<IObserver> _observers list of observers
      * @var CollectableType _lastCollectableType type of the last generated object
      * @var CollectableType _currentType type of the current generated object
      * @var IObjectComputer _objectComputer contains algorithm to compute required object
      * @var IObjectComputerFactory _objectComputerFactory object that create other objects, here, IObjectComputer
      * @var Dictionary<string, IObjectComputer> _objectComputers dictionary of needed various object computers
+     * @var List<IObserver> _observers list of observers
      */
 
     protected CollectableType _lastCollectableType = CollectableType.Death;
@@ -54,6 +54,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
 
     /**
      * @access public
+     * @param IObjectComputerFactory objectComputerFactory object that create other objects, here, IObjectComputer
      */
 
     public CollectableGenerator(IObjectComputerFactory<IObjectComputer> objectComputerFactory) : base()
@@ -229,6 +230,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
         catch (Exception e)
         {
             Debug.Log($"Exception thrown: {e.Message}");
+            Debug.Log($"Exception thrown: {e.StackTrace}");
         }
     }
 
@@ -275,7 +277,14 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
 
         foreach (ICollectable collectable in (_objectComputer as IObjectComputer<ICollectable>).GeneratedObjects)
         {
-            Notify("platformobject added", new PlatformObjectData());
+            PlatformObjectData data = new PlatformObjectData()
+            {
+                Type = _currentType.ToString(),
+                X = collectable.X,
+                Y = collectable.Y
+            };
+
+            Notify("platformobject added", data);
         }
     }
 }

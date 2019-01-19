@@ -137,7 +137,7 @@ public class PowerUpComputer : AbstractObjectComputer<ICollectable>
     /**************************************************/
 
     /******************************/
-    /***** COMPUTE > POSITION *****/
+    /***** COMPUTE Y POSITION *****/
     /******************************/
 
     /**

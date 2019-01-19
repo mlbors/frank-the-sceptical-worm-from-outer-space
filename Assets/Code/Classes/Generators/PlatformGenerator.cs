@@ -178,9 +178,10 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     public void ObserverUpdate(string info, object data)
     {
-        if (info == "platformobject added")
+        if (info == "platformobject added" && _currentObject != null)
         {
             Debug.Log("::: platform object added :::");
+            _currentObject.ObjectsData.Add((PlatformObjectData)data);
         }
     }
 

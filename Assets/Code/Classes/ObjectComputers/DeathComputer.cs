@@ -137,7 +137,7 @@ public class DeathComputer : AbstractObjectComputer<ICollectable>
     /**************************************************/
 
     /******************************/
-    /***** COMPUTE > POSITION *****/
+    /***** COMPUTE Y POSITION *****/
     /******************************/
 
     /**

@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,9 +30,18 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObservable
     /*********************/
 
     /**
+     * @var FoeType _lastFoeType type of the last generated object
+     * @var FoeType _currentType type of the current generated object
+     * @var IObjectComputer _objectComputer contains algorithm to compute required object
+     * @var IObjectComputerFactory _objectComputerFactory object that create other objects, here, IObjectComputer
      * @var List<IObserver> _observers list of observers
      */
 
+    protected FoeType _lastCollectableType = FoeType.Spike;
+    protected FoeType _currentType = FoeType.Spike;
+    protected IObjectComputer _objectComputer;
+    protected IObjectComputerFactory<IObjectComputer> _objectComputerFactory;
+    protected Dictionary<string, IObjectComputer> _objectComputers = new Dictionary<string, IObjectComputer>();
     protected List<IObserver> _observers = new List<IObserver>();
 
     /**************************************************/
@@ -43,11 +53,38 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObservable
 
     /**
      * @access public
-     * @param IPoolFactory _poolFactory factory object that creates other objects, here, IPool
+     * @param IObjectComputerFactory objectComputerFactory object that create other objects, here, IObjectComputer
      */
 
-    public FoeGenerator() : base()
+    public FoeGenerator(IObjectComputerFactory<IObjectComputer> objectComputerFactory) : base()
     {
+        _objectComputerFactory = objectComputerFactory;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************************/
+    /***** OBJECT COMPUTER GETTER/SETTER *****/
+    /*****************************************/
+
+    public IObjectComputer ObjectComputer
+    {
+        get { return _objectComputer; }
+        set { _objectComputer = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************************************/
+    /***** OBJECT COMPUTER FACTORY GETTER/SETTER *****/
+    /*************************************************/
+
+    public IObjectComputerFactory<IObjectComputer> ObjectComputerFactory
+    {
+        get { return _objectComputerFactory; }
+        set { _objectComputerFactory = value; }
     }
 
     /**************************************************/
@@ -81,6 +118,9 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObservable
     public override void Init()
     {
         _pool.Init();
+
+        _objectComputerFactory.Type = ObjectComputerType.Spike;
+        _objectComputers["spike"] = _objectComputerFactory.Create();
     }
 
     /**************************************************/
@@ -146,7 +186,49 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObservable
 
     public override void Generate()
     {
-        _currentObject = _pool.GetObject();
-        (_currentObject as MonoBehaviour).gameObject.SetActive(true);
+        try
+        {
+            _lastCollectableType = _currentType;
+            _currentType = FoeType.Spike;
+            (_pool as IFoePool).NeedType = _currentType;
+
+            _objectComputer = _objectComputers["spike"];
+            _GenerateFoes();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+            Debug.Log($"Exception thrown: {e.StackTrace}");
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** GENERATE FOES *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _GenerateFoes()
+    {
+        (_objectComputer as IObjectComputer<IFoe>).Pool = _pool;
+        _objectComputer.ReferenceObject = _referenceObject;
+        _objectComputer.ExecuteComputation();
+
+        foreach (IFoe foe in (_objectComputer as IObjectComputer<IFoe>).GeneratedObjects)
+        {
+            PlatformObjectData data = new PlatformObjectData()
+            {
+                Type = _currentType.ToString(),
+                X = foe.X,
+                Y = foe.Y
+            };
+
+            Notify("platformobject added", data);
+        }
     }
 }
