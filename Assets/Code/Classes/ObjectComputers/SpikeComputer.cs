@@ -67,6 +67,7 @@ public class SpikeComputer : AbstractObjectComputer<IFoe>
     {
         IPlatform platform = (_referenceObject as IGeneratorOperatorElement<IPlatform>).Generator.CurrentObject;
 
+        /*
         System.Random rnd = new System.Random();
         int amount = rnd.Next(0, 1);
 
@@ -74,6 +75,7 @@ public class SpikeComputer : AbstractObjectComputer<IFoe>
         {
             return;
         }
+        */
 
         _currentObject = _pool.GetObject();
         (_currentObject as MonoBehaviour).transform.position = _ComputePosition(platform);
@@ -151,9 +153,10 @@ public class SpikeComputer : AbstractObjectComputer<IFoe>
         float yPosition = 0.00f;
         float platformPosition = (platform as MonoBehaviour).transform.position.y;
         float platformHeight = (platform as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.y;
+        float currentObjectHeight = (_currentObject as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.y * 0.54f;
 
-        yPosition = platformPosition + platformHeight;
-
+        yPosition = platformPosition + currentObjectHeight * 1.50f;
+       
         return yPosition;
     }
 }
