@@ -98,6 +98,9 @@ public class SpikeComputer : AbstractObjectComputer<IFoe>
 
     protected Vector3 _ComputePosition(IPlatform platform)
     {
+        _currentObject.Width = (_currentObject as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x * 0.54f;
+        _currentObject.Height = (_currentObject as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.y * 0.54f;
+
         float xPosition = _ComputeXPosition(platform);
         float yPosition = _ComputeYPosition(platform);
 
@@ -126,9 +129,8 @@ public class SpikeComputer : AbstractObjectComputer<IFoe>
         float xPosition = 0.00f;
         float platformWidth = (platform as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
         float platformPosition = (platform as MonoBehaviour).transform.position.x - platformWidth / 2.00f;
-        float currentObjectWidth = (_currentObject as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x * 0.54f;
-        float minPosition = platformPosition + (currentObjectWidth / 2.00f);
-        float maxPosition = (platformPosition + platformWidth) - (currentObjectWidth / 2.00f);
+        float minPosition = platformPosition + (_currentObject.Width / 2.00f);
+        float maxPosition = (platformPosition + platformWidth) - (_currentObject.Width / 2.00f);
 
         xPosition = UnityEngine.Random.Range(minPosition, maxPosition);
 
@@ -153,9 +155,8 @@ public class SpikeComputer : AbstractObjectComputer<IFoe>
         float yPosition = 0.00f;
         float platformPosition = (platform as MonoBehaviour).transform.position.y;
         float platformHeight = (platform as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.y;
-        float currentObjectHeight = (_currentObject as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.y * 0.54f;
 
-        yPosition = platformPosition + currentObjectHeight * 1.50f;
+        yPosition = platformPosition + _currentObject.Height * 1.50f;
        
         return yPosition;
     }

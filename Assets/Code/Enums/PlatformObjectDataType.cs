@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - PlatformObjectData - Struct
+ * FTSWFOS - PlatformObjectDataType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,15 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/********************************/
-/***** PLATFORM OBJECT DATA *****/
-/********************************/
+/*************************************/
+/***** PLATFORM OBJECT DATA TYPE *****/
+/*************************************/
 
-public struct PlatformObjectData 
+public enum PlatformObjectDataType
 {
-    public PlatformObjectDataType Type;
-    public float X;
-    public float Y;
-    public float Width;
-    public float Height;
+    Bonus,
+    Death,
+    PowerUp,
+    NegativeBonus,
+    Spike
 }

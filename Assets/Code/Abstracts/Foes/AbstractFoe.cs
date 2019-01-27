@@ -31,13 +31,17 @@ abstract public class AbstractFoe : MonoBehaviour, IFoe, IObservable, IProduct
     /**
      * @var FoeType _type type of foe
      * @var Float _x x position
-     * @var Float _y y position;
+     * @var Float _y y position
+     * @var Float _width width of the object
+     * @var Float _height height of the object
      * @var List<IObserver> _observers list of observers
      */
 
     protected FoeType _type;
     protected float _x;
     protected float _y;
+    protected float _width;
+    protected float _height;
     protected List<IObserver> _observers = new List<IObserver>();
 
     /**************************************************/
@@ -89,6 +93,40 @@ abstract public class AbstractFoe : MonoBehaviour, IFoe, IObservable, IProduct
     {
         get { return _y; }
         set { _y = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*******************************/
+    /***** WIDTH GETTER/SETTER *****/
+    /*******************************/
+
+    /**
+     * @access public
+     */
+
+    public float Width
+    {
+        get { return _width; }
+        set { _width = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** HEIGHT GETTER/SETTER *****/
+    /********************************/
+
+    /**
+     * @access public
+     */
+
+    public float Height
+    {
+        get { return _height; }
+        set { _height = value; }
     }
 
     /**************************************************/

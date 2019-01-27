@@ -141,6 +141,9 @@ public class NegativeBonusComputer : AbstractObjectComputer<ICollectable>
 
     protected Vector3 _ComputePosition(int numberOfItem, IPlatform platform, int index)
     {
+        _currentObject.Width = (_currentObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2.00f * 0.15f;
+        _currentObject.Height = (_currentObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2.00f * 0.15f;
+
         float xPosition = _ComputeXPosition(numberOfItem, platform, index);
         float yPosition = _ComputeYPosition(numberOfItem, platform);
 
@@ -172,7 +175,6 @@ public class NegativeBonusComputer : AbstractObjectComputer<ICollectable>
         float offset = 0.00f;
         float platformWidth = (platform as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
         float platformPosition = (platform as MonoBehaviour).transform.position.x - platformWidth / 2.00f;
-        float currentObjectWidth = (_currentObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2.00f * 0.15f;
 
         if (_generatedObjects.Count == 0 && index == 0)
         {
@@ -180,8 +182,8 @@ public class NegativeBonusComputer : AbstractObjectComputer<ICollectable>
             float sumOfGapes = 0.00f;
             float neededSpace = 0.00f;
             float delta = 0.00f;
-            float minPosition = platformPosition + (currentObjectWidth / 2.00f);
-            float maxPosition = (platformPosition + platformWidth) - (currentObjectWidth / 2.00f);
+            float minPosition = platformPosition + (_currentObject.Width / 2.00f);
+            float maxPosition = (platformPosition + platformWidth) - (_currentObject.Width / 2.00f);
 
             do
             {
@@ -193,11 +195,11 @@ public class NegativeBonusComputer : AbstractObjectComputer<ICollectable>
                     position = UnityEngine.Random.Range(minPosition, maxPosition);
                     delta = position - platformPosition;
 
-                    _gapes[i] = UnityEngine.Random.Range(currentObjectWidth * 1.50f, currentObjectWidth * 5.50f);
+                    _gapes[i] = UnityEngine.Random.Range(_currentObject.Width * 1.50f, _currentObject.Width * 5.50f);
                     sumOfGapes += _gapes[i];
                 }
 
-                neededSpace = delta + sumOfGapes + (currentObjectWidth * numberOfItem);
+                neededSpace = delta + sumOfGapes + (_currentObject.Width * numberOfItem);
             } while (neededSpace > platformWidth);
 
             xPosition = position;

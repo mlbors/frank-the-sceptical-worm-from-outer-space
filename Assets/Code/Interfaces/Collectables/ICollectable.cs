@@ -42,5 +42,17 @@ public interface ICollectable
         set;
     }
 
+    float Width
+    {
+        get;
+        set;
+    }
+
+    float Height
+    {
+        get;
+        set;
+    }
+
     void Perform();
 }

@@ -13,6 +13,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /**************************************************/
@@ -96,6 +97,9 @@ public class DeathComputer : AbstractObjectComputer<ICollectable>
 
     protected Vector3 _ComputePosition(IPlatform platform)
     {
+        _currentObject.Width = (_currentObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2.00f * 0.15f;
+        _currentObject.Height = (_currentObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2.00f * 0.15f;
+
         float xPosition = _ComputeXPosition(platform);
         float yPosition = _ComputeYPosition(platform);
 
@@ -124,11 +128,42 @@ public class DeathComputer : AbstractObjectComputer<ICollectable>
         float xPosition = 0.00f;
         float platformWidth = (platform as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
         float platformPosition = (platform as MonoBehaviour).transform.position.x - platformWidth / 2.00f;
-        float currentObjectWidth = (_currentObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2.00f * 0.15f;
-        float minPosition = platformPosition + (currentObjectWidth / 2.00f);
-        float maxPosition = (platformPosition + platformWidth) - (currentObjectWidth / 2.00f);
+        float minPosition = platformPosition + (_currentObject.Width / 2.00f);
+        float maxPosition = (platformPosition + platformWidth) - (_currentObject.Width / 2.00f);
 
         xPosition = UnityEngine.Random.Range(minPosition, maxPosition);
+
+        foreach (PlatformObjectData data in platform.ObjectsData) 
+        {
+            if (data.Type != PlatformObjectDataType.Spike) 
+            {
+                continue;
+            }
+
+            float startPoint = data.X - (data.Width / 2);
+            float endPoint = data.X + (data.Width / 2);
+
+            if (xPosition >= startPoint && xPosition <= endPoint)
+            {
+                HashSet<int> exclude = new HashSet<int>();
+
+                for (int i = (int)startPoint; i <= (int)endPoint; i++)
+                {
+                    exclude.Add(i);
+                }
+
+                IEnumerable<int> range = Enumerable.Range((int)minPosition, (int)maxPosition).Where(i => !exclude.Contains(i));
+
+                System.Random rand = new System.Random();
+                int index = rand.Next((int)minPosition, (int)maxPosition - exclude.Count);
+                xPosition = range.ElementAt(index);
+            }
+            else 
+            {
+                continue;
+            }
+         
+        }
 
         return xPosition;
     }

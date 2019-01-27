@@ -279,9 +279,11 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
         {
             PlatformObjectData data = new PlatformObjectData()
             {
-                Type = _currentType.ToString(),
+                Type = (PlatformObjectDataType)Enum.Parse(typeof(PlatformObjectDataType), _currentType.ToString()),
                 X = collectable.X,
-                Y = collectable.Y
+                Y = collectable.Y,
+                Width = collectable.Width,
+                Height = collectable.Height
             };
 
             Notify("platformobject added", data);

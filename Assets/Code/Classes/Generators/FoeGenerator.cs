@@ -223,9 +223,11 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObservable
         {
             PlatformObjectData data = new PlatformObjectData()
             {
-                Type = _currentType.ToString(),
+                Type = (PlatformObjectDataType)Enum.Parse(typeof(PlatformObjectDataType), _currentType.ToString()),
                 X = foe.X,
-                Y = foe.Y
+                Y = foe.Y,
+                Width = foe.Width,
+                Height = foe.Height
             };
 
             Notify("platformobject added", data);

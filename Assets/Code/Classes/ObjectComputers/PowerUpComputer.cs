@@ -96,6 +96,9 @@ public class PowerUpComputer : AbstractObjectComputer<ICollectable>
 
     protected Vector3 _ComputePosition(IPlatform platform)
     {
+        _currentObject.Width = (_currentObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2.00f * 0.15f;
+        _currentObject.Height = (_currentObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2.00f * 0.15f;
+
         float xPosition = _ComputeXPosition(platform);
         float yPosition = _ComputeYPosition(platform);
 
@@ -124,9 +127,8 @@ public class PowerUpComputer : AbstractObjectComputer<ICollectable>
         float xPosition = 0.00f;
         float platformWidth = (platform as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
         float platformPosition = (platform as MonoBehaviour).transform.position.x - platformWidth / 2.00f;
-        float currentObjectWidth = (_currentObject as MonoBehaviour).gameObject.GetComponent<CircleCollider2D>().radius * 2.00f * 0.15f;
-        float minPosition = platformPosition + (currentObjectWidth / 2.00f);
-        float maxPosition = (platformPosition + platformWidth) - (currentObjectWidth / 2.00f);
+        float minPosition = platformPosition + (_currentObject.Width / 2.00f);
+        float maxPosition = (platformPosition + platformWidth) - (_currentObject.Width / 2.00f);
 
         xPosition = UnityEngine.Random.Range(minPosition, maxPosition);
 
