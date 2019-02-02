@@ -162,7 +162,6 @@ public class DeathComputer : AbstractObjectComputer<ICollectable>
             {
                 continue;
             }
-         
         }
 
         return xPosition;

@@ -158,6 +158,28 @@ public class PowerUpComputer : AbstractObjectComputer<ICollectable>
 
         yPosition = UnityEngine.Random.Range(minPosition, maxPosition);
 
+        foreach (PlatformObjectData data in platform.ObjectsData)
+        {
+            if (data.Type != PlatformObjectDataType.Spike)
+            {
+                continue;
+            }
+
+            float startPoint = data.X - (data.Width / 2);
+            float endPoint = data.X + (data.Width / 2);
+
+            if (_currentObject.X >= startPoint
+                && _currentObject.X <= endPoint
+                && yPosition - (_currentObject.Height / 2) <= data.Y + (data.Height / 2))
+            {
+                yPosition += UnityEngine.Random.Range(data.Height * 1.50f, data.Height * 3.00f);
+            }
+            else
+            {
+                continue;
+            }
+        }
+
         return yPosition;
     }
 }
