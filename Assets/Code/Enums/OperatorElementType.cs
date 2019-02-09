@@ -26,6 +26,7 @@ public enum OperatorElementType
 {
     CameraOperatorElement,
     CollectableOperatorElement,
+    EnvironmentOperatorElement,
     FoeOperatorElement,
     MenuOperatorElement,
     PlatformOperatorElement,
