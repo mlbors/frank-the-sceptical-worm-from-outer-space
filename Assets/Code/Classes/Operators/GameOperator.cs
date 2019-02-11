@@ -57,6 +57,9 @@ public class GameOperator : AbstractOperator, IGameOperator
         (cameraOperatorElement as ICameraOperatorElement).Attach(platformOperatorElement as IObserver);
         AddElement(cameraOperatorElement);
 
+        _operatorElementFactory.Type = OperatorElementType.EnvironmentOperatorElement;
+        AddElement(_operatorElementFactory.Create());
+
         _operatorElementFactory.Type = OperatorElementType.MenuOperatorElement;
         AddElement(_operatorElementFactory.Create());
 
@@ -82,8 +85,15 @@ public class GameOperator : AbstractOperator, IGameOperator
 
     public override void Init() 
     {
-        _SetValues();
-        _InitOperators();
+        try 
+        {
+            _SetValues();
+            _InitOperators();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+        }
     }
 
     /**************************************************/
