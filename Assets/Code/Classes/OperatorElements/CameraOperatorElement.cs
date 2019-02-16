@@ -23,7 +23,7 @@ using Zenject;
 /***** CAMERA OPERATOR ELEMENT *****/
 /***********************************/
 
-public class CameraOperatorElement : ICameraOperatorElement, IObserver
+public class CameraOperatorElement : ICameraOperatorElement, IObserver, IObservable
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -139,7 +139,8 @@ public class CameraOperatorElement : ICameraOperatorElement, IObserver
     {
         if (_camera == null)
         {
-            Camera = _cameraFactory.Create();
+            _camera = _cameraFactory.Create();
+            Notify("camera inited", _camera);
         }
     }
 

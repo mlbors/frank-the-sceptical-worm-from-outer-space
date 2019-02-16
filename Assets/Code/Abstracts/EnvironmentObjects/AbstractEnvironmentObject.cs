@@ -30,9 +30,11 @@ abstract public class AbstractEnvironmentObject : MonoBehaviour, IEnvironmentObj
 
     /**
      * @var EnvironmentObjectType _type type of environment object
+     * @var MonoBehaviour _followedObject object to follow (position)
      */
 
     protected EnvironmentObjectType _type;
+    protected MonoBehaviour _followedObject;
 
     /**************************************************/
     /**************************************************/
@@ -49,6 +51,23 @@ abstract public class AbstractEnvironmentObject : MonoBehaviour, IEnvironmentObj
     {
         get { return _type; }
         set { _type = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************************/
+    /***** FOLLOWED OBJECT GETTER/SETTER *****/
+    /*****************************************/
+
+    /**
+     * @access public
+     */
+
+    public MonoBehaviour FollowedObject
+    {
+        get { return _followedObject; }
+        set { _followedObject = value; }
     }
 }
  

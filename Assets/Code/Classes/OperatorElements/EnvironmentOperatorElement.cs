@@ -23,7 +23,7 @@ using Zenject;
 /***** ENVIRONMENT OPERATOR ELEMENT *****/
 /****************************************/
 
-public class EnvironmentOperatorElement : IEnvironmentOperatorElement
+public class EnvironmentOperatorElement : IEnvironmentOperatorElement, IObserver
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -134,4 +134,23 @@ public class EnvironmentOperatorElement : IEnvironmentOperatorElement
     public void Operate()
     {
     }
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IOBSERVER UPDATE *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public void ObserverUpdate(string info, object data)
+    {
+        if (info == "camera inited")
+        {
+
+        }
+    }
+
 }

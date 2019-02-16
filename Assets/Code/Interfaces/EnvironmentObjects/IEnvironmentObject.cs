@@ -29,4 +29,10 @@ public interface IEnvironmentObject
         get;
         set;
     }
+
+    MonoBehaviour FollowedObject
+    {
+        get;
+        set;
+    }
 }

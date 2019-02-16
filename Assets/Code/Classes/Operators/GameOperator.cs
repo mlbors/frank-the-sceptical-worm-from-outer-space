@@ -52,20 +52,22 @@ public class GameOperator : AbstractOperator, IGameOperator
         IOperatorElement platformOperatorElement = _operatorElementFactory.Create();
         AddElement(platformOperatorElement);
 
+        _operatorElementFactory.Type = OperatorElementType.EnvironmentOperatorElement;
+        IOperatorElement environmentOperatorElement = _operatorElementFactory.Create();
+        AddElement(environmentOperatorElement);
+
         _operatorElementFactory.Type = OperatorElementType.CameraOperatorElement;
         IOperatorElement cameraOperatorElement = _operatorElementFactory.Create();
-        (cameraOperatorElement as ICameraOperatorElement).Attach(platformOperatorElement as IObserver);
+        (cameraOperatorElement as IObservable).Attach(platformOperatorElement as IObserver);
+        (cameraOperatorElement as IObservable).Attach(environmentOperatorElement as IObserver);
         AddElement(cameraOperatorElement);
-
-        _operatorElementFactory.Type = OperatorElementType.EnvironmentOperatorElement;
-        AddElement(_operatorElementFactory.Create());
 
         _operatorElementFactory.Type = OperatorElementType.MenuOperatorElement;
         AddElement(_operatorElementFactory.Create());
 
         _operatorElementFactory.Type = OperatorElementType.PlayerOperatorElement;
         IOperatorElement playerOperator = _operatorElementFactory.Create();
-        (playerOperator as IPlayerOperatorElement).Attach(cameraOperatorElement as IObserver);
+        (playerOperator as IObservable).Attach(cameraOperatorElement as IObserver);
         AddElement(playerOperator);
 
         _operatorElementFactory.Type = OperatorElementType.ScoreOperatorElement;
