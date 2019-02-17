@@ -23,7 +23,7 @@ using Zenject;
 /***** ENVIRONMENT OPERATOR ELEMENT *****/
 /****************************************/
 
-public class EnvironmentOperatorElement : IEnvironmentOperatorElement, IObserver
+public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement<IEnvironmentObject>, IEnvironmentOperatorElement, IObserver
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -116,7 +116,7 @@ public class EnvironmentOperatorElement : IEnvironmentOperatorElement, IObserver
      * @access public
      */
 
-    public void Init()
+    public override void Init()
     {
     }
 
@@ -131,9 +131,10 @@ public class EnvironmentOperatorElement : IEnvironmentOperatorElement, IObserver
      * @access public
      */
 
-    public void Operate()
+    public override void Operate()
     {
     }
+
     /**************************************************/
     /**************************************************/
 
@@ -153,4 +154,58 @@ public class EnvironmentOperatorElement : IEnvironmentOperatorElement, IObserver
         }
     }
 
+    /**************************************************/
+    /**************************************************/
+
+    /******************************************************/
+    /***** IGENERATOR OPERATOR ELEMENT CALL GENERATOR *****/
+    /******************************************************/
+
+    public override void CallGenerator()
+    {
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************************************/
+    /***** IGENERATOR OPERATOR ELEMENT CALL DESTROYER *****/
+    /******************************************************/
+
+    public override void CallDestroyer()
+    {
+
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
+    /***** START *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public override void Start()
+    {
+
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************/
+    /***** UPDATE *****/
+    /******************/
+
+    /**
+     * @access public
+     */
+
+    public override void Update()
+    {
+
+    }
 }

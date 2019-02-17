@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - PoolType - Enum
+ * FTSWFOS - IEnvironmentObjectGenerator - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,14 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*********************/
-/***** POOL TYPE *****/
-/*********************/
+/*****************************************/
+/***** IENVIRONMENT OBJECT GENERATOR *****/
+/*****************************************/
 
-public enum PoolType
+public interface IEnvironmentObjectGenerator
 {
-    Collectable,
-    EnvironmentObject,
-    Foe,
-    Platform
 }

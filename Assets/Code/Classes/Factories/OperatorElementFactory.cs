@@ -97,7 +97,7 @@ public class OperatorElementFactory : AbstractDIFactory<IOperatorElement>, IOper
                 operatorElement = _container.Instantiate<CollectableOperatorElement>() as IOperatorElement;
                 break;
             case OperatorElementType.EnvironmentOperatorElement:
-                operatorElement = _container.Instantiate<EnvironmentOperatorElement>() as IOperatorElement;
+                operatorElement = _container.InstantiateComponentOnNewGameObject<EnvironmentOperatorElement>() as IOperatorElement;
                 break;
             case OperatorElementType.FoeOperatorElement:
                 operatorElement = _container.Instantiate<FoeOperatorElement>() as IOperatorElement;
@@ -137,7 +137,6 @@ public class OperatorElementFactory : AbstractDIFactory<IOperatorElement>, IOper
     {
         _container.Instantiate<CameraOperatorElement>();
         _container.Instantiate<CollectableOperatorElement>();
-        _container.Instantiate<EnvironmentOperatorElement>();
         _container.Instantiate<FoeOperatorElement>();
         _container.Instantiate<MenuOperatorElement>();
         _container.Instantiate<PlayerOperatorElement>();

@@ -25,6 +25,7 @@ using UnityEngine;
 public enum GeneratorType
 {
     Collectable,
+    EnvironmentObject,
     Foe,
     Platform
 }
