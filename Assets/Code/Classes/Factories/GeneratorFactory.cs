@@ -93,6 +93,9 @@ public class GeneratorFactory : AbstractDIFactory<IGenerator>, IGeneratorFactory
             case GeneratorType.Collectable:
                 generator = _container.Instantiate<CollectableGenerator>() as IGenerator;
                 break;
+            case GeneratorType.EnvironmentObject:
+                generator = _container.Instantiate<EnvironmentObjectGenerator>() as IGenerator;
+                break;
             case GeneratorType.Foe:
                 generator = _container.Instantiate<FoeGenerator>() as IGenerator;
                 break;
@@ -121,6 +124,7 @@ public class GeneratorFactory : AbstractDIFactory<IGenerator>, IGeneratorFactory
     public override void Validate()
     {
         _container.Instantiate<CollectableGenerator>();
+        _container.Instantiate<EnvironmentObjectGenerator>();
         _container.Instantiate<FoeGenerator>();
         _container.Instantiate<PlatformGenerator>();
     }

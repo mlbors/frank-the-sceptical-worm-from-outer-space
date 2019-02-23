@@ -50,13 +50,6 @@ public class EnvironmentInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.Bind<List<GameObject>>()
-                 .FromInstance(_settings.environmentObjects)
-                 .WhenInjectedInto<EnvironmentObjectFactory>();
-
-        Container.Bind<IEnvironmentObjectFactory<IEnvironmentObject>>()
-                 .To<EnvironmentObjectFactory>()
-                 .AsSingle();
     }
 
     /**************************************************/
@@ -73,14 +66,5 @@ public class EnvironmentInstaller : MonoInstaller
     [Serializable]
     public class Settings
     {
-        /*********************/
-        /***** ATTRIBUTS *****/
-        /*********************/
-
-        /**
-         * @var List<GameObject> environmentObjects list of environment objects
-         */
-
-        public List<GameObject> environmentObjects;
     }
 }

@@ -50,6 +50,7 @@ public class MainInstaller : MonoInstaller
         _InstallManagers();
         _InstallOperators();
         _InstallGeneratorsAndDestroyers();
+        _InstallEnvironmentObjects();
         _InstallCollectables();
         _InstallFoes();
         _InstallCamera();
@@ -169,6 +170,28 @@ public class MainInstaller : MonoInstaller
     /**************************************************/
     /**************************************************/
 
+    /***************************************/
+    /***** INSTALL ENVIRONMENT OBJECTS *****/
+    /***************************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InstallEnvironmentObjects()
+    {
+        Container.Bind<List<GameObject>>()
+                 .FromInstance(_settings.environmentObjects)
+                 .WhenInjectedInto<EnvironmentObjectFactory>();
+
+        Container.Bind<IEnvironmentObjectFactory<IEnvironmentObject>>()
+                 .To<EnvironmentObjectFactory>()
+                 .AsSingle();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /********************************/
     /***** INSTALL COLLECTABLES *****/
     /********************************/
@@ -255,6 +278,7 @@ public class MainInstaller : MonoInstaller
 
         /**
          * @var GameObject cameraGameObject prefab to use camera
+         * @var List<GameObject> environmentObjects list of environment objects
          * @var GameObject objectGenerationPoint point from where to generate objects
          * @var GameObject objectDestructionPoint point from where to destroy objects
          * @var List<GameObject> collectables list of collectables
@@ -262,6 +286,7 @@ public class MainInstaller : MonoInstaller
          */
 
         public GameObject cameraGameObject;
+        public List<GameObject> environmentObjects;
         public GameObject objectsGenerationPoint;
         public GameObject objectsDestructionPoint;
         public List<GameObject> collectables;

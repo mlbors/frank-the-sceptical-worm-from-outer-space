@@ -26,7 +26,7 @@ public enum ObjectComputerType
 {
     Bonus,
     Death,
-    PowerUp,
     NegativeBonus,
+    PowerUp,
     Spike
 }

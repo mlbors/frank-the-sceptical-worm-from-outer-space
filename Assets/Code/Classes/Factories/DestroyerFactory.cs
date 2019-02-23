@@ -93,6 +93,9 @@ public class DestroyerFactory : AbstractDIFactory<IDestroyer>, IDestroyerFactory
             case DestroyerType.Collectable:
                 destroyer = _container.Instantiate<CollectableDestroyer>() as IDestroyer;
                 break;
+            case DestroyerType.EnvironmentObject:
+                destroyer = _container.Instantiate<EnvironmentObjectDestroyer>() as IDestroyer;
+                break;
             case DestroyerType.Foe:
                 destroyer = _container.Instantiate<FoeDestroyer>() as IDestroyer;
                 break;
@@ -121,6 +124,7 @@ public class DestroyerFactory : AbstractDIFactory<IDestroyer>, IDestroyerFactory
     public override void Validate()
     {
         _container.Instantiate<CollectableDestroyer>();
+        _container.Instantiate<EnvironmentObjectDestroyer>();
         _container.Instantiate<FoeDestroyer>();
         _container.Instantiate<PlatformDestroyer>();
     }

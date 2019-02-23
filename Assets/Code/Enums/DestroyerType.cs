@@ -25,6 +25,7 @@ using UnityEngine;
 public enum DestroyerType
 {
     Collectable,
+    EnvironmentObject,
     Foe,
     Platform
 }

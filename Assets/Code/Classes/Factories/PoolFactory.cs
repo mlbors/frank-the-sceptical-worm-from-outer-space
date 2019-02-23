@@ -93,6 +93,9 @@ public class PoolFactory : AbstractDIFactory<IPool>, IPoolFactory<IPool>
             case PoolType.Collectable:
                 pool = _container.Instantiate<CollectablePool>() as IPool;
                 break;
+            case PoolType.EnvironmentObject:
+                pool = _container.Instantiate<EnvironmentObjectPool>() as IPool;
+                break;
             case PoolType.Foe:
                 pool = _container.Instantiate<FoePool>() as IPool;
                 break;
@@ -120,6 +123,9 @@ public class PoolFactory : AbstractDIFactory<IPool>, IPoolFactory<IPool>
 
     public override void Validate()
     {
+        _container.Instantiate<CollectablePool>();
+        _container.Instantiate<EnvironmentObjectPool>();
+        _container.Instantiate<FoePool>();
         _container.Instantiate<PlatformPool>();
     }
 }
