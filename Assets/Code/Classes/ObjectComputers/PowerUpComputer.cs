@@ -22,7 +22,7 @@ using UnityEngine;
 /***** POWER UP COMPUTER *****/
 /*****************************/
 
-public class PowerUpComputer : AbstractObjectComputer<ICollectable>
+public class PowerUpComputer : AbstractPlatformObjectComputer<ICollectable>
 {
     /*********************/
     /***** CONSTRUCT *****/

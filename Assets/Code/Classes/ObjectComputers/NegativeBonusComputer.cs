@@ -22,7 +22,7 @@ using UnityEngine;
 /***** NEGATIVE BONUS COMPUTER *****/
 /***********************************/
 
-public class NegativeBonusComputer : AbstractObjectComputer<ICollectable>
+public class NegativeBonusComputer : AbstractPlatformObjectComputer<ICollectable>
 {
     /*********************/
     /***** ATTRIBUTS *****/

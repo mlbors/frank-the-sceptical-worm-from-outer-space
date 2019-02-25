@@ -23,7 +23,7 @@ using UnityEngine;
 /***** DEATH COMPUTER *****/
 /**************************/
 
-public class DeathComputer : AbstractObjectComputer<ICollectable>
+public class DeathComputer : AbstractPlatformObjectComputer<ICollectable>
 {
     /*********************/
     /***** CONSTRUCT *****/

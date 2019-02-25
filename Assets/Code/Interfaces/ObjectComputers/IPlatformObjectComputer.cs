@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IOjectComputer - Interface
+ * FTSWFOS - IPlatformOjectComputer - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,18 +18,15 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/****************************/
-/***** IOBJECT COMPUTER *****/
-/****************************/
+/*************************************/
+/***** IPLATFORM OBJECT COMPUTER *****/
+/*************************************/
 
-public interface IObjectComputer
+public interface IPlatformObjectComputer<T> : IObjectComputer<T>
 {
-
-    MonoBehaviour ReferenceObject
+    PlatformType PlatformType
     {
         get;
         set;
     }
-
-    void ExecuteComputation();
 }

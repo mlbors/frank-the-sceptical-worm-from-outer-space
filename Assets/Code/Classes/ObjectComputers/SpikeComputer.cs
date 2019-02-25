@@ -22,7 +22,7 @@ using UnityEngine;
 /***** SPIKE COMPUTER *****/
 /**************************/
 
-public class SpikeComputer : AbstractObjectComputer<IFoe>
+public class SpikeComputer : AbstractPlatformObjectComputer<IFoe>
 {
     /*********************/
     /***** CONSTRUCT *****/

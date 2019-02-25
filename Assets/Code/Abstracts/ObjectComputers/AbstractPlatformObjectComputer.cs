@@ -18,11 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/************************************/
-/***** ABSTRACT OBJECT COMPUTER *****/
-/************************************/
+/*********************************************/
+/***** ABSTRACT PLATFORM OBJECT COMPUTER *****/
+/*********************************************/
 
-abstract public class AbstractObjectComputer<T> : IObjectComputer<T>
+abstract public class AbstractPlatformObjectComputer<T> : IPlatformObjectComputer<T>
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -53,7 +53,7 @@ abstract public class AbstractObjectComputer<T> : IObjectComputer<T>
      * @access protected
      */
 
-    protected AbstractObjectComputer()
+    protected AbstractPlatformObjectComputer()
     {
     }
 

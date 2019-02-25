@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IOjectComputer - Interface
+ * FTSWFOS - IEnvironmentOjectComputer - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,18 +18,10 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/****************************/
-/***** IOBJECT COMPUTER *****/
-/****************************/
+/****************************************/
+/***** IENVIRONMENT OBJECT COMPUTER *****/
+/****************************************/
 
-public interface IObjectComputer
+public interface IEnvironmentObjectComputer<T> : IObjectComputer<T>
 {
-
-    MonoBehaviour ReferenceObject
-    {
-        get;
-        set;
-    }
-
-    void ExecuteComputation();
 }
