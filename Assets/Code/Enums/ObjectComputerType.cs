@@ -24,8 +24,11 @@ using UnityEngine;
 
 public enum ObjectComputerType
 {
+    Back,
     Bonus,
     Death,
+    Front,
+    Middle,
     NegativeBonus,
     PowerUp,
     Spike

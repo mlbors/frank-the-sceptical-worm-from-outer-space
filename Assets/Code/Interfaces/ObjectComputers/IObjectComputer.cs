@@ -24,7 +24,6 @@ using UnityEngine;
 
 public interface IObjectComputer
 {
-
     MonoBehaviour ReferenceObject
     {
         get;

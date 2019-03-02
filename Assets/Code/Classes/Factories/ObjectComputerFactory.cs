@@ -89,11 +89,20 @@ public class ObjectComputerFactory : AbstractDIFactory<IObjectComputer>, IObject
 
         switch (_type)
         {
+            case ObjectComputerType.Back:
+                objectComputer = _container.Instantiate<BackComputer>() as IObjectComputer;
+                break;
             case ObjectComputerType.Bonus:
                 objectComputer = _container.Instantiate<BonusComputer>() as IObjectComputer;
                 break;
             case ObjectComputerType.Death:
                 objectComputer = _container.Instantiate<DeathComputer>() as IObjectComputer;
+                break;
+            case ObjectComputerType.Front:
+                objectComputer = _container.Instantiate<FrontComputer>() as IObjectComputer;
+                break;
+            case ObjectComputerType.Middle:
+                objectComputer = _container.Instantiate<MiddleComputer>() as IObjectComputer;
                 break;
             case ObjectComputerType.NegativeBonus:
                 objectComputer = _container.Instantiate<NegativeBonusComputer>() as IObjectComputer;
@@ -125,8 +134,11 @@ public class ObjectComputerFactory : AbstractDIFactory<IObjectComputer>, IObject
 
     public override void Validate()
     {
+        _container.Instantiate<BackComputer>();
         _container.Instantiate<BonusComputer>();
         _container.Instantiate<DeathComputer>();
+        _container.Instantiate<FrontComputer>();
+        _container.Instantiate<MiddleComputer>();
         _container.Instantiate<NegativeBonusComputer>();
         _container.Instantiate<PowerUpComputer>();
         _container.Instantiate<SpikeComputer>();

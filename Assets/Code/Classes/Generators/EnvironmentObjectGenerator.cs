@@ -29,6 +29,16 @@ public class EnvironmentObjectGenerator : AbstractGenerator<IEnvironmentObject>,
     /***** ATTRIBUTS *****/
     /*********************/
 
+    /**
+     * @var IObjectComputer _objectComputer contains algorithm to compute required object
+     * @var IObjectComputerFactory _objectComputerFactory object that create other objects, here, IObjectComputer
+     * @var Dictionary<string, IObjectComputer> _objectComputers dictionary of needed various object computers
+     */
+
+    protected IObjectComputer _objectComputer;
+    protected IObjectComputerFactory<IObjectComputer> _objectComputerFactory;
+    protected Dictionary<string, IObjectComputer> _objectComputers = new Dictionary<string, IObjectComputer>();
+
     /**************************************************/
     /**************************************************/
 
@@ -38,10 +48,38 @@ public class EnvironmentObjectGenerator : AbstractGenerator<IEnvironmentObject>,
 
     /**
      * @access public
+     * @param IObjectComputerFactory objectComputerFactory object that create other objects, here, IObjectComputer
      */
 
-    public EnvironmentObjectGenerator() : base()
+    public EnvironmentObjectGenerator(IObjectComputerFactory<IObjectComputer> objectComputerFactory) : base()
     {
+        _objectComputerFactory = objectComputerFactory;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************************/
+    /***** OBJECT COMPUTER GETTER/SETTER *****/
+    /*****************************************/
+
+    public IObjectComputer ObjectComputer
+    {
+        get { return _objectComputer; }
+        set { _objectComputer = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************************************/
+    /***** OBJECT COMPUTER FACTORY GETTER/SETTER *****/
+    /*************************************************/
+
+    public IObjectComputerFactory<IObjectComputer> ObjectComputerFactory
+    {
+        get { return _objectComputerFactory; }
+        set { _objectComputerFactory = value; }
     }
 
     /**************************************************/
@@ -58,6 +96,15 @@ public class EnvironmentObjectGenerator : AbstractGenerator<IEnvironmentObject>,
     public override void Init()
     {
         _pool.Init();
+
+        _objectComputerFactory.Type = ObjectComputerType.Back;
+        _objectComputers["back"] = _objectComputerFactory.Create();
+
+        _objectComputerFactory.Type = ObjectComputerType.Front;
+        _objectComputers["front"] = _objectComputerFactory.Create();
+
+        _objectComputerFactory.Type = ObjectComputerType.Middle;
+        _objectComputers["middle"] = _objectComputerFactory.Create();
     }
 
     /**************************************************/
