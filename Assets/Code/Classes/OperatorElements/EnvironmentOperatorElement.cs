@@ -26,83 +26,22 @@ using Zenject;
 public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement<IEnvironmentObject>, IEnvironmentOperatorElement, IObserver
 {
     /*********************/
-    /***** ATTRIBUTS *****/
-    /*********************/
-
-    /**
-     * @var List<IEnvironmentObject> _environmentObjects list of generated object
-     * @var IEnvironmentObjectFactory environmentObjectFactory factory object that creates other objects, here, IEnvironmentObject
-     */
-
-    protected List<IEnvironmentObject> _environmentObjects;
-    protected IEnvironmentObjectFactory<IEnvironmentObject> _environmentObjectFactory;
-
-    /**************************************************/
-    /**************************************************/
-
-    /*********************/
     /***** CONSTRUCT *****/
     /*********************/
 
     /**
      * @access public
-     * @param IEnvironmentObjectFactory environmentObjectFactory factory object that creates other objects, here, IEnvironmentObject
+     * @param IGeneratorFactory<IGenerator> generatorFactroy object that create other objects, here, IGenerator
+     * @param IDestroyerFactory<IDestroyer> destroyerFactory object that create other objects, here, IDestroyer
+     * @param IPoolFactory poolFactory factory object that creates other objects, here, IPool
      */
 
-    public EnvironmentOperatorElement(IEnvironmentObjectFactory<IEnvironmentObject> environmentObjectFactory)
+    [Inject]
+    public override void Construct(IGeneratorFactory<IGenerator> generatorFactory,
+                                   IDestroyerFactory<IDestroyer> destroyerFactory,
+                                   IPoolFactory<IPool> poolFactory)
     {
-        _SetValues(environmentObjectFactory);
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /*********************/
-    /***** CONSTRUCT *****/
-    /*********************/
-
-    /**
-     * @access protected
-     * @param IEnvironmentObjectFactory environmentObjectFactory factory object that creates other objects, here, IEnvironmentObject
-     */
-
-    protected void _SetValues(IEnvironmentObjectFactory<IEnvironmentObject> environmentObjectFactory)
-    {
-        _environmentObjectFactory = environmentObjectFactory;
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /****************************************************/
-    /***** ENVIRONMENT OBJECT FACTORY GETTER/SETTER *****/
-    /****************************************************/
-
-    /**
-     * @access public
-     */
-
-    public IEnvironmentObjectFactory<IEnvironmentObject> EnvironmentObjectFactory
-    {
-        get { return _environmentObjectFactory; }
-        set { _environmentObjectFactory = value; }
-    }
-
-    /**************************************************/
-    /**************************************************/
-
-    /*********************************************/
-    /***** ENVIRONMENT OBJECTS GETTER/SETTER *****/
-    /*********************************************/
-
-    /**
-     * @access public
-     */
-
-    public List<IEnvironmentObject> EnvironmentObjects
-    {
-        get { return _environmentObjects; }
-        set { _environmentObjects = value; }
+        base.Construct(generatorFactory, destroyerFactory, poolFactory);
     }
 
     /**************************************************/
@@ -118,6 +57,98 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
 
     public override void Init()
     {
+        _SetPool();
+        _SetDestroyer();
+        _SetGenerator();
+        _InitDestroyer();
+        _InitGenerator();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************/
+    /***** SET POOL *****/
+    /********************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetPool()
+    {
+        _poolFactory.Type = PoolType.EnvironmentObject;
+        Pool = _poolFactory.Create();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** SET DESTROYER *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetDestroyer()
+    {
+        _destroyerFactory.Type = DestroyerType.EnvironmentObject;
+        Destroyer = _destroyerFactory.Create() as IDestroyer<IEnvironmentObject>;
+        _destroyer.Pool = _pool as IPool<IEnvironmentObject>;
+        _destroyer.ReferenceObject = this;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** SET GENERATOR *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetGenerator()
+    {
+        _generatorFactory.Type = GeneratorType.EnvironmentObject;
+        Generator = _generatorFactory.Create() as IGenerator<IEnvironmentObject>;
+        _generator.Pool = _pool as IPool<IEnvironmentObject>;
+        _generator.ReferenceObject = this;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************/
+    /***** INIT DESTROYER *****/
+    /**************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InitDestroyer()
+    {
+        _destroyer.Init();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**************************/
+    /***** INIT GENERATOR *****/
+    /**************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InitGenerator()
+    {
+        _generator.Init();
     }
 
     /**************************************************/
