@@ -90,7 +90,7 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
     /**************************************************/
 
     /****************************/
-    /***** IPOOL GET OBEJCT *****/
+    /***** IPOOL GET OBJECT *****/
     /****************************/
 
     /**

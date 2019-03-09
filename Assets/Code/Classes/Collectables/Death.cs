@@ -41,7 +41,7 @@ public class Death : AbstractCollectable
     /**************************************************/
 
     /***************************************/
-    /***** ISOUNDING OBEJCT PLAY SOUND *****/
+    /***** ISOUNDING OBJECT PLAY SOUND *****/
     /***************************************/
 
     /**

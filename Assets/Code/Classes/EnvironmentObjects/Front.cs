@@ -24,5 +24,65 @@ using UnityEngine;
 
 public class Front : AbstractEnvironmentObject
 {
+    /*****************/
+    /***** AWAKE *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public override void Awake()
+    {
+
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
+    /***** START *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public override void Start()
+    {
+
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************/
+    /***** UPDATE *****/
+    /******************/
+
+    /**
+     * @access public
+     */
+
+    public override void Update()
+    {
+        _MoveObject();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************/
+    /***** MOVE OBJECT *****/
+    /***********************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _MoveObject()
+    {
+        transform.position = new Vector3(_followedObject.transform.position.x, _followedObject.transform.position.y, transform.position.z);
+    }
 }
  

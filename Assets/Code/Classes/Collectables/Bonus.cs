@@ -41,7 +41,7 @@ public class Bonus : AbstractCollectable
     /**************************************************/
 
     /***************************************/
-    /***** ISOUNDING OBEJCT PLAY SOUND *****/
+    /***** ISOUNDING OBJECT PLAY SOUND *****/
     /***************************************/
 
     /**

@@ -111,7 +111,7 @@ public class PlatformPool : AbstractPool<IPlatform>
     /**************************************************/
 
     /****************************/
-    /***** IPOOL GET OBEJCT *****/
+    /***** IPOOL GET OBJECT *****/
     /****************************/
 
     /**

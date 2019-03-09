@@ -236,7 +236,7 @@ abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObserv
     /**************************************************/
 
     /***************************************/
-    /***** ISOUNDING OBEJCT PLAY SOUND *****/
+    /***** ISOUNDING OBJECT PLAY SOUND *****/
     /***************************************/
 
     /**

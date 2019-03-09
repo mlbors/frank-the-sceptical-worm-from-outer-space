@@ -212,7 +212,7 @@ abstract public class AbstractPool<T> : IPool<T>, IProduct
     /**************************************************/
 
     /****************************/
-    /***** IPOOL GET OBEJCT *****/
+    /***** IPOOL GET OBJECT *****/
     /****************************/
 
     /**

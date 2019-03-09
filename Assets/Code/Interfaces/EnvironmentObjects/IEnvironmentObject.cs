@@ -35,4 +35,22 @@ public interface IEnvironmentObject
         get;
         set;
     }
+
+    float X
+    {
+        get;
+        set;
+    }
+
+    float Y
+    {
+        get;
+        set;
+    }
+
+    float Z
+    {
+        get;
+        set;
+    }
 }

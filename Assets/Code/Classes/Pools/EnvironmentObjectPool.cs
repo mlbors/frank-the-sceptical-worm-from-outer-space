@@ -48,7 +48,7 @@ public class EnvironmentObjectPool : AbstractPool<IEnvironmentObject>, IEnvironm
      * @param IFactory factory object that other creates objects, here object of type T
      */
 
-    public EnvironmentObjectPool(IEnvironmentObjectFactory<IEnvironmentObject> factory, int amount = 5) : base(amount, factory)
+    public EnvironmentObjectPool(IEnvironmentObjectFactory<IEnvironmentObject> factory, int amount = 1) : base(amount, factory)
     {
     }
 
@@ -90,7 +90,7 @@ public class EnvironmentObjectPool : AbstractPool<IEnvironmentObject>, IEnvironm
     /**************************************************/
 
     /****************************/
-    /***** IPOOL GET OBEJCT *****/
+    /***** IPOOL GET OBJECT *****/
     /****************************/
 
     /**
