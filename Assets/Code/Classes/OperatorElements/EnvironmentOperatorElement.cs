@@ -164,6 +164,12 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
 
     public override void Operate()
     {
+        if (_generationPoint == null || _destructionPoint == null)
+        {
+            return;
+        }
+
+        CallGenerator();
     }
 
     /**************************************************/
@@ -181,7 +187,13 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
     {
         if (info == "camera inited")
         {
+            Generator.ReferenceObject = (data as MonoBehaviour);
+        }
 
+        if (info == "camera created")
+        {
+            GenerationPoint = (data as List<Transform>)[0];
+            DestructionPoint = (data as List<Transform>)[1];
         }
     }
 
@@ -194,6 +206,7 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
 
     public override void CallGenerator()
     {
+        _generator.Generate();
     }
 
     /**************************************************/
@@ -205,7 +218,7 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
 
     public override void CallDestroyer()
     {
-
+        _destroyer.Destroy();
     }
 
     /**************************************************/
@@ -237,6 +250,6 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
 
     public override void Update()
     {
-
+        Operate();
     }
 }

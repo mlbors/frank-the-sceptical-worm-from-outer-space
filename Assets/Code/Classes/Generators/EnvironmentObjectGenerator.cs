@@ -33,11 +33,13 @@ public class EnvironmentObjectGenerator : AbstractGenerator<IEnvironmentObject>,
      * @var IObjectComputer _objectComputer contains algorithm to compute required object
      * @var IObjectComputerFactory _objectComputerFactory object that create other objects, here, IObjectComputer
      * @var Dictionary<string, IObjectComputer> _objectComputers dictionary of needed various object computers
+     * @var Bool _ahsRun tells if the generator has already be run 
      */
 
     protected IObjectComputer _objectComputer;
     protected IObjectComputerFactory<IObjectComputer> _objectComputerFactory;
     protected Dictionary<string, IObjectComputer> _objectComputers = new Dictionary<string, IObjectComputer>();
+    protected bool _hasRun;
 
     /**************************************************/
     /**************************************************/
@@ -100,11 +102,11 @@ public class EnvironmentObjectGenerator : AbstractGenerator<IEnvironmentObject>,
         _objectComputerFactory.Type = ObjectComputerType.Back;
         _objectComputers["back"] = _objectComputerFactory.Create();
 
-        _objectComputerFactory.Type = ObjectComputerType.Front;
-        _objectComputers["front"] = _objectComputerFactory.Create();
-
         _objectComputerFactory.Type = ObjectComputerType.Middle;
         _objectComputers["middle"] = _objectComputerFactory.Create();
+
+        _objectComputerFactory.Type = ObjectComputerType.Front;
+        _objectComputers["front"] = _objectComputerFactory.Create();
     }
 
     /**************************************************/
@@ -118,7 +120,15 @@ public class EnvironmentObjectGenerator : AbstractGenerator<IEnvironmentObject>,
     {
         try
         {
+            if (_hasRun)
+            {
+                return;
+            }
 
+            _objectComputers["back"].ExecuteComputation();
+            _objectComputers["middle"].ExecuteComputation();
+            _objectComputers["front"].ExecuteComputation();
+            _hasRun = true;
         }
         catch (Exception e)
         {
