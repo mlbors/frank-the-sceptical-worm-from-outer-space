@@ -67,6 +67,7 @@ public class MiddleComputer : AbstractEnvironmentObjectComputer<IEnvironmentObje
     {
         _generatedObjects = new Stack<IEnvironmentObject>();
 
+        (_pool as IEnvironmentObjectPool).NeedType = EnvironmentObjectType.Middle;
         _currentObject = _pool.GetObject();
         _currentObject.FollowedObject = _referenceObject;
         (_currentObject as MonoBehaviour).transform.position = _ComputePosition();
@@ -153,7 +154,7 @@ public class MiddleComputer : AbstractEnvironmentObjectComputer<IEnvironmentObje
     protected float _ComputeZPosition()
     {
         float zPosition = 0.00f;
-        zPosition = -9.00f;
+        zPosition = 9.00f;
         return zPosition;
     }
 }

@@ -97,7 +97,6 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
         _destroyerFactory.Type = DestroyerType.EnvironmentObject;
         Destroyer = _destroyerFactory.Create() as IDestroyer<IEnvironmentObject>;
         _destroyer.Pool = _pool as IPool<IEnvironmentObject>;
-        _destroyer.ReferenceObject = this;
     }
 
     /**************************************************/
@@ -116,7 +115,6 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
         _generatorFactory.Type = GeneratorType.EnvironmentObject;
         Generator = _generatorFactory.Create() as IGenerator<IEnvironmentObject>;
         _generator.Pool = _pool as IPool<IEnvironmentObject>;
-        _generator.ReferenceObject = this;
     }
 
     /**************************************************/
@@ -188,6 +186,7 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
         if (info == "camera inited")
         {
             Generator.ReferenceObject = (data as MonoBehaviour);
+            Destroyer.ReferenceObject = (data as MonoBehaviour);
         }
 
         if (info == "camera created")

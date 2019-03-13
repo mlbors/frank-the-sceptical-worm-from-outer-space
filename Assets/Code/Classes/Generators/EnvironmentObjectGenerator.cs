@@ -100,13 +100,19 @@ public class EnvironmentObjectGenerator : AbstractGenerator<IEnvironmentObject>,
         _pool.Init();
 
         _objectComputerFactory.Type = ObjectComputerType.Back;
-        _objectComputers["back"] = _objectComputerFactory.Create();
+        IObjectComputer backObjectComputer = _objectComputerFactory.Create();
+        (backObjectComputer as IObjectComputer<IEnvironmentObject>).Pool = _pool;
+        _objectComputers["back"] = backObjectComputer;
 
         _objectComputerFactory.Type = ObjectComputerType.Middle;
-        _objectComputers["middle"] = _objectComputerFactory.Create();
+        IObjectComputer middleObjectComputer = _objectComputerFactory.Create();
+        (middleObjectComputer as IObjectComputer<IEnvironmentObject>).Pool = _pool;
+        _objectComputers["middle"] = middleObjectComputer;
 
         _objectComputerFactory.Type = ObjectComputerType.Front;
-        _objectComputers["front"] = _objectComputerFactory.Create();
+        IObjectComputer frontObjectComputer = _objectComputerFactory.Create();
+        (frontObjectComputer as IObjectComputer<IEnvironmentObject>).Pool = _pool;
+        _objectComputers["front"] = frontObjectComputer;
     }
 
     /**************************************************/
@@ -120,14 +126,19 @@ public class EnvironmentObjectGenerator : AbstractGenerator<IEnvironmentObject>,
     {
         try
         {
-            if (_hasRun)
+            if (_hasRun || _referenceObject == null)
             {
                 return;
             }
 
+            _objectComputers["back"].ReferenceObject = _referenceObject;
+            _objectComputers["middle"].ReferenceObject = _referenceObject;
+            _objectComputers["front"].ReferenceObject = _referenceObject;
+
             _objectComputers["back"].ExecuteComputation();
             _objectComputers["middle"].ExecuteComputation();
             _objectComputers["front"].ExecuteComputation();
+
             _hasRun = true;
         }
         catch (Exception e)
