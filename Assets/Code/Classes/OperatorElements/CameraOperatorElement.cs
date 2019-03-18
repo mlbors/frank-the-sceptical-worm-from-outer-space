@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -187,14 +188,21 @@ public class CameraOperatorElement : ICameraOperatorElement, IObserver, IObserva
 
     public void ObserverUpdate(string info, object data)
     {
-        if (info == "player created")
+        try
         {
-            CameraFactory.Target = data as ICameraTarget;
-            _CreateCamera();
-            Transform generationPoint = (_camera as MonoBehaviour).transform.Find("ObjectsGenerationPoint");
-            Transform destructionPoint = (_camera as MonoBehaviour).transform.Find("ObjectsDestructionPoint");
-            List<Transform> points = new List<Transform>() { generationPoint, destructionPoint };
-            Notify("camera created", points);
+            if (info == "player created")
+            {
+                CameraFactory.Target = data as ICameraTarget;
+                _CreateCamera();
+                Transform generationPoint = (_camera as MonoBehaviour).transform.Find("ObjectsGenerationPoint");
+                Transform destructionPoint = (_camera as MonoBehaviour).transform.Find("ObjectsDestructionPoint");
+                List<Transform> points = new List<Transform>() { generationPoint, destructionPoint };
+                Notify("camera created", points);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
         }
     }
 

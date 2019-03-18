@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,11 +58,18 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
 
     public override void Init()
     {
-        _SetPool();
-        _SetDestroyer();
-        _SetGenerator();
-        _InitDestroyer();
-        _InitGenerator();
+        try
+        {
+            _SetPool();
+            _SetDestroyer();
+            _SetGenerator();
+            _InitDestroyer();
+            _InitGenerator();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+        }
     }
 
     /**************************************************/
@@ -162,12 +170,19 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
 
     public override void Operate()
     {
-        if (_generationPoint == null || _destructionPoint == null)
+        try
         {
-            return;
-        }
+            if (_generationPoint == null || _destructionPoint == null)
+            {
+                return;
+            }
 
-        CallGenerator();
+            CallGenerator();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+        }
     }
 
     /**************************************************/
@@ -183,16 +198,23 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
 
     public void ObserverUpdate(string info, object data)
     {
-        if (info == "camera inited")
+        try
         {
-            Generator.ReferenceObject = (data as MonoBehaviour);
-            Destroyer.ReferenceObject = (data as MonoBehaviour);
-        }
+            if (info == "camera inited")
+            {
+                Generator.ReferenceObject = (data as MonoBehaviour);
+                Destroyer.ReferenceObject = (data as MonoBehaviour);
+            }
 
-        if (info == "camera created")
+            if (info == "camera created")
+            {
+                GenerationPoint = (data as List<Transform>)[0];
+                DestructionPoint = (data as List<Transform>)[1];
+            }
+        }
+        catch (Exception e)
         {
-            GenerationPoint = (data as List<Transform>)[0];
-            DestructionPoint = (data as List<Transform>)[1];
+            Debug.Log($"Exception thrown: {e.Message}");
         }
     }
 

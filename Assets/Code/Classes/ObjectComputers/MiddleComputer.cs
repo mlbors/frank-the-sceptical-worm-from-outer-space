@@ -154,7 +154,7 @@ public class MiddleComputer : AbstractEnvironmentObjectComputer<IEnvironmentObje
     protected float _ComputeZPosition()
     {
         float zPosition = 0.00f;
-        zPosition = 9.00f;
+        zPosition = 6.00f;
         return zPosition;
     }
 }

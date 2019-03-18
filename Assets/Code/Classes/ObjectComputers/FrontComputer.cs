@@ -154,7 +154,7 @@ public class FrontComputer : AbstractEnvironmentObjectComputer<IEnvironmentObjec
     protected float _ComputeZPosition()
     {
         float zPosition = 0.00f;
-        zPosition = 6.00f;
+        zPosition = 3.00f;
         return zPosition;
     }
 }

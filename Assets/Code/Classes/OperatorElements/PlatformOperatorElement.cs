@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,13 +56,20 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     public override void Init()
     {
-        _SetInitialOffset();
-        _SetPool();
-        _SetDestroyer();
-        _SetGenerator();
-        _SetComposites();
-        _InitDestroyer();
-        _InitGenerator();
+        try
+        {
+            _SetInitialOffset();
+            _SetPool();
+            _SetDestroyer();
+            _SetGenerator();
+            _SetComposites();
+            _InitDestroyer();
+            _InitGenerator();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+        }
     }
 
     /**************************************************/
@@ -208,21 +216,28 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     public override void Operate()
     {
-        if (_generationPoint == null || _destructionPoint == null)
+        try
         {
-            return;
-        }
+            if (_generationPoint == null || _destructionPoint == null)
+            {
+                return;
+            }
 
-        if (_IsGenerationPointAhead())
-        {
-            CallGenerator();
-            _MoveOperator();
-            _generator.CurrentObject = null;
-        }
+            if (_IsGenerationPointAhead())
+            {
+                CallGenerator();
+                _MoveOperator();
+                _generator.CurrentObject = null;
+            }
 
-        if (_IsDestructionPointBehind())
+            if (_IsDestructionPointBehind())
+            {
+                CallDestroyer();
+            }
+        }
+        catch (Exception e)
         {
-            CallDestroyer();
+            Debug.Log($"Exception thrown: {e.Message}");
         }
     }
 
@@ -239,10 +254,17 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     public void ObserverUpdate(string info, object data)
     {
-        if (info == "camera created")
+        try
         {
-            GenerationPoint = (data as List<Transform>)[0];
-            DestructionPoint = (data as List<Transform>)[1];
+            if (info == "camera created")
+            {
+                GenerationPoint = (data as List<Transform>)[0];
+                DestructionPoint = (data as List<Transform>)[1];
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
         }
     }
 

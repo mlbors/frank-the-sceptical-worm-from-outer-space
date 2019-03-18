@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,9 +54,16 @@ public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe
 
     public override void Init()
     {
-        _SetPool();
-        _SetDestroyer();
-        _SetGenerator();
+        try
+        {
+            _SetPool();
+            _SetDestroyer();
+            _SetGenerator();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+        }
     }
 
     /**************************************************/
@@ -123,16 +131,23 @@ public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe
 
     public override void Operate()
     {
-        switch(_requiredAction)
+        try
         {
-            case "generate" :
-                CallGenerator();
-                break;
-            case "destroy" :
-                CallDestroyer();
-                break;
-            default:
-                break;
+            switch (_requiredAction)
+            {
+                case "generate":
+                    CallGenerator();
+                    break;
+                case "destroy":
+                    CallDestroyer();
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
         }
     }
 

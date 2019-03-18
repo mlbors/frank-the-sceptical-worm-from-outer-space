@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,7 +83,14 @@ public class Back : AbstractEnvironmentObject
 
     protected void _MoveObject()
     {
-        transform.position = new Vector3(_followedObject.transform.position.x, _followedObject.transform.position.y, transform.position.z);
+        try
+        {
+            transform.position = new Vector3(_followedObject.transform.position.x, _followedObject.transform.position.y, transform.position.z);
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+        }
     }
 }
  

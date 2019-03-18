@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,16 @@ using UnityEngine;
 
 public class Front : AbstractEnvironmentObject
 {
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var Bool _increase position will increase or decrease
+     */
+
+    protected bool _increase = true;
+
     /*****************/
     /***** AWAKE *****/
     /*****************/
@@ -50,7 +61,6 @@ public class Front : AbstractEnvironmentObject
 
     public override void Start()
     {
-
     }
 
     /**************************************************/
@@ -82,7 +92,42 @@ public class Front : AbstractEnvironmentObject
 
     protected void _MoveObject()
     {
-        transform.position = new Vector3(_followedObject.transform.position.x, _followedObject.transform.position.y, transform.position.z);
+        try
+        {
+            float x = transform.position.x;
+
+            if (_increase)
+            {
+                if (x < _followedObject.transform.position.x + 6.75f)
+                {
+                    x = _followedObject.transform.position.x + 0.045f;
+                }
+                else
+                {
+                    _increase = false;
+                }
+
+            }
+
+            if (!_increase)
+            {
+                if (x > _followedObject.transform.position.x - 6.75f)
+                {
+                    x = _followedObject.transform.position.x - 0.045f;
+                }
+                else
+                {
+                    _increase = true;
+                }
+
+            }
+
+            transform.position = new Vector3(x, _followedObject.transform.position.y, transform.position.z);
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+        }
     }
 }
  

@@ -11,6 +11,7 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -132,11 +133,18 @@ public class PlayerOperatorElement : IPlayerOperatorElement, IObservable
 
     public void Init()
     {
-        Player = _playerFactory.Create();
-
-        if (Player != null)
+        try
         {
-            Notify("player created", Player);
+            Player = _playerFactory.Create();
+
+            if (Player != null)
+            {
+                Notify("player created", Player);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
         }
     }
 

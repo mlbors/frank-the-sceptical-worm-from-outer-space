@@ -154,7 +154,7 @@ public class BackComputer : AbstractEnvironmentObjectComputer<IEnvironmentObject
     protected float _ComputeZPosition()
     {
         float zPosition = 0.00f;
-        zPosition = 12.00f;
+        zPosition = 9.00f;
         return zPosition;
     }
 }
