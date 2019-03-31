@@ -1,4 +1,4 @@
-/**
+﻿/**
  * FTSWFOS - EnvironmentOperatorElement - Concrete Class
  *
  * @since       2018.01.09
@@ -196,17 +196,17 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
      * @access public
      */
 
-    public void ObserverUpdate(string info, object data)
+    public void ObserverUpdate(ObservableEventType info, object data)
     {
         try
         {
-            if (info == "camera inited")
+            if (info == ObservableEventType.CameraInitialized)
             {
                 Generator.ReferenceObject = (data as MonoBehaviour);
                 Destroyer.ReferenceObject = (data as MonoBehaviour);
             }
 
-            if (info == "camera created")
+            if (info == ObservableEventType.CameraCreated)
             {
                 GenerationPoint = (data as List<Transform>)[0];
                 DestructionPoint = (data as List<Transform>)[1];

@@ -32,5 +32,5 @@ public interface IObservable
 
     void Attach(IObserver observer);
     void Detach(IObserver observer);
-    void Notify(string info, object data);
+    void Notify(ObservableEventType info, object data);
 }

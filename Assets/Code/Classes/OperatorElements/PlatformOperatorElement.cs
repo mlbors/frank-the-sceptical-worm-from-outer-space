@@ -1,4 +1,4 @@
-/**
+﻿/**
  * FTSWFOS - PlatformOperatorElement - Concrete Class
  *
  * @since       2018.01.09
@@ -252,11 +252,11 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
      * @access public
      */
 
-    public void ObserverUpdate(string info, object data)
+    public void ObserverUpdate(ObservableEventType info, object data)
     {
         try
         {
-            if (info == "camera created")
+            if (info == ObservableEventType.CameraCreated)
             {
                 GenerationPoint = (data as List<Transform>)[0];
                 DestructionPoint = (data as List<Transform>)[1];

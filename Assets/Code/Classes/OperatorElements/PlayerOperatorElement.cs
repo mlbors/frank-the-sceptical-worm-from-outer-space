@@ -1,4 +1,4 @@
-/**
+﻿/**
  * FTSWFOS - PlayerOperatorElement - Concrete Class
  *
  * @since       2018.01.09
@@ -139,7 +139,7 @@ public class PlayerOperatorElement : IPlayerOperatorElement, IObservable
 
             if (Player != null)
             {
-                Notify("player created", Player);
+                Notify(ObservableEventType.PlayerCreated, Player);
             }
         }
         catch (Exception e)
@@ -205,7 +205,7 @@ public class PlayerOperatorElement : IPlayerOperatorElement, IObservable
      * @param String info info for update
      */
 
-    public void Notify(string info, object data)
+    public void Notify(ObservableEventType info, object data)
     {
         foreach (IObserver o in _observers)
         {

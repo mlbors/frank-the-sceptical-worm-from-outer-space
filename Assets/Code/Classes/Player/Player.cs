@@ -241,7 +241,7 @@ public class Player : AbstractPlayer
      * @param String info info for update
      */
 
-    public override void ObserverUpdate(string info, object data)
+    public override void ObserverUpdate(ObservableEventType info, object data)
     {
         
     }
@@ -355,7 +355,7 @@ public class Player : AbstractPlayer
     {
         if (Physics2D.OverlapCircle(_groundChecker.position, 0.015f, _ground))
         {
-            Notify("player grounded", null);
+            Notify(ObservableEventType.PlayerGrounded, null);
             return true;
         }
 

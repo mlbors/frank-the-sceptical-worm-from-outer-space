@@ -270,7 +270,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSub
      * @param String info info for update
      */
 
-    public void Notify(string info, object data)
+    public void Notify(ObservableEventType info, object data)
     {
         foreach (IObserver o in _observers)
         {
@@ -302,7 +302,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSub
      * @access public
      */
 
-    public abstract void ObserverUpdate(string info, object data);
+    public abstract void ObserverUpdate(ObservableEventType info, object data);
 
     /**************************************************/
     /**************************************************/

@@ -179,7 +179,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
      * @param String info info for update
      */
 
-    public void Notify(string info, object data)
+    public void Notify(ObservableEventType info, object data)
     {
         foreach (IObserver o in _observers)
         {
@@ -286,7 +286,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
                 Height = collectable.Height
             };
 
-            Notify("platformobject added", data);
+            Notify(ObservableEventType.PlatformObjectAdded, data);
         }
     }
 }
