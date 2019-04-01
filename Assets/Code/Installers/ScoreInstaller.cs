@@ -14,7 +14,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.UI;
+
 using Zenject;
 
 /**************************************************/
@@ -50,7 +53,9 @@ public class ScoreInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-
+        Container.Bind<Text>()
+                 .FromInstance(_settings.ScoreText)
+                 .WhenInjectedInto<ScoreFactory>();
     }
 
     /**************************************************/
@@ -72,11 +77,11 @@ public class ScoreInstaller : MonoInstaller
         /*********************/
 
         /**
-         * @var GameObject ScoreText text which displays score value
-         * @var GameObject HighScoreText text which displays highscore        
+         * @var Text ScoreText text which displays score value
+         * @var Text HighScoreText text which displays highscore        
          */
 
-        public GameObject ScoreText;
-        public GameObject HighScoreText;
+        public Text ScoreText;
+        public Text HighScoreText;
     }
 }

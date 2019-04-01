@@ -14,6 +14,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /**************************************************/
 /**************************************************/
@@ -30,9 +31,11 @@ abstract public class AbstractScore : IScore
 
     /**
      * @var int _value score value
+     * @var Text _text text representing score    
      */
 
     protected int _value = 0;
+    protected Text _text;
 
     /**************************************************/
     /**************************************************/
@@ -70,6 +73,23 @@ abstract public class AbstractScore : IScore
     /**************************************************/
     /**************************************************/
 
+    /******************************/
+    /***** TEXT GETTER/SETTER *****/
+    /******************************/
+
+    /**
+     * @access public
+     */
+
+    public Text Text
+    {
+        get { return _text; }
+        set { _text = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /*********************************/
     /***** ISCORE INCREASE SCORE *****/
     /*********************************/
@@ -78,9 +98,9 @@ abstract public class AbstractScore : IScore
      * @access public
      */
 
-    public virtual void IncreaseScore(int value)
+    public virtual void IncreaseScore(int value = 1)
     {
-        _value += 1;
+        _value += value;
     }
 
     /**************************************************/
@@ -94,9 +114,9 @@ abstract public class AbstractScore : IScore
      * @access public
      */
 
-    public virtual void DecreaseScore(int value)
+    public virtual void DecreaseScore(int value = 1)
     {
-        _value -= 1;
+        _value -= value;
     }
 
     /**************************************************/

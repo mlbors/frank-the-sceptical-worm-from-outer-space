@@ -13,7 +13,10 @@
 
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.UI;
+
 using Zenject;
 
 /**************************************************/
@@ -24,7 +27,20 @@ using Zenject;
 /*************************/
 
 public class ScoreFactory : AbstractDIFactory<IScore>, IScoreFactory<IScore>
-{
+{   
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var Text _text text representing score    
+     */
+
+    protected Text _text;
+
+    /**************************************************/
+    /**************************************************/
+
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -32,10 +48,29 @@ public class ScoreFactory : AbstractDIFactory<IScore>, IScoreFactory<IScore>
     /**
      * @access public
      * @param DiContainer container DI container
+     * @param Text text text representing score     
      */
 
-    public ScoreFactory(DiContainer container) : base (container)
+    public ScoreFactory(DiContainer container, Text text) : base (container)
     {
+        _text = text;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** TEXT GETTER/SETTER *****/
+    /******************************/
+
+    /**
+     * @access public
+     */
+
+    public Text Text
+    {
+        get { return _text; }
+        set { _text = value; }
     }
 
     /**************************************************/
@@ -56,6 +91,7 @@ public class ScoreFactory : AbstractDIFactory<IScore>, IScoreFactory<IScore>
        IScore score;
 
         score = _container.Instantiate<Score>() as IScore;
+        score.Text = _text;
 
         return score;
     }

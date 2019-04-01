@@ -54,6 +54,7 @@ public class MainInstaller : MonoInstaller
         _InstallCollectables();
         _InstallFoes();
         _InstallCamera();
+        _InstallScore();
     }
 
     /**************************************************/
@@ -256,6 +257,24 @@ public class MainInstaller : MonoInstaller
                  .AsSingle()
                  .WhenInjectedInto<CameraOperatorElement>()
                  .NonLazy();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** INSTALL SCORE *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InstallScore()
+    {
+        Container.Bind<IScoreFactory<IScore>>()
+                 .To<ScoreFactory>()
+                 .AsSingle();
     }
 
     /**************************************************/

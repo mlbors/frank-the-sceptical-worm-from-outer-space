@@ -14,6 +14,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /**************************************************/
 /**************************************************/
@@ -25,6 +26,12 @@ using UnityEngine;
 public interface IScore
 {
     int Value
+    {
+        get;
+        set;
+    }
+
+    Text Text
     {
         get;
         set;

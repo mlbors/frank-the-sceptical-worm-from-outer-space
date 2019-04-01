@@ -140,6 +140,6 @@ public class OperatorElementFactory : AbstractDIFactory<IOperatorElement>, IOper
         _container.Instantiate<FoeOperatorElement>();
         _container.Instantiate<MenuOperatorElement>();
         _container.Instantiate<PlayerOperatorElement>();
-        _container.Instantiate< ScoreOperatorElement>();
+        _container.Instantiate<ScoreOperatorElement>();
     }
 }
