@@ -140,6 +140,7 @@ public class ScoreOperatorElement : IOperatorElement, IObserver
             if (info == ObservableEventType.BonusHitten)
             {
                 Debug.Log("Bonus hitten");
+                _score.IncreaseScore((int)data);
             }
         }
         catch (Exception e)

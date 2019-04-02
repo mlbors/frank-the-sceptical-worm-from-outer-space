@@ -101,6 +101,7 @@ abstract public class AbstractScore : IScore
     public virtual void IncreaseScore(int value = 1)
     {
         _value += value;
+        _UpdateText();
     }
 
     /**************************************************/
@@ -117,6 +118,7 @@ abstract public class AbstractScore : IScore
     public virtual void DecreaseScore(int value = 1)
     {
         _value -= value;
+        _UpdateText();
     }
 
     /**************************************************/
@@ -133,6 +135,23 @@ abstract public class AbstractScore : IScore
     public virtual void ResetScore()
     {
         _value = 0;
+        _UpdateText();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************/
+    /***** UPDATE TEXT *****/
+    /***********************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _UpdateText()
+    {
+        _text.text = $"Score: {_value}";
     }
 
 }
