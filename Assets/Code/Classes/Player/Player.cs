@@ -335,8 +335,11 @@ public class Player : AbstractPlayer
         {
             ChangeState(PlayerState.Running);
         }
+
         HandleInput();
         UpdateState();
+
+        Notify(ObservableEventType.PlayerIsAlive, 1);
     }
 
     /**************************************************/

@@ -274,7 +274,7 @@ abstract public class AbstractPlayer : MonoBehaviour, ICameraTarget, ICommandSub
     {
         foreach (IObserver o in _observers)
         {
-            o.ObserverUpdate(info, null);
+            o.ObserverUpdate(info, data);
         }
     }
 

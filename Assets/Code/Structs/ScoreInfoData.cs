@@ -1,5 +1,5 @@
-/**
- * FTSWFOS - IPlayerOperatorElement - Interface
+﻿/**
+ * FTSWFOS - ScoreInfoData - Struct
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,15 +18,11 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/************************************/
-/***** IPLAYER OEPRATOR ELEMENT *****/
-/************************************/
+/***************************/
+/***** SCORE INFO DATA *****/
+/***************************/
 
-public interface IPlayerOperatorElement : IOperatorElement, IObservable
+public struct ScoreInfoData 
 {
-    IPlayer Player
-    {
-        get;
-        set;
-    }
+    public int Value;
 }

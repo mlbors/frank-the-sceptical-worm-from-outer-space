@@ -137,15 +137,23 @@ public class ScoreOperatorElement : IOperatorElement, IObserver
     {
         try
         {
-            if (info == ObservableEventType.BonusHitten)
+            switch (info)
             {
-                Debug.Log("Bonus hitten");
-                _score.IncreaseScore((int)data);
+                case ObservableEventType.BonusHitten:
+                case ObservableEventType.PlayerIsAlive:
+                    _score.IncreaseScore((int)data);
+                    break;
+                case ObservableEventType.PlayerCreated:
+                    (data as IObservable).Attach(this as IObserver);
+                    break;
+                default:
+                    break;
             }
         }
         catch (Exception e)
         {
             Debug.Log($"Exception thrown: {e.Message}");
+            Debug.Log($"Exception thrown: {e.StackTrace}");
         }
     }
 }
