@@ -35,12 +35,16 @@ public class Player : AbstractPlayer
      * @var Dictionary _statesPool a dictionary used as a pool for player states
      * @var LayerMask _ground what defines the ground
      * @var Transform _groundChecker what can check if player is grounded
+     * @var float _scoreIncrementStep tells after which time the score is updated
+     * @var float _nextScoreIncrement tells when the score will be updated
      */
 
     protected Stack<IPlayerState> _statesStack = new Stack<IPlayerState>();
     protected Dictionary<PlayerState, IPlayerState> _statesPool = new Dictionary<PlayerState, IPlayerState>();
     protected LayerMask _ground;
     protected Transform _groundChecker;
+    protected float _scoreIncrementStep = 1.00f;
+    protected float _nextScoreIncrement = 0.00f;
 
     /**************************************************/
     /**************************************************/
@@ -338,8 +342,27 @@ public class Player : AbstractPlayer
 
         HandleInput();
         UpdateState();
+        _UpdateScore();
+    }
 
-        Notify(ObservableEventType.PlayerIsAlive, 1);
+    /**************************************************/
+    /**************************************************/
+
+    /************************/
+    /***** UPDATE SCORE *****/
+    /************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _UpdateScore()
+    {
+        if (Time.time > _nextScoreIncrement)
+        {
+            _nextScoreIncrement += _scoreIncrementStep;
+            Notify(ObservableEventType.PlayerIsAlive, 1);
+        }
     }
 
     /**************************************************/
