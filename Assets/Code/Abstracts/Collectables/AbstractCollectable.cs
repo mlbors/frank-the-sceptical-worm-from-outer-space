@@ -215,7 +215,7 @@ abstract public class AbstractCollectable : MonoBehaviour, ICollectable, IObserv
     {
         foreach (IObserver o in _observers)
         {
-            o.ObserverUpdate(info, null);
+            o.ObserverUpdate(info, data);
         }
     }
 

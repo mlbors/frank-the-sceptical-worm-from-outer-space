@@ -35,4 +35,10 @@ public interface IFoeFactory<T> : IFactory<T>
         get;
         set;
     }
+
+    IOperatorElement ScoreOperator
+    {
+        get;
+        set;
+    }
 }

@@ -196,7 +196,7 @@ abstract public class AbstractFoe : MonoBehaviour, IFoe, IObservable, IProduct
     {
         foreach (IObserver o in _observers)
         {
-            o.ObserverUpdate(info, null);
+            o.ObserverUpdate(info, data);
         }
     }
 

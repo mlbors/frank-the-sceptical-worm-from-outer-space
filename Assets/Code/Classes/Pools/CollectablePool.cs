@@ -31,9 +31,11 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
 
     /**
      * @var CollectableType _neededType type of collectable needed
+     * @var IOperatorElement _scoreOperator object managing score     
      */
 
     protected CollectableType _neededType;
+    protected IOperatorElement _scoreOperator;
 
     /**************************************************/
     /**************************************************/
@@ -72,6 +74,19 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
     /**************************************************/
     /**************************************************/
 
+    /****************************************/
+    /***** SCORE OPERATOR GETTER/SETTER *****/
+    /****************************************/
+
+    public IOperatorElement ScoreOperator
+    {
+        get { return _scoreOperator; }
+        set { _scoreOperator = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /**********************/
     /***** IPOOL INIT *****/
     /**********************/
@@ -83,6 +98,7 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
     public override void Init()
     {
         _neededType = CollectableType.Bonus;
+        (_factory as ICollectableFactory<ICollectable>).ScoreOperator = _scoreOperator;
         FillPool();
     }
 

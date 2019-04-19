@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlatformOjectComputer - Interface
+ * FTSWFOS - IPlatformOjectComputerGeneric - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -22,9 +22,9 @@ using UnityEngine;
 /***** IPLATFORM OBJECT COMPUTER *****/
 /*************************************/
 
-public interface IPlatformObjectComputer
+public interface IPlatformObjectComputer<T> : IPlatformObjectComputer, IObjectComputer<T>
 {
-    IOperatorElement ScoreOperator
+    PlatformType PlatformType
     {
         get;
         set;

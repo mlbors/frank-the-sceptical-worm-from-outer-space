@@ -24,17 +24,19 @@ using UnityEngine;
 /***** SCORE OPERATOR ELEMENT *****/
 /**********************************/
 
-public class ScoreOperatorElement : IOperatorElement, IObserver
+public class ScoreOperatorElement : IOperatorElement, IObserver, IObservable
 {
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
+     * @var List<IObserver> _observers list of observers
      * @var IScore _score score object
      * @var IScoreFactory scoreFactory factory object that creates other objects, here, IScore
      */
 
+    protected List<IObserver> _observers = new List<IObserver>();
     protected IScore _score;
     protected IScoreFactory<IScore> _scoreFactory;
 
@@ -87,9 +89,9 @@ public class ScoreOperatorElement : IOperatorElement, IObserver
     /**************************************************/
     /**************************************************/
 
-    /********************************/
-    /***** score GETTER/SETTER *****/
-    /********************************/
+    /*******************************/
+    /***** SCORE GETTER/SETTER *****/
+    /*******************************/
 
     /**
      * @access public
@@ -101,6 +103,26 @@ public class ScoreOperatorElement : IOperatorElement, IObserver
         set { _score = value; }
     }
 
+    /**************************************************/
+    /**************************************************/
+
+    /***********************************/
+    /***** OBSERVERS GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public List<IObserver> Observers
+    {
+        get { return _observers; }
+        set { _observers = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /**********************************/
     /***** OPERATORELEMENT - INIT *****/
     /**********************************/
@@ -108,6 +130,7 @@ public class ScoreOperatorElement : IOperatorElement, IObserver
     public void Init()
     {
         _score = _scoreFactory.Create();
+        Notify(ObservableEventType.ScoreInitialized, this);
     }
 
     /**************************************************/
@@ -154,6 +177,60 @@ public class ScoreOperatorElement : IOperatorElement, IObserver
         {
             Debug.Log($"Exception thrown: {e.Message}");
             Debug.Log($"Exception thrown: {e.StackTrace}");
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - ATTACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to attach
+     */
+
+    public void Attach(IObserver observer)
+    {
+        _observers.Add(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - DETACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to detach
+     */
+
+    public void Detach(IObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** IOBSERVABLE NOTIFY *****/
+    /******************************/
+
+    /**
+     * @access private
+     * @param String info info for update
+     */
+
+    public void Notify(ObservableEventType info, object data)
+    {
+        foreach (IObserver o in _observers)
+        {
+            o.ObserverUpdate(info, data);
         }
     }
 }

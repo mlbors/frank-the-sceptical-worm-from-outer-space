@@ -24,8 +24,25 @@ using Zenject;
 /***** PLATFORM OPERATOR ELEMENT *****/
 /*************************************/
 
-public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatform>, IPlatformOperatorElement
+public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatform>, IPlatformOperatorElement, IObserver, IObservable
 {
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var List<IObserver> _observers list of observers
+     * @var bool _compositesNotified tells if composites were notified   
+     * @var IOperatorElement _scoreOperator object to pass to composites
+     */
+
+    protected List<IObserver> _observers = new List<IObserver>();
+    protected bool _compositesNotified;
+    protected IOperatorElement _scoreOperator;
+         
+    /**************************************************/
+    /**************************************************/
+
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -46,6 +63,24 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
     {
         base.Construct(generatorFactory, destroyerFactory, poolFactory, operatorElementFactory);
     }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************************/
+    /***** OBSERVERS GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public List<IObserver> Observers
+    {
+        get { return _observers; }
+        set { _observers = value; }
+    }
+
 
     /**************************************************/
     /**************************************************/
@@ -173,6 +208,9 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
         (_destroyer as IDestroyerComposite).AddOperatorElement(collectableOperatorElement);
         (_generator as IGeneratorComposite).AddOperatorElement(collectableOperatorElement);
+
+        Attach(collectableOperatorElement as IObserver);
+        Attach(foeOperatorElement as IObserver);
     }
 
     /**************************************************/
@@ -218,6 +256,8 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
     {
         try
         {
+            _NotifyComposites(_scoreOperator);
+
             if (_generationPoint == null || _destructionPoint == null)
             {
                 return;
@@ -256,15 +296,76 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
     {
         try
         {
-            if (info == ObservableEventType.CameraCreated)
+            switch (info)
             {
-                GenerationPoint = (data as List<Transform>)[0];
-                DestructionPoint = (data as List<Transform>)[1];
+                case ObservableEventType.CameraCreated:
+                    GenerationPoint = (data as List<Transform>)[0];
+                    DestructionPoint = (data as List<Transform>)[1];
+                    break;
+                case ObservableEventType.ScoreInitialized:
+                    _NotifyComposites(data);
+                    break;
+                default:
+                    break;
             }
         }
         catch (Exception e)
         {
             Debug.Log($"Exception thrown: {e.Message}");
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - ATTACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to attach
+     */
+
+    public void Attach(IObserver observer)
+    {
+        _observers.Add(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - DETACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to detach
+     */
+
+    public void Detach(IObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** IOBSERVABLE NOTIFY *****/
+    /******************************/
+
+    /**
+     * @access private
+     * @param String info info for update
+     */
+
+    public void Notify(ObservableEventType info, object data)
+    {
+        foreach (IObserver o in _observers)
+        {
+            o.ObserverUpdate(info, data);
         }
     }
 
@@ -374,5 +475,34 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
         float generatedObjectWidth = (_generator.CurrentObject as MonoBehaviour).gameObject.GetComponent<BoxCollider2D>().size.x;
         float generatedObjectXPos = (_generator.CurrentObject as MonoBehaviour).gameObject.transform.position.x;
         transform.position = new Vector3(generatedObjectWidth/2 + generatedObjectXPos, transform.position.y, transform.position.z);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************/
+    /***** NOTIFY COMPOSITES *****/
+    /*****************************/
+
+    /**
+     * @param object data object to pass
+     * @access protected
+     */
+
+    protected void _NotifyComposites(object data)
+    {
+        if (Observers.Count < 2)
+        {
+            _scoreOperator = (data as IOperatorElement);
+            return;
+        }
+
+        if (data == null || _compositesNotified)
+        {
+            return;
+        }
+
+        Notify(ObservableEventType.ScoreInitialized, data);
+        _compositesNotified = true;
     }
 }

@@ -35,5 +35,6 @@ public enum ObservableEventType
     PlayerIsAlive,
     PlatformObjectAdded,
     PowerUpHitten,
+    ScoreInitialized,
     SpikeHitten
 }

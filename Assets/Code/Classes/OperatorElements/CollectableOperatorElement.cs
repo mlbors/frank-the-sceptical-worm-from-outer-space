@@ -24,8 +24,21 @@ using Zenject;
 /***** COLLECTABLE OPERATOR ELEMENT *****/
 /****************************************/
 
-public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElement<ICollectable>
+public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElement<ICollectable>, IObserver, IObservable
 {
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var List<IObserver> _observers list of observers
+     */
+
+    protected List<IObserver> _observers = new List<IObserver>();
+
+    /**************************************************/
+    /**************************************************/
+
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -43,6 +56,23 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
                                    IPoolFactory<IPool> poolFactory)
     {
         base.Construct(generatorFactory, destroyerFactory, poolFactory);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************************/
+    /***** OBSERVERS GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public List<IObserver> Observers
+    {
+        get { return _observers; }
+        set { _observers = value; }
     }
 
     /**************************************************/
@@ -173,5 +203,89 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
     public override void CallDestroyer()
     {
         _destroyer.Destroy();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IOBSERVER UPDATE *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public void ObserverUpdate(ObservableEventType info, object data)
+    {
+        try
+        {
+            switch (info)
+            {
+                case ObservableEventType.ScoreInitialized:
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+            Debug.Log($"Exception thrown: {e.StackTrace}");
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - ATTACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to attach
+     */
+
+    public void Attach(IObserver observer)
+    {
+        _observers.Add(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - DETACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to detach
+     */
+
+    public void Detach(IObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** IOBSERVABLE NOTIFY *****/
+    /******************************/
+
+    /**
+     * @access private
+     * @param String info info for update
+     */
+
+    public void Notify(ObservableEventType info, object data)
+    {
+        foreach (IObserver o in _observers)
+        {
+            o.ObserverUpdate(info, data);
+        }
     }
 }

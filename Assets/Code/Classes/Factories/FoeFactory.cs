@@ -32,10 +32,12 @@ public class FoeFactory : AbstractDIFactory<IFoe>, IFoeFactory<IFoe>
     /**
      * @var FoeType _type type of foe
      * @var List<GameObject> _gameObjects game objects to use
+     * @var IOperatorElement _scoreOperator object managing score     
      */
 
     protected FoeType _type;
     protected List<GameObject> _gameObjects;
+    protected IOperatorElement _scoreOperator;
 
     /**************************************************/
     /**************************************************/
@@ -94,6 +96,19 @@ public class FoeFactory : AbstractDIFactory<IFoe>, IFoeFactory<IFoe>
     /**************************************************/
     /**************************************************/
 
+    /****************************************/
+    /***** SCORE OPERATOR GETTER/SETTER *****/
+    /****************************************/
+
+    public IOperatorElement ScoreOperator
+    {
+        get { return _scoreOperator; }
+        set { _scoreOperator = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /******************/
     /***** CREATE *****/
     /******************/
@@ -124,6 +139,7 @@ public class FoeFactory : AbstractDIFactory<IFoe>, IFoeFactory<IFoe>
         }
 
         foe.Type = _type;
+        (foe as IObservable).Attach(_scoreOperator as IObserver);
         return foe;
     }
 

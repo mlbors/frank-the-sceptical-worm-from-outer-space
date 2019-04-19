@@ -29,4 +29,10 @@ public interface ICollectablePool
         get;
         set;
     }
+
+    IOperatorElement ScoreOperator
+    {
+        get;
+        set;
+    }
 }

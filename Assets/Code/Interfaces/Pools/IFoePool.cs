@@ -29,4 +29,10 @@ public interface IFoePool
         get;
         set;
     }
+
+    IOperatorElement ScoreOperator
+    {
+        get;
+        set;
+    }
 }

@@ -35,4 +35,10 @@ public interface ICollectableFactory<T> : IFactory<T>
         get;
         set;
     }
+
+    IOperatorElement ScoreOperator
+    {
+        get;
+        set;
+    }
 }

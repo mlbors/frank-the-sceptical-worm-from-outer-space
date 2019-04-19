@@ -23,7 +23,7 @@ using UnityEngine;
 /***** FOE GENERATOR *****/
 /*************************/
 
-public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObservable
+public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObserver, IObservable
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -121,6 +121,40 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObservable
 
         _objectComputerFactory.Type = ObjectComputerType.Spike;
         _objectComputers["spike"] = _objectComputerFactory.Create();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IOBSERVER UPDATE *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public void ObserverUpdate(ObservableEventType info, object data)
+    {
+        try
+        {
+            switch (info)
+            {
+                case ObservableEventType.ScoreInitialized:
+                    foreach (KeyValuePair<string, IObjectComputer> objectComputer in _objectComputers)
+                    {
+                        (objectComputer.Value as IPlatformObjectComputer).ScoreOperator = (data as IOperatorElement);
+                    }
+                    (_pool as IFoePool).ScoreOperator = (data as IOperatorElement);
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+        }
     }
 
     /**************************************************/

@@ -23,7 +23,7 @@ using UnityEngine;
 /***** COLLECTABLE GENERATOR *****/
 /*********************************/
 
-public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectableGenerator, IObservable
+public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectableGenerator, IObserver, IObservable
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -131,6 +131,40 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
 
         _objectComputerFactory.Type = ObjectComputerType.PowerUp;
         _objectComputers["powerup"] = _objectComputerFactory.Create();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IOBSERVER UPDATE *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public void ObserverUpdate(ObservableEventType info, object data)
+    {
+        try
+        {
+            switch (info)
+            {
+                case ObservableEventType.ScoreInitialized:
+                    foreach (KeyValuePair<string, IObjectComputer> objectComputer in _objectComputers)
+                    {
+                        (objectComputer.Value as IPlatformObjectComputer).ScoreOperator = (data as IOperatorElement);
+                    }
+                    (_pool as ICollectablePool).ScoreOperator = (data as IOperatorElement);
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+        }
     }
 
     /**************************************************/

@@ -32,10 +32,12 @@ public class CollectableFactory : AbstractDIFactory<ICollectable>, ICollectableF
     /**
      * @var CollectableType _type type of collectable
      * @var List<GameObject> _gameObjects game objects to use
+     * @var IOperatorElement _scoreOperator object managing score     
      */
 
     protected CollectableType _type;
     protected List<GameObject> _gameObjects;
+    protected IOperatorElement _scoreOperator;
 
     /**************************************************/
     /**************************************************/
@@ -96,6 +98,19 @@ public class CollectableFactory : AbstractDIFactory<ICollectable>, ICollectableF
     /**************************************************/
     /**************************************************/
 
+    /****************************************/
+    /***** SCORE OPERATOR GETTER/SETTER *****/
+    /****************************************/
+
+    public IOperatorElement ScoreOperator
+    {
+        get { return _scoreOperator; }
+        set { _scoreOperator = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /******************/
     /***** CREATE *****/
     /******************/
@@ -141,6 +156,7 @@ public class CollectableFactory : AbstractDIFactory<ICollectable>, ICollectableF
         }
 
         collectable.Type = _type;
+        (collectable as IObservable).Attach(_scoreOperator as IObserver);
         return collectable;
     }
    

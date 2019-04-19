@@ -24,16 +24,18 @@ using UnityEngine;
 /********************/
 
 public class FoePool : AbstractPool<IFoe>, IFoePool
-{   
+{
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
      * @var FoeType _neededType type of foe needed
+     * @var IOperatorElement _scoreOperator object managing score     
      */
 
     protected FoeType _neededType;
+    protected IOperatorElement _scoreOperator;
 
     /**************************************************/
     /**************************************************/
@@ -73,6 +75,19 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
     /**************************************************/
     /**************************************************/
 
+    /****************************************/
+    /***** SCORE OPERATOR GETTER/SETTER *****/
+    /****************************************/
+
+    public IOperatorElement ScoreOperator
+    {
+        get { return _scoreOperator; }
+        set { _scoreOperator = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /**********************/
     /***** IPOOL INIT *****/
     /**********************/
@@ -84,6 +99,7 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
     public override void Init()
     {
         (_factory as IFoeFactory<IFoe>).Type = FoeType.Spike;
+        (_factory as IFoeFactory<IFoe>).ScoreOperator = _scoreOperator;
         FillPool();
     }
 

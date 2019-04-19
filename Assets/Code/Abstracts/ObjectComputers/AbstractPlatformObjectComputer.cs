@@ -30,6 +30,7 @@ abstract public class AbstractPlatformObjectComputer<T> : IPlatformObjectCompute
 
     /**
      * @var PlatformType _platformType platfrom type used for computation
+     * @var IOperatorElement _scoreOperator object managing score    
      * @var Stack<T> _generatedObjects stack of generated objects
      * @var T _currentObject current object used for computation
      * @var IPool _pool objects pool
@@ -37,6 +38,7 @@ abstract public class AbstractPlatformObjectComputer<T> : IPlatformObjectCompute
      */
 
     protected PlatformType _platformType;
+    protected IOperatorElement _scoreOperator;
     protected Stack<T> _generatedObjects = new Stack<T>();
     protected T _currentObject;
     protected IPool<T> _pool;
@@ -72,6 +74,19 @@ abstract public class AbstractPlatformObjectComputer<T> : IPlatformObjectCompute
     {
         get { return _platformType; }
         set { _platformType = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************************/
+    /***** SCORE OPERATOR GETTER/SETTER *****/
+    /****************************************/
+
+    public IOperatorElement ScoreOperator
+    {
+        get { return _scoreOperator; }
+        set { _scoreOperator = value; }
     }
 
     /**************************************************/
