@@ -199,6 +199,7 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
         IOperatorElement foeOperatorElement = _operatorElementFactory.Create();
         (foeOperatorElement as IGeneratorComponentOperatorElement).ReferenceObject = this;
 
+        Attach(foeOperatorElement as IObserver);
         (_destroyer as IDestroyerComposite).AddOperatorElement(foeOperatorElement);
         (_generator as IGeneratorComposite).AddOperatorElement(foeOperatorElement);
 
@@ -206,11 +207,9 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
         IOperatorElement collectableOperatorElement = _operatorElementFactory.Create();
         (collectableOperatorElement as IGeneratorComponentOperatorElement).ReferenceObject = this;
 
+        Attach(collectableOperatorElement as IObserver);
         (_destroyer as IDestroyerComposite).AddOperatorElement(collectableOperatorElement);
         (_generator as IGeneratorComposite).AddOperatorElement(collectableOperatorElement);
-
-        Attach(collectableOperatorElement as IObserver);
-        Attach(foeOperatorElement as IObserver);
     }
 
     /**************************************************/
@@ -491,9 +490,12 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     protected void _NotifyComposites(object data)
     {
-        if (Observers.Count < 2)
+        if (_observers.Count < 2)
         {
-            _scoreOperator = (data as IOperatorElement);
+            if (!_compositesNotified)
+            {
+                _scoreOperator = (data as IOperatorElement);
+            }
             return;
         }
 

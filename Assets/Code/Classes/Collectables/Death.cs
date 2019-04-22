@@ -34,7 +34,7 @@ public class Death : AbstractCollectable
 
     public override void Perform()
     {
-
+        Notify(ObservableEventType.BonusHitten, 10);
     }
 
     /**************************************************/

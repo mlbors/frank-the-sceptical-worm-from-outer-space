@@ -98,7 +98,7 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
     public override void Init()
     {
         _neededType = CollectableType.Bonus;
-        (_factory as ICollectableFactory<ICollectable>).ScoreOperator = _scoreOperator;
+        _CheckFactoryScoreOperator();
         FillPool();
     }
 
@@ -144,6 +144,7 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
 
     public override ICollectable InstantiateNewObject()
     {
+        _CheckFactoryScoreOperator();
         (_factory as ICollectableFactory<ICollectable>).Type = _neededType;
 
         ICollectable collectable = _factory.Create();
@@ -168,5 +169,24 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
     public override bool CheckIfObjectAvailable(ICollectable currentObject)
     {
         return !(currentObject as MonoBehaviour).gameObject.activeInHierarchy;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************************/
+    /***** CHECK FACTORY SCORE OPERATOR *****/
+    /****************************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _CheckFactoryScoreOperator()
+    {
+        if ((_factory as ICollectableFactory<ICollectable>).ScoreOperator == null)
+        {
+            (_factory as ICollectableFactory<ICollectable>).ScoreOperator = _scoreOperator;
+        }
     }
 }

@@ -34,7 +34,7 @@ public class NegativeBonus : AbstractCollectable
 
     public override void Perform()
     {
-
+        Notify(ObservableEventType.BonusHitten, -5);
     }
 
     /**************************************************/

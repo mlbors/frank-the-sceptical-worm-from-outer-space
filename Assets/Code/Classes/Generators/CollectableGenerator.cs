@@ -118,8 +118,6 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
 
     public override void Init()
     {
-        _pool.Init();
-
         _objectComputerFactory.Type = ObjectComputerType.Bonus;
         _objectComputers["bonus"] = _objectComputerFactory.Create();
 
@@ -156,6 +154,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
                         (objectComputer.Value as IPlatformObjectComputer).ScoreOperator = (data as IOperatorElement);
                     }
                     (_pool as ICollectablePool).ScoreOperator = (data as IOperatorElement);
+                    _pool.Init();
                     break;
                 default:
                     break;

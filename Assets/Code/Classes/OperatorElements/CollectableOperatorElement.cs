@@ -32,9 +32,13 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
 
     /**
      * @var List<IObserver> _observers list of observers
+     * @var bool _observersNotified tells if composites were notified   
+     * @var IOperatorElement _scoreOperator object to pass to composites    
      */
 
     protected List<IObserver> _observers = new List<IObserver>();
+    protected bool _observersNotified;
+    protected IOperatorElement _scoreOperator;
 
     /**************************************************/
     /**************************************************/
@@ -150,6 +154,7 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
         _generator.Pool = _pool as IPool<ICollectable>;
         _generator.ReferenceObject = _referenceObject;
         _generator.Init();
+        Attach(_generator as IObserver);
     }
 
     /**************************************************/
@@ -163,6 +168,8 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
     {
         try
         {
+            _NotifyGenerator(_scoreOperator);
+
             switch (_requiredAction)
             {
                 case "generate":
@@ -223,6 +230,7 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
             switch (info)
             {
                 case ObservableEventType.ScoreInitialized:
+                    _NotifyGenerator(data);
                     break;
                 default:
                     break;
@@ -287,5 +295,37 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
         {
             o.ObserverUpdate(info, data);
         }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** NOTIFY GENERATOR *****/
+    /****************************/
+
+    /**
+     * @param object data object to pass
+     * @access protected
+     */
+
+    protected void _NotifyGenerator(object data)
+    {
+        if (_observers.Count == 0)
+        {
+            if (!_observersNotified)
+            {
+                _scoreOperator = (data as IOperatorElement);
+            }
+            return;
+        }
+
+        if (data == null || _observersNotified)
+        {
+            return;
+        }
+
+        Notify(ObservableEventType.ScoreInitialized, data);
+        _observersNotified = true;
     }
 }

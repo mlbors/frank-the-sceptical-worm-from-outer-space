@@ -117,8 +117,6 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObserver, I
 
     public override void Init()
     {
-        _pool.Init();
-
         _objectComputerFactory.Type = ObjectComputerType.Spike;
         _objectComputers["spike"] = _objectComputerFactory.Create();
     }
@@ -145,6 +143,7 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObserver, I
                     {
                         (objectComputer.Value as IPlatformObjectComputer).ScoreOperator = (data as IOperatorElement);
                     }
+                    _pool.Init();
                     (_pool as IFoePool).ScoreOperator = (data as IOperatorElement);
                     break;
                 default:

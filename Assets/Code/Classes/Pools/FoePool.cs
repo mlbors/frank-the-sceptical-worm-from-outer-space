@@ -99,7 +99,7 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
     public override void Init()
     {
         (_factory as IFoeFactory<IFoe>).Type = FoeType.Spike;
-        (_factory as IFoeFactory<IFoe>).ScoreOperator = _scoreOperator;
+        _CheckFactoryScoreOperator();
         FillPool();
     }
 
@@ -117,6 +117,7 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
 
     public override IFoe InstantiateNewObject()
     {
+        _CheckFactoryScoreOperator();
         (_factory as IFoeFactory<IFoe>).Type = FoeType.Spike;
 
         IFoe foe = _factory.Create();
@@ -141,5 +142,24 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
     public override bool CheckIfObjectAvailable(IFoe currentObject)
     {
         return !(currentObject as MonoBehaviour).gameObject.activeInHierarchy;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************************/
+    /***** CHECK FACTORY SCORE OPERATOR *****/
+    /****************************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _CheckFactoryScoreOperator()
+    {
+        if ((_factory as IFoeFactory<IFoe>).ScoreOperator == null)
+        {
+            (_factory as IFoeFactory<IFoe>).ScoreOperator = _scoreOperator;
+        }
     }
 }

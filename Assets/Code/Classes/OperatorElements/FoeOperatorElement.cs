@@ -24,8 +24,25 @@ using Zenject;
 /***** FOE OPERATOR ELEMENT *****/
 /********************************/
 
-public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe>
+public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe>, IObserver, IObservable
 {
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var List<IObserver> _observers list of observers
+     * @var bool _observersNotified tells if composites were notified   
+     * @var IOperatorElement _scoreOperator object to pass to composites    
+     */
+
+    protected List<IObserver> _observers = new List<IObserver>();
+    protected bool _observersNotified;
+    protected IOperatorElement _scoreOperator;
+
+    /**************************************************/
+    /**************************************************/
+
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -43,6 +60,23 @@ public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe
                                    IPoolFactory<IPool> poolFactory)
     {
         base.Construct(generatorFactory, destroyerFactory, poolFactory);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************************/
+    /***** OBSERVERS GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public List<IObserver> Observers
+    {
+        get { return _observers; }
+        set { _observers = value; }
     }
 
     /**************************************************/
@@ -120,6 +154,7 @@ public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe
         _generator.Pool = _pool as IPool<IFoe>;
         _generator.ReferenceObject = _referenceObject;
         _generator.Init();
+        Attach(_generator as IObserver);
     }
 
     /**************************************************/
@@ -133,6 +168,8 @@ public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe
     {
         try
         {
+            _NotifyGenerator(_scoreOperator);
+
             switch (_requiredAction)
             {
                 case "generate":
@@ -173,5 +210,122 @@ public class FoeOperatorElement : AbstractGeneratorComponentOperatorElement<IFoe
     public override void CallDestroyer()
     {
         _destroyer.Destroy();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IOBSERVER UPDATE *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public void ObserverUpdate(ObservableEventType info, object data)
+    {
+        try
+        {
+            switch (info)
+            {
+                case ObservableEventType.ScoreInitialized:
+                    _NotifyGenerator(data);
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Exception thrown: {e.Message}");
+            Debug.Log($"Exception thrown: {e.StackTrace}");
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - ATTACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to attach
+     */
+
+    public void Attach(IObserver observer)
+    {
+        _observers.Add(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - DETACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to detach
+     */
+
+    public void Detach(IObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** IOBSERVABLE NOTIFY *****/
+    /******************************/
+
+    /**
+     * @access private
+     * @param String info info for update
+     */
+
+    public void Notify(ObservableEventType info, object data)
+    {
+        foreach (IObserver o in _observers)
+        {
+            o.ObserverUpdate(info, data);
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** NOTIFY GENERATOR *****/
+    /****************************/
+
+    /**
+     * @param object data object to pass
+     * @access protected
+     */
+
+    protected void _NotifyGenerator(object data)
+    {
+        if (_observers.Count == 0)
+        {
+            if (!_observersNotified)
+            {
+                _scoreOperator = (data as IOperatorElement);
+            }
+            return;
+        }
+
+        if (data == null || _observersNotified)
+        {
+            return;
+        }
+
+        Notify(ObservableEventType.ScoreInitialized, data);
+        _observersNotified = true;
     }
 }
