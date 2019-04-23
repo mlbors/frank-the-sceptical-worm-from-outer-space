@@ -143,8 +143,8 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObserver, I
                     {
                         (objectComputer.Value as IPlatformObjectComputer).ScoreOperator = (data as IOperatorElement);
                     }
-                    _pool.Init();
                     (_pool as IFoePool).ScoreOperator = (data as IOperatorElement);
+                    _pool.Init();
                     break;
                 default:
                     break;
@@ -152,7 +152,7 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObserver, I
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
+            Logger.LogMessage(e);
         }
     }
 
@@ -230,8 +230,7 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObserver, I
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
-            Debug.Log($"Exception thrown: {e.StackTrace}");
+            Logger.LogMessage(e);
         }
     }
 

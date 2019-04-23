@@ -103,7 +103,7 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
+            Logger.LogException(e);
         }
     }
 
@@ -276,7 +276,7 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
+            Logger.LogException(e);
         }
     }
 
@@ -310,7 +310,7 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
+            Logger.LogException(e);
         }
     }
 

@@ -202,7 +202,7 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
+            Logger.LogException(e);
         }
     }
 

@@ -126,7 +126,7 @@ public class Front : AbstractEnvironmentObject
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
+            Logger.LogMessage(e);
         }
     }
 }

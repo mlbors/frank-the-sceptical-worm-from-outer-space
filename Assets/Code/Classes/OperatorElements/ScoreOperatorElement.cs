@@ -164,6 +164,7 @@ public class ScoreOperatorElement : IOperatorElement, IObserver, IObservable
             {
                 case ObservableEventType.BonusHitten:
                 case ObservableEventType.PlayerIsAlive:
+                case ObservableEventType.SpikeHitten:
                     _score.IncreaseScore((int)data);
                     break;
                 case ObservableEventType.PlayerCreated:
@@ -175,8 +176,7 @@ public class ScoreOperatorElement : IOperatorElement, IObserver, IObservable
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
-            Debug.Log($"Exception thrown: {e.StackTrace}");
+            Logger.LogException(e);
         }
     }
 

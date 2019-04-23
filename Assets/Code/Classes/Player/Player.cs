@@ -124,7 +124,7 @@ public class Player : AbstractPlayer
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
+            Logger.LogException(e);
             return false;
         }
     }

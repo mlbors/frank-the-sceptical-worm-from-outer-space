@@ -162,7 +162,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
+            Logger.LogMessage(e);
         }
     }
 
@@ -262,8 +262,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
-            Debug.Log($"Exception thrown: {e.StackTrace}");
+            Logger.LogMessage(e);
         }
     }
 

@@ -123,7 +123,7 @@ public class GameLoader : AbstractLoader, IGameLoader
             }
             catch (Exception e)
             {
-                Debug.Log($"Exception thrown: {e.Message}");
+                Logger.LogException(e);
             }
         }
     }

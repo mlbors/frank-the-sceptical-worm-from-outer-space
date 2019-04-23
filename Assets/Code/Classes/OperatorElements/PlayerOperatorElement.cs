@@ -144,7 +144,7 @@ public class PlayerOperatorElement : IPlayerOperatorElement, IObservable
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
+            Logger.LogException(e);
         }
     }
 

@@ -45,12 +45,15 @@ public class Spike : AbstractFoe
     /*******************************/
 
     /**
-     * @access private
+     * @access public
      */
 
     public override void OnTriggerEnter2D(Collider2D otherObject)
     {
-
+        if (otherObject.gameObject.tag == "Player" && otherObject.GetType() == typeof(BoxCollider2D))
+        {
+            Notify(ObservableEventType.SpikeHitten, -5);
+        }
     }
 }
  

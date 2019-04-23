@@ -143,8 +143,7 @@ public class EnvironmentObjectGenerator : AbstractGenerator<IEnvironmentObject>,
         }
         catch (Exception e)
         {
-            Debug.Log($"Exception thrown: {e.Message}");
-            Debug.Log($"Exception thrown: {e.StackTrace}");
+            Logger.LogMessage(e);
         }
     }
 }

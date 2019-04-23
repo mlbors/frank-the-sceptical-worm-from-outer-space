@@ -76,7 +76,7 @@ public class GameManager : AbstractManager, IGameManager
             }
             catch (Exception e)
             {
-                Debug.Log($"Exception thrown: {e.Message}");
+                Logger.LogException(e);
             }
         }
     }
