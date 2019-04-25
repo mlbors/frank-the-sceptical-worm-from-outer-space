@@ -28,6 +28,7 @@ public enum ObservableEventType
     DeathHitten,
     CameraCreated,
     CameraInitialized,
+    GameInitialized,
     NegativeBonusHitten,
     None,
     PlayerCreated,

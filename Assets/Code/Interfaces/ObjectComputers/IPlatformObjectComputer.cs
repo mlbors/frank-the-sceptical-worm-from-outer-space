@@ -24,6 +24,12 @@ using UnityEngine;
 
 public interface IPlatformObjectComputer
 {
+    IOperator GameOperator
+    {
+        get;
+        set;
+    }
+
     IOperatorElement ScoreOperator
     {
         get;

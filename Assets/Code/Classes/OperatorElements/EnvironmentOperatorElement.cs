@@ -68,7 +68,7 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
         }
         catch (Exception e)
         {
-            Logger.LogMessage(e);
+            Logger.LogException(e);
         }
     }
 
@@ -181,7 +181,7 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
         }
         catch (Exception e)
         {
-            Logger.LogMessage(e);
+            Logger.LogException(e);
         }
     }
 
@@ -214,7 +214,7 @@ public class EnvironmentOperatorElement : AbstractSimpleGeneratorOperatorElement
         }
         catch (Exception e)
         {
-            Logger.LogMessage(e);
+            Logger.LogException(e);
         }
     }
 

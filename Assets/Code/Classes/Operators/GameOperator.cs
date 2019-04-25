@@ -24,8 +24,21 @@ using Zenject;
 /***** GAME OPERATOR *****/
 /*************************/
 
-public class GameOperator : AbstractOperator, IGameOperator
+public class GameOperator : AbstractOperator, IGameOperator, IObservable, IObserver
 {
+    /*********************/
+    /***** ATTRIBUTS *****/
+    /*********************/
+
+    /**
+     * @var List<IObserver> _observers list of observers
+     */
+
+    protected List<IObserver> _observers = new List<IObserver>();
+
+    /**************************************************/
+    /**************************************************/
+
     /*********************/
     /***** CONSTRUCT *****/
     /*********************/
@@ -42,6 +55,23 @@ public class GameOperator : AbstractOperator, IGameOperator
     /**************************************************/
     /**************************************************/
 
+    /***********************************/
+    /***** OBSERVERS GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public List<IObserver> Observers
+    {
+        get { return _observers; }
+        set { _observers = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /**********************/
     /***** SET VALUES *****/
     /**********************/
@@ -50,6 +80,7 @@ public class GameOperator : AbstractOperator, IGameOperator
     {
         _operatorElementFactory.Type = OperatorElementType.PlatformOperatorElement;
         IOperatorElement platformOperatorElement = _operatorElementFactory.Create();
+        Attach(platformOperatorElement as IObserver);
         AddElement(platformOperatorElement);
 
         _operatorElementFactory.Type = OperatorElementType.ScoreOperatorElement;
@@ -94,6 +125,7 @@ public class GameOperator : AbstractOperator, IGameOperator
         {
             _SetValues();
             _InitOperators();
+            Notify(ObservableEventType.GameInitialized, this);
         }
         catch (Exception e)
         {
@@ -150,6 +182,90 @@ public class GameOperator : AbstractOperator, IGameOperator
             {
                 Logger.LogException(e);
             }
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IOBSERVER UPDATE *****/
+    /****************************/
+
+    /**
+     * @access public
+     */
+
+    public void ObserverUpdate(ObservableEventType info, object data)
+    {
+        try
+        {
+            switch (info)
+            {
+                case ObservableEventType.SpikeHitten:
+                    Notify(ObservableEventType.SpikeHitten, null);
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.LogException(e);
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - ATTACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to attach
+     */
+
+    public void Attach(IObserver observer)
+    {
+        _observers.Add(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /********************************/
+    /***** IOBSERVABLE - DETACH *****/
+    /********************************/
+
+    /**
+     * @access private
+     * @param IObserver observer observer to detach
+     */
+
+    public void Detach(IObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** IOBSERVABLE NOTIFY *****/
+    /******************************/
+
+    /**
+     * @access private
+     * @param String info info for update
+     */
+
+    public void Notify(ObservableEventType info, object data)
+    {
+        foreach (IObserver o in _observers)
+        {
+            o.ObserverUpdate(info, data);
         }
     }
 }

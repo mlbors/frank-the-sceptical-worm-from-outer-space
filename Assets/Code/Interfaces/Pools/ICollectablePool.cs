@@ -30,6 +30,12 @@ public interface ICollectablePool
         set;
     }
 
+    IOperator GameOperator
+    {
+        get;
+        set;
+    }
+
     IOperatorElement ScoreOperator
     {
         get;

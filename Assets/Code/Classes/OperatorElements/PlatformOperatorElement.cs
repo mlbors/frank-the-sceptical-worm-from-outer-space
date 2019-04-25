@@ -32,12 +32,16 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     /**
      * @var List<IObserver> _observers list of observers
-     * @var bool _compositesNotified tells if composites were notified   
+     * @var bool _gameOperatorAttached tells if gameOperator was attached to composites
+     * @var bool _scoreOperatorAttached tells if scoreOperator was attached to composites    
+     * @var IOperator _gameOperator object to pass to composites
      * @var IOperatorElement _scoreOperator object to pass to composites
      */
 
     protected List<IObserver> _observers = new List<IObserver>();
-    protected bool _compositesNotified;
+    protected bool _gameOperatorAttached;
+    protected bool _scoreOperatorAttached;
+    protected IOperator _gameOperator;
     protected IOperatorElement _scoreOperator;
          
     /**************************************************/
@@ -80,7 +84,6 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
         get { return _observers; }
         set { _observers = value; }
     }
-
 
     /**************************************************/
     /**************************************************/
@@ -255,7 +258,8 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
     {
         try
         {
-            _NotifyComposites(_scoreOperator);
+            _NotifyComposites(ObservableEventType.GameInitialized, _gameOperator);
+            _NotifyComposites(ObservableEventType.ScoreInitialized, _scoreOperator);
 
             if (_generationPoint == null || _destructionPoint == null)
             {
@@ -301,8 +305,11 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
                     GenerationPoint = (data as List<Transform>)[0];
                     DestructionPoint = (data as List<Transform>)[1];
                     break;
+                case ObservableEventType.GameInitialized:
+                    _NotifyComposites(ObservableEventType.GameInitialized, data);
+                    break;
                 case ObservableEventType.ScoreInitialized:
-                    _NotifyComposites(data);
+                    _NotifyComposites(ObservableEventType.ScoreInitialized, data);
                     break;
                 default:
                     break;
@@ -485,26 +492,52 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
     /**
      * @param object data object to pass
+     * @param ObservableEventType info info for update    
      * @access protected
      */
 
-    protected void _NotifyComposites(object data)
+    protected void _NotifyComposites(ObservableEventType info, object data)
     {
         if (_observers.Count < 2)
         {
-            if (!_compositesNotified)
+            switch (info)
             {
-                _scoreOperator = (data as IOperatorElement);
+                case ObservableEventType.GameInitialized:
+                    if (!_gameOperatorAttached)
+                    {
+                        _gameOperator = (data as IOperator);
+                    }
+                    break;
+
+                case ObservableEventType.ScoreInitialized:
+                    if (!_scoreOperatorAttached)
+                    {
+                        _scoreOperator = (data as IOperatorElement);
+                    }
+                    break;
             }
             return;
         }
 
-        if (data == null || _compositesNotified)
+        switch (info)
         {
-            return;
-        }
+            case ObservableEventType.GameInitialized:
+                if (data != null && !_gameOperatorAttached)
+                {
+                    _gameOperator = (data as IOperator);
+                    Notify(ObservableEventType.GameInitialized, data);
+                    _gameOperatorAttached = true;
+                }
+                break;
 
-        Notify(ObservableEventType.ScoreInitialized, data);
-        _compositesNotified = true;
+            case ObservableEventType.ScoreInitialized:
+                if (data != null && !_scoreOperatorAttached)
+                {
+                    _scoreOperator = (data as IOperatorElement);
+                    Notify(ObservableEventType.ScoreInitialized, data);
+                    _scoreOperatorAttached = true;
+                }
+                break;
+        }
     }
 }

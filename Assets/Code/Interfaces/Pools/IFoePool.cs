@@ -30,6 +30,12 @@ public interface IFoePool
         set;
     }
 
+    IOperator GameOperator
+    {
+        get;
+        set;
+    }
+
     IOperatorElement ScoreOperator
     {
         get;

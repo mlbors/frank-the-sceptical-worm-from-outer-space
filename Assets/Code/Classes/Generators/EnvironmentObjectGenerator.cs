@@ -143,7 +143,7 @@ public class EnvironmentObjectGenerator : AbstractGenerator<IEnvironmentObject>,
         }
         catch (Exception e)
         {
-            Logger.LogMessage(e);
+            Logger.LogException(e);
         }
     }
 }

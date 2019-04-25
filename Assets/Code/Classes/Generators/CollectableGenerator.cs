@@ -36,6 +36,9 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
      * @var IObjectComputerFactory _objectComputerFactory object that create other objects, here, IObjectComputer
      * @var Dictionary<string, IObjectComputer> _objectComputers dictionary of needed various object computers
      * @var List<IObserver> _observers list of observers
+     * @var bool  _poolInitialized tells if pool was initialized
+     * @var bool _gameOperatorAttached tells if gameOperator was attached to composites
+     * @var bool _scoreOperatorAttached tells if scoreOperator was attached to composites  
      */
 
     protected CollectableType _lastCollectableType = CollectableType.Death;
@@ -44,6 +47,9 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
     protected IObjectComputerFactory<IObjectComputer> _objectComputerFactory;
     protected Dictionary<string, IObjectComputer> _objectComputers = new Dictionary<string, IObjectComputer>();
     protected List<IObserver> _observers = new List<IObserver>();
+    protected bool _poolInitialized;
+    protected bool _gameOperatorAttached;
+    protected bool _scoreOperatorAttached;
 
     /**************************************************/
     /**************************************************/
@@ -148,13 +154,21 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
         {
             switch (info)
             {
+                case ObservableEventType.GameInitialized:
+                    foreach (KeyValuePair<string, IObjectComputer> objectComputer in _objectComputers)
+                    {
+                        (objectComputer.Value as IPlatformObjectComputer).GameOperator = (data as IOperator);
+                    }
+                    (_pool as ICollectablePool).GameOperator = (data as IOperator);
+                    _gameOperatorAttached = true;
+                    break;
                 case ObservableEventType.ScoreInitialized:
                     foreach (KeyValuePair<string, IObjectComputer> objectComputer in _objectComputers)
                     {
                         (objectComputer.Value as IPlatformObjectComputer).ScoreOperator = (data as IOperatorElement);
                     }
                     (_pool as ICollectablePool).ScoreOperator = (data as IOperatorElement);
-                    _pool.Init();
+                    _scoreOperatorAttached = true;
                     break;
                 default:
                     break;
@@ -162,7 +176,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
         }
         catch (Exception e)
         {
-            Logger.LogMessage(e);
+            Logger.LogException(e);
         }
     }
 
@@ -231,6 +245,11 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
     {
         try 
         {
+            if (!_CheckIfPoolInitialized())
+            {
+                return;
+            }
+
             _lastCollectableType = _currentType;
             _currentType = _GetRandomCollectableType();
             (_pool as ICollectablePool).NeedType = _currentType;
@@ -262,8 +281,42 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
         }
         catch (Exception e)
         {
-            Logger.LogMessage(e);
+            Logger.LogException(e);
         }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************************************/
+    /***** CHECK IF POOL WAS INITIALIZED *****/
+    /*****************************************/
+
+    /**
+     * @access protected
+     * @return bool    
+     */
+
+    protected bool _CheckIfPoolInitialized()
+    {
+        if (_pool == null)
+        {
+            return false;
+        }
+
+        if (_poolInitialized)
+        {
+            return true;
+        }
+
+        if (!_poolInitialized && _gameOperatorAttached && _scoreOperatorAttached)
+        {
+            _pool.Init();
+            _poolInitialized = true;
+            return true;
+        }
+
+        return false;
     }
 
     /**************************************************/

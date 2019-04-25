@@ -32,12 +32,16 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
 
     /**
      * @var List<IObserver> _observers list of observers
-     * @var bool _observersNotified tells if composites were notified   
-     * @var IOperatorElement _scoreOperator object to pass to composites    
+     * @var bool _gameOperatorAttached tells if gameOperator was attached to composites
+     * @var bool _scoreOperatorAttached tells if scoreOperator was attached to composites    
+     * @var IOperator _gameOperator object to pass to composites
+     * @var IOperatorElement _scoreOperator object to pass to composites   
      */
 
     protected List<IObserver> _observers = new List<IObserver>();
-    protected bool _observersNotified;
+    protected bool _gameOperatorAttached;
+    protected bool _scoreOperatorAttached;
+    protected IOperator _gameOperator;
     protected IOperatorElement _scoreOperator;
 
     /**************************************************/
@@ -96,7 +100,7 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
         }
         catch (Exception e)
         {
-            Logger.LogMessage(e);
+            Logger.LogException(e);
         }
     }
 
@@ -168,7 +172,8 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
     {
         try
         {
-            _NotifyGenerator(_scoreOperator);
+            _NotifyGenerators(ObservableEventType.GameInitialized, _gameOperator);
+            _NotifyGenerators(ObservableEventType.ScoreInitialized, _scoreOperator);
 
             switch (_requiredAction)
             {
@@ -184,7 +189,7 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
         }
         catch (Exception e)
         {
-            Logger.LogMessage(e);
+            Logger.LogException(e);
         }
     }
 
@@ -229,8 +234,11 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
         {
             switch (info)
             {
+                case ObservableEventType.GameInitialized:
+                    _NotifyGenerators(ObservableEventType.GameInitialized, data);
+                    break;
                 case ObservableEventType.ScoreInitialized:
-                    _NotifyGenerator(data);
+                    _NotifyGenerators(ObservableEventType.ScoreInitialized, data);
                     break;
                 default:
                     break;
@@ -238,7 +246,7 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
         }
         catch (Exception e)
         {
-            Logger.LogMessage(e);
+            Logger.LogException(e);
         }
     }
 
@@ -305,26 +313,52 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
 
     /**
      * @param object data object to pass
+     * @param ObservableEventType info info for update    
      * @access protected
      */
 
-    protected void _NotifyGenerator(object data)
+    protected void _NotifyGenerators(ObservableEventType info, object data)
     {
-        if (_observers.Count == 0)
+        if (_observers.Count < 1)
         {
-            if (!_observersNotified)
+            switch (info)
             {
-                _scoreOperator = (data as IOperatorElement);
+                case ObservableEventType.GameInitialized:
+                    if (!_gameOperatorAttached)
+                    {
+                        _gameOperator = (data as IOperator);
+                    }
+                    break;
+
+                case ObservableEventType.ScoreInitialized:
+                    if (!_scoreOperatorAttached)
+                    {
+                        _scoreOperator = (data as IOperatorElement);
+                    }
+                    break;
             }
             return;
         }
 
-        if (data == null || _observersNotified)
+        switch (info)
         {
-            return;
-        }
+            case ObservableEventType.GameInitialized:
+                if (data != null && !_gameOperatorAttached)
+                {
+                    _gameOperator = (data as IOperator);
+                    Notify(ObservableEventType.GameInitialized, data);
+                    _gameOperatorAttached = true;
+                }
+                break;
 
-        Notify(ObservableEventType.ScoreInitialized, data);
-        _observersNotified = true;
+            case ObservableEventType.ScoreInitialized:
+                if (data != null && !_scoreOperatorAttached)
+                {
+                    _scoreOperator = (data as IOperatorElement);
+                    Notify(ObservableEventType.ScoreInitialized, data);
+                    _scoreOperatorAttached = true;
+                }
+                break;
+        }
     }
 }

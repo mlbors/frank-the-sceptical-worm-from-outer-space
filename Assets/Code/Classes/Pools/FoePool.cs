@@ -31,10 +31,12 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
 
     /**
      * @var FoeType _neededType type of foe needed
+     * @var IOperator _gameOperator object managing game        
      * @var IOperatorElement _scoreOperator object managing score     
      */
 
     protected FoeType _neededType;
+    protected IOperator _gameOperator;
     protected IOperatorElement _scoreOperator;
 
     /**************************************************/
@@ -70,6 +72,19 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
     {
         get { return _neededType; }
         set { _neededType = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***************************************/
+    /***** GAME OPERATOR GETTER/SETTER *****/
+    /***************************************/
+
+    public IOperator GameOperator
+    {
+        get { return _gameOperator; }
+        set { _gameOperator = value; }
     }
 
     /**************************************************/
@@ -117,7 +132,7 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
 
     public override IFoe InstantiateNewObject()
     {
-        _CheckFactoryScoreOperator();
+        _CheckFactory();
         (_factory as IFoeFactory<IFoe>).Type = FoeType.Spike;
 
         IFoe foe = _factory.Create();
@@ -142,6 +157,42 @@ public class FoePool : AbstractPool<IFoe>, IFoePool
     public override bool CheckIfObjectAvailable(IFoe currentObject)
     {
         return !(currentObject as MonoBehaviour).gameObject.activeInHierarchy;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** CHECK FACTORY *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _CheckFactory()
+    {
+        _CheckFactoryGameOperator();
+        _CheckFactoryScoreOperator();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***************************************/
+    /***** CHECK FACTORY GAME OPERATOR *****/
+    /***************************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _CheckFactoryGameOperator()
+    {
+        if ((_factory as IFoeFactory<IFoe>).GameOperator == null)
+        {
+            (_factory as IFoeFactory<IFoe>).GameOperator = _gameOperator;
+        }
     }
 
     /**************************************************/

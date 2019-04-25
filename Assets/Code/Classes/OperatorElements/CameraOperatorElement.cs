@@ -202,7 +202,7 @@ public class CameraOperatorElement : ICameraOperatorElement, IObserver, IObserva
         }
         catch (Exception e)
         {
-            Logger.LogMessage(e);
+            Logger.LogException(e);
         }
     }
 

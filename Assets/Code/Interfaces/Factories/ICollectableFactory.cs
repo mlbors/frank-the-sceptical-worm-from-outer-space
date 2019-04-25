@@ -36,6 +36,12 @@ public interface ICollectableFactory<T> : IFactory<T>
         set;
     }
 
+    IOperator GameOperator
+    {
+        get;
+        set;
+    }
+
     IOperatorElement ScoreOperator
     {
         get;

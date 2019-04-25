@@ -36,6 +36,12 @@ public interface IFoeFactory<T> : IFactory<T>
         set;
     }
 
+    IOperator GameOperator
+    {
+        get;
+        set;
+    }
+
     IOperatorElement ScoreOperator
     {
         get;

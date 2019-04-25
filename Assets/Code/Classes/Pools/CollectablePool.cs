@@ -31,10 +31,12 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
 
     /**
      * @var CollectableType _neededType type of collectable needed
+     * @var IOperator _gameOperator object managing game        
      * @var IOperatorElement _scoreOperator object managing score     
      */
 
     protected CollectableType _neededType;
+    protected IOperator _gameOperator;
     protected IOperatorElement _scoreOperator;
 
     /**************************************************/
@@ -69,6 +71,19 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
     {
         get { return _neededType; }
         set { _neededType = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***************************************/
+    /***** GAME OPERATOR GETTER/SETTER *****/
+    /***************************************/
+
+    public IOperator GameOperator
+    {
+        get { return _gameOperator; }
+        set { _gameOperator = value; }
     }
 
     /**************************************************/
@@ -144,7 +159,7 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
 
     public override ICollectable InstantiateNewObject()
     {
-        _CheckFactoryScoreOperator();
+        _CheckFactory();
         (_factory as ICollectableFactory<ICollectable>).Type = _neededType;
 
         ICollectable collectable = _factory.Create();
@@ -169,6 +184,42 @@ public class CollectablePool : AbstractPool<ICollectable>, ICollectablePool
     public override bool CheckIfObjectAvailable(ICollectable currentObject)
     {
         return !(currentObject as MonoBehaviour).gameObject.activeInHierarchy;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** CHECK FACTORY *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _CheckFactory()
+    {
+        _CheckFactoryGameOperator();
+        _CheckFactoryScoreOperator();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***************************************/
+    /***** CHECK FACTORY GAME OPERATOR *****/
+    /***************************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _CheckFactoryGameOperator()
+    {
+        if ((_factory as ICollectableFactory<ICollectable>).GameOperator == null)
+        {
+            (_factory as ICollectableFactory<ICollectable>).GameOperator = _gameOperator;
+        }
     }
 
     /**************************************************/
