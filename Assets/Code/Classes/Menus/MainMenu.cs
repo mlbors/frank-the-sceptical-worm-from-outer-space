@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlatformFactory - Interface
+ * FTSWFOS - MainMenu - Concrete Class
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -11,28 +11,32 @@
 /***** IMPORTS *****/
 /*******************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 /**************************************************/
 /**************************************************/
 
-/*****************************/
-/***** IPLATFORM FACTORY *****/
-/*****************************/
+/*********************/
+/***** MAIN MENU *****/
+/*********************/
 
-public interface IPlatformFactory<T> : IFactory<T>
+public class MainMenu : MonoBehaviour, IMenu
 {
-    PlatformType Type
-    {
-        get;
-        set;
-    }
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
 
-    List<GameObject> GameObjects
+    /**
+     * @access public
+     */
+
+    [Inject]
+    public void Construct()
     {
-        get;
-        set;
+    
     }
 }

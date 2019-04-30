@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlatformFactory - Interface
+ * FTSWFOS - IMenuFactory - Interface
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,13 +18,13 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*****************************/
-/***** IPLATFORM FACTORY *****/
-/*****************************/
+/*************************/
+/***** IMENU FACTORY *****/
+/*************************/
 
-public interface IPlatformFactory<T> : IFactory<T>
+public interface IMenuFactory<T> : IFactory<T>
 {
-    PlatformType Type
+    MenuType Type
     {
         get;
         set;

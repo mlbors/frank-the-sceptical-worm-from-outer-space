@@ -1,5 +1,5 @@
 ﻿/**
- * FTSWFOS - IPlatformFactory - Interface
+ * FTSWFOS - MenuType - Enum
  *
  * @since       2018.01.09
  * @version     1.0.0.0
@@ -18,21 +18,13 @@ using UnityEngine;
 /**************************************************/
 /**************************************************/
 
-/*****************************/
-/***** IPLATFORM FACTORY *****/
-/*****************************/
+/*********************/
+/***** MENU TYPE *****/
+/*********************/
 
-public interface IPlatformFactory<T> : IFactory<T>
+public enum MenuType
 {
-    PlatformType Type
-    {
-        get;
-        set;
-    }
-
-    List<GameObject> GameObjects
-    {
-        get;
-        set;
-    }
+    Death,
+    Main,
+    Pause
 }
