@@ -24,4 +24,6 @@ using UnityEngine;
 
 public interface IMenu
 {
+    void Activate();
+    void Deactivate();
 }

@@ -24,19 +24,6 @@ using Zenject;
 /***** DEATH MENU *****/
 /**********************/
 
-public class DeathMenu : MonoBehaviour, IMenu
+public class DeathMenu : AbstractMenu
 {
-    /*********************/
-    /***** CONSTRUCT *****/
-    /*********************/
-
-    /**
-     * @access public
-     */
-
-    [Inject]
-    public void Construct()
-    {
-    
-    }
 }

@@ -53,7 +53,13 @@ public class MenuInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        Container.Bind<List<GameObject>>()
+                 .FromInstance(_settings.menus)
+                 .WhenInjectedInto<MenuFactory>();
 
+        Container.Bind<IMenuFactory<IMenu>>()
+                 .To<MenuFactory>()
+                 .AsSingle();
     }
 
     /**************************************************/

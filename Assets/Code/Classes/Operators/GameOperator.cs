@@ -99,7 +99,9 @@ public class GameOperator : AbstractOperator, IGameOperator, IObservable, IObser
         AddElement(cameraOperatorElement);
 
         _operatorElementFactory.Type = OperatorElementType.MenuOperatorElement;
-        AddElement(_operatorElementFactory.Create());
+        IOperatorElement menuOperatorElement = _operatorElementFactory.Create();
+        Attach(menuOperatorElement as IObserver);
+        AddElement(menuOperatorElement);
 
         _operatorElementFactory.Type = OperatorElementType.PlayerOperatorElement;
         IOperatorElement playerOperator = _operatorElementFactory.Create();
@@ -202,6 +204,9 @@ public class GameOperator : AbstractOperator, IGameOperator, IObservable, IObser
         {
             switch (info)
             {
+                case ObservableEventType.Death:
+                    Notify(ObservableEventType.Death, null);
+                    break;
                 case ObservableEventType.SpikeHitten:
                     Notify(ObservableEventType.SpikeHitten, null);
                     break;

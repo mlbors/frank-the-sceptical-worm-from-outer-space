@@ -80,6 +80,7 @@ public class GameManager : AbstractManager, IGameManager, IObservable, IObserver
         _operatorFactory.Type = OperatorType.GameOperator;
         IOperator gameOperator = _operatorFactory.Create();
         (gameOperator as IObservable).Attach(this as IObserver);
+        Attach(gameOperator as IObserver);
         AddOperator(gameOperator);
     }
 
@@ -210,6 +211,7 @@ public class GameManager : AbstractManager, IGameManager, IObservable, IObserver
     protected void _StopGame()
     {
         Logger.LogMessage("Game would stop!");
+        Notify(ObservableEventType.Death, null);
     }
 
 }

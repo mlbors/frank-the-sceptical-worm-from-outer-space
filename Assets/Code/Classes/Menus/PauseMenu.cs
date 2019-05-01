@@ -24,19 +24,6 @@ using Zenject;
 /***** PAUSE MENU *****/
 /**********************/
 
-public class PauseMenu : MonoBehaviour, IMenu
+public class PauseMenu : AbstractMenu
 {
-    /*********************/
-    /***** CONSTRUCT *****/
-    /*********************/
-
-    /**
-     * @access public
-     */
-
-    [Inject]
-    public void Construct()
-    {
-    
-    }
 }

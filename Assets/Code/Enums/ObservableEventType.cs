@@ -25,6 +25,7 @@ using UnityEngine;
 public enum ObservableEventType
 {
     BonusHitten,
+    Death,
     DeathHitten,
     CameraCreated,
     CameraInitialized,
