@@ -27,16 +27,18 @@ using Zenject;
 /*************************/
 
 public class ScoreFactory : AbstractDIFactory<IScore>, IScoreFactory<IScore>
-{   
+{
     /*********************/
     /***** ATTRIBUTS *****/
     /*********************/
 
     /**
-     * @var Text _text text representing score    
+     * @var Text _text text representing score
+     * @var ITextFactory _textFactory object that create other objects, here, Text
      */
 
     protected Text _text;
+    protected ITextFactory<Text> _textFactory;
 
     /**************************************************/
     /**************************************************/
@@ -51,9 +53,9 @@ public class ScoreFactory : AbstractDIFactory<IScore>, IScoreFactory<IScore>
      * @param Text text text representing score     
      */
 
-    public ScoreFactory(DiContainer container, Text text) : base (container)
+    public ScoreFactory(DiContainer container, ITextFactory<Text> textFactory) : base (container)
     {
-        _text = text;
+        _textFactory = textFactory;
     }
 
     /**************************************************/
@@ -88,10 +90,12 @@ public class ScoreFactory : AbstractDIFactory<IScore>, IScoreFactory<IScore>
 
     public override IScore Create(params object[] constructorArguments)
     {
-       IScore score;
+        IScore score;
+
+        _textFactory.Type = TextType.Score;
 
         score = _container.Instantiate<Score>() as IScore;
-        score.Text = _text;
+        score.Text = _textFactory.Create();
 
         return score;
     }

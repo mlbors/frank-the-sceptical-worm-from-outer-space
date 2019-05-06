@@ -52,10 +52,7 @@ public class ScoreInstaller : MonoInstaller
      */
 
     public override void InstallBindings()
-    {
-        Container.Bind<Text>()
-                 .FromInstance(_settings.ScoreText)
-                 .WhenInjectedInto<ScoreFactory>();
+    {          
     }
 
     /**************************************************/
@@ -72,16 +69,6 @@ public class ScoreInstaller : MonoInstaller
     [Serializable]
     public class Settings
     {
-        /*********************/
-        /***** ATTRIBUTS *****/
-        /*********************/
 
-        /**
-         * @var Text ScoreText text which displays score value
-         * @var Text HighScoreText text which displays highscore        
-         */
-
-        public Text ScoreText;
-        public Text HighScoreText;
     }
 }

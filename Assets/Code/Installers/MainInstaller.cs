@@ -15,6 +15,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 /**************************************************/
@@ -54,6 +55,7 @@ public class MainInstaller : MonoInstaller
         _InstallCollectables();
         _InstallFoes();
         _InstallCamera();
+        _InstallText();
         _InstallScore();
     }
 
@@ -270,6 +272,29 @@ public class MainInstaller : MonoInstaller
      * @access protected
      */
 
+    protected void _InstallText()
+    {
+        Container.Bind<List<GameObject>>()
+                 .FromInstance(_settings.texts)
+                 .WhenInjectedInto<TextFactory>();
+
+        Container.Bind<ITextFactory<Text>>()
+                  .To<TextFactory>()
+                  .AsSingle()
+                  .NonLazy();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*************************/
+    /***** INSTALL SCORE *****/
+    /*************************/
+
+    /**
+     * @access protected
+     */
+
     protected void _InstallScore()
     {
         Container.Bind<IScoreFactory<IScore>>()
@@ -302,6 +327,7 @@ public class MainInstaller : MonoInstaller
          * @var GameObject objectDestructionPoint point from where to destroy objects
          * @var List<GameObject> collectables list of collectables
          * @var List<GameObject> foes list of foes
+         * @var List<GameObject> texts list of texts        
          */
 
         public GameObject cameraGameObject;
@@ -310,5 +336,6 @@ public class MainInstaller : MonoInstaller
         public GameObject objectsDestructionPoint;
         public List<GameObject> collectables;
         public List<GameObject> foes;
+        public List<GameObject> texts;
     }
 }
