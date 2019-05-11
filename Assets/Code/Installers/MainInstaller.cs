@@ -278,6 +278,10 @@ public class MainInstaller : MonoInstaller
                  .FromInstance(_settings.texts)
                  .WhenInjectedInto<TextFactory>();
 
+        Container.Bind<GameObject>()
+                 .FromInstance(_settings.mainCanvas)
+                 .WhenInjectedInto<TextFactory>();
+
         Container.Bind<ITextFactory<Text>>()
                   .To<TextFactory>()
                   .AsSingle()
@@ -327,7 +331,8 @@ public class MainInstaller : MonoInstaller
          * @var GameObject objectDestructionPoint point from where to destroy objects
          * @var List<GameObject> collectables list of collectables
          * @var List<GameObject> foes list of foes
-         * @var List<GameObject> texts list of texts        
+         * @var List<GameObject> texts list of texts  
+         * @var GameObject mainCanvas main canvas to render UI components
          */
 
         public GameObject cameraGameObject;
@@ -337,5 +342,6 @@ public class MainInstaller : MonoInstaller
         public List<GameObject> collectables;
         public List<GameObject> foes;
         public List<GameObject> texts;
+        public GameObject mainCanvas;
     }
 }

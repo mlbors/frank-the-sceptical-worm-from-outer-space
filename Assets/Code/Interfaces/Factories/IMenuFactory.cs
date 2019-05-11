@@ -35,4 +35,10 @@ public interface IMenuFactory<T> : IFactory<T>
         get;
         set;
     }
+
+    GameObject Canvas
+    {
+        get;
+        set;
+    }
 }

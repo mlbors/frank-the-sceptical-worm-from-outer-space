@@ -57,6 +57,10 @@ public class MenuInstaller : MonoInstaller
                  .FromInstance(_settings.menus)
                  .WhenInjectedInto<MenuFactory>();
 
+        Container.Bind<GameObject>()
+                 .FromInstance(_settings.mainCanvas)
+                 .WhenInjectedInto<MenuFactory>();
+
         Container.Bind<IMenuFactory<IMenu>>()
                  .To<MenuFactory>()
                  .AsSingle();
@@ -82,8 +86,10 @@ public class MenuInstaller : MonoInstaller
 
         /**
          * @var List<GameObject> menus list of menus
+         * @var GameObject mainCanvas main canvas to render UI components        
          */
 
         public List<GameObject> menus;
+        public GameObject mainCanvas;
     }
 }

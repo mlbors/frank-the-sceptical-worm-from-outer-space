@@ -32,11 +32,13 @@ public class MenuFactory : AbstractDIFactory<IMenu>, IMenuFactory<IMenu>
     /**
      * @var MenuType _type type of menu
      * @var List<GameObject> _gameObjects game objects to use
+     * @var GameObject _canvas canvas to use to render objects    
      * @var IOperator _gameOperator object managing game          
      */
 
     protected MenuType _type;
     protected List<GameObject> _gameObjects;
+    protected GameObject _canvas;
     protected IOperator _gameOperator;
 
     /**************************************************/
@@ -53,10 +55,11 @@ public class MenuFactory : AbstractDIFactory<IMenu>, IMenuFactory<IMenu>
      * @param List<GameObject> gameObjects game objects to use
      */
 
-    public MenuFactory(DiContainer container, List<GameObject> gameObjects, MenuType type = MenuType.Main) : base(container)
+    public MenuFactory(DiContainer container, List<GameObject> gameObjects, GameObject canvas, MenuType type = MenuType.Main) : base(container)
     {
-        _type = type;
         _gameObjects = gameObjects;
+        _canvas = canvas;
+        _type = type;
     }
 
     /**************************************************/
@@ -96,6 +99,23 @@ public class MenuFactory : AbstractDIFactory<IMenu>, IMenuFactory<IMenu>
     /**************************************************/
     /**************************************************/
 
+    /********************************/
+    /***** CANVAS GETTER/SETTER *****/
+    /********************************/
+
+    /**
+     * @access public
+     */
+
+    public GameObject Canvas
+    {
+        get { return _canvas; }
+        set { _canvas = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /***************************************/
     /***** GAME OPERATOR GETTER/SETTER *****/
     /***************************************/
@@ -128,21 +148,25 @@ public class MenuFactory : AbstractDIFactory<IMenu>, IMenuFactory<IMenu>
         {
             case MenuType.Death:
                 prefab = _container.InstantiatePrefab(_gameObjects[0]);
+                prefab.transform.SetParent(_canvas.transform, false);
                 _container.Bind<IMenu>().To<DeathMenu>().AsTransient();
                 menu = _container.InstantiateComponent<DeathMenu>(prefab, new object[] {});
                 break;
             case MenuType.Main:
                 prefab = _container.InstantiatePrefab(_gameObjects[1]);
+                prefab.transform.SetParent(_canvas.transform, false);
                 _container.Bind<IMenu>().To<MainMenu>().AsTransient();
                 menu = _container.InstantiateComponent<MainMenu>(prefab, new object[] { });
                 break;
             case MenuType.Pause:
                 prefab = _container.InstantiatePrefab(_gameObjects[2]);
+                prefab.transform.SetParent(_canvas.transform, false);
                 _container.Bind<IMenu>().To<PauseMenu>().AsTransient();
                 menu = _container.InstantiateComponent<PauseMenu>(prefab, new object[] { });
                 break;
             default:
                 prefab = _container.InstantiatePrefab(_gameObjects[1]);
+                prefab.transform.SetParent(_canvas.transform, false);
                 _container.Bind<IMenu>().To<DeathMenu>().AsTransient();
                 menu = _container.InstantiateComponent<DeathMenu>(prefab, new object[] { });
                 break;

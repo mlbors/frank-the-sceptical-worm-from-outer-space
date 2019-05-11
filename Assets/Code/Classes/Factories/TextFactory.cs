@@ -32,11 +32,13 @@ public class TextFactory : AbstractDIFactory<Text>, ITextFactory<Text>
 
     /**
      * @var TextType _type type of text
-     * @var List<GameObject> _gameObjects texts to use       
+     * @var List<GameObject> _gameObjects texts to use    
+     * @var GameObject _canvas canvas to use to render objects
      */
 
     protected TextType _type;
     protected List<GameObject> _gameObjects;
+    protected GameObject _canvas;
 
     /**************************************************/
     /**************************************************/
@@ -48,14 +50,16 @@ public class TextFactory : AbstractDIFactory<Text>, ITextFactory<Text>
     /**
      * @access public
      * @param DiContainer container DI container
-     * @param TextType type type of text
      * @param List<GameObject> texts texts to use
+     * @param GameObject canvas canvas to use to render objects
+     * @param TextType type type of text    
      */
 
-    public TextFactory(DiContainer container, List<GameObject> gameObjects, TextType type = TextType.Score) : base(container)
+    public TextFactory(DiContainer container, List<GameObject> gameObjects, GameObject canvas, TextType type = TextType.Score) : base(container)
     {
-        _type = type;
         _gameObjects = gameObjects;
+        _canvas = canvas;
+        _type = type;
     }
 
     /**************************************************/
@@ -95,6 +99,23 @@ public class TextFactory : AbstractDIFactory<Text>, ITextFactory<Text>
     /**************************************************/
     /**************************************************/
 
+    /********************************/
+    /***** CANVAS GETTER/SETTER *****/
+    /********************************/
+
+    /**
+     * @access public
+     */
+
+    public GameObject Canvas
+    {
+        get { return _canvas; }
+        set { _canvas = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /******************/
     /***** CREATE *****/
     /******************/
@@ -114,18 +135,17 @@ public class TextFactory : AbstractDIFactory<Text>, ITextFactory<Text>
         {
             case TextType.HighScore:
                 prefab = _container.InstantiatePrefab(_gameObjects[0]);
-                text = prefab.transform.GetComponent<Text>();
                 break;
             case TextType.Score:
                 prefab = _container.InstantiatePrefab(_gameObjects[1]);
-                text = prefab.transform.GetComponent<Text>();
                 break;
             default:
                 prefab = _container.InstantiatePrefab(_gameObjects[0]);
-                text = prefab.transform.GetComponent<Text>();
                 break;
         }
 
+        prefab.transform.SetParent(_canvas.transform, false);
+        text = prefab.transform.GetComponent<Text>();
         return text;
     }
 
