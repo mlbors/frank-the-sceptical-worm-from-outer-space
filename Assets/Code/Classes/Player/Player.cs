@@ -133,6 +133,30 @@ public class Player : AbstractPlayer
     /**************************************************/
 
     /************************/
+    /***** RESET PLAYER *****/
+    /************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _ResetPlayer()
+    {
+        try
+        {
+            transform.position = new Vector3(0, 0, transform.position.z);
+            ChangeState(PlayerState.Standing);
+        }
+        catch (Exception e)
+        {
+            Logger.LogException(e);
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /************************/
     /***** CHANGE STATE *****/
     /************************/
 
@@ -247,7 +271,22 @@ public class Player : AbstractPlayer
 
     public override void ObserverUpdate(ObservableEventType info, object data)
     {
-        
+        try
+        {
+            switch (info)
+            {
+                case ObservableEventType.GameRestarts:
+                    _ResetPlayer();
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.LogException(e);
+        }
+
     }
 
     /**************************************************/

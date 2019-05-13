@@ -30,6 +30,7 @@ public enum ObservableEventType
     CameraCreated,
     CameraInitialized,
     GameInitialized,
+    GameRestarts,
     NegativeBonusHitten,
     None,
     PlayerCreated,

@@ -29,4 +29,6 @@ public interface ICamera
         get;
         set;
     }
+
+    void Reset();
 }

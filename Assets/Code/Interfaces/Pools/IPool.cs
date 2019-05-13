@@ -32,4 +32,5 @@ public interface IPool
 
     void Init();
     void FillPool();
+    void Reset();
 }

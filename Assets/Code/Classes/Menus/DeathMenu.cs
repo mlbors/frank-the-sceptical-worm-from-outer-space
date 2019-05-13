@@ -26,4 +26,5 @@ using Zenject;
 
 public class DeathMenu : AbstractMenu
 {
+
 }

@@ -190,14 +190,21 @@ public class CameraOperatorElement : ICameraOperatorElement, IObserver, IObserva
     {
         try
         {
-            if (info == ObservableEventType.PlayerCreated)
+            switch(info)
             {
-                CameraFactory.Target = data as ICameraTarget;
-                _CreateCamera();
-                Transform generationPoint = (_camera as MonoBehaviour).transform.Find("ObjectsGenerationPoint");
-                Transform destructionPoint = (_camera as MonoBehaviour).transform.Find("ObjectsDestructionPoint");
-                List<Transform> points = new List<Transform>() { generationPoint, destructionPoint };
-                Notify(ObservableEventType.CameraCreated, points);
+                case ObservableEventType.GameRestarts:
+                    _camera.Reset();
+                    break;
+                case ObservableEventType.PlayerCreated:
+                    CameraFactory.Target = data as ICameraTarget;
+                    _CreateCamera();
+                    Transform generationPoint = (_camera as MonoBehaviour).transform.Find("ObjectsGenerationPoint");
+                    Transform destructionPoint = (_camera as MonoBehaviour).transform.Find("ObjectsDestructionPoint");
+                    List<Transform> points = new List<Transform>() { generationPoint, destructionPoint };
+                    Notify(ObservableEventType.CameraCreated, points);
+                    break;
+                default:
+                    break;
             }
         }
         catch (Exception e)

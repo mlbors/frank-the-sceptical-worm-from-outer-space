@@ -210,8 +210,25 @@ public class GameManager : AbstractManager, IGameManager, IObservable, IObserver
 
     protected void _StopGame()
     {
-        Logger.LogMessage("Game would stop!");
         Notify(ObservableEventType.Death, null);
+        Time.timeScale = 0;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /************************/
+    /***** RESTART GAME *****/
+    /************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _RestartGame()
+    {
+        Notify(ObservableEventType.GameRestarts, null);
+        Time.timeScale = 1;
     }
 
 }

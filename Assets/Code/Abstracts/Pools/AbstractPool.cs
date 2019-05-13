@@ -211,6 +211,25 @@ abstract public class AbstractPool<T> : IPool<T>, IProduct
     /**************************************************/
     /**************************************************/
 
+    /***********************/
+    /***** IPOOL RESET *****/
+    /***********************/
+
+    /**
+     * @access public
+     */
+
+    public virtual void Reset()
+    {
+        for (int i = 0; i < _pooledObjects.Count; i++)
+        {
+            (_pooledObjects[i] as MonoBehaviour).gameObject.SetActive(false);
+        }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /****************************/
     /***** IPOOL GET OBJECT *****/
     /****************************/
