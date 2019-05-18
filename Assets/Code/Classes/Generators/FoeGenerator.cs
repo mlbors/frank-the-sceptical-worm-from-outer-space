@@ -152,6 +152,7 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObserver, I
                     (_pool as IFoePool).GameOperator = (data as IOperator);
                     _gameOperatorAttached = true;
                     break;
+
                 case ObservableEventType.ScoreInitialized:
                     foreach (KeyValuePair<string, IObjectComputer> objectComputer in _objectComputers)
                     {
@@ -160,6 +161,7 @@ public class FoeGenerator : AbstractGenerator<IFoe>, IFoeGenerator, IObserver, I
                     (_pool as IFoePool).ScoreOperator = (data as IOperatorElement);
                     _scoreOperatorAttached = true;
                     break;
+
                 default:
                     break;
             }

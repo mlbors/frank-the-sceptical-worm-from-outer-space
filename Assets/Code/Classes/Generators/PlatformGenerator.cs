@@ -178,9 +178,17 @@ public class PlatformGenerator : AbstractGeneratorComposite<IPlatform>, IPlatfor
 
     public void ObserverUpdate(ObservableEventType info, object data)
     {
-        if (info == ObservableEventType.PlatformObjectAdded && _currentObject != null)
+        switch(info)
         {
-            _currentObject.ObjectsData.Add((PlatformObjectData)data);
+            case ObservableEventType.PlatformObjectAdded:
+                if (_currentObject != null)
+                {
+                    _currentObject.ObjectsData.Add((PlatformObjectData)data);
+                }
+                break;
+
+            default:
+                break;
         }
     }
 

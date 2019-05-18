@@ -207,6 +207,9 @@ public class GameOperator : AbstractOperator, IGameOperator, IObservable, IObser
                 case ObservableEventType.Death:
                     Notify(ObservableEventType.Death, null);
                     break;
+                case ObservableEventType.GameRestarts:
+                    Notify(ObservableEventType.GameRestarts, null);
+                    break;
                 case ObservableEventType.SpikeHitten:
                     Notify(ObservableEventType.SpikeHitten, null);
                     break;

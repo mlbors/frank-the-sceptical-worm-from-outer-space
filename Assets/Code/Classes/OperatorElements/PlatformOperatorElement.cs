@@ -305,12 +305,20 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
                     GenerationPoint = (data as List<Transform>)[0];
                     DestructionPoint = (data as List<Transform>)[1];
                     break;
+
                 case ObservableEventType.GameInitialized:
                     _NotifyComposites(ObservableEventType.GameInitialized, data);
                     break;
+
+                case ObservableEventType.GameRestarts:
+                    _pool.Reset();
+                    Notify(ObservableEventType.GameRestarts, null);
+                    break;
+
                 case ObservableEventType.ScoreInitialized:
                     _NotifyComposites(ObservableEventType.ScoreInitialized, data);
                     break;
+
                 default:
                     break;
             }

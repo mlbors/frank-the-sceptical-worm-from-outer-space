@@ -162,6 +162,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
                     (_pool as ICollectablePool).GameOperator = (data as IOperator);
                     _gameOperatorAttached = true;
                     break;
+
                 case ObservableEventType.ScoreInitialized:
                     foreach (KeyValuePair<string, IObjectComputer> objectComputer in _objectComputers)
                     {
@@ -170,6 +171,7 @@ public class CollectableGenerator : AbstractGenerator<ICollectable>, ICollectabl
                     (_pool as ICollectablePool).ScoreOperator = (data as IOperatorElement);
                     _scoreOperatorAttached = true;
                     break;
+
                 default:
                     break;
             }

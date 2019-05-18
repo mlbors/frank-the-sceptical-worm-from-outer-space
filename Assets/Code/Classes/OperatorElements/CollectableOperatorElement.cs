@@ -237,6 +237,10 @@ public class CollectableOperatorElement : AbstractGeneratorComponentOperatorElem
                 case ObservableEventType.GameInitialized:
                     _NotifyGenerators(ObservableEventType.GameInitialized, data);
                     break;
+                case ObservableEventType.GameRestarts:
+                    Notify(ObservableEventType.GameRestarts, null);
+                    _pool.Reset();
+                    break;
                 case ObservableEventType.ScoreInitialized:
                     _NotifyGenerators(ObservableEventType.ScoreInitialized, data);
                     break;
