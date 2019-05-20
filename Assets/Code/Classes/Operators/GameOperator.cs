@@ -86,6 +86,7 @@ public class GameOperator : AbstractOperator, IGameOperator, IObservable, IObser
         _operatorElementFactory.Type = OperatorElementType.ScoreOperatorElement;
         IOperatorElement scoreOperatorElement = _operatorElementFactory.Create();
         (scoreOperatorElement as IObservable).Attach(platformOperatorElement as IObserver);
+        Attach(scoreOperatorElement as IObserver);
         AddElement(scoreOperatorElement);
 
         _operatorElementFactory.Type = OperatorElementType.EnvironmentOperatorElement;
@@ -96,6 +97,7 @@ public class GameOperator : AbstractOperator, IGameOperator, IObservable, IObser
         IOperatorElement cameraOperatorElement = _operatorElementFactory.Create();
         (cameraOperatorElement as IObservable).Attach(platformOperatorElement as IObserver);
         (cameraOperatorElement as IObservable).Attach(environmentOperatorElement as IObserver);
+        Attach(cameraOperatorElement as IObserver);
         AddElement(cameraOperatorElement);
 
         _operatorElementFactory.Type = OperatorElementType.MenuOperatorElement;

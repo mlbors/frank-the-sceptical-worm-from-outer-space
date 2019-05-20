@@ -195,6 +195,7 @@ public class CameraOperatorElement : ICameraOperatorElement, IObserver, IObserva
                 case ObservableEventType.GameRestarts:
                     _camera.Reset();
                     break;
+
                 case ObservableEventType.PlayerCreated:
                     CameraFactory.Target = data as ICameraTarget;
                     _CreateCamera();
@@ -203,6 +204,7 @@ public class CameraOperatorElement : ICameraOperatorElement, IObserver, IObserva
                     List<Transform> points = new List<Transform>() { generationPoint, destructionPoint };
                     Notify(ObservableEventType.CameraCreated, points);
                     break;
+
                 default:
                     break;
             }

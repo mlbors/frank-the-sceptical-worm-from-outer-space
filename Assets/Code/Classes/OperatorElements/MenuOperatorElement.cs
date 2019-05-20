@@ -104,6 +104,14 @@ public class MenuOperatorElement : IOperatorElement, IObserver
                 case ObservableEventType.Death:
                     _menus["death"].Activate();
                     break;
+
+                case ObservableEventType.GameRestarts:
+                    foreach (KeyValuePair<string, IMenu> menu in _menus)
+                    {
+                        menu.Value.Deactivate();
+                    }
+                    break;
+
                 default:
                     break;
             }

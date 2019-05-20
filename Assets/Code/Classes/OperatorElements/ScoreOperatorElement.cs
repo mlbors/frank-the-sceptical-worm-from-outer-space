@@ -167,12 +167,15 @@ public class ScoreOperatorElement : IOperatorElement, IObserver, IObservable
                 case ObservableEventType.SpikeHitten:
                     _score.IncreaseScore((int)data);
                     break;
+
                 case ObservableEventType.GameRestarts:
                     _score.ResetScore();
                     break;
+
                 case ObservableEventType.PlayerCreated:
                     (data as IObservable).Attach(this as IObserver);
                     break;
+
                 default:
                     break;
             }
