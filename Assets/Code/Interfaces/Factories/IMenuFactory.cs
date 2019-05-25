@@ -41,4 +41,10 @@ public interface IMenuFactory<T> : IFactory<T>
         get;
         set;
     }
+
+    IOperator GameOperator
+    {
+        get;
+        set;
+    }
 }

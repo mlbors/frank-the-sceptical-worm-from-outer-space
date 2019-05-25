@@ -173,6 +173,7 @@ public class MenuFactory : AbstractDIFactory<IMenu>, IMenuFactory<IMenu>
 
         }
 
+        (menu as IObservable).Attach(_gameOperator as IObserver);
         return menu;
     }
 

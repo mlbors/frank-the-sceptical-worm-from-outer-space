@@ -40,4 +40,92 @@ public class DeathMenu : AbstractMenu
 
     protected Button _restartButton;
     protected Button _quitButton;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access public
+     */
+
+    [Inject]
+    public override void Construct()
+    {
+        _SetValues();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /**********************/
+    /***** SET VALUES *****/
+    /**********************/
+
+    protected void _SetValues()
+    {
+        _SetButtons();
+        _SetActions();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************/
+    /***** SET BUTTONS *****/
+    /***********************/
+
+    protected void _SetButtons()
+    {
+        Button[] buttons = GetComponentsInChildren<Button>();
+        _restartButton = buttons[0];
+        _quitButton = buttons[1];
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************/
+    /***** SET ACTIONS *****/
+    /***********************/
+
+    protected void _SetActions()
+    {
+        _SetRestartAction();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************************/
+    /***** SET RESTART ACTION *****/
+    /******************************/
+
+    protected void _SetRestartAction()
+    {
+        _restartButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            Logger.LogMessage("Restart button clicked");
+            Notify(ObservableEventType.RestartButtonClicked, null);
+        });
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***************************/
+    /***** SET QUIT ACTION *****/
+    /***************************/
+
+    protected void _SetQuitAction()
+    {
+        _quitButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            Logger.LogMessage("Quit button clicked");
+        });
+    }
+
 }

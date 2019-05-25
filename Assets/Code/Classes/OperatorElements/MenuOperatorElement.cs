@@ -62,6 +62,17 @@ public class MenuOperatorElement : IOperatorElement, IObserver
 
     public void Init()
     {
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** SET MENUS *****/
+    /*********************/
+
+    protected void _SetMenus()
+    {
         _menuFactory.Type = MenuType.Death;
         _menus["death"] = _menuFactory.Create();
 
@@ -103,6 +114,11 @@ public class MenuOperatorElement : IOperatorElement, IObserver
             {
                 case ObservableEventType.Death:
                     _menus["death"].Activate();
+                    break;
+
+                case ObservableEventType.GameInitialized:
+                    (_menuFactory as IMenuFactory<IMenu>).GameOperator = (data as IOperator);
+                    _SetMenus();
                     break;
 
                 case ObservableEventType.GameRestarts:
