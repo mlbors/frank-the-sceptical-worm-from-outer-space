@@ -52,7 +52,7 @@ public class Spike : AbstractFoe
     {
         if (otherObject.gameObject.tag == "Player" && otherObject.GetType() == typeof(BoxCollider2D))
         {
-            Notify(ObservableEventType.SpikeHitten, -5);
+            Notify(ObservableEventType.SpikeHitten, 5);
         }
     }
 }

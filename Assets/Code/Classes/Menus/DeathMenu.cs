@@ -108,7 +108,6 @@ public class DeathMenu : AbstractMenu
     {
         _restartButton.GetComponent<Button>().onClick.AddListener(() =>
         {
-            Logger.LogMessage("Restart button clicked");
             Notify(ObservableEventType.RestartButtonClicked, null);
         });
     }

@@ -130,7 +130,10 @@ public class GameManager : AbstractManager, IGameManager, IObservable, IObserver
         {
             switch (info)
             {
-                case ObservableEventType.SpikeHitten:
+                case ObservableEventType.RestartButtonClicked:
+                    _RestartGame();
+                    break;
+                case ObservableEventType.PlayerIsDead:
                     _StopGame();
                     break;
                 default:

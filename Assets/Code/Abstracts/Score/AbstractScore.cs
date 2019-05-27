@@ -117,12 +117,18 @@ abstract public class AbstractScore : IScore
 
     public virtual void DecreaseScore(int value = 1)
     {
-        if (value == 0)
+        if (_value == 0)
         {
             return;
         }
 
         _value -= value;
+
+        if (_value < 0)
+        {
+            _value = 0;
+        }
+
         _UpdateText();
     }
 

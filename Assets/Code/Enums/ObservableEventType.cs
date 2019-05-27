@@ -36,6 +36,7 @@ public enum ObservableEventType
     PlayerCreated,
     PlayerGrounded,
     PlayerIsAlive,
+    PlayerIsDead,
     PlatformObjectAdded,
     PowerUpHitten,
     QuitButtonClicked,

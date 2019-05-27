@@ -215,11 +215,11 @@ public class GameOperator : AbstractOperator, IGameOperator, IObservable, IObser
                     break;
 
                 case ObservableEventType.RestartButtonClicked:
-                    Logger.LogMessage("RestartButtonClicked");
+                    Notify(ObservableEventType.RestartButtonClicked, null);
                     break;
 
                 case ObservableEventType.SpikeHitten:
-                    Notify(ObservableEventType.SpikeHitten, null);
+                    Notify(ObservableEventType.PlayerIsDead, data);
                     break;
 
                 default:

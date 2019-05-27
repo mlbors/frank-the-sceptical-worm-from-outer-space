@@ -164,7 +164,6 @@ public class ScoreOperatorElement : IOperatorElement, IObserver, IObservable
             {
                 case ObservableEventType.BonusHitten:
                 case ObservableEventType.PlayerIsAlive:
-                case ObservableEventType.SpikeHitten:
                     _score.IncreaseScore((int)data);
                     break;
 
@@ -174,6 +173,10 @@ public class ScoreOperatorElement : IOperatorElement, IObserver, IObservable
 
                 case ObservableEventType.PlayerCreated:
                     (data as IObservable).Attach(this as IObserver);
+                    break;
+
+                case ObservableEventType.SpikeHitten:
+                    _score.DecreaseScore((int)data);
                     break;
 
                 default:
