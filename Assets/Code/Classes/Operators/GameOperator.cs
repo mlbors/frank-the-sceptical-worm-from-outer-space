@@ -109,6 +109,7 @@ public class GameOperator : AbstractOperator, IGameOperator, IObservable, IObser
         IOperatorElement playerOperator = _operatorElementFactory.Create();
         (playerOperator as IObservable).Attach(cameraOperatorElement as IObserver);
         (playerOperator as IObservable).Attach(scoreOperatorElement as IObserver);
+        Attach(playerOperator as IObserver);
         AddElement(playerOperator);
     }
 

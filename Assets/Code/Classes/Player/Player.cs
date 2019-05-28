@@ -84,6 +84,26 @@ public class Player : AbstractPlayer
     /**************************************************/
     /**************************************************/
 
+    /******************************/
+    /***** SET INITIAL VALUES *****/
+    /******************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetInitialValues()
+    {
+        _moveSpeed = 6.75f;
+        _speedMultiplier = 1.25f;
+        _speedMilestoneCount = 0.00f;
+        _speedIncreaseMilestone = 80.25f;
+        transform.position = new Vector3(0, 0, transform.position.z);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /***********************/
     /***** INIT PLAYER *****/
     /***********************/
@@ -103,20 +123,14 @@ public class Player : AbstractPlayer
             }
 
             _GetComponents();
-
-            _moveSpeed = 6.75f;
-            _speedMultiplier = 1.25f;
-            _speedMilestoneCount = 0.00f;
-            _speedIncreaseMilestone = 80.25f;
+            _SetInitialValues();
 
             _ground = LayerMask.GetMask("Ground");
-            _groundChecker = this.transform.Find("GroundCheck");
+            _groundChecker = transform.Find("GroundCheck");
 
             _stateFactory.Subject = this as IPlayerStateSubject;
 
             _initialized = true;
-
-            transform.position = new Vector3(0, 0, transform.position.z);
 
             ChangeState(PlayerState.Standing);
 
@@ -144,7 +158,7 @@ public class Player : AbstractPlayer
     {
         try
         {
-            transform.position = new Vector3(0, 0, transform.position.z);
+            _SetInitialValues();
             ChangeState(PlayerState.Standing);
         }
         catch (Exception e)

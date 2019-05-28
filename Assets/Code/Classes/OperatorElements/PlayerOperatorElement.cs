@@ -23,7 +23,7 @@ using UnityEngine;
 /***** PLAYER OPERATOR ELEMENT *****/
 /***********************************/
 
-public class PlayerOperatorElement : IPlayerOperatorElement, IObservable
+public class PlayerOperatorElement : IPlayerOperatorElement, IObservable, IObserver
 {
     /*********************/
     /***** ATTRIBUTS *****/
@@ -140,6 +140,7 @@ public class PlayerOperatorElement : IPlayerOperatorElement, IObservable
             if (Player != null)
             {
                 Notify(ObservableEventType.PlayerCreated, Player);
+                Attach(Player as IObserver);
             }
         }
         catch (Exception e)
@@ -157,6 +158,38 @@ public class PlayerOperatorElement : IPlayerOperatorElement, IObservable
 
     public void Operate()
     {
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /****************************/
+    /***** IOBSERVER UPDATE *****/
+    /****************************/
+
+    /**
+     * @access public
+     * @param String info info for update
+     */
+
+    public void ObserverUpdate(ObservableEventType info, object data)
+    {
+        try
+        {
+            switch (info)
+            {
+                case ObservableEventType.GameRestarts:
+                    Notify(ObservableEventType.GameRestarts, data);
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.LogException(e);
+        }
+
     }
 
     /**************************************************/

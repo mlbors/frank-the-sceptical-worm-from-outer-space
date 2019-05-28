@@ -84,7 +84,7 @@ abstract public class AbstractCamera : MonoBehaviour, ICamera, IProduct
 
     public virtual void Reset()
     {
-        transform.position = new Vector3(0, 0, 0);
+        transform.position = new Vector3(0, 0, transform.position.z);
     }
 
     /**************************************************/
