@@ -312,6 +312,7 @@ public class PlatformOperatorElement : AbstractGeneratorOperatorElement<IPlatfor
 
                 case ObservableEventType.GameRestarts:
                     _pool.Reset();
+                    _SetInitialOffset();
                     Notify(ObservableEventType.GameRestarts, null);
                     break;
 

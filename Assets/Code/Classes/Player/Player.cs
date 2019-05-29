@@ -98,7 +98,7 @@ public class Player : AbstractPlayer
         _speedMultiplier = 1.25f;
         _speedMilestoneCount = 0.00f;
         _speedIncreaseMilestone = 80.25f;
-        transform.position = new Vector3(0, 0, transform.position.z);
+        transform.position = new Vector3(0.00f, 0.00f, transform.position.z);
     }
 
     /**************************************************/
