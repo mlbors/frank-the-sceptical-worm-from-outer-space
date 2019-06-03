@@ -30,5 +30,11 @@ public interface ICamera
         set;
     }
 
+    bool Resetting
+    {
+        get;
+        set;
+    }
+
     void Reset();
 }

@@ -194,6 +194,7 @@ public class CameraOperatorElement : ICameraOperatorElement, IObserver, IObserva
             {
                 case ObservableEventType.GameRestarts:
                     _camera.Reset();
+                    _camera.Resetting = true;
                     break;
 
                 case ObservableEventType.PlayerCreated:

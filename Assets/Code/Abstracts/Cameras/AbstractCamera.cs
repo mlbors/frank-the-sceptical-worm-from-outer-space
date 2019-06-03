@@ -36,6 +36,7 @@ abstract public class AbstractCamera : MonoBehaviour, ICamera, IProduct
 
     protected ICameraTarget _cameraTarget;
     protected bool _initialized = false;
+    protected bool _resetting = false;
 
     /**************************************************/
     /**************************************************/
@@ -69,6 +70,23 @@ abstract public class AbstractCamera : MonoBehaviour, ICamera, IProduct
     {
         get { return _cameraTarget; }
         set { _cameraTarget = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************************/
+    /***** RESETTING GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public bool Resetting
+    {
+        get { return _resetting; }
+        set { _resetting = value; }
     }
 
     /**************************************************/

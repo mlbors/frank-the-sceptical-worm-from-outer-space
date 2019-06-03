@@ -57,6 +57,23 @@ public class Camera : AbstractCamera
     /**************************************************/
     /**************************************************/
 
+    /*********************************/
+    /***** SET INITIAL POSITIONS *****/
+    /*********************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _SetInitialPositions()
+    {
+        transform.position = new Vector3(0.00f, 0.00f, transform.position.z);
+        _targetLastPosition = new Vector3(0.00f, _targetLastPosition.y, _targetLastPosition.z);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /***********************/
     /***** INIT CAMERA *****/
     /***********************/
@@ -67,9 +84,25 @@ public class Camera : AbstractCamera
 
     protected bool _InitCamera()
     {
-        transform.position = new Vector3(0, 0, transform.position.z);
+        _SetInitialPositions();
         _initialized = true;
         return _initialized;
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
+    /***** RESET *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public override void Reset()
+    {
+        _SetInitialPositions();
     }
 
     /**************************************************/
@@ -121,6 +154,12 @@ public class Camera : AbstractCamera
 
     public override void Update()
     {
+        if (_resetting)
+        {
+            _resetting = false;
+            return;
+        }
+
         _MoveCamera();
         _GetTargetLastPostion();
     }
