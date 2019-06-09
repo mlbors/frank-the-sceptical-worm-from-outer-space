@@ -26,6 +26,7 @@ public enum OperatorElementType
 {
     CameraOperatorElement,
     CollectableOperatorElement,
+    DeathBoxOperatorElement,
     EnvironmentOperatorElement,
     FoeOperatorElement,
     MenuOperatorElement,
