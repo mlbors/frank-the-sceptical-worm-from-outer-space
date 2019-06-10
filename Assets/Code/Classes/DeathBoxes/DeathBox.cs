@@ -34,7 +34,7 @@ public class DeathBox : AbstractDeathBox
 
     public override void Operate()
     {
-
+        Notify(ObservableEventType.DeathHitten, null);
     }
 
     /**************************************************/
