@@ -138,6 +138,7 @@ public class Camera : AbstractCamera
             _InitCamera();
             return;
         }
+
         _GetTargetLastPostion();
     }
 

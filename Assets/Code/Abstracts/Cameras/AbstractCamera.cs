@@ -32,6 +32,7 @@ abstract public class AbstractCamera : MonoBehaviour, ICamera, IProduct
     /**
      * @var ICameraTarget _cameraTarget camera target
      * @var Bool _initialized tells if camerea is initialized
+     * @var Bool _resetting tells if camera is resetting    
      */
 
     protected ICameraTarget _cameraTarget;

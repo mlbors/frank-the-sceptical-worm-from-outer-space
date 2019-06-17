@@ -48,5 +48,19 @@ public interface IDeathBox
         set;
     }
 
+    MonoBehaviour TargetObject
+    {
+        get;
+        set;
+    }
+
+    bool Resetting
+    {
+        get;
+        set;
+    }
+
+
+    void Reset();
     void Operate();
 }

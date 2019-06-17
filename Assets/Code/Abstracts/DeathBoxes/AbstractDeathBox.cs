@@ -13,7 +13,10 @@
 
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+
+using Zenject;
 
 /**************************************************/
 /**************************************************/
@@ -34,6 +37,9 @@ abstract public class AbstractDeathBox : MonoBehaviour, IDeathBox, IObservable, 
      * @var Float _width width of the object
      * @var Float _height height of the object
      * @var List<IObserver> _observers list of observers
+     * @var MonoBehaviour _targetObject object to follow  
+     * @var Bool _initialized tells if deathbox is initialized
+     * @var Bool _resetting tells if deathbox is resetting   
      */
 
     protected float _x;
@@ -41,6 +47,26 @@ abstract public class AbstractDeathBox : MonoBehaviour, IDeathBox, IObservable, 
     protected float _width;
     protected float _height;
     protected List<IObserver> _observers = new List<IObserver>();
+    protected MonoBehaviour _targetObject;
+    protected bool _initialized = false;
+    protected bool _resetting = false;
+
+    /**************************************************/
+    /**************************************************/
+
+    /*********************/
+    /***** CONSTRUCT *****/
+    /*********************/
+
+    /**
+     * @access protected
+     */
+
+    [Inject]
+    public virtual void Construct()
+    {
+       
+    }
 
     /**************************************************/
     /**************************************************/
@@ -130,6 +156,40 @@ abstract public class AbstractDeathBox : MonoBehaviour, IDeathBox, IObservable, 
     /**************************************************/
     /**************************************************/
 
+    /***************************************/
+    /***** TARGET OBJECT GETTER/SETTER *****/
+    /***************************************/
+
+    /**
+     * @access public
+     */
+
+    public MonoBehaviour TargetObject
+    {
+        get { return _targetObject; }
+        set { _targetObject = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***********************************/
+    /***** RESETTING GETTER/SETTER *****/
+    /***********************************/
+
+    /**
+     * @access public
+     */
+
+    public bool Resetting
+    {
+        get { return _resetting; }
+        set { _resetting = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /********************************/
     /***** IOBSERVABLE - ATTACH *****/
     /********************************/
@@ -180,6 +240,61 @@ abstract public class AbstractDeathBox : MonoBehaviour, IDeathBox, IObservable, 
             o.ObserverUpdate(info, data);
         }
     }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
+    /***** RESET *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public virtual void Reset()
+    {
+        transform.position = new Vector3(0.00f, 0.00f, transform.position.z);
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
+    /***** AWAKE *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public abstract void Awake();
+
+    /**************************************************/
+    /**************************************************/
+
+    /*****************/
+    /***** START *****/
+    /*****************/
+
+    /**
+     * @access public
+     */
+
+    public abstract void Start();
+
+    /**************************************************/
+    /**************************************************/
+
+    /******************/
+    /***** UPDATE *****/
+    /******************/
+
+    /**
+     * @access public
+     */
+
+    public abstract void Update();
 
     /**************************************************/
     /**************************************************/
