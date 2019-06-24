@@ -34,13 +34,11 @@ public class DeathBoxOperatorElement : MonoBehaviour, IOperatorElement, IDeathBo
      * @var List<IObserver> _observers list of observers
      * @var IDeathBox _deathBox death box object
      * @var IDeathBoxFactory deathBoxFactory factory object that creates other objects, here, DeathBox
-     * @var MonoBehaviour _targetObject object to follow
      */
 
     protected List<IObserver> _observers = new List<IObserver>();
     protected IDeathBox _deathBox;
     protected IDeathBoxFactory<IDeathBox> _deathBoxFactory;
-    protected MonoBehaviour _targetObject;
 
     /**************************************************/
     /**************************************************/
@@ -114,20 +112,21 @@ public class DeathBoxOperatorElement : MonoBehaviour, IOperatorElement, IDeathBo
     /**************************************************/
     /**************************************************/
 
-    /***************************************/
-    /***** TARGET OBJECT GETTER/SETTER *****/
-    /***************************************/
+    /****************************/
+    /***** CREATE DEATH BOX *****/
+    /****************************/
 
     /**
-     * @access public
+     * @access protected
      */
 
-    public MonoBehaviour TargetObject
+    protected void _CreateDeathBox()
     {
-        get { return _targetObject; }
-        set { _targetObject = value; }
+        if (_deathBox == null)
+        {
+            _deathBox = _deathBoxFactory.Create();
+        }
     }
-
 
     /**************************************************/
     /**************************************************/
@@ -190,7 +189,21 @@ public class DeathBoxOperatorElement : MonoBehaviour, IOperatorElement, IDeathBo
     {
         try
         {
+            switch (info)
+            {
+                case ObservableEventType.GameRestarts:
+                    _deathBox.Reset();
+                    _deathBox.Resetting = true;
+                    break;
 
+                case ObservableEventType.PlayerCreated:
+                    _deathBoxFactory.TargetObject = data as MonoBehaviour;
+                    _CreateDeathBox();
+                    break;
+
+                default:
+                    break;
+            }
         }
         catch (Exception e)
         {

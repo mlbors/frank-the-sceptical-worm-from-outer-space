@@ -31,11 +31,13 @@ public class DeathBoxFactory : AbstractDIFactory<IDeathBox>, IDeathBoxFactory<ID
 
     /**
      * @var GameObject _gameObject game object to use
+     * @var MonoBehaviour _targetObject object to follow    
      * @var IOperator _gameOperator object managing game 
      * @var IOperatorElement _scoreOperator object managing score 
      */
 
     protected GameObject _gameObject;
+    protected MonoBehaviour _targetObject;
     protected IOperator _gameOperator;
     protected IOperatorElement _scoreOperator;
 
@@ -72,6 +74,23 @@ public class DeathBoxFactory : AbstractDIFactory<IDeathBox>, IDeathBoxFactory<ID
     {
         get { return _gameObject; }
         set { _gameObject = value; }
+    }
+
+    /**************************************************/
+    /**************************************************/
+
+    /***************************************/
+    /***** TARGET OBJECT GETTER/SETTER *****/
+    /***************************************/
+
+    /**
+     * @access public
+     */
+
+    public MonoBehaviour TargetObject
+    {
+        get { return _targetObject; }
+        set { _targetObject = value; }
     }
 
     /**************************************************/

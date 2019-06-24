@@ -55,6 +55,7 @@ public class MainInstaller : MonoInstaller
         _InstallCollectables();
         _InstallFoes();
         _InstallCamera();
+        _InstallDeathBox();
         _InstallText();
         _InstallScore();
     }
@@ -264,6 +265,31 @@ public class MainInstaller : MonoInstaller
     /**************************************************/
     /**************************************************/
 
+    /*****************************/
+    /***** INSTALL DEATH BOX *****/
+    /*****************************/
+
+    /**
+     * @access protected
+     */
+
+    protected void _InstallDeathBox()
+    {
+        Container.Bind<GameObject>()
+                 .FromInstance(_settings.deahtBoxGameObject)
+                 .AsCached()
+                 .WhenInjectedInto<DeathBoxFactory>();
+
+        Container.Bind<IDeathBoxFactory<IDeathBox>>()
+                 .To<DeathBoxFactory>()
+                 .AsSingle()
+                 .WhenInjectedInto<DeathBoxOperatorElement>()
+                 .NonLazy();
+    }
+
+    /**************************************************/
+    /**************************************************/
+
     /*************************/
     /***** INSTALL SCORE *****/
     /*************************/
@@ -326,6 +352,7 @@ public class MainInstaller : MonoInstaller
 
         /**
          * @var GameObject cameraGameObject prefab to use camera
+         * @var GameObject deathBoxGameObject prefab to use camera        
          * @var List<GameObject> environmentObjects list of environment objects
          * @var GameObject objectGenerationPoint point from where to generate objects
          * @var GameObject objectDestructionPoint point from where to destroy objects
@@ -336,6 +363,7 @@ public class MainInstaller : MonoInstaller
          */
 
         public GameObject cameraGameObject;
+        public GameObject deahtBoxGameObject;
         public List<GameObject> environmentObjects;
         public GameObject objectsGenerationPoint;
         public GameObject objectsDestructionPoint;

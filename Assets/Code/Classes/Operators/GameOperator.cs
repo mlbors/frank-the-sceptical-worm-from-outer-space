@@ -93,6 +93,11 @@ public class GameOperator : AbstractOperator, IGameOperator, IObservable, IObser
         IOperatorElement environmentOperatorElement = _operatorElementFactory.Create();
         AddElement(environmentOperatorElement);
 
+        _operatorElementFactory.Type = OperatorElementType.DeathBoxOperatorElement;
+        IOperatorElement deathBoxOperatorElement = _operatorElementFactory.Create();
+        Attach(deathBoxOperatorElement as IObserver);
+        AddElement(deathBoxOperatorElement);
+
         _operatorElementFactory.Type = OperatorElementType.CameraOperatorElement;
         IOperatorElement cameraOperatorElement = _operatorElementFactory.Create();
         (cameraOperatorElement as IObservable).Attach(platformOperatorElement as IObserver);
@@ -108,6 +113,7 @@ public class GameOperator : AbstractOperator, IGameOperator, IObservable, IObser
         _operatorElementFactory.Type = OperatorElementType.PlayerOperatorElement;
         IOperatorElement playerOperator = _operatorElementFactory.Create();
         (playerOperator as IObservable).Attach(cameraOperatorElement as IObserver);
+        (playerOperator as IObservable).Attach(deathBoxOperatorElement as IObserver);
         (playerOperator as IObservable).Attach(scoreOperatorElement as IObserver);
         Attach(playerOperator as IObserver);
         AddElement(playerOperator);

@@ -29,4 +29,10 @@ public interface IDeathBoxFactory<T> : IFactory<T>
         get;
         set;
     }
+
+    MonoBehaviour TargetObject
+    {
+        get;
+        set;
+    }
 }

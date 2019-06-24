@@ -29,10 +29,4 @@ public interface IDeathBoxOperatorElement : IOperatorElement, IObserver, IObserv
         get;
         set;
     }
-
-    MonoBehaviour TargetObject
-    {
-        get;
-        set;
-    }
 }
